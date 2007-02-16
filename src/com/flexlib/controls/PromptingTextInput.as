@@ -102,19 +102,19 @@ public class PromptingTextInput extends TextInput
 	/** Storage for the promptFormat property */
 	private var _promptFormat:String = '<font color="#999999"><i>[prompt]</i></font>';
 	
+	/** 
+	 * A format string to specify how the prompt is displayed.  This is typically
+	 * an HTML string that can set the font color and style.  Use <code>[prompt]</code>
+	 * within the string as a replacement token that will be replaced with the actual
+	 * prompt text.
+	 * 
+	 * The default value is "&lt;font color="#999999"&gt;&lt;i&gt;[prompt]&lt;/i&gt;&lt;/font&gt;"
+	 */
 	public function get promptFormat():String
 	{
 		return _promptFormat;
 	}
 	
-	/** 
-	 * A format string to specify how the prompt is displayed.  This is typically
-	 * an HTML string that can set the font color and style.  Use <code>[prompt]</code>
-	 * within the string as a replacement token that will be replaced with the actualy
-	 * prompt text.
-	 * 
-	 * The default value is "<font color="#999999"><i>[prompt]</i></font>"
-	 */
 	public function set promptFormat( value:String ):void
 	{
 		_promptFormat = value;
