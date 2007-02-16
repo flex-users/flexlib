@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<project name="as3corelib" basedir="../" default="lib">
+
+	<!-- Define variables/paths used in this build script -->
+	<property file="./build/build.properties" />
+
+	<!--
+		Have you edit the properties file to make sure the paths are right on your system?
+	-->
+	<target name="properties">
+		<fail unless="asdoc.exe">The "asdoc.exe" property must be set in ${build.dir}/build.properties.</fail>
+		<fail unless="compc.exe">The "compc.exe" property must be set in ${build.dir}/build.properties.</fail>
+		<fail unless="mxmlc.exe">The "mxmlc.exe" property must be set in ${build.dir}/build.properties.</fail>
+	</target>
+	
+	<!-- 
+		Extension for ANT to allow for tasks like "for" and "propertyregex"
+	-->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.dir}/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
+	
+	<!--
+		Compile the unit tests for the library, placing the test runner .swf file
+		in the bin directory.
+	-->
+	<target name="compileTests" depends="properties">
+		<exec executable="${mxmlc.exe}" dir="${basedir}">
+			<!-- Point to the main test runner's application mxml file -->
+			<arg line="'${tests.dir}/${testRunner.dir}/${testRunner.name}.mxml'" />
+			
+			<!-- Place the built .swf file in the "bin" directory -->
+			<arg line="-o '${bin.dir}/${testRunner.name}.swf'" />
+			
+			<!-- Define source directories for "src" and "tests" -->
+			<arg line="-sp ${src.dir}" />
+			<arg line="-sp ${tests.dir}" />
+			
+			<!-- Include the necessary framework libraries in the class path -->
+			<arg line="-l '${flex2sdk.lib.dir}'" />
+			
+			<!-- Include in the flexunit.swc in the class path -->
+			<arg line="-l ${flexunit.swc}" />
+			
+			<!-- Include locale-specific items in the path -->
+			<arg line="-locale ${flex2sdk.locale}" />
+			<arg line="-l '${flex2sdk.locale.dir}'" />
+		</exec>
+	</target>
+	
+	<!--
+		Runs the unit tests for the library in the stand-alone Flash Player
+	-->
+	<target name="test" depends="compileTests">
+		<!--
+			If/When we add support for determinig the status of unit tests
+			as part of the ANT build process, we need to change the spawn to
+			"no" so that ANT waits until the test runner closes before
+			proceeding.
+		-->
+		<exec executable="${flashDebugPlayer.exe}" spawn="yes">
+			<arg line="${bin.dir}/${testRunner.name}.swf" />
+		</exec>
+	</target>
+	
+	<!--
+		Compile all of the classes under the "src" tree into a .swc file
+	-->
+	<target name="lib" depends="properties">
+		<exec executable="${compc.exe}" dir="${basedir}">
+			<!-- Specify the name of the output file -->
+			<arg line="-o '${bin.dir}/${library.name}.swc'" />
+			
+			<!-- Specify the main source path as "src" -->
+			<arg line="-sp ${src.dir}" />
+			
+			<!-- Include all of the classes in the "src" tree -->
+			<arg line="-is ${src.dir}" />
+		</exec>
+	</target>
+	
+	<!--
+		Generate the example applications using the library
+	-->
+	<target name="examples" depends="properties">
+		<exec executable="${mxmlc.exe}" dir="${basedir}">
+			<!-- Point to the main test runner's application mxml file -->
+			<arg line="'${examples.dir}/${exampleApplicationName}/${exampleApplicationName}_Sample.mxml'" />
+			
+			<!-- Place the built .swf file in the "bin" directory -->
+			<arg line="-o '${bin.dir}/${exampleApplicationName}_Sample.swf'" />
+			
+			<!-- Define source directories for "src" and "tests" -->
+			<arg line="-sp ${src.dir}" />
+			
+			<!-- Include the necessary framework libraries in the class path -->
+			<arg line="-l '${flex2sdk.lib.dir}'" />
+			
+			<!-- Include locale-specific items in the path -->
+			<arg line="-locale ${flex2sdk.locale}" />
+			<arg line="-l '${flex2sdk.locale.dir}'" />
+		</exec>
+	</target>
+	
+	<!--
+		Generate ASDoc output for the library
+	-->
+	<target name="docs" depends="properties">
+		<!-- Clean out the contents of the doc directory, without delete "docs" -->
+		<!--
+		<delete includeemptydirs="true">
+			<fileset dir="${docs.dir}" includes="**/*" />
+		</delete>
+		-->
+		
+		<exec executable="${asdoc.exe}" spawn="no">
+			<!-- Place the documentation in the "docs" directory -->
+			<arg line="-o ${docs.dir}" />
+			
+			<!-- Specify the main source path as "src" -->
+			<arg line="-sp ${src.dir}" />
+			
+			<!-- Document all of the classes in the "src" tree -->
+			<arg line="-ds ${src.dir} " />
+			
+			<!-- Include the library name in the window title -->
+			<arg line="-window-title 'Adobe ActionScript 3.0 Library - ${library.name}' "/>
+		</exec>
+	</target>
+	
+	<!--
+		When the ASDoc files are generated and imported into the SVN
+		repository, the files need to have mime types set correctly so that
+		you can open a web browser to the docs in the repository and
+		have the HTML render correctly.  Failure to set the mime types will
+		result in the doc source being displayed, rather than the docs being
+		rendered.
+		
+		This target requires the ANT contrib library in order to run.
+	-->
+	<target name="fixDocMimeTypes">
+		<!-- Loop over the files in the doc directory -->
+		<for param="file">
+			<!-- Include the following file types in the target directory as part of the loop -->
+			<fileset dir="${basedir}/../../doc">
+				<include name="**/*.html" />
+				<include name="**/*.png" />
+				<include name="**/*.jpg" />
+				<include name="**/*.css" />
+				<include name="**/*.js" />
+				<include name="**/*.gif" />
+			</fileset>
+			
+			<sequential>
+				<!--- 
+					Determine the mime-type from the file extension.
+				-->
+				<property name="mime.type.html" value="text/html" />
+				<property name="mime.type.png" value="image/png" />
+				<property name="mime.type.jpg" value="image/jpeg" />
+				<property name="mime.type.css" value="text/css" />
+				<property name="mime.type.js" value="text/plain" />
+				<property name="mime.type.gif" value="image/gif" />
+				
+				<!-- Extract the extension from the file name -->
+				<propertyregex property="fileExtension" override="yes" input="@{file}"
+						regexp=".*\\([^\\]+)\.([a-zA-Z0-9]+)" replace="\2" />
+			
+				<!-- Set the mime.type property based on the extension -->
+				<propertycopy name="mime.type" from="mime.type.${fileExtension}" override="yes" />
+				
+				<!-- Sanity check...
+				<echo>@{file} is ${fileExtension} with mime type ${mime.type}</echo>
+				-->
+				
+				<!-- Configure the mime type for the file -->
+				<exec executable="${svn.exe}" spawn="no">
+					<arg line="propset svn:mime-type ${mime.type} @{file}" />
+				</exec>
+			</sequential>
+		</for>
+	</target>
+
+</project>
