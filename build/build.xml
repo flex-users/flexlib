@@ -76,8 +76,12 @@
 			<!-- Specify the main source path as "src" -->
 			<arg line="-sp ${src.dir}" />
 			
-			<!-- Include all of the classes in the "src" tree -->
-			<arg line="-is ${src.dir}" />
+			<!-- Specify the manifest.xml file and namespace to use -->
+			<arg line="-namespace http://code.google.com/p/flexlib/ manifest.xml" />
+			<arg line="-include-namespaces http://code.google.com/p/flexlib/" />
+			
+			<!-- Exclude the core flex framework from the library -->
+			<arg line="-el '${flex2sdk.lib.dir}'" />
 		</exec>
 	</target>
 	
@@ -92,8 +96,8 @@
 			<!-- Place the built .swf file in the "bin" directory -->
 			<arg line="-o '${bin.dir}/${exampleApplicationName}_Sample.swf'" />
 			
-			<!-- Define source directories for "src" and "tests" -->
-			<arg line="-sp ${src.dir}" />
+			<!-- Include the flexlib library in the path -->
+			<arg line="-l '${bin.dir}/${library.name}.swc'" />
 			
 			<!-- Include the necessary framework libraries in the class path -->
 			<arg line="-l '${flex2sdk.lib.dir}'" />

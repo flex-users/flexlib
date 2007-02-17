@@ -36,7 +36,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
-	xmlns:controls="com.flexlib.controls.*"
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
 	layout="vertical">
 	
 	<mx:Panel title="PromptingTextInput Sample">
@@ -47,14 +47,13 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			</mx:FormItem>
 			
 			<mx:FormItem label="Address:" direction="vertical">
-				<controls:PromptingTextInput id="address1" prompt="Address 1" />
-				
-				<controls:PromptingTextInput id="address2" prompt="Address 2" />
+				<flexlib:PromptingTextInput id="address1" prompt="Address 1" />
+				<flexlib:PromptingTextInput id="address2" prompt="Address 2" />
 			
 				<mx:HBox>
-					<controls:PromptingTextInput id="city" prompt="City"  width="129"/>
-					<controls:PromptingTextInput id="state" prompt="State"  width="50"/>
-					<controls:PromptingTextInput id="zip" prompt="Zip"  width="77"/>
+					<flexlib:PromptingTextInput id="city" prompt="City"  width="129"/>
+					<flexlib:PromptingTextInput id="state" prompt="State"  width="50"/>
+					<flexlib:PromptingTextInput id="zip" prompt="Zip"  width="77"/>
 				</mx:HBox>
 			</mx:FormItem>
 		
