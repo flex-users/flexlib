@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../print.css" type="text/css" media="print">
+<meta content="SuperTabBar,flexlib.controls.SuperTabBar,TABS_REORDERED,dragEnabled,dropEnabled,closePolicy,setClosePolicyForTab,getClosePolicyForTab,resetTabs" name="keywords">
+<title>flexlib.controls.SuperTabBar</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'SuperTabBar - Adobe ActionScript 3.0 Library - flexlib';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/SuperTabBar.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;SuperTabBar</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class SuperTabBar"); titleBar_setSubNav(true,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">flexlib.controls</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class SuperTabBar</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">SuperTabBar <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../images/inherit-arrow.gif"> mx.controls.TabBar</td>
+</tr>
+</table>
+<p></p>
+   The SuperTabBar control extends the TabBar control and adds drag and drop functionality
+   and closable tabs. 
+   <p>The SuperTabBar is used by the SuperTabNavigator component, or it can be used on its
+   own to independentaly control a ViewStack. SuperTabBar does not control scrolling of tabs.
+   Scrolling of tabs in the SuperTabNavigator is done by wrapping the SuperTabBar in a scrollable
+   canvas component.</p>
+     <p></p>
+<a name="mxmlSyntaxSummary"></a><span class="classHeaderTableLabel">MXML Syntax</span><span style="display:none" id="showMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="collapsedImage" alt="collapsed" title="collapsed" src="../../images/collapsed.gif"> Show MXML Syntax</a>
+<br>
+</span><span id="hideMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="expandedImage" alt="expanded" title="expanded" src="../../images/expanded.gif"> Hide MXML Syntax</a></span>
+<div class="mxmlSyntax" id="mxmlSyntax">     <p>The <code>&lt;mx:SuperTabBar&gt;</code> tag inherits all of the tag attributes
+   of its superclass, and adds the following tag attributes:</p>
+     <pre>
+   &lt;mx:SuperTabBar
+     <b>Properties</b>
+     closePolicy="SuperTab.CLOSE_ROLLOVER|SuperTab.CLOSE_ALWAYS|SuperTab.CLOSE_SELECTED|SuperTab.CLOSE_NEVER"
+     dragEnabled="true"
+     dropEnabled="true"
+  
+     <b>Events</b>
+     tabsReorderEvent="<i>No default</i>"
+     &gt;
+     ...
+        <i>child tags</i>
+     ...
+   &lt;/mx:SuperTabBar&gt;
+   </pre>
+     </div>
+<script type="text/javascript" language="javascript">
+<!--
+setMXMLOnly();
+--></script>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">com.dougmccune.containers.SuperTabNavigator<br>mx.controls.TabBar</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#closePolicy">closePolicy</a> : String<div class="summaryTableDescription">
+   The policy for when to show the close button for each tab.</div>
+</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#dragEnabled">dragEnabled</a> : Boolean<div class="summaryTableDescription">
+   Boolean indicating if this SuperTabBar allows its tabs to be dragged.</div>
+</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#dropEnabled">dropEnabled</a> : Boolean<div class="summaryTableDescription">
+   Boolean indicating if this SuperTabBar allows its tabs to be dropped onto it.</div>
+</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#SuperTabBar()">SuperTabBar</a>()</div>
+<div class="summaryTableDescription">
+   Constructor
+   </div>
+</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getClosePolicyForTab()">getClosePolicyForTab</a>(index:int):String</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#resetTabs()">resetTabs</a>():void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setClosePolicyForTab()">setClosePolicyForTab</a>(index:int, value:String):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:tabsReordered">tabsReordered</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+  Fired when a tab is dropped onto this SuperTabBar, which re-orders the tabs and updates the
+  list of tabs.</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+</table>
+</div>
+<a name="constantSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Constants</div>
+<table id="summaryTableConstant" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#TABS_REORDERED">TABS_REORDERED</a> : String = "tabsReordered"<div class="summaryTableDescription">[static]
+   Event that is dispatched when the tabs are re-ordered in the SuperTabBar.</div>
+</td><td class="summaryTableOwnerCol">SuperTabBar</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="closePolicy"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">closePolicy</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>closePolicy:String</code>&nbsp;&nbsp;[read-write]<p>
+   The policy for when to show the close button for each tab.
+   </p><p>This is a proxy property that sets each SuperTab's closePolicy setting to
+   whatever is set here.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get closePolicy():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set closePolicy(value:String):void</code>
+<br>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">com.dougmccune.controls.tabClasses.SuperTab</div>
+</div>
+<a name="dragEnabled"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">dragEnabled</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>dragEnabled:Boolean</code>&nbsp;&nbsp;[read-write]<p>
+   Boolean indicating if this SuperTabBar allows its tabs to be dragged.
+   </p><p>If both dragEnabled and dropEnabled are true then the 
+   SuperTabBar allows tabs to be reordered with drag and drop.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get dragEnabled():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set dragEnabled(value:Boolean):void</code>
+<br>
+</div>
+<a name="dropEnabled"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">dropEnabled</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>dropEnabled:Boolean</code>&nbsp;&nbsp;[read-write]<p>
+   Boolean indicating if this SuperTabBar allows its tabs to be dropped onto it.
+   </p><p>If both dragEnabled and dropEnabled are true then the 
+   SuperTabBar allows tabs to be reordered with drag and drop.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get dropEnabled():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set dropEnabled(value:Boolean):void</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="SuperTabBar()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">SuperTabBar</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function SuperTabBar()</code><p>
+   Constructor
+   </p></div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="getClosePolicyForTab()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getClosePolicyForTab</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getClosePolicyForTab(index:int):String</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:int</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
+<a name="resetTabs()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">resetTabs</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function resetTabs():void</code>
+</div>
+<a name="setClosePolicyForTab()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setClosePolicyForTab</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function setClosePolicyForTab(index:int, value:String):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:int</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:String</code></td>
+</tr>
+</table>
+</div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:tabsReordered"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">tabsReordered</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/TabReorderEvent.html"><code>flexlib.events.TabReorderEvent</code></a>
+<br>
+<p></p><p>
+  Fired when a tab is dropped onto this SuperTabBar, which re-orders the tabs and updates the
+  list of tabs.
+  </p></div>
+<a name="constantDetail"></a>
+<div class="detailSectionHeader">Constant detail</div>
+<a name="TABS_REORDERED"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">TABS_REORDERED</td><td class="detailHeaderType">constant</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const TABS_REORDERED:String = "tabsReordered"</code><p>
+   Event that is dispatched when the tabs are re-ordered in the SuperTabBar.
+   </p></div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

@@ -1,0 +1,505 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../print.css" type="text/css" media="print">
+<meta content="SuperTabNavigator,flexlib.containers.SuperTabNavigator,POPUPPOLICY_AUTO,POPUPPOLICY_ON,POPUPPOLICY_OFF,popUpButtonPolicy,startScrollingEvent,stopScrollingEvent,scrollSpeed,dragEnabled,dropEnabled,minTabWidth,closePolicy,setClosePolicyForTab,updateDisplayList,styleChanged" name="keywords">
+<title>flexlib.containers.SuperTabNavigator</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'SuperTabNavigator - Adobe ActionScript 3.0 Library - flexlib';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/containers/SuperTabNavigator.html&amp;flexlib/containers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;SuperTabNavigator</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class SuperTabNavigator"); titleBar_setSubNav(false,true,true,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">flexlib.containers</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class SuperTabNavigator</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">SuperTabNavigator <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../images/inherit-arrow.gif"> mx.containers.TabNavigator</td>
+</tr>
+</table>
+<p></p>
+   The SuperTabNavigator is an extension of the TabNavigator navigation
+   container.
+  
+   <p>The SuperTabNavigator functions exactly like the TabNavigator, but
+   adds some functionality. Added functionality includes:</p>
+  <ul>
+    <li>Draggable, re-orderable tabs</li>
+    <li>Closable tabs</li>
+    <li>Scrolling tab bar if too many tabs are open</li>
+    <li>Drop-down list of tabs</li>
+   </ul>
+  
+   <p>These features make the SuperTabNavigator function much more like the 
+   tabs in Firefox.</p>
+   
+   <p></p>
+<a name="mxmlSyntaxSummary"></a><span class="classHeaderTableLabel">MXML Syntax</span><span style="display:none" id="showMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="collapsedImage" alt="collapsed" title="collapsed" src="../../images/collapsed.gif"> Show MXML Syntax</a>
+<br>
+</span><span id="hideMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="expandedImage" alt="expanded" title="expanded" src="../../images/expanded.gif"> Hide MXML Syntax</a></span>
+<div class="mxmlSyntax" id="mxmlSyntax">     <p>The <code>&lt;mx:SuperTabNavigator&gt;</code> tag inherits all of the
+   tag attributes of the TabNavigator,
+   and adds the following tag attributes:</p>
+     <pre>
+   &lt;mx:SuperTabNavigator
+     <b>Styles</b>
+     popupButtonStyleName="<i>Value of the</i> <code>popupButtonStyleName</code> <i>property</i>"
+     leftButtonStyleName="<i>Value of the</i> <code>leftButtonStyleName</code> <i>property</i>"
+     rightButtonStyleName="<i>Value of the</i> <code>rightButtonStyleName</code> <i>property</i>"
+     
+     <b>Properties</b>
+     popUpButtonPolicy="on|auto|off"
+     startScrollingEvent="MouseEvent.MOUSE_DOWN|MouseEvent.MOUSE_OVER"
+     stopScrollingEvent="MouseEvent.MOUSE_UP|MouseEvent.MOUSE_OUT"
+     scrollSpeed="100"
+     dragEnabled="true|false"
+     dropEnabled="true|false"
+     minTabWidth="60"
+  
+     &gt;
+       ...
+       <i>child tags</i>
+       ...
+   &lt;/mx:SuperTabNavigator&gt;
+   </pre>
+     </div>
+<script type="text/javascript" language="javascript">
+<!--
+setMXMLOnly();
+--></script>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">mx.containers.TabNavigator<br>com.dougmccune.controls.SuperTabBar</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#closePolicy">closePolicy</a> : String<div class="summaryTableDescription">
+     The close policy for tabs.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#dragEnabled">dragEnabled</a> : Boolean<div class="summaryTableDescription">
+   Boolean indicating whether or not this SuperTabNavigator allows
+   tabs to be dragged from the tab bar.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#dropEnabled">dropEnabled</a> : Boolean<div class="summaryTableDescription">
+   Boolean indicating whether or not this SuperTabNavigator allows
+   tabs to be dropped on the tab bar.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#minTabWidth">minTabWidth</a> : Number<div class="summaryTableDescription">
+   The minimum tab width allowed to display tabs.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#popUpButtonPolicy">popUpButtonPolicy</a> : String<div class="summaryTableDescription">
+   Either POPUPPOLICY.AUTO, POPUPOLICY_ON, or POPUPPOLICY_OFF.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#POPUPPOLICY_AUTO">POPUPPOLICY_AUTO</a> : String = "auto"<div class="summaryTableDescription">[static]
+   Static variable indicating the Button will be shown if there is more
+   than one tab in the SuperTabNavigator.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#POPUPPOLICY_OFF">POPUPPOLICY_OFF</a> : String = "off"<div class="summaryTableDescription">[static]
+   Static variable indicating the Button will never be shown to the
+   right of the tab bar.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#POPUPPOLICY_ON">POPUPPOLICY_ON</a> : String = "on"<div class="summaryTableDescription">[static]
+   Static variable indicating the Button will always be shown to the
+   right of the tab bar, no matter how many tabs are open.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#scrollSpeed">scrollSpeed</a> : Number<div class="summaryTableDescription">
+   The delay in milliseconds between scrolling the tabs.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#startScrollingEvent">startScrollingEvent</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#stopScrollingEvent">stopScrollingEvent</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setClosePolicyForTab()">setClosePolicyForTab</a>(index:int, value:String):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#styleChanged()">styleChanged</a>(styleProp:String):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#updateDisplayList()">updateDisplayList</a>(unscaledWidth:Number, unscaledHeight:Number):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+</table>
+</div>
+<a name="styleSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Styles</div>
+<table id="summaryTableStyle" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Style</th><th>Description</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol"><a name="style:leftButtonStyleName"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<span class="signatureLink">leftButtonStyleName</span>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>String &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+   Name of CSS style declaration that specifies style for button used to control the horizontal
+   scrolling of the tabs. This button appears on the right-most side of the tab bar.
+   
+    The default value is <code>undefined</code>.</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol"><a name="style:popupButtonStyleName"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<span class="signatureLink">popupButtonStyleName</span>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>String &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+   Name of CSS style declaration that specifies style for the Button that appears
+   on the right side of the tab bar.
+   
+    The default value is <code>undefined</code>.</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol"><a name="style:rightButtonStyleName"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<span class="signatureLink">rightButtonStyleName</span>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>String &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+   Name of CSS style declaration that specifies style for button used to control the horizontal
+   scrolling of the tabs. This button appears on the left-most side of the tab bar.
+   
+    The default value is <code>undefined</code>.</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="closePolicy"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">closePolicy</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>closePolicy:String</code>&nbsp;&nbsp;[read-write]<p>
+     The close policy for tabs. 
+     </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get closePolicy():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set closePolicy(value:String):void</code>
+<br>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">com.dougmccune.controls.SuperTabBar</div>
+</div>
+<a name="dragEnabled"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">dragEnabled</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>dragEnabled:Boolean</code>&nbsp;&nbsp;[read-write]<p>
+   Boolean indicating whether or not this SuperTabNavigator allows
+   tabs to be dragged from the tab bar.
+   </p><p>If both dragEnabled and dropEnabled are true then the SuperTabNavigator allows
+   reordering of tabs by drag and drop</p>
+    
+   <p>The default value is <code>true</code>.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get dragEnabled():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set dragEnabled(value:Boolean):void</code>
+<br>
+</div>
+<a name="dropEnabled"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">dropEnabled</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>dropEnabled:Boolean</code>&nbsp;&nbsp;[read-write]<p>
+   Boolean indicating whether or not this SuperTabNavigator allows
+   tabs to be dropped on the tab bar.
+   </p><p>If both dragEnabled and dropEnabled are true then the SuperTabNavigator allows
+   reordering of tabs by drag and drop</p>
+   
+   <p>The default value is <code>true</code>.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get dropEnabled():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set dropEnabled(value:Boolean):void</code>
+<br>
+</div>
+<a name="minTabWidth"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">minTabWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>minTabWidth:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The minimum tab width allowed to display tabs.
+   </p><p>If tabs cannot fit at their default size, then they are shrunk until they
+   reach minTabWidth. If they still cannot fit then they remain at minTabWidth and 
+   the SuperTabBar scrolls the tabs.</p>
+      <p>The default value is <code>60</code>.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get minTabWidth():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set minTabWidth(value:Number):void</code>
+<br>
+</div>
+<a name="popUpButtonPolicy"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">popUpButtonPolicy</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>popUpButtonPolicy:String</code>&nbsp;&nbsp;[read-write]<p>
+   Either POPUPPOLICY.AUTO, POPUPOLICY_ON, or POPUPPOLICY_OFF.
+   </p><p>Indicates how the Button to the right of the tabs should
+   be shown. AUTO means the button will be shown if there is more than
+   one tab. ON means it will always be shown, and OFF means it will never
+   be shown.
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get popUpButtonPolicy():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set popUpButtonPolicy(value:String):void</code>
+<br>
+</div>
+<a name="POPUPPOLICY_AUTO"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">POPUPPOLICY_AUTO</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static var POPUPPOLICY_AUTO:String = "auto"</code><p>
+   Static variable indicating the Button will be shown if there is more
+   than one tab in the SuperTabNavigator.
+   Used to set popUpButtonPolicy.
+   </p></div>
+<a name="POPUPPOLICY_OFF"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">POPUPPOLICY_OFF</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static var POPUPPOLICY_OFF:String = "off"</code><p>
+   Static variable indicating the Button will never be shown to the
+   right of the tab bar. 
+   Used to set popUpButtonPolicy.
+   </p></div>
+<a name="POPUPPOLICY_ON"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">POPUPPOLICY_ON</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static var POPUPPOLICY_ON:String = "on"</code><p>
+   Static variable indicating the Button will always be shown to the
+   right of the tab bar, no matter how many tabs are open. 
+   Used to set popUpButtonPolicy.
+   </p></div>
+<a name="scrollSpeed"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">scrollSpeed</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>scrollSpeed:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The delay in milliseconds between scrolling the tabs.
+   </p><p>The smaller the number here the faster the scrolling speed.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get scrollSpeed():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set scrollSpeed(value:Number):void</code>
+<br>
+</div>
+<a name="startScrollingEvent"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">startScrollingEvent</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>startScrollingEvent:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get startScrollingEvent():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set startScrollingEvent(value:String):void</code>
+<br>
+</div>
+<a name="stopScrollingEvent"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">stopScrollingEvent</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>stopScrollingEvent:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get stopScrollingEvent():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set stopScrollingEvent(value:String):void</code>
+<br>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="setClosePolicyForTab()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setClosePolicyForTab</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function setClosePolicyForTab(index:int, value:String):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:int</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:String</code></td>
+</tr>
+</table>
+</div>
+<a name="styleChanged()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">styleChanged</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function styleChanged(styleProp:String):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">styleProp</span>:String</code></td>
+</tr>
+</table>
+</div>
+<a name="updateDisplayList()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">updateDisplayList</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">unscaledWidth</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">unscaledHeight</span>:Number</code></td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

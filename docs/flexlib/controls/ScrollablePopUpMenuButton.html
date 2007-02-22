@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../print.css" type="text/css" media="print">
+<meta content="ScrollablePopUpMenuButton,flexlib.controls.ScrollablePopUpMenuButton,verticalScrollPolicy,arrowScrollPolicy,maxHeight" name="keywords">
+<title>flexlib.controls.ScrollablePopUpMenuButton</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'ScrollablePopUpMenuButton - Adobe ActionScript 3.0 Library - flexlib';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/ScrollablePopUpMenuButton.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;ScrollablePopUpMenuButton</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class ScrollablePopUpMenuButton"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">flexlib.controls</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class ScrollablePopUpMenuButton</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">ScrollablePopUpMenuButton <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../images/inherit-arrow.gif"> <a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a> <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../images/inherit-arrow.gif"> mx.controls.PopUpButton</td>
+</tr>
+</table>
+<p></p>
+  ScrollablePopUpMenuButton is an extension of PopUpMenuButton that uses <code>com.dougmccune.controls.ScrollableMenu</code>
+  instead of using the original <controls>mx.controls.Menu</controls>, which adds scrolling functionality
+  to the menu.
+  
+  <p>This control extends <code>PopUpMenuButtonBase</code>, which was a copy/paste version of the 
+  original <code>mx.controls.PopUpMenuButton</code>. The only changes made to our copied version
+  of the base class was to change some private variables and methods to protected, so we can
+  access them here in our subclass.</p>
+  
+  <p></p>
+<a name="mxmlSyntaxSummary"></a><span class="classHeaderTableLabel">MXML Syntax</span><span style="display:none" id="showMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="collapsedImage" alt="collapsed" title="collapsed" src="../../images/collapsed.gif"> Show MXML Syntax</a>
+<br>
+</span><span id="hideMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="expandedImage" alt="expanded" title="expanded" src="../../images/expanded.gif"> Hide MXML Syntax</a></span>
+<div class="mxmlSyntax" id="mxmlSyntax">   
+   <p>The <code>&lt;mccune:ScrollablePopUpMenuButton&gt;</code> tag inherits all of the tag
+   attributes of its superclass, and adds the following tag attributes:</p>
+   
+   <pre>
+   &lt;mccune:ScrollablePopUpMenuButton
+     <strong>Properties</strong>
+     verticalScrollPolicy="auto|on|off"
+     arrowScrollPolicy="auto|on|off"
+     maxHeight="undefined"
+  
+   /&gt;
+   </pre>
+  
+  </div>
+<script type="text/javascript" language="javascript">
+<!--
+setMXMLOnly();
+--></script>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">mx.controls.PopUpMenuButton</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#arrowScrollPolicy">arrowScrollPolicy</a> : String<div class="summaryTableDescription">
+     The scrolling policy that determines when to show the up and down buttons for scrolling.</div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#dataDescriptor">dataDescriptor</a> : IMenuDataDescriptor<div class="summaryTableDescription">
+      The data descriptor accesses and manipulates data in the data provider.</div>
+</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#dataProvider">dataProvider</a> : Object<div class="summaryTableDescription">
+      DataProvider for popUpMenu.</div>
+</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#labelField">labelField</a> : String<div class="summaryTableDescription">
+      Name of the field in the <code>dataProvider</code> Array that contains the text to
+      show for each menu item.</div>
+</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#labelFunction">labelFunction</a> : Function<div class="summaryTableDescription">
+      A function that determines the text to display for each menu item.</div>
+</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#maxHeight">maxHeight</a> : Number<div class="summaryTableDescription">[write-only]
+   Overriden to also set the maxHeight of the child menu control.</div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#popUp">popUp</a> : IUIComponent<div class="summaryTableDescription">
+      A reference to the pop-up Menu object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#showRoot">showRoot</a> : Boolean<div class="summaryTableDescription">
+      Specifies whether to display the top-level node or nodes of the data provider.</div>
+</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#verticalScrollPolicy">verticalScrollPolicy</a> : String<div class="summaryTableDescription">
+     Controls the vertical scrolling of the ScrollablePopUpMenuButton.</div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#ScrollablePopUpMenuButton()">ScrollablePopUpMenuButton</a>()</div>
+<div class="summaryTableDescription">
+   Constructor
+   </div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<div class="showHideLinks">
+<div class="hideInheritedEvent" id="hideInheritedEvent">
+<a onclick="javascript:setInheritedVisible(false,'Event');" href="#eventSummary" class="showHideLink"><img src="../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Events</a>
+</div>
+<div class="showInheritedEvent" id="showInheritedEvent">
+<a onclick="javascript:setInheritedVisible(true,'Event');" href="#eventSummary" class="showHideLink"><img src="../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Events</a>
+</div>
+</div>
+<table id="summaryTableEvent" class="summaryTable hideInheritedEvent" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedEvent">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#event:itemClick">itemClick</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+  Dispatched when a user selects an item from the pop-up menu.</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="arrowScrollPolicy"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">arrowScrollPolicy</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>arrowScrollPolicy:String</code>&nbsp;&nbsp;[read-write]<p>
+     The scrolling policy that determines when to show the up and down buttons for scrolling.
+     
+     </p><p>This property is independant of <code>verticalScrollPolicy</code>. The property here
+     just serves a proxy to set the <code>arrowScrollPolicy</code> of the child menu component.</p>
+     
+     <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get arrowScrollPolicy():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set arrowScrollPolicy(value:String):void</code>
+<br>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">com.dougmccune.controls.ScrollableMenu</div>
+</div>
+<a name="maxHeight"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">maxHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>maxHeight:Number</code>&nbsp;&nbsp;[write-only]<p>
+   Overriden to also set the maxHeight of the child menu control.
+   
+   </p><p>This makes setting the maxHeight also set the maxHeight of the popUpMenu item.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set maxHeight(value:Number):void</code>
+<br>
+</div>
+<a name="verticalScrollPolicy"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">verticalScrollPolicy</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>verticalScrollPolicy:String</code>&nbsp;&nbsp;[read-write]<p>
+     Controls the vertical scrolling of the ScrollablePopUpMenuButton.
+     </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get verticalScrollPolicy():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set verticalScrollPolicy(value:String):void</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="ScrollablePopUpMenuButton()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ScrollablePopUpMenuButton</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function ScrollablePopUpMenuButton()</code><p>
+   Constructor
+   </p></div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

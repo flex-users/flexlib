@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../print.css" type="text/css" media="print">
+<meta content="ScrollableMenu,flexlib.controls.ScrollableMenu,verticalScrollPolicy,createMenu,configureScrollBars,measure" name="keywords">
+<title>flexlib.controls.ScrollableMenu</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'ScrollableMenu - Adobe ActionScript 3.0 Library - flexlib';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/ScrollableMenu.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;ScrollableMenu</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class ScrollableMenu"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">flexlib.controls</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class ScrollableMenu</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">ScrollableMenu <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../images/inherit-arrow.gif"> mx.controls.Menu</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../controls/ScrollableArrowMenu.html">ScrollableArrowMenu</a></td>
+</tr>
+</table>
+<p></p>
+  An extension of mx.controls.Menu that allows the control to scroll vertically.
+  
+  <p>Overrides a few methods and properties so we can re-enable scrolling. The 
+  Menu control in the Flex framework intentionally disables vertical scrolling.
+  This class simply undoes alot of that. We reinstitute normal <code>verticalScrollPolicy</code>
+  functionality.</p>
+  
+  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">mx.controls.Menu</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#verticalScrollPolicy">verticalScrollPolicy</a> : String<div class="summaryTableDescription"> 
+   Override the verticalScrollPolicy so we can re-instate scrolling functionality.</div>
+</td><td class="summaryTableOwnerCol">ScrollableMenu</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#ScrollableMenu()">ScrollableMenu</a>()</div>
+<div class="summaryTableDescription">
+   Constructor
+   </div>
+</td><td class="summaryTableOwnerCol">ScrollableMenu</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#createMenu()">createMenu</a>(parent:DisplayObjectContainer, mdp:Object, showRoot:Boolean = true):<a href="../controls/ScrollableMenu.html">ScrollableMenu</a>
+</div>
+<div class="summaryTableDescription">[static]
+   We have to override the static function createMenu so that we create a 
+   ScrollableMenu instead of a normal Menu.</div>
+</td><td class="summaryTableOwnerCol">ScrollableMenu</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#configureScrollBars()">configureScrollBars</a>():void</div>
+<div class="summaryTableDescription"> 
+   Overridden to reinstate proper scrolling functionality.</div>
+</td><td class="summaryTableOwnerCol">ScrollableMenu</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#measure()">measure</a>():void</div>
+<div class="summaryTableDescription">
+     We overide the <code>measure()</code> method because we need to check if the menu is going off
+     the stage.</div>
+</td><td class="summaryTableOwnerCol">ScrollableMenu</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="verticalScrollPolicy"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">verticalScrollPolicy</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>verticalScrollPolicy:String</code>&nbsp;&nbsp;[read-write]<p> 
+   Override the verticalScrollPolicy so we can re-instate scrolling functionality.
+   
+   </p><p>The mx.controls.Menu class overrides setting and getting the verticalScrollPolicy
+   Basically setting the verticalScrollPolicy did nothing, and getting it always 
+   returned ScrollPolicy.OFF. So that's not going to work if we want the menu to scroll.
+   Here we reinstate the verticalScrollPolicy setter, and keep a local copy of the value
+   in a private variable _verticalScrollPolicy.</p>
+   
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get verticalScrollPolicy():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set verticalScrollPolicy(value:String):void</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="ScrollableMenu()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ScrollableMenu</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function ScrollableMenu()</code><p>
+   Constructor
+   </p></div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="configureScrollBars()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">configureScrollBars</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function configureScrollBars():void</code><p> 
+   Overridden to reinstate proper scrolling functionality.
+   
+   </p><p>The Menu class overrode configureScrollBars() and made the function 
+   do nothing. That means the scrollbars don't know how to draw themselves,
+   so here we reinstate configureScrollBars. This is basically a copy of the 
+   same method from the mx.controls.List class. It would have been nice if
+   we could have called this method from down in a subclass of Menu, but AS
+   doesn't let us do something like super.super, so instead we have to recreate
+   the class here.</p>
+   </div>
+<a name="createMenu()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">createMenu</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function createMenu(parent:DisplayObjectContainer, mdp:Object, showRoot:Boolean = true):<a href="../controls/ScrollableMenu.html">ScrollableMenu</a></code><p>
+   We have to override the static function createMenu so that we create a 
+   ScrollableMenu instead of a normal Menu.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">parent</span>:DisplayObjectContainer</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">mdp</span>:Object</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">showRoot</span>:Boolean</code> (default = <code>true</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../controls/ScrollableMenu.html">ScrollableMenu</a></code></td>
+</tr>
+</table>
+</div>
+<a name="measure()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">measure</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function measure():void</code><p>
+     We overide the <code>measure()</code> method because we need to check if the menu is going off
+     the stage. If it's going to be too high, then we make it smaller to keep it from
+     going off. I also stuck in a buffer of 10 pixels from the bottom of the stage.
+     
+     We also check if we're showing the vertical scrollbar, and if so we adjust the 
+     width to account for that.
+     </p></div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->
