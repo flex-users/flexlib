@@ -90,7 +90,7 @@ package flexlib.controls {
 	 *  &lt;/mx:SuperTabBar&gt;
 	 *  </pre>
 	 *
-	 *  @see com.dougmccune.containers.SuperTabNavigator
+	 *  @see flexlib.containers.SuperTabNavigator
 	 * 	@see mx.controls.TabBar
 	 */
 	public class SuperTabBar extends TabBar{
@@ -179,7 +179,7 @@ package flexlib.controls {
 		 * The policy for when to show the close button for each tab.
 		 * <p>This is a proxy property that sets each SuperTab's closePolicy setting to
 		 * whatever is set here.</p>
-		 * @see com.dougmccune.controls.tabClasses.SuperTab
+		 * @see flexlib.controls.tabClasses.SuperTab
 		 */
 		public function get closePolicy():String {
 			return _closePolicy;

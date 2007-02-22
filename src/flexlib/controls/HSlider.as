@@ -54,11 +54,11 @@ import mx.controls.sliderClasses.SliderDirection;
  *  this control will work exactly like the original HSlider.  
  *  @mxml
  *  
- *  <p>The <code>&lt;mccune:HSlider&gt;</code> tag inherits all of the tag attributes
+ *  <p>The <code>&lt;flexlib:HSlider&gt;</code> tag inherits all of the tag attributes
  *  of its superclass, and adds the following tag attribute:</p>
  * 
  *  <pre>
- *  &lt;mccune:HSlider
+ *  &lt;flexlib:HSlider
  *    <strong>Styles</strong>
  *    dataTipPlacement="top"
  *  /&gt;
@@ -66,8 +66,8 @@ import mx.controls.sliderClasses.SliderDirection;
  *  </p>
  *  	
  *  @see mx.controls.HSlider
- *  @see com.dougmccune.controls.VSlider
- *  @see com.dougmccune.baseClasses.SliderBase
+ *  @see flexlib.controls.VSlider
+ *  @see flexlib.baseClasses.SliderBase
  */
 public class HSlider extends ExtendedSlider
 {

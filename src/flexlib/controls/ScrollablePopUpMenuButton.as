@@ -11,7 +11,7 @@ package flexlib.controls
 	use namespace mx_internal;
 	
 	/**
-	 * ScrollablePopUpMenuButton is an extension of PopUpMenuButton that uses <code>com.dougmccune.controls.ScrollableMenu</code>
+	 * ScrollablePopUpMenuButton is an extension of PopUpMenuButton that uses <code>flexlib.controls.ScrollableMenu</code>
 	 * instead of using the original <controls>mx.controls.Menu</controls>, which adds scrolling functionality
 	 * to the menu.
 	 * 
@@ -22,11 +22,11 @@ package flexlib.controls
 	 * 
 	 * @mxml
 	 *  
-	 *  <p>The <code>&lt;mccune:ScrollablePopUpMenuButton&gt;</code> tag inherits all of the tag
+	 *  <p>The <code>&lt;flexlib:ScrollablePopUpMenuButton&gt;</code> tag inherits all of the tag
 	 *  attributes of its superclass, and adds the following tag attributes:</p>
 	 *  
 	 *  <pre>
-	 *  &lt;mccune:ScrollablePopUpMenuButton
+	 *  &lt;flexlib:ScrollablePopUpMenuButton
 	 *    <strong>Properties</strong>
 	 *    verticalScrollPolicy="auto|on|off"
 	 * 	  arrowScrollPolicy="auto|on|off"
@@ -86,7 +86,7 @@ package flexlib.controls
 	    * <p>This property is independant of <code>verticalScrollPolicy</code>. The property here
 	    * just serves a proxy to set the <code>arrowScrollPolicy</code> of the child menu component.</p>
 	    * 
-	    * @see com.dougmccune.controls.ScrollableMenu
+	    * @see flexlib.controls.ScrollableMenu
 	    */ 
 	    public function get arrowScrollPolicy():String {
 			return this._arrowScrollPolicy;

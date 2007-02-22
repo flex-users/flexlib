@@ -55,11 +55,11 @@ import mx.controls.sliderClasses.SliderDirection;
  *   
  *  @mxml
  *  
- *  <p>The <code>&lt;mccune:VSlider&gt;</code> tag inherits all of the tag attributes
+ *  <p>The <code>&lt;flexlib:VSlider&gt;</code> tag inherits all of the tag attributes
  *  of its superclass, and adds the following tag attribute:</p>
  * 
  *  <pre>
- *  &lt;mccune:VSlider
+ *  &lt;flexlib:VSlider
  *    <strong>Styles</strong>
  *    dataTipPlacement="top"
  *  /&gt;
@@ -67,8 +67,8 @@ import mx.controls.sliderClasses.SliderDirection;
  *  </p>
  *  	
  *  @see mx.controls.VSlider
- *  @see com.dougmccune.controls.HSlider
- *  @see com.dougmccune.baseClasses.SliderBase
+ *  @see flexlib.controls.HSlider
+ *  @see flexlib.baseClasses.SliderBase
  */
 public class VSlider extends ExtendedSlider
 {

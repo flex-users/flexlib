@@ -134,7 +134,7 @@ package flexlib.containers
 	 *  </pre>
 	 *
 	 *  @see mx.containers.TabNavigator
-	 *  @see com.dougmccune.controls.SuperTabBar
+	 *  @see flexlib.controls.SuperTabBar
 	 */
 	public class SuperTabNavigator extends TabNavigator
 	{
@@ -516,7 +516,7 @@ package flexlib.containers
 	    
 	    /**
 	    * The close policy for tabs. 
-	    * @see com.dougmccune.controls.SuperTabBar
+	    * @see flexlib.controls.SuperTabBar
 	    */
 	    public function get closePolicy():String {
 	    	return (tabBar as SuperTabBar).closePolicy;

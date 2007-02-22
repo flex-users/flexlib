@@ -39,7 +39,7 @@ package flexlib.controls
 	[IconFile("ScrollableMenu.png")]
 	
 	/**
-	 * ScrollableMenuBar is an extension of MenuBar that uses <code>com.dougmccune.controls.ScrollableMenu</code>
+	 * ScrollableMenuBar is an extension of MenuBar that uses <code>flexlib.controls.ScrollableMenu</code>
 	 * instead of using the original <controls>mx.controls.Menu</controls>. This allows us to specify a maxHeight for the 
 	 * ScrollableMenuBar and that maxHeight will be used to determine the maxHeight for all the
 	 * menus that the component generates.

@@ -19,7 +19,7 @@ import mx.skins.Border;
 
 /**
  * The skin for the highlighted state of the track of a Slider. Modified to work with
- * com.dougmccune.controls.VSlider and HSlider.
+ * flexlib.controls.VSlider and HSlider.
  */
 public class SliderHighlightSkin extends Border
 {

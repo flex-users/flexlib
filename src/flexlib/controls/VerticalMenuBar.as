@@ -28,12 +28,12 @@ package flexlib.controls
 	 *
 	 *  @mxml
 	 *  <p>
-	 *  The <code>&lt;mccune:VerticalMenuBar&gt</code> tag inherits all of the tag attributes of its superclass, and
+	 *  The <code>&lt;flexlib:VerticalMenuBar&gt</code> tag inherits all of the tag attributes of its superclass, and
 	 *  adds the following tag attributes:
 	 *  </p>
 	 *  
 	 *  <pre>
-	 *  &lt;mccune:VerticalMenuBar
+	 *  &lt;flexlib:VerticalMenuBar
 	 *    <b>Properties</b>
 	 *    direction="left|right"
 	 *  

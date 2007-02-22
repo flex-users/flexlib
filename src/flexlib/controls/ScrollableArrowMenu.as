@@ -69,7 +69,7 @@ package flexlib.controls
 	 * An extension of ScrollableMenu that uses two arrow buttons placed at the top and
 	 * bottom of the menu for scrolling.
 	 * 
-	 * @see com.dougmccune.controls.ScrollableMenu
+	 * @see flexlib.controls.ScrollableMenu
 	 */
 	public class ScrollableArrowMenu extends ScrollableMenu
 	{
