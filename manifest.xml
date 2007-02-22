@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <componentPackage>
+    <!-- Darron Schall -->
     <component id="PromptingTextInput" class="flexlib.controls.PromptingTextInput" />
+    
+    <!-- Doug McCune -->
+    <component id="SuperTabBar" class="flexlib.controls.SuperTabBar"/>
+    <component id="TabPopUpButtonSkin" class="flexlib.skins.TabPopUpButtonSkin"/>
+	<component id="SuperTabNavigator" class="flexlib.containers.SuperTabNavigator"/>
+    <component id="ButtonScrollingCanvas" class="flexlib.containers.ButtonScrollingCanvas"/>
+    <component id="DragScrollingCanvas" class="flexlib.containers.DragScrollingCanvas"/>
+    <component id="ScrollableMenuBar" class="flexlib.controls.ScrollableMenuBar"/>
+    <component id="ScrollablePopUpMenuButton" class="flexlib.controls.ScrollablePopUpMenuButton"/>
+    <component id="HAccordion" class="flexlib.containers.HAccordion"/>
+    <component id="VAccordion" class="flexlib.containers.VAccordion"/>
+    <component id="VerticalMenuBar" class="flexlib.controls.VerticalMenuBar"/>
+    <component id="HSlider" class="flexlib.controls.HSlider"/>
+    <component id="VSlider" class="flexlib.controls.VSlider"/>
+    
+    <component id="SliderHighlightSkin" class="flexlib.skins.SliderHighlightSkin"/>
+	<component id="SliderThumbHighlightSkin" class="flexlib.skins.SliderThumbHighlightSkin"/>
+	<component id="SliderThumbNoGripHighlightSkin" class="flexlib.skins.SliderThumbNoGripHighlightSkin"/>
+    
+    
 </componentPackage>

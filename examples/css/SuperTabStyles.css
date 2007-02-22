@@ -1,0 +1,66 @@
+/* These styles are important! Without them the SuperTabNavigator will 
+   look pretty crappy.
+ */
+	SuperTabNavigator {
+		popupButtonStyleName: "popupButton";
+		tabStyleName: "firefoxLikeTabs";
+		leftButtonStyleName: "leftButton";
+		rightButtonStyleName: "rightButton";
+		buttonWidth:20px;	
+	}
+	
+	ScrollableArrowMenu {
+		upButtonStyleName: "upButton";
+		downButtonStyleName: "downButton";
+	}
+	
+	.leftButton {
+		icon: Embed("../assets/assets.swf#left_arrow");
+		fillAlphas: 1, 1, 1, 1;
+		cornerRadius:0;
+	}
+	
+	.rightButton {
+		icon: Embed("../assets/assets.swf#right_arrow");
+		fillAlphas: 1, 1, 1, 1;
+		cornerRadius:0;
+	}
+	
+	.upButton {
+		icon: Embed("../assets/assets.swf#up_arrow");
+		fillAlphas: 1, 1, 1, 1;
+		cornerRadius:0;
+	}
+	
+	.downButton {
+		icon: Embed("../assets/assets.swf#down_arrow");
+		fillAlphas: 1, 1, 1, 1;
+		cornerRadius:0;
+	}
+	
+	.closeButton {
+		upSkin: Embed("../assets/assets.swf#firefox_close_up");
+		downSkin: Embed("../assets/assets.swf#firefox_close_down");	
+		overSkin: Embed("../assets/assets.swf#firefox_close_over");
+		disabledSkin: Embed("../assets/assets.swf#firefox_close_disabled");		
+	}
+	
+	.popupButton {
+		upSkin: ClassReference("flexlib.skins.TabPopUpButtonSkin");
+		popUpDownSkin: ClassReference("flexlib.skins.TabPopUpButtonSkin");	
+		popUpOverSkin: ClassReference("flexlib.skins.TabPopUpButtonSkin");	
+		disabledSkin: ClassReference("flexlib.skins.TabPopUpButtonSkin");		
+	}
+	
+	.firefoxLikeTabs {
+		highlightAlphas: 0.52, 0.4;
+		fillAlphas: 1, 1;
+	   	fillColors: #eceadb, #eceadb;
+	   	backgroundColor: #ffffff;
+	   	borderColor: #999999;
+	   	color: #000000;
+	   	textRollOverColor: #000000;	
+	   	textAlign: "left";
+	   	indicatorClass: Embed("../assets/assets.swf#indicator");	
+		closeButtonStyleName: "closeButton";
+	}

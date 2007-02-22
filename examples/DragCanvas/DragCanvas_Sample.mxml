@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flexlib="http://code.google.com/p/flexlib/" >
+	
+	
+	<mx:Style>
+		.mySkin {
+			leftButtonStyleName: "leftButton2";
+			rightButtonStyleName: "rightButton2";
+			upButtonStyleName: "upButton2";
+			downButtonStyleName: "downButton2";
+			buttonWidth:20px;	
+		}
+		
+		.leftButton2 {
+			icon: Embed("../assets/assets.swf#left_arrow");
+			fillAlphas: 0,0,0,0;
+			cornerRadius:0;
+		}
+		
+		.rightButton2 {
+			icon: Embed("../assets/assets.swf#right_arrow");
+			fillAlphas: 0,0,0,0;
+			cornerRadius:0;
+		}
+		
+		.upButton2 {
+			icon: Embed("../assets/assets.swf#up_arrow");
+			fillAlphas: 0,0,0,0;
+			cornerRadius:0;
+		}
+		
+		.downButton2 {
+			icon: Embed("../assets/assets.swf#down_arrow");
+			fillAlphas: 0,0,0,0;
+			cornerRadius:0;
+		}
+	</mx:Style>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.core.ScrollPolicy;
+		]]>
+	</mx:Script>
+	<mx:VBox verticalGap="20" width="100%" horizontalAlign="center">
+		
+	
+		<flexlib:DragScrollingCanvas x="50" y="50" 
+			borderStyle="inset"  id="dragCanvas"
+			width="400" height="250" 
+			childrenDoDrag="true" backgroundColor="#feefd3" backgroundAlpha=".65" cornerRadius="0">
+			
+			<mx:Button x="95" y="186" label="Button"/>
+			<mx:CheckBox x="496" y="257" label="Checkbox"/>
+			<mx:NumericStepper x="296" y="92"/>
+			
+			<mx:DataGrid x="107" y="216" width="371" height="272">
+				<mx:columns>
+					<mx:DataGridColumn headerText="Column 1" dataField="col1"/>
+					<mx:DataGridColumn headerText="Column 2" dataField="col2"/>
+					<mx:DataGridColumn headerText="Column 3" dataField="col3"/>
+				</mx:columns>
+			</mx:DataGrid>
+			<mx:Label x="45" y="32" text="Click to Drag this container."/>
+			<mx:CheckBox x="45" y="75" selected="true" label="Show normal scrollbars" click="event.currentTarget.selected?dragCanvas.verticalScrollPolicy = dragCanvas.horizontalScrollPolicy = ScrollPolicy.AUTO : dragCanvas.verticalScrollPolicy = dragCanvas.horizontalScrollPolicy = ScrollPolicy.OFF;"/>
+		</flexlib:DragScrollingCanvas>
+	
+		<flexlib:ButtonScrollingCanvas x="50" y="50" 
+			  styleName="mySkin"
+			 startScrollingEvent="{MouseEvent.MOUSE_OVER}"
+			  stopScrollingEvent="{MouseEvent.MOUSE_OUT}"
+			borderStyle="inset" 
+			width="400" height="250" 
+			backgroundColor="#feefd3" backgroundAlpha="0.65">
+			
+			<mx:Button x="95" y="186" label="Button"/>
+			<mx:CheckBox x="496" y="257" label="Checkbox"/>
+			<mx:NumericStepper x="296" y="92"/>
+			
+			<mx:DataGrid x="98" y="329" width="371" height="272">
+				<mx:columns>
+					<mx:DataGridColumn headerText="Column 1" dataField="col1"/>
+					<mx:DataGridColumn headerText="Column 2" dataField="col2"/>
+					<mx:DataGridColumn headerText="Column 3" dataField="col3"/>
+				</mx:columns>
+			</mx:DataGrid>
+			<mx:Label x="41" y="66" text="Rollover the side, top and botom areas to scroll this one"/>
+		</flexlib:ButtonScrollingCanvas>
+	</mx:VBox>
+</mx:Application>

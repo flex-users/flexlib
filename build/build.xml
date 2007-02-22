@@ -42,7 +42,7 @@
 			<arg line="-l '${flex2sdk.lib.dir}'" />
 			
 			<!-- Include in the flexunit.swc in the class path -->
-			<arg line="-l ${flexunit.swc}" />
+			<arg line="-l '${flexunit.swc}'" />
 			
 			<!-- Include locale-specific items in the path -->
 			<arg line="-locale ${flex2sdk.locale}" />
@@ -74,7 +74,7 @@
 			<arg line="-o '${bin.dir}/${library.name}.swc'" />
 			
 			<!-- Specify the main source path as "src" -->
-			<arg line="-sp ${src.dir}" />
+			<arg line="-sp '${src.dir}'" />
 			
 			<!-- Specify the manifest.xml file and namespace to use -->
 			<arg line="-namespace http://code.google.com/p/flexlib/ manifest.xml" />
@@ -89,23 +89,41 @@
 		Generate the example applications using the library
 	-->
 	<target name="examples" depends="properties">
-		<exec executable="${mxmlc.exe}" dir="${basedir}">
-			<!-- Point to the main test runner's application mxml file -->
-			<arg line="'${examples.dir}/${exampleApplicationName}/${exampleApplicationName}_Sample.mxml'" />
-			
-			<!-- Place the built .swf file in the "bin" directory -->
-			<arg line="-o '${bin.dir}/${exampleApplicationName}_Sample.swf'" />
-			
-			<!-- Include the flexlib library in the path -->
-			<arg line="-l '${bin.dir}/${library.name}.swc'" />
-			
-			<!-- Include the necessary framework libraries in the class path -->
-			<arg line="-l '${flex2sdk.lib.dir}'" />
-			
-			<!-- Include locale-specific items in the path -->
-			<arg line="-locale ${flex2sdk.locale}" />
-			<arg line="-l '${flex2sdk.locale.dir}'" />
-		</exec>
+		
+		
+		<for param="file">
+			<!-- Include the following file types in the target directory as part of the loop -->
+			<fileset dir="${basedir}/examples">
+				<include name="**/*_Sample.mxml" />
+			</fileset>
+					
+			<sequential>
+				
+					
+				<propertyregex property="exampleApplicationName" override="yes" input="@{file}"
+										regexp=".*\\(.*)_Sample.mxml" replace="\1" />
+				<propertyregex property="exampleFolderName" override="yes" input="@{file}"
+										regexp="(.*)\\(.*)_Sample.mxml" replace="\1" />
+		
+				<exec executable="${mxmlc.exe}" dir="${basedir}">
+					<!-- Point to the main test runner's application mxml file -->
+					<arg line="'@{file}'" />
+					
+					<!-- Place the built .swf file in the "bin" directory -->
+					<arg line="-o '${exampleFolderName}/${exampleApplicationName}_Sample.swf'" />
+					
+					<!-- Include the flexlib library in the path -->
+					<arg line="-l '${bin.dir}/${library.name}.swc'" />
+					
+					<!-- Include the necessary framework libraries in the class path -->
+					<arg line="-l '${flex2sdk.lib.dir}'" />
+					
+					<!-- Include locale-specific items in the path -->
+					<arg line="-locale ${flex2sdk.locale}" />
+					<arg line="-l '${flex2sdk.locale.dir}'" />
+				</exec>
+			</sequential>
+		</for>
 	</target>
 	
 	<!--
@@ -113,21 +131,21 @@
 	-->
 	<target name="docs" depends="properties">
 		<!-- Clean out the contents of the doc directory, without delete "docs" -->
-		<!--
+		
 		<delete includeemptydirs="true">
 			<fileset dir="${docs.dir}" includes="**/*" />
 		</delete>
-		-->
+		
 		
 		<exec executable="${asdoc.exe}" spawn="no">
 			<!-- Place the documentation in the "docs" directory -->
-			<arg line="-o ${docs.dir}" />
+			<arg line="-o '${docs.dir}'" />
 			
 			<!-- Specify the main source path as "src" -->
-			<arg line="-sp ${src.dir}" />
+			<arg line="-sp '${src.dir}'" />
 			
 			<!-- Document all of the classes in the "src" tree -->
-			<arg line="-ds ${src.dir} " />
+			<arg line="-ds '${src.dir}' " />
 			
 			<!-- Include the library name in the window title -->
 			<arg line="-window-title 'Adobe ActionScript 3.0 Library - ${library.name}' "/>

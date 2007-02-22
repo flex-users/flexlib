@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<mx:Application
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	xmlns:mx="http://www.adobe.com/2006/mxml">
+
+	<mx:Style source="../css/AccordionDefaults.css" />
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.Accordion;
+			/* We have to embed a font for the VAccordion. Without doing this the
+			 * labels that are rotated will be invisible. In AccordionDefaults.css
+			 * we reference the bolded font named 'accordionHeader' so that needs 
+			 * to match here. */
+		     [Embed(systemFont='Arial', fontWeight="bold", fontName='accordionHeader', mimeType='application/x-font', flashType='true')] 
+		     private var font1:Class;
+		]]>
+	</mx:Script>
+	
+	
+	
+	<mx:VBox width="100%" height="100%">
+		
+	
+	    <mx:Panel title="HAccordion" height="100%" width="100%" 
+	        paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10">
+	
+	        
+	        <flexlib:HAccordion id="accordion" width="100%" height="100%">
+	            <!-- Define each panel using a VBox container. -->
+	            <mx:VBox label="Accordion Button for Panel 1" horizontalScrollPolicy="off">
+	                <mx:Label text="Accordion container panel 1"/>
+	            </mx:VBox>
+	
+	            <mx:VBox label="Accordion Button for Panel 2" horizontalScrollPolicy="off">
+	                <mx:Label text="Accordion container panel 2"/>
+	            </mx:VBox>
+	
+	            <mx:VBox label="Accordion Button for Panel 3" horizontalScrollPolicy="off">
+	                <mx:Label text="Accordion container panel 3"/>
+	            </mx:VBox>
+	        </flexlib:HAccordion>
+	      </mx:Panel>
+	      
+	      <mx:Panel title="VAccordion" height="100%" width="100%" 
+	        paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10">
+	
+	        <flexlib:VAccordion id="accordion2" width="100%" height="100%">
+	            <!-- Define each panel using a VBox container. -->
+	            <mx:VBox label="Accordion Button for Panel 1">
+	                <mx:Label text="Accordion container panel 1"/>
+	            </mx:VBox>
+	
+	            <mx:VBox label="Accordion Button for Panel 2">
+	                <mx:Label text="Accordion container panel 2"/>
+	            </mx:VBox>
+	
+	            <mx:VBox label="Accordion Button for Panel 3">
+	                <mx:Label text="Accordion container panel 3"/>
+	            </mx:VBox>
+	        </flexlib:VAccordion>
+	        
+	    
+	    </mx:Panel>
+	   </mx:VBox>
+</mx:Application>
