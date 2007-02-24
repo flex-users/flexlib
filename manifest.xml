@@ -16,6 +16,7 @@
     <component id="VerticalMenuBar" class="flexlib.controls.VerticalMenuBar"/>
     <component id="HSlider" class="flexlib.controls.HSlider"/>
     <component id="VSlider" class="flexlib.controls.VSlider"/>
+    <component id="ConvertibleTreeList" class="flexlib.controls.ConvertibleTreeList"/>
     
     <component id="SliderHighlightSkin" class="flexlib.skins.SliderHighlightSkin"/>
 	<component id="SliderThumbHighlightSkin" class="flexlib.skins.SliderThumbHighlightSkin"/>

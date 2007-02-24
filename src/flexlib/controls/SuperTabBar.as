@@ -71,11 +71,11 @@ package flexlib.controls {
 	 *
 	 *  @mxml
 	 *
-	 *  <p>The <code>&lt;mx:SuperTabBar&gt;</code> tag inherits all of the tag attributes
+	 *  <p>The <code>&lt;flexlib:SuperTabBar&gt;</code> tag inherits all of the tag attributes
 	 *  of its superclass, and adds the following tag attributes:</p>
 	 *
 	 *  <pre>
-	 *  &lt;mx:SuperTabBar
+	 *  &lt;flexlib:SuperTabBar
 	 *    <b>Properties</b>
 	 *    closePolicy="SuperTab.CLOSE_ROLLOVER|SuperTab.CLOSE_ALWAYS|SuperTab.CLOSE_SELECTED|SuperTab.CLOSE_NEVER"
 	 *    dragEnabled="true"
@@ -87,7 +87,7 @@ package flexlib.controls {
 	 *    ...
 	 *       <i>child tags</i>
 	 *    ...
-	 *  &lt;/mx:SuperTabBar&gt;
+	 *  &lt;/flexlib:SuperTabBar&gt;
 	 *  </pre>
 	 *
 	 *  @see flexlib.containers.SuperTabNavigator

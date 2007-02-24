@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:flexlib="http://code.google.com/p/flexlib/" 
+	creationComplete="initDP();">
+
+	<mx:Style>
+		TitleWindow.close {
+			closeButtonUpSkin:Embed('icons/closeNav.png');
+			closeButtonDownSkin:Embed('icons/closeNav.png');
+			closeButtonOverSkin:Embed('icons/closeNav.png');
+			closeButtonDisabledSkin:Embed('icons/closeNav.png');
+		}
+		
+		TitleWindow.open {
+			closeButtonUpSkin:Embed('icons/openNav.png');
+			closeButtonDownSkin:Embed('icons/openNav.png');
+			closeButtonOverSkin:Embed('icons/openNav.png');
+			closeButtonDisabledSkin:Embed('icons/openNav.png');
+		}
+	</mx:Style>
+	
+	<mx:Script>
+		<![CDATA[
+			[Embed(source="icons/ScrollableMenu.png")] 
+            public var menu_icon:Class; 
+            [Embed(source="icons/HSlider.png")]
+            public var slider_icon:Class; 
+            [Embed(source="icons/SuperTabNavigator.png")]
+            public var tab_icon:Class; 
+			[Embed(source="icons/HAccordion.png")]
+            public var accordion_icon:Class; 
+            [Embed(source="icons/DragScrollingCanvas.png")]
+            public var drag_icon:Class;
+            [Embed(source="icons/VerticalMenuBar.png")]
+            public var vmenu_icon:Class;
+            [Embed(source="icons/UtilIcon.png")]
+            public var util_icon:Class;
+            [Embed(source="icons/ConvertibleTreeList.png")]
+            public var ctree_icon:Class;
+            
+            [Embed(source="icons/full_list.png")]
+            public var icon1:Class;
+            [Embed(source="icons/icon_list.png")]
+            public var icon2:Class;
+            [Embed(source="icons/text_list.png")]
+            public var icon3:Class;
+            [Embed(source="icons/tree.png")]
+            public var icon4:Class;
+            
+           
+            private function initDP():void {
+            	var xml:XML = 
+            		<node>
+				    	<group label="Controls">
+				        	<example label="Draggable Slider" showInList="true" icon="slider_icon" number="6" />
+				            <example label="Scrollable Menu Controls" showInList="true" icon="menu_icon" number="5" />
+				            <example label="Vertical MenuBar" showInList="true" icon="vmenu_icon" number="8" />
+				        </group>
+				        <group label="Containers">
+				        	<example label="Alternative Dragging Canvases" showInList="true" icon="drag_icon" number="1" />
+				        	<example label="Horizontal Accordion" showInList="true" icon="accordion_icon" number="3" />
+				        	<example label="SuperTabNavigator" showInList="true" icon="tab_icon" number="7" />
+				        </group>
+				        <group label="Utility">
+				        	<example label="Hit Tester" showInList="true" icon="util_icon" number="4" />
+				        </group>
+			        </node>; 
+				
+				ctree.dataProvider = xml;
+				ctree2.dataProvider = xml;
+				
+            }
+
+			private function resizeCTree(event:Event):void {
+				if(ctree2.width == ctree2.minWidth) {
+					controlsWindow.title = "Controls";
+					controlsWindow.styleName = "close";
+					
+					ctree2.width = ctree2.maxWidth;
+					ctree2.mode = ConvertibleTreeList.TREE;
+				}
+				else {
+					controlsWindow.title = "";
+					controlsWindow.styleName = "open";
+					
+					ctree2.width = ctree2.minWidth;
+					ctree2.mode = ConvertibleTreeList.ICON_LIST;
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	
+					
+	<mx:VBox width="100%">
+		<mx:Panel layout="vertical" title="Example 1">
+			<mx:Canvas borderStyle="solid" width="100%" >
+				<flexlib:ConvertibleTreeList id="ctree"
+					width="100%" height="150" 
+					showRoot="false" 
+					iconField="@icon" 
+					labelField="@label"
+					 listField="showInList"
+					/>
+			</mx:Canvas>
+			
+			<mx:ControlBar>
+				<mx:ToggleButtonBar itemClick="ctree.mode = event.item.mode" >
+					<mx:dataProvider>
+		                <mx:Array>
+		                  <mx:Object icon="{icon4}" mode="{ConvertibleTreeList.TREE}" />
+		                  <mx:Object icon="{icon1}" mode="{ConvertibleTreeList.FULL_LIST}" />
+		                  <mx:Object icon="{icon2}" mode="{ConvertibleTreeList.ICON_LIST}" />
+		                  <mx:Object icon="{icon3}" mode="{ConvertibleTreeList.TEXT_LIST}"/>
+		                </mx:Array>
+		            </mx:dataProvider>
+				</mx:ToggleButtonBar>
+			</mx:ControlBar>
+		</mx:Panel>
+		
+		<mx:TitleWindow id="controlsWindow"
+			styleName="close" 
+			layout="vertical"   title="Controls" 
+			paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0"
+			showCloseButton="true" close="resizeCTree(event)"
+			>
+			
+			<flexlib:ConvertibleTreeList id="ctree2"  resizeEffect="Resize"
+				minWidth="32" maxWidth="240"
+				width="240"	height="160"  
+				showRoot="false" 
+				iconField="@icon" 
+				labelField="@label"
+				/>
+					
+		</mx:TitleWindow>
+	</mx:VBox>
+	
+</mx:Application>

@@ -166,7 +166,7 @@
 		<!-- Loop over the files in the doc directory -->
 		<for param="file">
 			<!-- Include the following file types in the target directory as part of the loop -->
-			<fileset dir="${basedir}/../../doc">
+			<fileset dir="docs">
 				<include name="**/*.html" />
 				<include name="**/*.png" />
 				<include name="**/*.jpg" />
@@ -199,10 +199,24 @@
 				
 				<!-- Configure the mime type for the file -->
 				<exec executable="${svn.exe}" spawn="no">
-					<arg line="propset svn:mime-type ${mime.type} @{file}" />
+					<arg line="propset svn:mime-type '${mime.type}' '@{file}'" />
 				</exec>
 			</sequential>
 		</for>
+	</target>
+	
+	<target name="zip">
+		<zip destfile="${bin.dir}/flexlib.zip">
+		    <fileset dir="${basedir}">
+				<include name="src/**" />
+		    	<include name="docs/**" />
+				<include name="examples/**" />
+			</fileset>
+			<fileset dir="${bin.dir}">
+				<include name="${library.name}.swc" />
+			</fileset>
+		</zip>
+			
 	</target>
 
 </project>
