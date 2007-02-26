@@ -1,14 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  I ripped off this skin from one of the original Adobe ones included
-//  in the Flex framework. I assume that means you've got to follow Adobe's 
-//  licensing rules. I don't know what those are. As for me, I don't care what
-//  you do with this code. How's that for licensing terms? 
-//
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-//
 //  Copyright (C) 2003-2006 Adobe Macromedia Software LLC and its licensors.
 //  All Rights Reserved. The following is Source Code and is subject to all
 //  restrictions on such code as contained in the End User License Agreement

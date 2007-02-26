@@ -1,4 +1,26 @@
 <?xml version="1.0"?>
+<!--
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
 <project name="as3corelib" basedir="../" default="lib">
 
 	<!-- Define variables/paths used in this build script -->
@@ -89,17 +111,19 @@
 		Generate the example applications using the library
 	-->
 	<target name="examples" depends="properties">
-		
-		
+		<!-- 
+			Loop over all of the Sample applications in the examples directory,
+			compile them, and place the resulting .swf next to the application
+			.mxml file.
+		-->
 		<for param="file">
-			<!-- Include the following file types in the target directory as part of the loop -->
+			<!-- Find the sample applications -->
 			<fileset dir="${basedir}/examples">
 				<include name="**/*_Sample.mxml" />
 			</fileset>
 					
 			<sequential>
-				
-					
+				<!-- Pull out the example name and folder -->
 				<propertyregex property="exampleApplicationName" override="yes" input="@{file}"
 										regexp=".*\\(.*)_Sample.mxml" replace="\1" />
 				<propertyregex property="exampleFolderName" override="yes" input="@{file}"
@@ -205,18 +229,20 @@
 		</for>
 	</target>
 	
-	<target name="zip">
-		<zip destfile="${bin.dir}/flexlib.zip">
-		    <fileset dir="${basedir}">
+	<!--
+		Generate a distribution based on the current source code.  Includes
+		the source code, the documentation, the examples, and the binary .swc file.
+	-->
+	<target name="zip" depends="lib,docs">
+		<!-- Creates the .zip file in the bin directory -->
+		<zip destfile="${bin.dir}/${library.name}.zip">
+			<fileset dir="${basedir}">
 				<include name="src/**" />
 		    	<include name="docs/**" />
 				<include name="examples/**" />
-			</fileset>
-			<fileset dir="${bin.dir}">
-				<include name="${library.name}.swc" />
+				<include name="${bin.dir}/${library.name}.swc" />
 			</fileset>
 		</zip>
-			
 	</target>
 
 </project>
