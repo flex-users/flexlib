@@ -461,10 +461,20 @@ package flexlib.controls
 		
 		public function get selectedItem():Object {
 			if(this._mode == ConvertibleTreeList.TREE) {
+				trace("TREE SEL: " + tree.selectedItem);
 				return tree.selectedItem;
 			}
 			else {
 				return list.selectedItem;
+			}
+		}
+		
+		public function set selectedItem(value:Object):void {
+			if(this._mode == ConvertibleTreeList.TREE) {
+				tree.selectedItem = value;
+			}
+			else {
+				list.selectedItem = value;
 			}
 		}
 		

@@ -240,6 +240,7 @@ SOFTWARE.
 				<include name="src/**" />
 		    	<include name="docs/**" />
 				<include name="examples/**" />
+				<exclude name="**/*_Sample.swf" />
 				<include name="${bin.dir}/${library.name}.swc" />
 			</fileset>
 		</zip>

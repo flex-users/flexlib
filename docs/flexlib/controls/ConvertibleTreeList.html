@@ -100,7 +100,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">ConvertibleTreeList</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#selectedItem">selectedItem</a> : Object<div class="summaryTableDescription">[read-only]</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#selectedItem">selectedItem</a> : Object<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">ConvertibleTreeList</td>
 </tr>
 <tr class="">
@@ -359,9 +359,11 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>selectedItem:Object</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<code>selectedItem:Object</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get selectedItem():Object</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set selectedItem(value:Object):void</code>
 <br>
 </div>
 <a name="showRoot"></a>
@@ -499,9 +501,7 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">
-<footer> 
-</footer>
+<center class="copyright"> 
 </center>
 </div>
 </body>

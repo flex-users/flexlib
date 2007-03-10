@@ -17,10 +17,16 @@
     <component id="HSlider" class="flexlib.controls.HSlider"/>
     <component id="VSlider" class="flexlib.controls.VSlider"/>
     <component id="ConvertibleTreeList" class="flexlib.controls.ConvertibleTreeList"/>
+    <component id="ImageMap" class="flexlib.controls.ImageMap"/>
+    <component id="area" class="flexlib.controls.area"/>
+    
     
     <component id="SliderHighlightSkin" class="flexlib.skins.SliderHighlightSkin"/>
 	<component id="SliderThumbHighlightSkin" class="flexlib.skins.SliderThumbHighlightSkin"/>
 	<component id="SliderThumbNoGripHighlightSkin" class="flexlib.skins.SliderThumbNoGripHighlightSkin"/>
+    
+    <!-- Renaun Erickson -->
+    <component id="AdvancedForm" class="flexlib.containers.AdvancedForm"/>
     
     
 </componentPackage>

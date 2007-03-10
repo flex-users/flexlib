@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="vertical" backgroundGradientColors="[#FFFFFF, #FFFFFF]"
+	horizontalAlign="center" verticalAlign="middle">
+	
+	<mx:CheckBox id="chk" label="Show outlines"/>
+	
+	<ImageMap xmlns="http://code.google.com/p/flexlib/"  scaleContent="true"
+		source="usa.jpg"  
+		outlineAlpha="{chk.selected ? 1 : 0}" outlineColor="0x00ff00" 
+		fillAlpha="{chk.selected ? .5 : 0}" fillColor="0xff0000" 
+		showToolTips="true" 
+		shapeClick="navigateToURL(new URLRequest(event.href), event.linkTarget)" 
+		>
+		<map>
+			<area alt="WA" shape="POLY" coords="85,11,133,11,134,42,114,42,100,47,96,45,91,48,83,40,76,40,75,29,70,23,71,18,82,20,87,18" href="http://en.wikipedia.org/wiki/Washington" target="_blank"/>
+			<area alt="OR" shape="POLY" coords="76,40,83,40,90,48,96,45,101,47,115,43,134,43,138,46,133,57,134,84,72,84,71,71,76,56" href="http://en.wikipedia.org/wiki/Oregon" target="_blank"/>
+			<area alt="CA" shape="POLY" coords="73,84,108,84,109,116,158,161,153,172,153,179,133,182,126,169,105,161,91,139,81,120,73,100" href="http://en.wikipedia.org/wiki/California" target="_blank"/>
+			<area alt="HI" shape="POLY" coords="5,117,12,118,44,129,54,137,69,151,56,162,50,140,27,130,3,122" href="http://en.wikipedia.org/wiki/Hawaii" target="_blank"/>
+			<area alt="AK" shape="POLY" coords="165,202,165,251,176,255,183,254,197,274,194,279,173,256,143,245,140,252,132,253,130,267,89,281,113,257,100,256,87,242,103,230,84,227,87,217,100,220,89,206,115,192" href="http://en.wikipedia.org/wiki/Alaska" target="_blank"/>
+			<area alt="ID" shape="POLY" coords="134,11,142,11,142,24,156,36,154,47,159,47,166,57,183,56,183,83,135,83,133,56,138,46,134,41" href="http://en.wikipedia.org/wiki/Idaho" target="_blank"/>
+			<area alt="NV" shape="POLY" coords="109,84,158,84,158,142,153,145,152,156,109,116" href="http://en.wikipedia.org/wiki/Nevada" target="_blank"/>
+			<area alt="AZ" shape="POLY" coords="159,136,199,136,199,194,181,194,151,182,154,179,154,170,158,161,152,155,153,145,159,144" href="http://en.wikipedia.org/wiki/Arizona" target="_blank"/>
+			<area alt="UT" shape="POLY" coords="199,135,158,135,159,84,183,84,183,94,199,94" href="http://en.wikipedia.org/wiki/Utah" target="_blank"/>
+			<area alt="MT" shape="POLY" coords="142,11,241,11,241,52,182,52,182,55,166,57,159,46,154,47,156,35,142,23" href="http://en.wikipedia.org/wiki/Montana" target="_blank"/>
+			<area alt="WY" shape="POLY" coords="182,52,241,52,241,95,183,94" href="http://en.wikipedia.org/wiki/Wyoming" target="_blank"/>
+			<area alt="CO" shape="POLY" coords="200,95,257,95,257,136,200,136" href="http://en.wikipedia.org/wiki/Colorado" target="_blank"/>
+			<area alt="NM" shape="POLY" coords="200,136,249,136,249,186,219,187,207,189,207,194,200,194" href="http://en.wikipedia.org/wiki/New Mexico" target="_blank"/>
+			<area alt="ND" shape="POLY" coords="241,11,297,11,298,19,302,43,242,43" href="http://en.wikipedia.org/wiki/North Dakota" target="_blank"/>
+			<area alt="SD" shape="POLY" coords="242,43,302,43,300,47,304,50,304,68,302,77,295,75,290,75,286,73,242,73" href="http://en.wikipedia.org/wiki/South Dakota" target="_blank"/>
+			<area alt="NE" shape="POLY" coords="242,73,286,73,290,76,302,77,314,104,258,104,258,94,242,94" href="http://en.wikipedia.org/wiki/Nebraska" target="_blank"/>
+			<area alt="KS" shape="POLY" coords="257,104,315,104,319,114,318,136,257,135" href="http://en.wikipedia.org/wiki/Kansas" target="_blank"/>
+			<area alt="OK" shape="POLY" coords="249,136,319,136,320,169,314,166,300,169,295,166,286,166,275,160,274,141,249,141" href="http://en.wikipedia.org/wiki/Oklahoma" target="_blank"/>
+			<area alt="TX" shape="POLY" coords="249,141,273,141,274,160,288,167,296,167,300,169,312,167,323,171,323,188,328,197,326,210,310,219,296,235,297,248,283,245,270,220,259,209,249,212,248,219,234,211,230,196,220,187,249,187" href="http://en.wikipedia.org/wiki/Texas" target="_blank"/>
+			<area alt="MN" shape="POLY" coords="297,11,313,11,315,8,321,14,333,15,345,21,360,21,338,36,337,41,333,44,335,56,347,65,346,68,304,68,304,49,300,47,302,43,300,24" href="http://en.wikipedia.org/wiki/Minnesota" target="_blank"/>
+			<area alt="IA" shape="POLY" coords="304,68,345,68,355,82,352,89,348,90,345,99,311,99,307,88,303,77" href="http://en.wikipedia.org/wiki/Iowa" target="_blank"/>
+			<area alt="MI" shape="POLY" coords="311,98,344,98,346,107,352,116,356,117,354,124,361,128,364,140,359,146,355,146,355,140,319,140,318,113,315,110,315,105" href="http://en.wikipedia.org/wiki/MIssouri" target="_blank"/>
+			<area alt="AR" shape="POLY" coords="318,140,355,140,355,145,360,145,355,156,352,158,351,162,348,165,347,177,323,177,323,172,320,169,320,150" href="http://en.wikipedia.org/wiki/Arkansas" target="_blank"/>
+			<area alt="LA" shape="POLY" coords="323,176,346,177,349,182,344,197,358,197,360,202,360,210,364,216,353,217,339,212,326,209,328,194,323,187" href="http://en.wikipedia.org/wiki/Loisiana" target="_blank"/>
+			<area alt="WI" shape="POLY" coords="342,34,349,32,357,37,372,42,377,49,374,56,381,53,375,78,352,78,347,68,348,64,335,55,333,44,338,40,339,35" href="http://en.wikipedia.org/wiki/Wisconsin" target="_blank"/>
+			<area alt="MI" shape="POLY" coords="357,35,373,28,378,37,399,34,412,41,403,46,412,53,406,67,416,62,421,74,412,86,383,86,389,77,388,54,395,53,399,44,393,43,378,48,370,41,356,37" href="http://en.wikipedia.org/wiki/Michigan" target="_blank"/>
+			<area alt="IL" shape="POLY" coords="353,78,375,78,377,88,377,112,374,124,374,131,368,134,366,133,362,135,361,127,354,123,357,116,347,109,345,99,349,90,354,86,355,81" href="http://en.wikipedia.org/wiki/Illinois" target="_blank"/>
+			<area alt="IN" shape="POLY" coords="379,88,384,86,401,87,401,114,393,119,392,123,385,124,381,126,375,126,375,121,378,109" href="http://en.wikipedia.org/wiki/Indiana" target="_blank"/>
+			<area alt="KY" shape="POLY" coords="364,140,365,133,372,132,378,126,392,124,395,118,403,114,410,118,417,118,423,131,412,139" href="http://en.wikipedia.org/wiki/Kentucky" target="_blank"/>
+			<area alt="TN" shape="POLY" coords="364,140,425,139,424,143,417,146,409,151,403,156,355,156" href="http://en.wikipedia.org/wiki/Tennessee" target="_blank"/>
+			<area alt="MS" shape="POLY" coords="355,156,371,156,370,201,359,202,345,196,349,164" href="http://en.wikipedia.org/wiki/Mississippi" target="_blank"/>
+			<area alt="AL" shape="POLY" coords="372,156,393,156,399,187,398,198,377,198,379,204,376,206,370,201" href="http://en.wikipedia.org/wiki/Alabama" target="_blank"/>
+			<area alt="OH" shape="POLY" coords="401,86,414,87,419,90,435,84,436,100,433,101,432,108,419,120,401,113" href="http://en.wikipedia.org/wiki/Ohio" target="_blank"/>
+			<area alt="FL" shape="POLY" coords="380,203,378,198,399,198,400,200,416,201,422,204,428,199,430,215,438,238,439,254,433,257,416,231,417,218,405,207,395,211,388,203" href="http://en.wikipedia.org/wiki/Florida" target="_blank"/>
+			<area alt="GA" shape="POLY" coords="394,156,412,156,413,160,418,164,419,167,425,173,432,186,427,199,422,203,400,200,399,184" href="http://en.wikipedia.org/wiki/Georgia" target="_blank"/>
+			<area alt="SC" shape="POLY" coords="413,156,426,154,442,158,451,168,433,186,424,171,418,164,412,159" href="http://en.wikipedia.org/wiki/South Carolina" target="_blank"/>
+			<area alt="NC" shape="POLY" coords="404,155,413,155,422,153,442,158,452,169,477,149,474,139,426,139,424,142" href="http://en.wikipedia.org/wiki/North Carolina" target="_blank"/>
+			<area alt="WV" shape="POLY" coords="436,101,436,107,444,107,445,111,451,109,452,112,447,119,441,120,439,127,426,133,423,130,418,121,432,108,433,102" href="http://en.wikipedia.org/wiki/West Virginia" target="_blank"/>
+			<area alt="DC" shape="POLY" coords="462,114,471,120,469,128,459,125" href="http://en.wikipedia.org/wiki/Washington DC" target="_blank"/>
+			<area alt="VA" shape="POLY" coords="414,139,473,139,469,128,459,125,462,114,453,111,448,119,442,120,439,128,426,133,419,131" href="http://en.wikipedia.org/wiki/Virginia" target="_blank"/>
+			<area alt="MD" shape="POLY" coords="444,107,444,111,451,109,464,115,471,120,471,111,475,112,477,120,482,120,476,107" href="http://en.wikipedia.org/wiki/Maryland" target="_blank"/>
+			<area alt="DE" shape="POLY" coords="471,119,471,112,475,113,477,121,483,122,474,134" href="http://en.wikipedia.org/wiki/Delaware" target="_blank"/>
+			<area alt="NJ" shape="POLY" coords="476,107,481,113,489,105,489,98,490,93,483,90,479,96,482,102" href="http://en.wikipedia.org/wiki/New Jersey" target="_blank"/>
+			<area alt="PA" shape="POLY" coords="436,106,475,106,482,102,478,95,483,90,479,83,436,83" href="http://en.wikipedia.org/wiki/Pennsylvania" target="_blank"/>
+			<area alt="NY" shape="POLY" coords="440,82,479,82,484,90,490,94,490,98,504,96,493,93,496,75,494,63,496,52,474,56,470,69,457,70,451,67" href="http://en.wikipedia.org/wiki/New York" target="_blank"/>
+			<area alt="CT" shape="POLY" coords="494,92,507,90,506,84,494,84" href="http://en.wikipedia.org/wiki/Connecticut" target="_blank"/>
+			<area alt="RI" shape="POLY" coords="507,90,506,83,513,83,513,89" href="http://en.wikipedia.org/wiki/Rhode Island" target="_blank"/>
+			<area alt="MA" shape="POLY" coords="513,89,519,87,515,73,511,76,496,76,495,83,513,83" href="http://en.wikipedia.org/wiki/Massachusetts" target="_blank"/>
+			<area alt="VT" shape="POLY" coords="496,75,502,75,504,64,508,58,508,53,496,53,494,64" href="http://en.wikipedia.org/wiki/Vermont" target="_blank"/>
+			<area alt="NH" shape="POLY" coords="502,75,512,75,516,71,514,67,513,50,509,54,508,58,503,67" href="http://en.wikipedia.org/wiki/New Hampshire" target="_blank"/>
+			<area alt="ME" shape="POLY" coords="516,70,531,59,535,59,547,54,546,50,541,44,540,33,536,29,529,27,521,39,519,45,513,50" href="http://en.wikipedia.org/wiki/Maine" target="_blank"/>
+		</map>
+	</ImageMap>
+</mx:Application>

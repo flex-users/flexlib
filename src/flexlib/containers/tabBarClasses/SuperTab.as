@@ -36,6 +36,9 @@ package flexlib.containers.tabBarClasses {
 	import mx.core.mx_internal;
 	
 	import mx.containers.Box
+
+	import flash.text.TextFieldType;
+	import flash.events.FocusEvent;
 	
 	use namespace mx_internal;
 	
@@ -92,8 +95,10 @@ package flexlib.containers.tabBarClasses {
 			// We need to enabled mouseChildren so our closeButton can receive
 			// mouse events.
 			this.mouseChildren = true;
+			
+			this.addEventListener(MouseEvent.DOUBLE_CLICK, doubleClickHandler);
 		}
-		
+	
 		private var _closePolicy:String;
 		
 		/**
@@ -157,9 +162,38 @@ package flexlib.containers.tabBarClasses {
 			
 			addChild(indicator);
 			addChild(closeButton);
+
+			
+			this.textField.addEventListener(Event.CHANGE, captureTextChange); 
 			
 		}
+
+		private function doubleClickHandler(event:MouseEvent):void {
+			this.editableLabel = true;
+			this.textField.addEventListener(FocusEvent.FOCUS_OUT, textUnfocusListener);
+			
+		}		
 		
+		private function textUnfocusListener(event:Event):void {
+			this.editableLabel = false;
+			this.textField.removeEventListener(FocusEvent.FOCUS_OUT, textUnfocusListener);
+		}
+		
+		public function get editableLabel():Boolean {
+			return this.textField.type == TextFieldType.INPUT 
+				&& this.textField.selectable;
+		}
+		
+		public function set editableLabel(value:Boolean):void {
+			this.textField.type = value ? TextFieldType.INPUT : TextFieldType.DYNAMIC;
+			this.textField.selectable = value;
+		}
+		
+		
+		private function captureTextChange(event:Event):void {
+			event.stopImmediatePropagation();
+			
+		}
 		
 		
 		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{

@@ -30,6 +30,12 @@ package flexlib.containers
 
 	[IconFile("DragScrollingCanvas.png")]
 	
+	/**
+	 * <code>DragScrollingCanvas</code> is a Canvas component that allows the user to drag
+	 * the contents instead of or in addition to using the scrollbars. There is only one
+	 * additional property, childrenDoDrag, which is a Boolean indicating whether or not
+	 * a mouse down event on a child component will trigger the dragging.
+	 */
 	public class DragScrollingCanvas extends Canvas
 	{
 		
