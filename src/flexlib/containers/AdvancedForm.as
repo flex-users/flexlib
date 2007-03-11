@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 /*
-	Class that provides Reset and Undo/Redo functionality for a Form
+	Class t hat provides Reset and Undo/Redo functionality for a Form
 */
 package flexlib.containers
 {
