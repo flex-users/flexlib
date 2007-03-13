@@ -23,7 +23,7 @@ SOFTWARE.
 -->
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="vertical" backgroundGradientColors="[#FFFFFF, #FFFFFF]"
-	horizontalAlign="center" verticalAlign="middle">
+	horizontalAlign="center" verticalAlign="middle" verticalScrollPolicy="off" horizontalScrollPolicy="off">
 	
 	<mx:CheckBox id="chk" label="Show outlines"/>
 	
@@ -31,7 +31,7 @@ SOFTWARE.
 		source="usa.jpg"  
 		outlineAlpha="{chk.selected ? 1 : 0}" outlineColor="0x00ff00" 
 		fillAlpha="{chk.selected ? .5 : 0}" fillColor="0xff0000" 
-		showToolTips="true" 
+		showToolTips="true" width="100%" maxWidth="554"
 		shapeClick="navigateToURL(new URLRequest(event.href), event.linkTarget)" 
 		>
 		<map>
