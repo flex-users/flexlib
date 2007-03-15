@@ -141,9 +141,13 @@ public class PromptingTextInput extends TextInput
 		}
 	}
 	
+	
 	override public function set text( value:String ):void
 	{
-		_textEmpty = value.length == 0;
+		// changed the test to also test for null values, not just 0 length
+		// if we were passed undefined or null then the zero length test would 
+		// still return false. - Doug McCune
+		_textEmpty = (!value) || value.length == 0;
 		super.text = value;
 		invalidateDisplayList();
 	}
