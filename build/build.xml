@@ -242,11 +242,11 @@ SOFTWARE.
 		<!-- Creates the .zip file in the bin directory -->
 		<zip destfile="${bin.dir}/${library.name}.zip">
 			<fileset dir="${basedir}">
+				<include name="bin/${library.name}.swc" />
 				<include name="src/**" />
 		    	<include name="docs/**" />
 				<include name="examples/**" />
 				<exclude name="**/*_Sample.swf" />
-				<include name="${bin.dir}/${library.name}.swc" />
 			</fileset>
 		</zip>
 	</target>
