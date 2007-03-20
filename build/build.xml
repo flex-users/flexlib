@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<project name="as3corelib" basedir="../" default="lib">
+<project name="flexlib" basedir="../" default="lib">
 
 	<!-- Define variables/paths used in this build script -->
 	<property file="./build/build.properties" />
@@ -120,14 +120,20 @@ SOFTWARE.
 			<!-- Find the sample applications -->
 			<fileset dir="${basedir}/examples">
 				<include name="**/*_Sample.mxml" />
+				<!-- 
+					For only building specific examples, comment out
+					the line above, and uncomment the line below and modify
+					as appropriate.
+				-->
+				<!-- <include name="**/TreeGrid_Sample.mxml" /> -->
 			</fileset>
 					
 			<sequential>
 				<!-- Pull out the example name and folder -->
 				<propertyregex property="exampleApplicationName" override="yes" input="@{file}"
-										regexp=".*\\(.*)_Sample.mxml" replace="\1" />
+										regexp=".*${file.separator}(.*)_Sample.mxml" replace="\1" />
 				<propertyregex property="exampleFolderName" override="yes" input="@{file}"
-										regexp="(.*)\\(.*)_Sample.mxml" replace="\1" />
+										regexp="(.*)${file.separator}(.*)_Sample.mxml" replace="\1" />
 		
 				<exec executable="${mxmlc.exe}" dir="${basedir}">
 					<!-- Point to the main test runner's application mxml file -->
@@ -154,12 +160,11 @@ SOFTWARE.
 		Generate ASDoc output for the library
 	-->
 	<target name="docs" depends="properties">
-		<!-- Clean out the contents of the doc directory, without delete "docs" -->
+		<!-- Clean out the contents of the doc directory, without deleting "docs" -->
 		
 		<delete includeemptydirs="true">
 			<fileset dir="${docs.dir}" includes="**/*" />
 		</delete>
-		
 		
 		<exec executable="${asdoc.exe}" spawn="no">
 			<!-- Place the documentation in the "docs" directory -->
@@ -172,7 +177,7 @@ SOFTWARE.
 			<arg line="-ds '${src.dir}' " />
 			
 			<!-- Include the library name in the window title -->
-			<arg line="-window-title 'Adobe ActionScript 3.0 Library - ${library.name}' "/>
+			<arg line="-window-title '${library.name}' "/>
 		</exec>
 	</target>
 	

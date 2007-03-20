@@ -28,5 +28,8 @@
     <!-- Renaun Erickson -->
     <component id="AdvancedForm" class="flexlib.containers.AdvancedForm"/>
     
+    <!-- Yaniv De Ridder -->
+    <component id="TreeGrid" class="flexlib.controls.TreeGrid"/>
+    <component id="TreeGridColumn" class="flexlib.controls.treeGridClasses.TreeGridColumn"/>
     
 </componentPackage>

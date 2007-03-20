@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node id="1" name="Companies" type="COMPANIES" desc="All Companies" statusIcon="statusIcon">
+	<node id="2" name="Adobe" type="COMPANY" desc="Adobe inc." statusIcon="statusIcon">
+		<node id="5" name="Adobe Consulting" type="COMPANY" desc="Adobe (formerly macromedia)" statusIcon="statusIcon" />
+		<node id="6" name="EDBU" type="COMPANY" desc="Database company" statusIcon="statusIcon" />
+	</node>
+	<node id="3" name="Macromedia" type="COMPANY" desc="Adobe (formerly macromedia)" statusIcon="statusIcon" />
+	<node id="4" name="Oracle" type="COMPANY" desc="Database company" statusIcon="statusIcon" />
+</node>
+
