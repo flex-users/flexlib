@@ -131,9 +131,9 @@ SOFTWARE.
 			<sequential>
 				<!-- Pull out the example name and folder -->
 				<propertyregex property="exampleApplicationName" override="yes" input="@{file}"
-										regexp=".*${file.separator}(.*)_Sample.mxml" replace="\1" />
+										regexp=".*\\(.*)_Sample.mxml" replace="\1" />
 				<propertyregex property="exampleFolderName" override="yes" input="@{file}"
-										regexp="(.*)${file.separator}(.*)_Sample.mxml" replace="\1" />
+										regexp="(.*)\\(.*)_Sample.mxml" replace="\1" />
 		
 				<exec executable="${mxmlc.exe}" dir="${basedir}">
 					<!-- Point to the main test runner's application mxml file -->
