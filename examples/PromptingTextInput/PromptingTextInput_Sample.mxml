@@ -33,6 +33,10 @@ SOFTWARE.
 			<mx:FormItem label="Name:">
 				<mx:TextInput id="fullName" />
 			</mx:FormItem>
+		
+			<mx:FormItem label="Password:">
+				<flexlib:PromptingTextInput id="pword" prompt="Password" displayAsPassword="true" />
+			</mx:FormItem>
 			
 			<mx:FormItem label="Address:" direction="vertical">
 				<flexlib:PromptingTextInput id="address1" prompt="Address 1" />

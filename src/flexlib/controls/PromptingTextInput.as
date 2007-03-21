@@ -48,6 +48,7 @@ public class PromptingTextInput extends TextInput
 	 */
 	private var _currentlyFocused:Boolean = false;
 	
+		
 	/**
 	 * Constructor
 	 */
@@ -152,6 +153,21 @@ public class PromptingTextInput extends TextInput
 		invalidateDisplayList();
 	}
 	
+	/**
+	 * We store a local copy of displayAsPassword. We need to keep this so that we can
+	 * change it to false if we're showing the prompt. Then we change it back (if it was 
+	 * set to true) once we're no longer showing the prompt.
+	 */
+	private var _displayAsPassword:Boolean = false;
+	
+	override public function set displayAsPassword(value:Boolean):void {
+		_displayAsPassword = value;
+		super.displayAsPassword = value;
+	}
+	override public function get displayAsPassword():Boolean {
+		return _displayAsPassword;
+	}
+	
 	// ==============================================================
 	//	overriden methods
 	// ==============================================================
@@ -175,6 +191,19 @@ public class PromptingTextInput extends TextInput
 			else
 			{
 				super.htmlText = _promptFormat.replace( /\[prompt\]/g, _prompt );
+			}
+			
+			if(super.displayAsPassword) {
+				//If we're showing the prompt and we have displayAsPassword set then
+				//we need to set it to false while the prompt is showing.
+				var oldVal:Boolean = _displayAsPassword;
+				super.displayAsPassword = false;
+				_displayAsPassword = oldVal;
+			}
+		}
+		else {
+			if(super.displayAsPassword != _displayAsPassword) {
+				super.displayAsPassword = _displayAsPassword;
 			}
 		}
 		
