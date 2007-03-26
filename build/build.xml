@@ -110,7 +110,7 @@ SOFTWARE.
 	<!--
 		Generate the example applications using the library
 	-->
-	<target name="examples" depends="properties">
+	<target name="examples_modified" depends="properties">
 		<!-- 
 			Loop over all of the Sample applications in the examples directory,
 			compile them, and place the resulting .swf next to the application
@@ -119,6 +119,13 @@ SOFTWARE.
 		<for param="file">
 			<!-- Find the sample applications -->
 			<fileset dir="${basedir}/examples">
+				<!-- 
+					The modified selector will only select files that have been
+					modified since the examples target was last run. This means we
+					can update a single example, then run the examples target and
+					only the updated example will get recompiled.
+				-->
+				<modified/>
 				<include name="**/*_Sample.mxml" />
 				<!-- 
 					For only building specific examples, comment out
@@ -149,6 +156,35 @@ SOFTWARE.
 					<arg line="-l '${flex2sdk.lib.dir}'" />
 					
 					<!-- Include locale-specific items in the path -->
+					<arg line="-locale ${flex2sdk.locale}" />
+					<arg line="-l '${flex2sdk.locale.dir}'" />
+				</exec>
+			</sequential>
+		</for>
+	</target>
+	
+	<!--
+		Exactly the same as examples_modified, except we regenerate all example files, 
+		regardless of whether they've been modified since last run. This is almost line-for-line
+		the same as the examples_modified target, so all comments have been removed for brevity.
+	-->
+	<target name="examples_all" depends="properties">
+		<for param="file">
+			<fileset dir="${basedir}/examples">
+				<include name="**/*_Sample.mxml" />
+			</fileset>
+					
+			<sequential>
+				<propertyregex property="exampleApplicationName" override="yes" input="@{file}"
+										regexp=".*\\(.*)_Sample.mxml" replace="\1" />
+				<propertyregex property="exampleFolderName" override="yes" input="@{file}"
+										regexp="(.*)\\(.*)_Sample.mxml" replace="\1" />
+		
+				<exec executable="${mxmlc.exe}" dir="${basedir}">
+					<arg line="'@{file}'" />
+					<arg line="-o '${exampleFolderName}/${exampleApplicationName}_Sample.swf'" />
+					<arg line="-l '${bin.dir}/${library.name}.swc'" />
+					<arg line="-l '${flex2sdk.lib.dir}'" />
 					<arg line="-locale ${flex2sdk.locale}" />
 					<arg line="-l '${flex2sdk.locale.dir}'" />
 				</exec>

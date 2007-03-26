@@ -127,7 +127,19 @@ public class PromptingTextInput extends TextInput
 	 * the prompt.  If the prompt is displaying, the text is just an empty
 	 * string.
 	 */
-	[Bindable]
+	[Bindable("textChanged")]
+    [CollapseWhiteSpace]
+    [NonCommittingChangeEvent("change")]
+	override public function set text( value:String ):void
+	{
+		// changed the test to also test for null values, not just 0 length
+		// if we were passed undefined or null then the zero length test would 
+		// still return false. - Doug McCune
+		_textEmpty = (!value) || value.length == 0;
+		super.text = value;
+		invalidateDisplayList();
+	}
+	
 	override public function get text():String
 	{
 		// If the text has changed
@@ -143,15 +155,6 @@ public class PromptingTextInput extends TextInput
 	}
 	
 	
-	override public function set text( value:String ):void
-	{
-		// changed the test to also test for null values, not just 0 length
-		// if we were passed undefined or null then the zero length test would 
-		// still return false. - Doug McCune
-		_textEmpty = (!value) || value.length == 0;
-		super.text = value;
-		invalidateDisplayList();
-	}
 	
 	/**
 	 * We store a local copy of displayAsPassword. We need to keep this so that we can
