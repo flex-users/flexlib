@@ -30,7 +30,7 @@ package flexlib.containers
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
-	import flexlib.containers.tabBarClasses.SuperTab;
+	import flexlib.controls.tabBarClasses.SuperTab;
 	import flexlib.controls.ScrollableArrowMenu;
 	import flexlib.controls.ScrollableMenu;
 	import flexlib.controls.SuperTabBar;

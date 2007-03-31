@@ -21,24 +21,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package flexlib.containers.tabBarClasses {
+package flexlib.controls.tabBarClasses
+{
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FocusEvent;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
 	import flash.geom.Rectangle;
+	import flash.text.TextFieldType;
 	
+	import mx.containers.Box;
 	import mx.controls.Button;
 	import mx.controls.tabBarClasses.Tab;
 	import mx.core.UIComponent;
 	import mx.core.mx_internal;
-	
-	import mx.containers.Box
-
-	import flash.text.TextFieldType;
-	import flash.events.FocusEvent;
 	
 	use namespace mx_internal;
 	

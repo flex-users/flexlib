@@ -24,7 +24,7 @@ SOFTWARE.
 package flexlib.controls {
 	
 	import flexlib.containers.SuperTabNavigator;
-	import flexlib.containers.tabBarClasses.SuperTab;
+	import flexlib.controls.tabBarClasses.SuperTab;
 	import flexlib.events.TabReorderEvent;
 	
 	import flash.display.Bitmap;

@@ -37,7 +37,7 @@ SOFTWARE.
 			import mx.controls.Label;
 			import mx.containers.VBox;
 			import mx.containers.Canvas;
-			import flexlib.containers.tabBarClasses.SuperTab;
+			import flexlib.controls.tabBarClasses.SuperTab;
 			
 			import mx.containers.Panel;
 			
