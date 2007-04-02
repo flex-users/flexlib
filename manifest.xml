@@ -2,6 +2,7 @@
 <componentPackage>
     <!-- Darron Schall -->
     <component id="PromptingTextInput" class="flexlib.controls.PromptingTextInput" />
+    <component id="FlowBox" class="flexlib.containers.FlowBox" />
     
     <!-- Doug McCune -->
     <component id="SuperTabBar" class="flexlib.controls.SuperTabBar"/>
