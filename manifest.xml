@@ -33,4 +33,12 @@
     <component id="TreeGrid" class="flexlib.controls.TreeGrid"/>
     <component id="TreeGridColumn" class="flexlib.controls.treeGridClasses.TreeGridColumn"/>
     
+    <!-- Adobe Flex Team -->
+    <component id="DockableToolBar" class="flexlib.containers.DockableToolBar"/>
+    <component id="Docker" class="flexlib.containers.Docker"/>
+    <component id="FlowContainer" class="flexlib.containers.FlowContainer"/>
+	
+	
+	
+    
 </componentPackage>

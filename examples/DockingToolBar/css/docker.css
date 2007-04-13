@@ -1,0 +1,70 @@
+/*
+Please remember to add the following effects to the main application.
+
+	<mx:Move duration="250" id="DockerMove"/>
+	<mx:Fade duration="250" id="DockerFade"/>
+*/
+
+Application
+{
+	paddingBottom: 2;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	verticalGap: 0;
+}
+
+Docker
+{
+	paddingLeft: 0;
+	dockingAreaStyleName: "dockingArea";
+	rowStyleName: "dockingRow";
+}
+
+DockableToolBar
+{
+	addedEffect: "DockerFade";
+	borderStyle: "outset";
+	horizontalGap: 2;
+	paddingBottom: 2;
+	paddingLeft: 0;
+	paddingRight: 8;
+	paddingTop: 0;
+	backgroundColor: #9199A4;
+}	
+
+.dockingArea
+{
+	horizontalScrollPolicy: "off";
+	verticalGap: 0;
+	borderStyle: "applicationControlBar";
+	dropShadowEnabled: true;	
+}
+
+.dockingRow
+{
+	horizontalGap: 1;
+	addedEffect: "DockerFade";
+	removedEffect: "DockerFade";
+}
+
+TitleWindow
+{
+	removedEffect: "DockerFade";
+	moveEffect: "DockerMove";
+	backgroundColor: #9199A4;
+	borderAlpha: 1.0;
+	borderStyle: "default";
+	borderThickness: 0;
+	/* borderThicknessBottom is NaN */
+	borderThicknessLeft: 0;
+	borderThicknessRight: 0;
+	borderThicknessTop: 0;
+	cornerRadius: 8;
+	dropShadowEnabled: true;
+	paddingBottom: 0;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	headerHeight: 20;
+}

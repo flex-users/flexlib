@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*" 
+	width="100%" height="100%"
+	horizontalScrollPolicy="auto"
+	verticalScrollPolicy="off" 
+	xmlns:flexlib="http://code.google.com/p/flexlib/" >
+	
+	<mx:Style source="css/docker.css"/>
+
+	<mx:Script>
+	<![CDATA[
+		import mx.effects.Move;
+		import mx.controls.Menu;
+		import mx.events.MenuEvent;
+		
+	   //MenuBar
+	   [Bindable]
+	   public var myMenuBarData:Object = 
+	   		{	label: "top", children: 
+	   			[
+					{label: "File", children: 
+						[
+						{label: "Open"},
+						{label: "New File"}
+						]},
+					{label: "Edit", children: 
+						[
+						{label: "Copy"},
+						{label: "Paste"},
+						{label: "Send"}
+						]},
+					{label: "Window", children: 
+						[
+						{label: "Tile"}
+						]}
+				]
+	   		}
+	]]>
+	</mx:Script>
+
+	<mx:Array id="fontFamilyArray"> 
+		<mx:String>Arial</mx:String>
+		<mx:String>Courier</mx:String>
+		<mx:String>Helvetica</mx:String>
+	</mx:Array>
+
+	<mx:Array id="fontSizeArray"> 
+		<mx:String>8</mx:String>
+		<mx:String>12</mx:String>
+		<mx:String>16</mx:String>
+		<mx:String>24</mx:String>
+	</mx:Array>
+
+	<mx:Move duration="250" id="DockerMove"/>
+	<mx:Fade duration="250" id="DockerFade"/>
+
+<flexlib:Docker horizontalScrollPolicy="off" width="100%" height="100%">
+
+	<flexlib:DockableToolBar id="toolbar3" label="Menu">
+        <mx:MenuBar id="menubar" dataProvider="{myMenuBarData}" showRoot="false" 
+        	labelField="label"/> 
+	</flexlib:DockableToolBar>
+  
+	<flexlib:DockableToolBar label="ToolBar 1" minWidth="0">
+		<mx:Button width="20" toggle="true"
+						icon="@Embed('assets/icon_style_bold.png')"/>
+		<mx:Button  width="20" toggle="true"
+						icon="@Embed('assets/icon_style_italic.png')"/>
+		<mx:Button  width="20" toggle="true"
+						icon="@Embed('assets/icon_style_underline.png')"/>
+		<mx:ColorPicker width="22" height="22"/>
+		<mx:Spacer height="{alignButtons.height}" width="4"/>
+		<mx:ToggleButtonBar buttonWidth="20">
+			<mx:dataProvider>
+				<mx:Array> 
+					<mx:Object icon="@Embed('assets/icon_align_left.png')" action="left"/>
+					<mx:Object icon="@Embed('assets/icon_align_center.png')" action="center"/>
+					<mx:Object icon="@Embed('assets/icon_align_right.png')" action="right"/>
+					<mx:Object icon="@Embed('assets/icon_align_justify.png')" action="justify"/>
+				</mx:Array>
+			</mx:dataProvider>
+		</mx:ToggleButtonBar>
+	</flexlib:DockableToolBar>	
+	
+	<flexlib:DockableToolBar label="ToolBar 2" minWidth="0">
+		<mx:ComboBox id="fontFamilyCombo" editable="true"
+			dataProvider = "{fontFamilyArray}"/>
+		<mx:ComboBox id="fontSizeCombo" width="50" editable="true"
+			dataProvider = "{fontSizeArray}"/>
+			<mx:Button id="boldButton" width="20" toggle="true"
+					   icon="@Embed('assets/icon_style_bold.png')"/>
+			<mx:Button id="italicButton" width="20" toggle="true"
+					   icon="@Embed('assets/icon_style_italic.png')"/>
+			<mx:Button id="underlineButton" width="20" toggle="true"
+					   icon="@Embed('assets/icon_style_underline.png')"/>
+		<mx:ColorPicker id="colorPicker" width="22" height="22"/>
+	</flexlib:DockableToolBar>
+
+	<flexlib:DockableToolBar initialPosition="bottom" label="ToolBar 3" minWidth="0">
+		<mx:Button id="bulletButton" width="20" toggle="true"
+			   icon="@Embed('assets/icon_bullet.png')"/>
+		<mx:Spacer height="{linkTextInput.height}" width="4"/>
+		<mx:TextInput id="linkTextInput" width="80"/>
+	</flexlib:DockableToolBar>
+	
+	<flexlib:DockableToolBar label="ToolBar 4" minWidth="0">
+		<mx:ToggleButtonBar id="alignButtons" buttonWidth="20">
+			<mx:dataProvider>
+				<mx:Array> 
+					<mx:Object icon="@Embed('assets/icon_align_left.png')" action="left"/>
+					<mx:Object icon="@Embed('assets/icon_align_center.png')" action="center"/>
+					<mx:Object icon="@Embed('assets/icon_align_right.png')" action="right"/>
+					<mx:Object icon="@Embed('assets/icon_align_justify.png')" action="justify"/>
+				</mx:Array>
+			</mx:dataProvider>
+		</mx:ToggleButtonBar>
+	</flexlib:DockableToolBar>
+ 
+	<flexlib:DockableToolBar label="ToolBar 5" initialPosition="bottom" minWidth="0">
+		<mx:Button  width="20" toggle="true"
+				icon="@Embed('assets/icon_bullet.png')"/>
+		<mx:Spacer height="{linkTextInput.height}" width="4"/>
+		<mx:TextInput  width="80"/>
+		<mx:ComboBox  editable="true" width="100"
+			dataProvider = "{fontFamilyArray}"/>
+		<mx:ComboBox  width="50" editable="true"
+			dataProvider = "{fontSizeArray}"/>
+	</flexlib:DockableToolBar>
+
+	<mx:TextArea width="480" height="350">
+		<mx:htmlText>This is just a demonstation of multiple toolbars. 
+		The toolbars do not perform any function in this sample.&lt;br&gt;&lt;b&gt;Usage:&lt;/b&gt;Resize application upto minWidth defined by Docker to see toolbars flow in second row, resizing below minWidth will show horizontal scrollbar.&lt;br&gt;Drag toolbar using dragstrip on left of each toolbar to see toolbar in floating state. You can dock the floating toolbar again at top or bottom.</mx:htmlText>
+	</mx:TextArea>
+
+</flexlib:Docker>
+</mx:Application>
