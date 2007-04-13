@@ -149,7 +149,7 @@ SOFTWARE.
 			dataProvider = "{fontSizeArray}"/>
 	</flexlib:DockableToolBar>
 
-	<mx:TextArea width="480" height="350">
+	<mx:TextArea width="100%" height="100%">
 		<mx:htmlText>This is just a demonstation of multiple toolbars. 
 		The toolbars do not perform any function in this sample.&lt;br&gt;&lt;b&gt;Usage:&lt;/b&gt;Resize application upto minWidth defined by Docker to see toolbars flow in second row, resizing below minWidth will show horizontal scrollbar.&lt;br&gt;Drag toolbar using dragstrip on left of each toolbar to see toolbar in floating state. You can dock the floating toolbar again at top or bottom.</mx:htmlText>
 	</mx:TextArea>
