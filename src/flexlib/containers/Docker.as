@@ -68,7 +68,7 @@ use namespace mx_internal;
  *  
  *
  *
- *  @see com.adobe.flex.extras.containers.DockableToolBar
+ *  @see flexlib.containers.DockableToolBar
  *
  */
 
