@@ -132,15 +132,15 @@ SOFTWARE.
 					the line above, and uncomment the line below and modify
 					as appropriate.
 				-->
-				<!-- <include name="**/TreeGrid_Sample.mxml" /> -->
+				<!--<include name="**/HorizontalAxisDataSelector_Sample.mxml" />-->
 			</fileset>
 					
 			<sequential>
 				<!-- Pull out the example name and folder -->
 				<propertyregex property="exampleApplicationName" override="yes" input="@{file}"
-										regexp=".*\\(.*)_Sample.mxml" replace="\1" />
+										regexp=".*${file.separator}(.*)_Sample.mxml" replace="\1" />
 				<propertyregex property="exampleFolderName" override="yes" input="@{file}"
-										regexp="(.*)\\(.*)_Sample.mxml" replace="\1" />
+										regexp="(.*)${file.separator}(.*)_Sample.mxml" replace="\1" />
 		
 				<exec executable="${mxmlc.exe}" dir="${basedir}">
 					<!-- Point to the main test runner's application mxml file -->
@@ -176,9 +176,9 @@ SOFTWARE.
 					
 			<sequential>
 				<propertyregex property="exampleApplicationName" override="yes" input="@{file}"
-										regexp=".*\\(.*)_Sample.mxml" replace="\1" />
+										regexp=".*${file.separator}(.*)_Sample.mxml" replace="\1" />
 				<propertyregex property="exampleFolderName" override="yes" input="@{file}"
-										regexp="(.*)\\(.*)_Sample.mxml" replace="\1" />
+										regexp="(.*)${file.separator}(.*)_Sample.mxml" replace="\1" />
 		
 				<exec executable="${mxmlc.exe}" dir="${basedir}">
 					<arg line="'@{file}'" />

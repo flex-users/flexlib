@@ -3,6 +3,7 @@
     <!-- Darron Schall -->
     <component id="PromptingTextInput" class="flexlib.controls.PromptingTextInput" />
     <component id="FlowBox" class="flexlib.containers.FlowBox" />
+    <component id="HorizontalAxisDataSelector" class="flexlib.charts.HorizontalAxisDataSelector" />
     
     <!-- Doug McCune -->
     <component id="SuperTabBar" class="flexlib.controls.SuperTabBar"/>
@@ -36,9 +37,6 @@
     <!-- Adobe Flex Team -->
     <component id="DockableToolBar" class="flexlib.containers.DockableToolBar"/>
     <component id="Docker" class="flexlib.containers.Docker"/>
-    <component id="FlowContainer" class="flexlib.containers.FlowContainer"/>
-	
-	
-	
+    <component id="FlowContainer" class="flexlib.containers.FlowContainer"/>	
     
 </componentPackage>
