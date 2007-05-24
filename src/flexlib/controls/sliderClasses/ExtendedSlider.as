@@ -48,6 +48,18 @@ package flexlib.controls.sliderClasses
 	 */
 	public class ExtendedSlider extends SliderBase
 	{
+		
+		private var draggingRegion:Boolean = false;
+		
+		/**
+		 * If this prperty is true then when you drag the draggable region between two thumbs
+		 * the thumbs will always keep their same distance between each other, even when you
+		 * drag the region to the left or right edges of the track. If set to false then when 
+		 * you drag the region to the edges of the track the region itself will begin to resize.
+		 * It's a little hard to explain, just try it out.
+		 */
+		public var lockRegionsWhileDragging:Boolean = false;
+		
 		protected var highlightHitArea:UIComponent;
 		
 		/**
@@ -117,6 +129,10 @@ package flexlib.controls.sliderClasses
 			var x:Number = event.stageX;
 			var y:Number = event.stageY;
 			
+			draggingRegion = true;
+			
+			systemManager.addEventListener(MouseEvent.MOUSE_UP, regionDraggingStopped, false, 0, true);
+			
 			for(var i:int=0; i<thumbCount; i++) {
 				var curThumb:SliderThumb = SliderThumb(thumbs.getChildAt(i));
 				
@@ -126,6 +142,10 @@ package flexlib.controls.sliderClasses
 				curThumb.focusEnabled = false;
 				curThumb.dispatchEvent(event);
 			}
+		}
+		
+		private function regionDraggingStopped(event:MouseEvent):void {
+			draggingRegion = false;
 		}
 		
 		/**
@@ -390,6 +410,36 @@ package flexlib.controls.sliderClasses
 	        dataTip.x = r.x < 0 ? 0 : r.x;
 	        dataTip.y = r.y < 0 ? 0 : r.y;
 	    }
+	    
+	    override mx_internal function getXBounds(selectedThumbIndex:int):Object {
+	    	if(!draggingRegion || !lockRegionsWhileDragging) {
+	    		return super.getXBounds(selectedThumbIndex);
+	    	}
+	    	else {
+	    		var minThumbValue:Number;
+		        var maxThumbValue:Number;
+		        
+		        for each(var value:Number in values) {
+		        	if(isNaN(minThumbValue) || value < minThumbValue) {
+		        		minThumbValue = value;
+		        	}
+		        	
+		        	if(isNaN(maxThumbValue) || value > maxThumbValue) {
+		        		maxThumbValue = value;
+		        	}
+		        }
+		
+				var minValue:Number = values[selectedThumbIndex] - minThumbValue + minimum;
+				var maxValue:Number = maximum - (maxThumbValue - values[selectedThumbIndex]);
+				
+				var minX:Number = getXFromValue(minValue);
+				var maxX:Number = getXFromValue(maxValue);
+				
+				return { min: minX, max: maxX };        
+	    	}
+	    }
+	    
+	    
 		
 	}
 }

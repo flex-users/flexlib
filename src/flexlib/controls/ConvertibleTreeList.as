@@ -110,7 +110,7 @@ package flexlib.controls
 		public function set mode(value:String):void {
 			_mode = value;
 		
-			// If we're setting the mode after we've created the childre
+			// If we're setting the mode after we've created the children
 			// then we should make sure we actually do the work
 			if(viewstack && tree && list) {
 				modeChanged();
@@ -329,6 +329,8 @@ package flexlib.controls
 			_tree.labelField = _list.labelField = _labelField;
 			_tree.showRoot = _showRoot;
 			
+			_tree.allowMultipleSelection = _list.allowMultipleSelection = _allowMultipleSelection;
+			
 			modeChanged();
 			
 			
@@ -407,7 +409,7 @@ package flexlib.controls
 		 * @private
 		 * This takes a heirarchical data provider for a Tree control and flattens it out
 		 * so we can use it in a List control. It takes an XMLList and checks each item 
-		 * for the attribute that is defined by listFIeld. If that is set to true then
+		 * for the attribute that is defined by listField. If that is set to true then
 		 * the item is included in the flat data provider. This allows us to exclude certiain
 		 * items from the List control that are in the Tree control (folders come to mind).
 		 */
@@ -461,7 +463,6 @@ package flexlib.controls
 		
 		public function get selectedItem():Object {
 			if(this._mode == ConvertibleTreeList.TREE) {
-				trace("TREE SEL: " + tree.selectedItem);
 				return tree.selectedItem;
 			}
 			else {
@@ -478,13 +479,45 @@ package flexlib.controls
 			}
 		}
 		
+		public function get selectedItems():Array {
+			if(this._mode == ConvertibleTreeList.TREE) {
+				return tree.selectedItems;
+			}
+			else {
+				return list.selectedItems;
+			}
+		}
+		
+		public function set selectedItems(value:Array):void {
+			if(this._mode == ConvertibleTreeList.TREE) {
+				tree.selectedItems = value;
+			}
+			else {
+				list.selectedItems = value;
+			}
+		}
+		
 		public function get selectedIndex():Object {
 			if(this._mode == ConvertibleTreeList.TREE) {
-				return tree.selectedIndex;
+				return tree.selectedIndex;tree;
 			}
 			else {
 				return list.selectedIndex;
 			}
+		}
+		
+		private var _allowMultipleSelection:Boolean = false;
+		
+		public function get allowMultipleSelection():Boolean {
+			return _allowMultipleSelection;
+		}
+		
+		public function set allowMultipleSelection(value:Boolean):void {
+			_allowMultipleSelection = value;
+			
+			if(list) list.allowMultipleSelection = value;
+			if(tree) tree.allowMultipleSelection = value;
+			
 		}
 		
 		

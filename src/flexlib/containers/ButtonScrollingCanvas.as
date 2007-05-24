@@ -35,6 +35,8 @@ package flexlib.containers
 	import mx.core.EdgeMetrics;
 	import mx.core.ScrollPolicy;
 	import mx.events.ScrollEvent;
+	import mx.styles.CSSStyleDeclaration;
+	import mx.styles.StyleManager;
 
 	
 	[Style(name="buttonWidth", type="Number", inherit="no")]
@@ -48,6 +50,18 @@ package flexlib.containers
 	
 	public class ButtonScrollingCanvas extends Canvas
 	{
+		[Embed (source="../assets/assets.swf", symbol="up_arrow")]
+		private static var DEFAULT_UP_BUTTON:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="down_arrow")]
+		private static var DEFAULT_DOWN_BUTTON:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="left_arrow")]
+		private static var DEFAULT_LEFT_BUTTON:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="right_arrow")]
+		private static var DEFAULT_RIGHT_BUTTON:Class;
+		
 		private var leftButton:Button;
 		private var rightButton:Button;
 		private var upButton:Button;
@@ -94,6 +108,114 @@ package flexlib.containers
 		public function ButtonScrollingCanvas()
 		{ 
 			super();
+		}
+		
+		
+		/**
+		 * @private
+		 */
+		private static function initializeStyles():void
+		{
+			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ButtonScrollingCanvas");
+			
+			if(!selector)
+			{
+				selector = new CSSStyleDeclaration();
+			}
+			
+			selector.defaultFactory = function():void
+			{
+				this.upButtonStyleName = "upButton";
+				this.downButtonStyleName = "downButton";
+				this.leftButtonStyleName = "leftButton";
+				this.rightButtonStyleName = "rightButton";
+			}
+			
+			StyleManager.setStyleDeclaration("ButtonScrollingCanvas", selector, false);
+			
+			
+			
+			// Style for the left arrow for tab scrolling
+			var upStyleName:String = selector.getStyle("upButtonStyleName");
+			var upSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + upStyleName);
+			
+			if(!upSelector)
+			{
+				upSelector = new CSSStyleDeclaration();
+			}
+			
+			upSelector.defaultFactory = function():void
+			{
+				this.icon = DEFAULT_UP_BUTTON;	
+				this.fillAlphas = [1,1,1,1];
+				this.cornerRadius = 0;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + upStyleName, upSelector, false);
+			
+			// Style for the down arrow button
+			var downStyleName:String = selector.getStyle("downButtonStyleName");
+			var downSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + downStyleName);
+			
+			if(!downSelector)
+			{
+				downSelector = new CSSStyleDeclaration();
+			}
+			
+			downSelector.defaultFactory = function():void
+			{
+				this.icon = DEFAULT_DOWN_BUTTON;	
+				this.fillAlphas = [1,1,1,1];
+				this.cornerRadius = 0;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + downStyleName, downSelector, false);
+			
+			// Style for the left arrow button
+			var leftStyleName:String = selector.getStyle("leftButtonStyleName");
+			var leftSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + leftStyleName);
+			
+			if(!leftSelector)
+			{
+				leftSelector = new CSSStyleDeclaration();
+			}
+			
+			leftSelector.defaultFactory = function():void
+			{
+				this.icon = DEFAULT_LEFT_BUTTON;	
+				this.fillAlphas = [1,1,1,1];
+				this.cornerRadius = 0;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + leftStyleName, leftSelector, false);
+			
+			// Style for the right arrow button
+			var rightStyleName:String = selector.getStyle("rightButtonStyleName");
+			var rightSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + rightStyleName);
+			
+			if(!rightSelector)
+			{
+				rightSelector = new CSSStyleDeclaration();
+			}
+			
+			rightSelector.defaultFactory = function():void
+			{
+				this.icon = DEFAULT_RIGHT_BUTTON;	
+				this.fillAlphas = [1,1,1,1];
+				this.cornerRadius = 0;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + rightStyleName, rightSelector, false);
+			
+		}
+		
+		initializeStyles();
+		
+		override public function initialize():void {
+			super.initialize();
+			
+			//initialize the default styles
+			ButtonScrollingCanvas.initializeStyles();
 		}
 		
 		override protected function createChildren():void {

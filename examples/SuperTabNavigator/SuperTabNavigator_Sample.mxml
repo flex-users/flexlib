@@ -28,8 +28,7 @@ SOFTWARE.
 	creationComplete="initTabs()" 
 	>
 	
-	<mx:Style source="../css/SuperTabStyles.css" />
-
+	
 	<mx:Script>
 		<![CDATA[
 			import flexlib.controls.SuperTabBar;

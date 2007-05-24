@@ -59,6 +59,7 @@ package flexlib.containers
 	import mx.events.IndexChangedEvent;
 	import mx.events.MenuEvent;
 	import mx.styles.CSSStyleDeclaration;
+	import mx.styles.StyleManager;
 	
 	[IconFile("SuperTabNavigator.png")]
 
@@ -208,6 +209,27 @@ package flexlib.containers
 		 * Used to set popUpButtonPolicy.
 		 */
 		public static var POPUPPOLICY_OFF:String = "off";
+		
+		[Embed (source="../assets/assets.swf", symbol="indicator")]
+		private static var DEFAULT_INDICATOR:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="firefox_close_up")]
+		private static var DEFAULT_CLOSE_UP:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="firefox_close_over")]
+		private static var DEFAULT_CLOSE_OVER:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="firefox_close_down")]
+		private static var DEFAULT_CLOSE_DOWN:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="firefox_close_disabled")]
+		private static var DEFAULT_CLOSE_DISABLED:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="left_arrow")]
+		private static var DEFAULT_LEFT_BUTTON:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="right_arrow")]
+		private static var DEFAULT_RIGHT_BUTTON:Class;
 		
 		/**
 		 * @private
@@ -394,11 +416,145 @@ package flexlib.containers
 			this.invalidateDisplayList();
 		}
 		
+		/**
+		 * @private
+		 */
+		private static function initializeStyles():void
+		{
+			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("SuperTabNavigator");
+			
+			if(!selector)
+			{
+				selector = new CSSStyleDeclaration();
+			}
+			
+			selector.defaultFactory = function():void
+			{
+				this.popupButtonStyleName = "popupButton";
+				this.tabStyleName = "superTab";
+				this.leftButtonStyleName = "leftButton";
+				this.rightButtonStyleName = "rightButton";
+				this.buttonWidth = 20;	
+			}
+			
+			
+			
+			
+			
+			// Style for the PopUpButton on the right
+			var popupButtonStyleName:String = selector.getStyle("popupButtonStyleName");
+			var pSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + popupButtonStyleName);
+			
+			if(!pSelector)
+			{
+				pSelector = new CSSStyleDeclaration();
+			}
+			
+			pSelector.defaultFactory = function():void
+			{
+				this.upSkin = TabPopUpButtonSkin;
+				this.popUpDownSkin = TabPopUpButtonSkin;
+				this.popUpOverSkin = TabPopUpButtonSkin;
+				this.disabledSkin = TabPopUpButtonSkin;
+			}
+			
+			StyleManager.setStyleDeclaration("." + popupButtonStyleName, pSelector, false);
+			
+			
+			// Style for the SuperTabs
+			var tabStyleName:String = selector.getStyle("tabStyleName");
+			var tSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + tabStyleName);
+			
+			if(!tSelector)
+			{
+				tSelector = new CSSStyleDeclaration();
+			}
+			
+			tSelector.defaultFactory = function():void
+			{
+				this.textAlign = "left";
+	   			this.indicatorClass = DEFAULT_INDICATOR;	
+				this.tabCloseButtonStyleName = "tabCloseButton";
+			}
+			
+			StyleManager.setStyleDeclaration("." + tabStyleName, tSelector, false);
+			
+			// Style for the close button on each tab
+			var tabCloseStyleName:String = tSelector.getStyle("tabCloseButtonStyleName");
+			var cSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + tabCloseStyleName);
+			
+			if(!cSelector)
+			{
+				cSelector = new CSSStyleDeclaration();
+			}
+			
+			cSelector.defaultFactory = function():void
+			{
+				this.upSkin = DEFAULT_CLOSE_UP;	
+				this.overSkin = DEFAULT_CLOSE_OVER;	
+				this.downSkin = DEFAULT_CLOSE_DOWN;	
+				this.disabledSkin = DEFAULT_CLOSE_DISABLED;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + tabCloseStyleName, cSelector, false);
+			
+			// Style for the left arrow for tab scrolling
+			var leftStyleName:String = selector.getStyle("leftButtonStyleName");
+			var lSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + leftStyleName);
+			
+			if(!lSelector)
+			{
+				lSelector = new CSSStyleDeclaration();
+			}
+			
+			lSelector.defaultFactory = function():void
+			{
+				this.icon = DEFAULT_LEFT_BUTTON;	
+				this.fillAlphas = [1,1,1,1];
+				this.cornerRadius = 0;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + leftStyleName, lSelector, false);
+			
+			// Style for the right arrow for tab scrolling
+			var rightStyleName:String = selector.getStyle("rightButtonStyleName");
+			var rSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + rightStyleName);
+			
+			if(!rSelector)
+			{
+				rSelector = new CSSStyleDeclaration();
+			}
+			
+			rSelector.defaultFactory = function():void
+			{
+				this.icon = DEFAULT_RIGHT_BUTTON;	
+				this.fillAlphas = [1,1,1,1];
+				this.cornerRadius = 0;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + rightStyleName, rSelector, false);
+			
+			
+			
+			StyleManager.setStyleDeclaration("SuperTabNavigator", selector, false);
+			
+			
+		}
+		
+		initializeStyles();
+		
+		override public function initialize():void {
+			super.initialize();
+			
+			SuperTabNavigator.initializeStyles();
+	    	
+		}
 		 /**
 	     *  @private
 	     */
 		override protected function createChildren():void
 	    {
+	    	
 	    	if (!tabBar){
 	    		// We're using our custom SuperTabBar class instead of TabBar
 				tabBar = new SuperTabBar();
@@ -446,7 +602,7 @@ package flexlib.containers
 	        	canvas.setStyle("backgroundAlpha", 0);
 	        	canvas.setStyle("paddingTop", 0);
 				canvas.setStyle("paddingBottom", 0);
-	        	
+				
 	        	canvas.startScrollingEvent = _startScrollingEvent;
 	        	canvas.stopScrollingEvent = _stopScrollingEvent;
 	        	canvas.scrollSpeed = _scrollSpeed;
@@ -460,7 +616,7 @@ package flexlib.containers
 	        // Now we add a spacer that will take up the rest of the box width
 	        spacer = new Spacer();
 	        spacer.percentWidth = 100;
-	        holder.addChild(spacer);
+	       // holder.addChild(spacer);
 	        
 	        // We create the menu once. This doesn't get shown until we click
 	        // the Button. But it can get created here so we don't have
@@ -644,6 +800,8 @@ package flexlib.containers
 	    override protected function updateDisplayList(unscaledWidth:Number,
                                                   unscaledHeight:Number):void
 	    {
+	    	
+	    	 
 	        //We need to calculate the tab widths first, so we call super.updateDisplayList later
 	        
 	        // Are we supposed to be showing the Button?
@@ -664,7 +822,7 @@ package flexlib.containers
 	
 	        var th:Number = tabBarHeight + 1;
 	        
-	        // tabBarSpace is used tot ry to figure out how much space we 
+	        // tabBarSpace is used to try to figure out how much space we 
 	        // need for the tabs, to figure out if we need to scroll them
 	        var tabBarSpace:Number = w;
 	        if(popupButton.includeInLayout) {
@@ -689,6 +847,8 @@ package flexlib.containers
 					
        				forcedTabWidth = tabSizeNeeded;
        				this.setStyle("tabWidth", forcedTabWidth);
+       				tabBar.setStyle("tabWidth", forcedTabWidth);
+       				
 					callLater(invalidateDisplayList);
 					return;
 	   			}
@@ -699,13 +859,16 @@ package flexlib.containers
 	       			if(this.getStyle("tabWidth") != undefined) {
 						if(isNaN(originalTabWidthStyle)) {
 							this.clearStyle("tabWidth");
+							tabBar.clearStyle("tabWidth");
 						}
 						else {
 							this.setStyle("tabWidth", originalTabWidthStyle);
+							tabBar.setStyle("tabWidth", originalTabWidthStyle);
 							originalTabWidthStyle = -1;
 		    			}
 		    			
 		    			callLater(invalidateDisplayList);
+		    			return;
 	       			}
 	       		}
 	       		forcedTabWidth = -1;
@@ -714,8 +877,7 @@ package flexlib.containers
 	        if(forcedTabWidth != -1) {
 				pw = (forcedTabWidth * tabBar.numChildren) + (this.getStyle("horizontalGap") * (tabBar.numChildren-1));
 			}
-	        
-	        
+			
 	        
 	        holder.move(0, 1);
 	        holder.setActualSize(unscaledWidth, th);
@@ -735,8 +897,19 @@ package flexlib.containers
 				canvas.horizontalScrollPosition = 0;
 			} 
 			
-			tabBar.setActualSize(pw, th);
-			tabBar.move(0, 0);
+			//now we're good to go with the tab widths, so this should be OK
+			//if we called this first we would see some flickering of the tabs 
+			//as they are resized quickly. No good.
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+			
+			//OK, so one problem: in the call to super.updateDisplayList() the width of tabBar gets reset.
+			//that's crap, because we need to set it to what we set it to, damnit. But we need to call super.updateDisplayList
+			//or the component won't get drawn right at all. And we can't call super.super.updateDisplayList, so we
+			//have to reset the width of tabBar after our call to updateDisplayList
+			
+			if(pw > unscaledWidth) {
+				tabBar.setActualSize(pw, th);
+			}
 			
 			/* we only care about horizontalAlign if we're not taking up too
 			   much space already */
@@ -755,11 +928,7 @@ package flexlib.containers
 		        }
 			}
 			
-			//now we're good to go with the tab widths, so this should be OK
-			//if we called this first we would see some flickering of the tabs 
-			//as they are resized quickly. No good.
-			super.updateDisplayList(unscaledWidth, unscaledHeight);
-	                
+			
 	    }
 	    
 	    override public function styleChanged(styleProp:String):void {
@@ -800,7 +969,7 @@ package flexlib.containers
 	    /**
 	    * @private
 	    * 
-	    * Check to make sure that the currently selected tab is viaible. This means
+	    * Check to make sure that the currently selected tab is visible. This means
 	    * that we might have to scroll the canvas component so the tab comes into view
 	    */
 	    private function ensureTabIsVisible():void {

@@ -46,7 +46,7 @@ package flexlib.controls {
 	import mx.core.mx_internal;
 	import mx.events.DragEvent;
 	import mx.managers.DragManager;
-	
+
 	
 	/**
 	 * Fired when a tab is dropped onto this SuperTabBar, which re-orders the tabs and updates the
@@ -342,6 +342,8 @@ package flexlib.controls {
 				var obj:UIComponent = new UIComponent();
 				obj.addChild(dragProxy);
 				
+				event.target.removeEventListener(MouseEvent.MOUSE_MOVE, doDrag);
+				
 				DragManager.doDrag(IUIComponent(event.target),ds,event,obj);	
 			}					
 		}
@@ -453,10 +455,12 @@ package flexlib.controls {
 				
 				this.dispatchEvent(new TabReorderEvent(SuperTabBar.TABS_REORDERED, false, false, parentBar, oldIndex, newIndex));
 			}	
+			
 		}
 		
 		public function resetTabs():void {
 			this.resetNavItems();
 		}
+		
 	}
 }

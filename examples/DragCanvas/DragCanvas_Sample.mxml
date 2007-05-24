@@ -25,39 +25,7 @@ SOFTWARE.
 	xmlns:flexlib="http://code.google.com/p/flexlib/" >
 	
 	
-	<mx:Style>
-		.mySkin {
-			leftButtonStyleName: "leftButton2";
-			rightButtonStyleName: "rightButton2";
-			upButtonStyleName: "upButton2";
-			downButtonStyleName: "downButton2";
-			buttonWidth:20px;	
-		}
-		
-		.leftButton2 {
-			icon: Embed("../assets/assets.swf#left_arrow");
-			fillAlphas: 0,0,0,0;
-			cornerRadius:0;
-		}
-		
-		.rightButton2 {
-			icon: Embed("../assets/assets.swf#right_arrow");
-			fillAlphas: 0,0,0,0;
-			cornerRadius:0;
-		}
-		
-		.upButton2 {
-			icon: Embed("../assets/assets.swf#up_arrow");
-			fillAlphas: 0,0,0,0;
-			cornerRadius:0;
-		}
-		
-		.downButton2 {
-			icon: Embed("../assets/assets.swf#down_arrow");
-			fillAlphas: 0,0,0,0;
-			cornerRadius:0;
-		}
-	</mx:Style>
+	
 	
 	<mx:Script>
 		<![CDATA[
@@ -88,9 +56,8 @@ SOFTWARE.
 		</flexlib:DragScrollingCanvas>
 	
 		<flexlib:ButtonScrollingCanvas x="50" y="50" 
-			  styleName="mySkin"
-			 startScrollingEvent="{MouseEvent.MOUSE_OVER}"
-			  stopScrollingEvent="{MouseEvent.MOUSE_OUT}"
+			startScrollingEvent="{MouseEvent.MOUSE_OVER}"
+			stopScrollingEvent="{MouseEvent.MOUSE_OUT}"
 			borderStyle="inset" 
 			width="400" height="250" 
 			backgroundColor="#feefd3" backgroundAlpha="0.65">

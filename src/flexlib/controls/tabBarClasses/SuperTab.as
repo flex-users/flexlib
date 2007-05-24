@@ -47,7 +47,7 @@ package flexlib.controls.tabBarClasses
 	 *  Name of CSS style declaration that specifies the style to use for the 
 	 *  close button
 	 */
-	[Style(name="closeButtonStyleName", type="String", inherit="no")]
+	[Style(name="tabCloseButtonStyleName", type="String", inherit="no")]
 	
 	/**
 	 *  The class that is used for the indicator
@@ -149,7 +149,7 @@ package flexlib.controls.tabBarClasses
 			closeButton.addEventListener(MouseEvent.CLICK, closeClickHandler, false, 0, true); 
 		
 			// This allows someone to specify a CSS style for the close button
-			closeButton.styleName = getStyle("closeButtonStyleName");
+			closeButton.styleName = getStyle("tabCloseButtonStyleName");
 			
 			var indicatorClass:Class = getStyle("indicatorClass") as Class;
 			if(indicatorClass) {

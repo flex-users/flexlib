@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="ExtendedSlider,flexlib.controls.sliderClasses.ExtendedSlider,highlightHitArea,createChildren,positionDataTip" name="keywords">
+<meta content="ExtendedSlider,flexlib.controls.sliderClasses.ExtendedSlider,lockRegionsWhileDragging,highlightHitArea,createChildren,positionDataTip" name="keywords">
 <title>flexlib.controls.sliderClasses.ExtendedSlider</title>
 </head>
 <body>
@@ -69,7 +69,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
 </div>
 </div>
-<table id="summaryTableProperty" class="summaryTable hideInheritedProperty" cellpadding="3" cellspacing="0">
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
@@ -103,6 +103,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../baseClasses/SliderBase.html#liveDragging">liveDragging</a> : Boolean = false<div class="summaryTableDescription">
       Specifies whether live dragging is enabled for the slider.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../baseClasses/SliderBase.html">SliderBase</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#lockRegionsWhileDragging">lockRegionsWhileDragging</a> : Boolean = false<div class="summaryTableDescription">
+   If this prperty is true then when you drag the draggable region between two thumbs
+   the thumbs will always keep their same distance between each other, even when you
+   drag the region to the left or right edges of the track.</div>
+</td><td class="summaryTableOwnerCol">ExtendedSlider</td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../baseClasses/SliderBase.html#maximum">maximum</a> : Number<div class="summaryTableDescription">
@@ -556,6 +563,20 @@ showHideInherited();
 <div class="detailBody">
 <code>protected var highlightHitArea:UIComponent</code>
 </div>
+<a name="lockRegionsWhileDragging"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">lockRegionsWhileDragging</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var lockRegionsWhileDragging:Boolean = false</code><p>
+   If this prperty is true then when you drag the draggable region between two thumbs
+   the thumbs will always keep their same distance between each other, even when you
+   drag the region to the left or right edges of the track. If set to false then when 
+   you drag the region to the edges of the track the region itself will begin to resize.
+   It's a little hard to explain, just try it out.
+   </p></div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
 <a name="ExtendedSlider()"></a>

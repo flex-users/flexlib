@@ -43,6 +43,8 @@ package flexlib.controls
 	import mx.core.mx_internal;
 	import mx.events.ScrollEvent;
 	import mx.managers.PopUpManager;
+	import mx.styles.StyleManager;
+	import mx.styles.CSSStyleDeclaration;
 	
 	use namespace mx_internal;
 	
@@ -73,6 +75,12 @@ package flexlib.controls
 	 */
 	public class ScrollableArrowMenu extends ScrollableMenu
 	{
+		[Embed (source="../assets/assets.swf", symbol="up_arrow")]
+		private static var DEFAULT_UP_BUTTON:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="down_arrow")]
+		private static var DEFAULT_DOWN_BUTTON:Class;
+		
 		/**
 		 * @private
 		 * The buttons that are used for the scrolling up and down
@@ -153,6 +161,75 @@ package flexlib.controls
 		public function ScrollableArrowMenu()
 		{
 			super();
+		}
+		
+		/**
+		 * @private
+		 */
+		private static function initializeStyles():void
+		{
+			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("SuperTabNavigator");
+			
+			if(!selector)
+			{
+				selector = new CSSStyleDeclaration();
+			}
+			
+			selector.defaultFactory = function():void
+			{
+				this.upButtonStyleName = "upButton";
+				this.downButtonStyleName = "downButton";
+			}
+			
+			StyleManager.setStyleDeclaration("ScrollableArrowMenu", selector, false);
+			
+			
+			
+			// Style for the left arrow for tab scrolling
+			var upStyleName:String = selector.getStyle("upButtonStyleName");
+			var upSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + upStyleName);
+			
+			if(!upSelector)
+			{
+				upSelector = new CSSStyleDeclaration();
+			}
+			
+			upSelector.defaultFactory = function():void
+			{
+				this.icon = DEFAULT_UP_BUTTON;	
+				this.fillAlphas = [1,1,1,1];
+				this.cornerRadius = 0;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + upStyleName, upSelector, false);
+			
+			// Style for the down arrow button
+			var downStyleName:String = selector.getStyle("downButtonStyleName");
+			var downSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + downStyleName);
+			
+			if(!downSelector)
+			{
+				downSelector = new CSSStyleDeclaration();
+			}
+			
+			downSelector.defaultFactory = function():void
+			{
+				this.icon = DEFAULT_DOWN_BUTTON;	
+				this.fillAlphas = [1,1,1,1];
+				this.cornerRadius = 0;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + downStyleName, downSelector, false);
+			
+		}
+		
+		initializeStyles();
+		
+		override public function initialize():void {
+			super.initialize();
+			
+			//initialize the default styles
+			ScrollableArrowMenu.initializeStyles();
 		}
 		
 		/**
