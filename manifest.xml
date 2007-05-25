@@ -39,4 +39,14 @@
     <component id="Docker" class="flexlib.containers.Docker"/>
     <component id="FlowContainer" class="flexlib.containers.FlowContainer"/>	
     
+    <!-- Daniel Wabyick -->
+    <component id="EnhancedButtonSkin" class = "flexlib.skins.EnhancedButtonSkin" />
+    
+    <!-- Stacy Young -->
+    <component id="Base64Image" class = "flexlib.controls.Base64Image" />
+    
+    <!-- Tom Lee -->
+    <component id="Highlighter" class = "flexlib.controls.Highlighter" />
+    
+    
 </componentPackage>
