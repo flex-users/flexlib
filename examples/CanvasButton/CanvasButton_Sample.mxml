@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flexlib="http://code.google.com/p/flexlib/"  
+	layout="vertical" >
+
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			private function doClick():void {
+				Alert.show("Good job, you clicked a button.");
+			}
+		]]>
+	</mx:Script>
+	<flexlib:CanvasButton width="150" click="doClick();">
+			<mx:VBox height="100%" width="100%" verticalGap="0" >
+				<mx:Label text="This is a" width="100%" textAlign="left" />
+				<mx:VBox width="100%" horizontalAlign="center">
+					<mx:Canvas cornerRadius="5" backgroundColor="0xff0000" backgroundAlpha=".5" borderStyle="solid">
+						<mx:Label text="crazy" fontSize="20" fontStyle="italic" fontWeight="bold" width="100%" />
+					</mx:Canvas>
+				</mx:VBox>
+				<mx:Label text="button!" width="100%" textAlign="right" />
+			</mx:VBox>
+	</flexlib:CanvasButton>
+	
+	<flexlib:CanvasButton click="doClick();">
+		<mx:HBox verticalAlign="middle"
+			 horizontalGap="0"
+			paddingLeft="5" paddingTop="5" paddingRight="5" paddingBottom="5">
+			<mx:Image source="flex_small.png" />
+			<mx:Label text="Two icons!" />
+			<mx:Image source="flex_small.png" />
+		</mx:HBox>	
+	</flexlib:CanvasButton>
+	
+	
+</mx:Application>
