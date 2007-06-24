@@ -568,6 +568,17 @@ package flexlib.containers
 				tabBar.setStyle("paddingTop", 0);
 				tabBar.setStyle("paddingBottom", 0);
 				
+				//this is a bit of a hack. We don't want tabBar to inherit the left, right, top, or bottom
+				//styles from SuperTabNavigator. So we disable the use of left, right, top, or bottom on SuperTabBar
+				//if it's used in SuperTabNavigator
+				//fixes issue 29: http://code.google.com/p/flexlib/issues/detail?id=29
+				tabBar.setStyle("left", NaN);
+				tabBar.setStyle("right", NaN);
+				tabBar.setStyle("top", NaN);
+				tabBar.setStyle("bottom", NaN);
+				
+				
+				
 				(tabBar as SuperTabBar).closePolicy = SuperTab.CLOSE_ROLLOVER;
 			}
 			
@@ -801,6 +812,8 @@ package flexlib.containers
                                                   unscaledHeight:Number):void
 	    {
 	    	
+				
+	    	
 	    	 
 	        //We need to calculate the tab widths first, so we call super.updateDisplayList later
 	        
@@ -889,9 +902,11 @@ package flexlib.containers
 				canvasWidth -= popupButton.width;
 			}
 			
+			canvas.move(0,0);
 			canvas.width = canvasWidth;
 			canvas.height = th;
 			canvas.explicitButtonHeight = th - 1;
+			canvas.verticalScrollPolicy = ScrollPolicy.OFF;
 			
 			if(pw <= canvasWidth) {
 				canvas.horizontalScrollPosition = 0;
