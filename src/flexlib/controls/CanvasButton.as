@@ -30,6 +30,10 @@ package flexlib.controls
 	import mx.core.UIComponent;
 	import mx.core.UIComponentDescriptor;
 	import mx.core.mx_internal;
+	import mx.managers.IFocusManagerContainer;
+	import mx.core.IRawChildrenContainer;
+	import mx.core.IDataRenderer;
+	import flash.display.DisplayObject;
 	
 	use namespace mx_internal;
 
@@ -66,18 +70,26 @@ package flexlib.controls
 		
 		public function CanvasButton():void {
 			super();
+			
+			
 		}
+		
+		private var _childrenCreated:Boolean = false;
 		
 		override protected function createChildren():void {
 			super.createChildren();
 			
 			//create our canvas and add it to the display list
 			canvas = new Canvas();
-			addChild(canvas);
+			super.addChild(canvas);
 			
 			//if child components have been specified in MXML then we need 
 			//to add them all now
 			createComponents();
+			
+			mouseChildren = true;
+			
+			_childrenCreated = true;	
 		}
 		
 		
@@ -126,13 +138,25 @@ package flexlib.controls
 		 * the childDescriptors property with UIComponentDescriptor objects. These are used to create 
 		 * the child components that are set in MXML.
 		 */
+		
 		public function set childDescriptors(value:Array):void {
 			_childDescriptors = value;
+		}
+		
+		mx_internal function setDocumentDescriptor(desc:UIComponentDescriptor):void {
 			
-			// I don't know if createChildren can ever be called before the childDescriptors are set,
-			// I doubt it, but just in case we see if canvas has been created and set the children if so
-			if(canvas) 
-				createComponents();
+			if (_documentDescriptor && _documentDescriptor.properties.childDescriptors) {
+            	if (desc.properties.childDescriptors) {
+                	throw new Error("Multiple sets of visual children have been specified for this component (base component definition and derived component definition).");
+				}
+			} else {
+				_documentDescriptor = desc;
+				_documentDescriptor.document = this;
+			}
+                   
+            if(desc.properties.childDescriptors) {
+				this.childDescriptors = desc.properties.childDescriptors; 
+			}
 		}
 		
 		/**
@@ -146,5 +170,8 @@ package flexlib.controls
 				canvas.createComponentFromDescriptor(desc, true);
 			}
 		}
+		
+		
+		
 	}
 }
