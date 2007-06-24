@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2006. Adobe Systems Incorporated.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+  * Neither the name of Adobe Systems Incorporated nor the names of its
+    contributors may be used to endorse or promote products derived from this
+    software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+@ignore
+-->
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" 
+	implements="flexlib.scheduling.scheduleClasses.renderers.IScheduleEntryRenderer" 
+	borderStyle="applicationControlBar" styleName="defaultEntryStyle" 
+	verticalScrollPolicy="off" horizontalScrollPolicy="off" 
+	preinitialize="onPreinitialize()">
+	
+	<mx:Style>
+		.defaultEntryStyle {
+			dropShadowEnabled: true;
+		   shadowDistance: 2;
+		   borderStyle: default;
+		   borderThickness: 1;
+		   backgroundColor: #996633;
+		   highlightAlphas: 0.08, 0;
+		   fillAlphas: 1, 1;
+		   fillColors: #7aa4bc, #53839f;
+		   borderColor: #339966;
+			cornerRadius: 6;
+			paddingLeft: 5;
+			paddingRight: 5;
+			paddingTop: 5;
+			paddingBottom: 5;
+			fontSize: 11;
+			fontWeight: normal;
+			color: #FFFFFF;
+			verticalGap: -2;
+			timeStyleName: "defaultTimeStyle";
+		}
+		.defaultTimeStyle {
+			fontSize: 9;
+			fontWeight: bold;
+			color: #000000;
+		}		
+	</mx:Style>	
+	
+	<mx:Script>
+		<![CDATA[
+			import flexlib.scheduling.scheduleClasses.IScheduleEntry;
+			import flexlib.scheduling.scheduleClasses.SimpleScheduleEntry;
+			
+			import mx.controls.Label;
+			import mx.controls.Text;
+			import mx.formatters.DateFormatter;
+			import mx.utils.ColorUtil;
+			
+			public var contentLabel : Label;
+			public var contentText : Text;
+			
+			private var defaultLabel : String = "";
+			private var formatter : DateFormatter;
+			private var formatString : String = "L:NNAA";
+			private var origFillColors : Array;
+			private var changeSelection : Boolean;
+			private var _entry : IScheduleEntry;
+			private var _selected : Boolean = false;
+			
+			public function onPreinitialize() : void
+			{
+				formatter = new DateFormatter();
+				formatter.formatString = formatString;
+			}
+			
+			public function get entry() : IScheduleEntry
+			{
+				return _entry;
+			}
+			
+			public function set entry( value : IScheduleEntry ) : void
+			{
+				_entry = value;
+			}
+		
+			public function get selected() : Boolean
+			{
+				return _selected;
+			}
+			
+			public function set selected( value : Boolean ) : void
+			{
+				_selected = value;
+				updateSelected();
+			}
+			
+			/**
+			 * @private
+			 */
+			override public function styleChanged( styleProp : String ) : void
+			{
+				super.styleChanged( styleProp );
+				if( styleProp != null )
+				{
+					if( styleProp == "fillColors" && !changeSelection )
+					{
+						origFillColors = getStyle( styleProp );						
+					}
+					else if( changeSelection )
+					{
+						changeSelection = false;
+					}
+				}	
+			}
+			
+			private function updateSelected() : void
+			{
+				var newColor1 : uint;
+				var newColor2 : uint;
+				if( origFillColors == null ) origFillColors = getStyle( "fillColors" );
+				
+				if( _selected )
+				{
+					setStyle( "dropShadowEnabled", true );
+					changeSelection = true;					
+					newColor1 = ColorUtil.adjustBrightness2( origFillColors[ 0 ], 25 );
+					newColor2 = ColorUtil.adjustBrightness2( origFillColors[ 1 ], 25 );
+					setStyle( "fillColors", [ newColor1, newColor2 ] );
+				}
+				else 
+				{
+					setStyle( "dropShadowEnabled", false );
+					changeSelection = true;
+					newColor1 = ColorUtil.adjustBrightness2( origFillColors[ 0 ], 0 );
+					newColor2 = ColorUtil.adjustBrightness2( origFillColors[ 1 ], 0 );
+					setStyle( "fillColors", [ newColor1, newColor2 ] );
+				}
+			}
+			
+			protected function setTextContent( content : SimpleScheduleEntry ) : void
+			{
+				if( content.label == null ) content.label = defaultLabel;
+				
+				formatter.error = "";
+				var time : String = formatter.format( content.startDate ) 
+				 + " - " + formatter.format( content.endDate );
+				
+				toolTip = time + "\n" + content.label;
+				contentLabel.text = time;
+				contentLabel.styleName = getStyle( "timeStyleName" );
+				contentText.text = content.label;
+				
+				updateSelected();				
+			}
+		]]>
+	</mx:Script>
+	
+</mx:Box>

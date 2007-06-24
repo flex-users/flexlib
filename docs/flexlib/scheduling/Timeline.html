@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../print.css" type="text/css" media="print">
+<meta content="Timeline,flexlib.scheduling.Timeline,timeRanges,minimumTimeRangeWidth,startDate,endDate,itemRenderer,zoom,contentWidth,xPosition,currentDate" name="keywords">
+<title>flexlib.scheduling.Timeline</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'Timeline - flexlib';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/scheduling/Timeline.html&amp;flexlib/scheduling/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Timeline</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Timeline"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">flexlib.scheduling</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class Timeline</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Timeline <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../images/inherit-arrow.gif"> mx.core.ScrollControlBase</td>
+</tr>
+</table>
+<p></p>
+  
+  Timeline is an independent control that renders and let users interact 
+  with a customizable timeframe. Developers can use this component in combinations 
+  other components, i.e. to add a timeline to a ScheduleViewer component. See 
+  flexlib.scheduling.ScheduleViewer for more details. 
+  <p>
+  You can style the layout of the timeline frame and customize and style 
+  each item of the timeline. By default, one item of Timeline would be a Label 
+  displaying a date. 
+  </p>
+  <p>
+  The rendering of the item can be customized via the itemRenderer property. The itemRenderer has to 
+  implement flexlib.scheduling.timelineClasses.ITimelineEntryRenderer. 
+  Via Timeline's timeRanges property you can pass more information to the renderers 
+  on specific time ranges. By default a format string as used in mx.formatters.DateFormatter 
+  is passed to the renderer depending on what time range is currently displayed. i.e. by default 
+  a format string of "L:NNAA" is passed to the renderer when Timeline currently 
+  only dispays a time range of one minute. 
+  You can customize this with passing your own timeRanges collection. timeRanges 
+  must contain items that adhere to the flexlib.scheduling.timelineClasses.ITimeDescriptor 
+  interface. See flexlib.scheduling.timelineClasses.TimeRangeDescriptorUtil class 
+  for more details and utilities on customizations of time ranges. 
+  </p>
+  Timeline supports zooming via the zoom and contentWidth property.
+  <p>
+  Currently, only horizontal timelines are supported. 
+  </p>
+  <!--<a href="examples/TimelineLabSample.html">See the example SWF</a>-->
+  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../scheduling/Timeline.html#itemRenderer" target="">itemRenderer</a>
+<br>
+<a href="timelineClasses/ITimelineEntryRenderer.html" target="">flexlib.scheduling.timelineClasses.ITimelineEntryRenderer</a>
+<br>
+<a href="../scheduling/Timeline.html#timeRanges" target="">timeRanges</a>
+<br>
+<a href="timelineClasses/ITimeDescriptor.html" target="">flexlib.scheduling.timelineClasses.ITimeDescriptor</a>
+<br>
+<a href="timelineClasses/TimeRangeDescriptorUtil.html" target="">flexlib.scheduling.timelineClasses.TimeRangeDescriptorUtil</a>
+<br>
+<a href="../scheduling/ScheduleViewer.html" target="">flexlib.scheduling.ScheduleViewer</a>
+<br>
+<a href="util/DateUtil.html" target="">flexlib.scheduling.util.DateUtil</a>
+</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#contentWidth">contentWidth</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#currentDate">currentDate</a> : Date<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#endDate">endDate</a> : Date<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#itemRenderer">itemRenderer</a> : IFactory<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#minimumTimeRangeWidth">minimumTimeRangeWidth</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#startDate">startDate</a> : Date<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#timeRanges">timeRanges</a> : IList<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#xPosition">xPosition</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#zoom">zoom</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#Timeline()">Timeline</a>()</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Timeline</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="contentWidth"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">contentWidth</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>contentWidth:Number</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get contentWidth():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set contentWidth(value:Number):void</code>
+<br>
+</div>
+<a name="currentDate"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">currentDate</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>currentDate:Date</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get currentDate():Date</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set currentDate(value:Date):void</code>
+<br>
+</div>
+<a name="endDate"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">endDate</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>endDate:Date</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get endDate():Date</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set endDate(value:Date):void</code>
+<br>
+</div>
+<a name="itemRenderer"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">itemRenderer</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>itemRenderer:IFactory</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get itemRenderer():IFactory</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set itemRenderer(value:IFactory):void</code>
+<br>
+</div>
+<a name="minimumTimeRangeWidth"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">minimumTimeRangeWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>minimumTimeRangeWidth:Number</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get minimumTimeRangeWidth():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set minimumTimeRangeWidth(value:Number):void</code>
+<br>
+</div>
+<a name="startDate"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">startDate</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>startDate:Date</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get startDate():Date</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set startDate(value:Date):void</code>
+<br>
+</div>
+<a name="timeRanges"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">timeRanges</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>timeRanges:IList</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get timeRanges():IList</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set timeRanges(value:IList):void</code>
+<br>
+</div>
+<a name="xPosition"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">xPosition</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>xPosition:Number</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get xPosition():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set xPosition(value:Number):void</code>
+<br>
+</div>
+<a name="zoom"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">zoom</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>zoom:Number</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get zoom():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set zoom(value:Number):void</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="Timeline()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">Timeline</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function Timeline()</code>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

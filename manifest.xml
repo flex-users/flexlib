@@ -49,5 +49,18 @@
     <!-- Tom Lee -->
     <component id="Highlighter" class = "flexlib.controls.Highlighter" />
     
+    <!-- Scheduling Framework -->
+    <component id="ScheduleViewer" class = "flexlib.scheduling.ScheduleViewer" />
+    <component id="Timeline" class = "flexlib.scheduling.Timeline" />
+    <component id="ScheduleData" class = "flexlib.scheduling.samples.ScheduleData" />
+    <component id="ColoredSolidScheduleEntryRenderer" class = "flexlib.scheduling.scheduleClasses.renderers.ColoredSolidScheduleEntryRenderer" />
+    <component id="ColoredGradientScheduleEntryRenderer" class = "flexlib.scheduling.scheduleClasses.renderers.ColoredGradientScheduleEntryRenderer" />
+    <component id="GradientScheduleEntryRenderer" class = "flexlib.scheduling.scheduleClasses.renderers.GradientScheduleEntryRenderer" />
+    <component id="SolidScheduleEntryRenderer" class = "flexlib.scheduling.scheduleClasses.renderers.SolidScheduleEntryRenderer" />
+    <component id="SimpleLayout" class = "flexlib.scheduling.scheduleClasses.layout.SimpleLayout" />
+    <component id="AlternatingHorizontalLinesViewer" class = "flexlib.scheduling.samples.AlternatingHorizontalLinesViewer" />
+    <component id="SolidVerticalLinesViewer" class = "flexlib.scheduling.samples.SolidVerticalLinesViewer" />
+    
+    
     
 </componentPackage>

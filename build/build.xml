@@ -24,7 +24,13 @@ SOFTWARE.
 <project name="flexlib" basedir="../" default="lib">
 
 	<!-- Define variables/paths used in this build script -->
-	<property file="./build/build.properties" />
+	
+	<!-- 
+		Two build property files are supplied, one setup for a Windows machine and one for a Mac. 
+		Use whichever one fits your machine (you'll probably have to edit it for your computer setup)
+	-->
+	<!--<property file="./build/build.win.properties" />-->
+	<property file="./build/build.mac.properties" />
 
 	<!--
 		Have you edit the properties file to make sure the paths are right on your system?
@@ -214,6 +220,8 @@ SOFTWARE.
 			
 			<!-- Include the library name in the window title -->
 			<arg line="-window-title '${library.name}' "/>
+			
+			<arg line="-templates-path '${flex2sdk.templates.dir}' "/>
 		</exec>
 	</target>
 	
@@ -253,7 +261,7 @@ SOFTWARE.
 				
 				<!-- Extract the extension from the file name -->
 				<propertyregex property="fileExtension" override="yes" input="@{file}"
-						regexp=".*\\([^\\]+)\.([a-zA-Z0-9]+)" replace="\2" />
+						regexp=".*${file.separator}([^\\]+)\.([a-zA-Z0-9]+)" replace="\2" />
 			
 				<!-- Set the mime.type property based on the extension -->
 				<propertycopy name="mime.type" from="mime.type.${fileExtension}" override="yes" />
