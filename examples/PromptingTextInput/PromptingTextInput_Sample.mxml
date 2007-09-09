@@ -29,7 +29,6 @@ SOFTWARE.
 	
 	<mx:Panel title="PromptingTextInput Sample">
 		<mx:Form>
-
 			<mx:FormItem label="Name:">
 				<mx:TextInput id="fullName" />
 			</mx:FormItem>
@@ -47,6 +46,10 @@ SOFTWARE.
 					<flexlib:PromptingTextInput id="state" prompt="State"  width="50"/>
 					<flexlib:PromptingTextInput id="zip" prompt="Zip"  width="77"/>
 				</mx:HBox>
+			</mx:FormItem>
+		
+			<mx:FormItem label="Self-description:">
+				<flexlib:PromptingTextArea id="bio" prompt="Describe yourself..." width="200" height="75" />
 			</mx:FormItem>
 		
 		</mx:Form>

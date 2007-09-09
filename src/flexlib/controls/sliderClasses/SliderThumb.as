@@ -19,6 +19,7 @@ package flexlib.controls.sliderClasses
 	import mx.core.mx_internal;
 	import mx.events.SliderEvent;
 	import mx.controls.sliderClasses.SliderDirection;
+	import flexlib.baseClasses.SliderBase;
 	
 	use namespace mx_internal;
 	
@@ -124,7 +125,7 @@ package flexlib.controls.sliderClasses
 		{
 			$x = value - width / 2;
 			
-			ExtendedSlider(owner).drawTrackHighlight();
+			SliderBase(owner).drawTrackHighlight();
 		}
 		
 		//--------------------------------------------------------------------------
@@ -174,7 +175,7 @@ package flexlib.controls.sliderClasses
 				stage.removeEventListener(MouseEvent.MOUSE_MOVE, 
 								stage_mouseMoveHandler);
 							
-				ExtendedSlider(owner).onThumbRelease(this);
+				SliderBase(owner).onThumbRelease(this);
 			}
 		}
 	
@@ -210,12 +211,12 @@ package flexlib.controls.sliderClasses
 		private function calculateXPos(value:Number,
 									   overrideSnap:Boolean = false):Number
 		{
-			var bounds:Object = ExtendedSlider(owner).getXBounds(thumbIndex);
+			var bounds:Object = SliderBase(owner).getXBounds(thumbIndex);
 			
 			var result:Number = Math.min(Math.max(value, bounds.min), bounds.max);
 	
 			if (!overrideSnap)
-				result = ExtendedSlider(owner).getSnapValue(result, this);	
+				result = SliderBase(owner).getSnapValue(result, this);	
 			
 			return result;
 		}
@@ -245,7 +246,7 @@ package flexlib.controls.sliderClasses
 		 */
 		private function updateValue():void
 		{
-			ExtendedSlider(owner).updateThumbValue(thumbIndex);
+			SliderBase(owner).updateThumbValue(thumbIndex);
 		}
 	
 		//--------------------------------------------------------------------------
@@ -260,13 +261,13 @@ package flexlib.controls.sliderClasses
 		 */
 		override protected function keyDownHandler(event:KeyboardEvent):void
 		{
-			var multiThumbs:Boolean = ExtendedSlider(owner).thumbCount > 1;
+			var multiThumbs:Boolean = SliderBase(owner).thumbCount > 1;
 			var currentVal:Number = xPosition;
-			var moveInterval:Number = ExtendedSlider(owner).snapInterval > 0 ?
-									  ExtendedSlider(owner).getSnapIntervalWidth() :
+			var moveInterval:Number = SliderBase(owner).snapInterval > 0 ?
+									  SliderBase(owner).getSnapIntervalWidth() :
 									  1;
 			var isHorizontal:Boolean =
-				ExtendedSlider(owner).direction == SliderDirection.HORIZONTAL;
+				SliderBase(owner).direction == SliderDirection.HORIZONTAL;
 			
 			var newVal:Number;
 			if ((event.keyCode == Keyboard.DOWN && !isHorizontal) ||
@@ -282,19 +283,19 @@ package flexlib.controls.sliderClasses
 			else if ((event.keyCode == Keyboard.PAGE_DOWN && !isHorizontal) ||
 					 (event.keyCode == Keyboard.HOME && isHorizontal))
 			{
-				newVal = ExtendedSlider(owner).getXFromValue(ExtendedSlider(owner).minimum);
+				newVal = SliderBase(owner).getXFromValue(SliderBase(owner).minimum);
 			}
 			else if ((event.keyCode == Keyboard.PAGE_UP && !isHorizontal) ||
 					 (event.keyCode == Keyboard.END && isHorizontal))
 			{
-				newVal = ExtendedSlider(owner).getXFromValue(ExtendedSlider(owner).maximum);
+				newVal = SliderBase(owner).getXFromValue(SliderBase(owner).maximum);
 			}
 			
 			if (!isNaN(newVal))
 			{
 				event.stopPropagation();
 				//mark last interaction as key 
-				ExtendedSlider(owner).keyInteraction = true;
+				SliderBase(owner).keyInteraction = true;
 				moveXPos(newVal);
 			}
 		}
@@ -325,7 +326,7 @@ package flexlib.controls.sliderClasses
 				stage.addEventListener(MouseEvent.MOUSE_MOVE, 
 								stage_mouseMoveHandler);
 	
-				ExtendedSlider(owner).onThumbPress(this);
+				SliderBase(owner).onThumbPress(this);
 			}
 		}
 		
@@ -346,13 +347,13 @@ package flexlib.controls.sliderClasses
 			if (enabled)
 			{
 				var pt:Point = new Point(event.stageX, event.stageY);
-				pt = ExtendedSlider(owner).innerSlider.globalToLocal(pt);
+				pt = SliderBase(owner).innerSlider.globalToLocal(pt);
 				
 				// Place the thumb in the correct position.
 				moveXPos(pt.x - xOffset + width / 2, false, true);
 				
 				// Callback to the Slider to handle tooltips and update its value.
-				ExtendedSlider(owner).onThumbMove(this);
+				SliderBase(owner).onThumbMove(this);
 			}
 		}
 	

@@ -157,12 +157,12 @@ package flexlib.controls
 		* 
 		* @param word The string to find and highlight.
 		*/
-        public function highlightWordInstances(word:String):void{
+        public function highlightWordInstances(word:String, caseSensitive:Boolean=true):void{
 
             var txt:String = this.field.text;
             
             // Create a StringBoundaries object for every instance
-            var instances:Array = this.finder.indexesOf(word);
+            var instances:Array = this.finder.indexesOf(word, caseSensitive);
 
             var len:int = word.length-1;
             
@@ -180,10 +180,10 @@ package flexlib.controls
         * 
         * @param word The string to find and highlight.
         */
-        public function highlightNext(word:String):void{
+        public function highlightNext(word:String, caseSensitive:Boolean=true):void{
             this.reset();
             
-            var i:int = this.finder.findNext(word);
+            var i:int = this.finder.findNext(word, caseSensitive);
             
             var line:int = this.field.getLineIndexOfChar(i);
             this.field.scrollV = line;
@@ -202,9 +202,9 @@ package flexlib.controls
         * 
         * @param word The string to find and highlight.
         */
-        public function highlightPrevious(word:String):void{
+        public function highlightPrevious(word:String, caseSensitive:Boolean=true):void{
             this.reset();
-           	var i:int = this.finder.findPrevious(word);
+           	var i:int = this.finder.findPrevious(word, caseSensitive);
             
             var line:int = this.field.getLineIndexOfChar(i);
             this.field.scrollV = line;

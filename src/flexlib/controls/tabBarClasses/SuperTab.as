@@ -38,6 +38,7 @@ package flexlib.controls.tabBarClasses
 	import mx.controls.tabBarClasses.Tab;
 	import mx.core.UIComponent;
 	import mx.core.mx_internal;
+	import flexlib.scheduling.scheduleClasses.utils.Selection;
 	
 	use namespace mx_internal;
 	
@@ -135,6 +136,18 @@ package flexlib.controls.tabBarClasses
 			this.showIndicator = true;	
 		}
 		
+		override protected function measure():void {
+			super.measure();
+			
+			if(_closePolicy == SuperTab.CLOSE_ALWAYS || _closePolicy == SuperTab.CLOSE_ROLLOVER) {
+				//the close icon is 10 px wide and 4px from the right
+				measuredMinWidth += 10;
+			}
+			else if(_closePolicy == SuperTab.CLOSE_SELECTED && selected) {
+				measuredMinWidth += 10;
+			}
+		}
+		
 		override protected function createChildren():void{
 			super.createChildren();
 			
@@ -146,7 +159,9 @@ package flexlib.controls.tabBarClasses
 			closeButton.height = 10;
 			
 			// We have to listen for the click event so we know to close the tab
-			closeButton.addEventListener(MouseEvent.CLICK, closeClickHandler, false, 0, true); 
+			closeButton.addEventListener(MouseEvent.MOUSE_UP, closeClickHandler, false, 0, true); 
+			closeButton.addEventListener(MouseEvent.MOUSE_DOWN, cancelEvent, false, 0, true); 
+			closeButton.addEventListener(MouseEvent.CLICK, cancelEvent, false, 0, true); 
 		
 			// This allows someone to specify a CSS style for the close button
 			closeButton.styleName = getStyle("tabCloseButtonStyleName");
@@ -210,7 +225,7 @@ package flexlib.controls.tabBarClasses
 			closeButton.visible = false;
 			indicator.visible = false;
 			
-			// Depedning on the closePolicy we might be showing the closeButton
+			// Depending on the closePolicy we might be showing the closeButton
 			// and it may or may not be enabled.
 			if(_closePolicy == SuperTab.CLOSE_SELECTED) {
 				if(selected) {
@@ -247,10 +262,10 @@ package flexlib.controls.tabBarClasses
 				// Resize the text if we're showing the closeIcon, so the
 				// closeIcon won't overlap the text. This means the text may
 				// have to truncate using the "..." differently.
-				this.textField.width -= closeButton.width;
+				this.textField.width = closeButton.x - textField.x;
 				this.textField.truncateToFit();
 				
-				// We place the closeButton 4 pixels from the top and 4 pixels from the left.
+				// We place the closeButton 4 pixels from the top and 4 pixels from the right.
 				// Why 4 pixels? Because I said so. 
 				closeButton.x = unscaledWidth-closeButton.width - 4;
 				closeButton.y = 4;
@@ -283,6 +298,21 @@ package flexlib.controls.tabBarClasses
 		 */
 		private function closeClickHandler(event:MouseEvent):void {
 			dispatchEvent(new Event(CLOSE_TAB_EVENT));
+			event.stopImmediatePropagation();
+			event.stopPropagation();
+		}
+		
+		override public function set selected(value:Boolean):void {
+			
+			super.selected = value;
+			
+			callLater(invalidateSize);
+			//callLater(invalidateDisplayList);
+		}
+		
+		
+		private function cancelEvent(event:Event):void {
+			event.stopPropagation();
 			event.stopImmediatePropagation();
 		}
 		

@@ -95,7 +95,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#highlightNext()">highlightNext</a>(word:String):void</div>
+<a class="signatureLink" href="#highlightNext()">highlightNext</a>(word:String, caseSensitive:Boolean = true):void</div>
 <div class="summaryTableDescription">
         Highlights the first instance of a string after the cursor position.</div>
 </td><td class="summaryTableOwnerCol">Highlighter</td>
@@ -103,7 +103,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#highlightPrevious()">highlightPrevious</a>(word:String):void</div>
+<a class="signatureLink" href="#highlightPrevious()">highlightPrevious</a>(word:String, caseSensitive:Boolean = true):void</div>
 <div class="summaryTableDescription">
         Highlights the first instance of a string before the cursor position.</div>
 </td><td class="summaryTableOwnerCol">Highlighter</td>
@@ -111,7 +111,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#highlightWordInstances()">highlightWordInstances</a>(word:String):void</div>
+<a class="signatureLink" href="#highlightWordInstances()">highlightWordInstances</a>(word:String, caseSensitive:Boolean = true):void</div>
 <div class="summaryTableDescription">
   Highlights all instances of a string.</div>
 </td><td class="summaryTableOwnerCol">Highlighter</td>
@@ -239,7 +239,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function highlightNext(word:String):void</code><p>
+<code>public function highlightNext(word:String, caseSensitive:Boolean = true):void</code><p>
         Highlights the first instance of a string after the cursor position.
         
         </p><span class="label">Parameters</span>
@@ -247,6 +247,12 @@ showHideInherited();
 <tr>
 <td width="20px"></td><td><code><span class="label">word</span>:String</code> &mdash; The string to find and highlight.
         </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">caseSensitive</span>:Boolean</code> (default = <code>true</code>)<code></code></td>
 </tr>
 </table>
 </div>
@@ -257,7 +263,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function highlightPrevious(word:String):void</code><p>
+<code>public function highlightPrevious(word:String, caseSensitive:Boolean = true):void</code><p>
         Highlights the first instance of a string before the cursor position.
         
         </p><span class="label">Parameters</span>
@@ -265,6 +271,12 @@ showHideInherited();
 <tr>
 <td width="20px"></td><td><code><span class="label">word</span>:String</code> &mdash; The string to find and highlight.
         </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">caseSensitive</span>:Boolean</code> (default = <code>true</code>)<code></code></td>
 </tr>
 </table>
 </div>
@@ -275,7 +287,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function highlightWordInstances(word:String):void</code><p>
+<code>public function highlightWordInstances(word:String, caseSensitive:Boolean = true):void</code><p>
   Highlights all instances of a string.
   
   </p><span class="label">Parameters</span>
@@ -283,6 +295,12 @@ showHideInherited();
 <tr>
 <td width="20px"></td><td><code><span class="label">word</span>:String</code> &mdash; The string to find and highlight.
   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">caseSensitive</span>:Boolean</code> (default = <code>true</code>)<code></code></td>
 </tr>
 </table>
 </div>

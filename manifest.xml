@@ -2,6 +2,7 @@
 <componentPackage>
     <!-- Darron Schall -->
     <component id="PromptingTextInput" class="flexlib.controls.PromptingTextInput" />
+    <component id="PromptingTextArea" class="flexlib.controls.PromptingTextArea" />
     <component id="FlowBox" class="flexlib.containers.FlowBox" />
     <component id="HorizontalAxisDataSelector" class="flexlib.charts.HorizontalAxisDataSelector" />
     
@@ -60,6 +61,9 @@
     <component id="SimpleLayout" class = "flexlib.scheduling.scheduleClasses.layout.SimpleLayout" />
     <component id="AlternatingHorizontalLinesViewer" class = "flexlib.scheduling.samples.AlternatingHorizontalLinesViewer" />
     <component id="SolidVerticalLinesViewer" class = "flexlib.scheduling.samples.SolidVerticalLinesViewer" />
+    
+    <!-- Tobias Patton (effectiveUI) -->
+    <component id="IconLoader" class = "flexlib.controls.IconLoader" />
     
     
     

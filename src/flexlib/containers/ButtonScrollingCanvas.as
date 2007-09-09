@@ -238,6 +238,7 @@ package flexlib.containers
 			// never show the scrollbars since we're controlling them
 			// on our own
 			innerCanvas = new Canvas();
+			innerCanvas.document = this.document;
 			innerCanvas.horizontalScrollPolicy = ScrollPolicy.OFF;
 			innerCanvas.verticalScrollPolicy = ScrollPolicy.OFF;
 			innerCanvas.clipContent = true;

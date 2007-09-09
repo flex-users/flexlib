@@ -34,6 +34,7 @@ package flexlib.controls
 	import mx.core.IRawChildrenContainer;
 	import mx.core.IDataRenderer;
 	import flash.display.DisplayObject;
+	import mx.core.ScrollPolicy;
 	
 	use namespace mx_internal;
 
@@ -81,6 +82,8 @@ package flexlib.controls
 			
 			//create our canvas and add it to the display list
 			canvas = new Canvas();
+			canvas.verticalScrollPolicy = _verticalScrollPolicy;
+			canvas.horizontalScrollPolicy = _horizontalScrollPolicy;
 			super.addChild(canvas);
 			
 			//if child components have been specified in MXML then we need 
@@ -170,6 +173,42 @@ package flexlib.controls
 				canvas.createComponentFromDescriptor(desc, true);
 			}
 		}
+		
+		private var _horizontalScrollPolicy:String = ScrollPolicy.AUTO;
+	    
+		public function get horizontalScrollPolicy():String
+	    {
+	        return _horizontalScrollPolicy;
+	    }
+	
+	    /**
+	     *  @private
+	     */
+	    public function set horizontalScrollPolicy(value:String):void
+	    {
+	        _horizontalScrollPolicy = value;
+	        
+	        if(canvas)
+	        	canvas.horizontalScrollPolicy = value;
+	    }
+	    
+	    private var _verticalScrollPolicy:String = ScrollPolicy.AUTO;
+	    
+	    public function get verticalScrollPolicy():String
+	    {
+	        return _verticalScrollPolicy;
+	    }
+	
+	    /**
+	     *  @private
+	     */
+	    public function set verticalScrollPolicy(value:String):void
+	    {
+	        _verticalScrollPolicy = value;
+	        
+	        if(canvas)
+	        	canvas.verticalScrollPolicy = value;
+	    }
 		
 		
 		

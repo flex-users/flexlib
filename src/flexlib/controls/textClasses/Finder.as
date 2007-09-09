@@ -62,12 +62,17 @@ package flexlib.controls.textClasses
 		* @param string The string to search for.
 		* @return An array of all the indexes of the string. 
 		*/
-        public function indexesOf(string:String):Array{
+        public function indexesOf(string:String, caseSensitive:Boolean=true):Array{
             var pos:int = 0;
             var r:Array = [];
             
             var txt:String = this.textField.text;
             var len:int = string.length;
+            
+            if(!caseSensitive) {
+            	txt = txt.toLowerCase();
+            	string = string.toLowerCase();
+            }
             
             do{
                 if ((pos = txt.indexOf(string, pos)) != -1){
@@ -85,8 +90,14 @@ package flexlib.controls.textClasses
         * @param string The string to search for.
         * @return The character index of the string.
         */
-        public function findNext(string:String):int{
+        public function findNext(string:String, caseSensitive:Boolean=true):int{
         	var str:String = this.textField.text;
+            
+            if(!caseSensitive) {
+            	str = str.toLowerCase();
+            	string = string.toLowerCase();
+            }
+            
             var len:int = string.length;
             var i:int = str.indexOf(string,this.caratIndex+len);
             
@@ -111,13 +122,19 @@ package flexlib.controls.textClasses
         * @param string The string to search for.
         * @return The character index of the string.
         */
-        public function findPrevious(string:String):int{
+        public function findPrevious(string:String, caseSensitive:Boolean=true):int{
        		 
             if(this.caratIndex == 0){
                 this.caratIndex = this.textField.text.length;
             }
             var txt:String = this.textField.text;
             var str:String = txt.substring(0,this.caratIndex);
+            
+            if(!caseSensitive) {
+            	txt = txt.toLowerCase();
+            	str = str.toLowerCase();
+            }
+            
             var len:int = string.length;
             var i:int = str.lastIndexOf(string);
             
