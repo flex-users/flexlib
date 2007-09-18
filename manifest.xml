@@ -24,6 +24,7 @@
     <component id="area" class="flexlib.controls.area"/>
     <component id="Fire" class="flexlib.controls.Fire"/>
     <component id="CanvasButton" class="flexlib.controls.CanvasButton"/>
+    <component id="CanvasButtonAccordionHeader" class="flexlib.containers.accordionClasses.CanvasButtonAccordionHeader"/>
     
     <component id="SliderHighlightSkin" class="flexlib.skins.SliderHighlightSkin"/>
 	<component id="SliderThumbHighlightSkin" class="flexlib.skins.SliderThumbHighlightSkin"/>

@@ -112,6 +112,19 @@ package flexlib.controls.sliderClasses
 			dataTips = new Array();
 			
 			this.sliderThumbClass = SliderThumb;
+			
+			/* Hack to get the component to work with Flex 3 SDK.
+			 * The Flex 3 SDK default stylesheet introduces the thumbSkin style and does not
+			 * set the other styles (thumbUpSKin, etc), so here we check if thumbSkin
+			 * has been set, and if so we set the other, older styles.
+			 */
+			var thumbSkin:* = getStyle("thumbSkin");
+			if(thumbSkin != null) {
+				setStyle("thumbUpSkin", thumbSkin);
+				setStyle("thumbDownSkin", thumbSkin);
+				setStyle("thumbOverSkin", thumbSkin);
+				setStyle("thumbDisabledSkin", thumbSkin);
+			}
 		}
 		
 		/**

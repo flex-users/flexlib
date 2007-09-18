@@ -10,12 +10,10 @@
 package flexlib.containers.accordionClasses
 {
 
-import flexlib.baseClasses.AccordionBase;
-
 import flash.display.DisplayObject;
 import flash.events.Event;
 import flash.events.MouseEvent;
-
+import mx.containers.Accordion;
 import mx.controls.Button;
 import mx.core.Container;
 import mx.core.EdgeMetrics;
@@ -25,25 +23,26 @@ import mx.core.mx_internal;
 import mx.styles.CSSStyleDeclaration;
 import mx.styles.ISimpleStyleClient;
 import mx.styles.StyleManager;
+import flexlib.controls.CanvasButton;
+import mx.skins.halo.AccordionHeaderSkin;
 
 use namespace mx_internal;
-
-[ExcludeClass]
 
 [AccessibilityClass(implementation="mx.accessibility.AccordionHeaderAccImpl")]
 
 /**
- *  The AccordionHeader class defines the appearance of the navigation buttons
- *  of an Accordion.
- *  You use the <code>getHeaderAt()</code> method of the Accordion class to get a reference
- *  to an individual AccordionHeader object.
+ * The <code>CanvasButtonAccordionHeader</code> class allows you to easily use a <code>CanvasButton</code> control as the header
+ * renderer of an <code>Accordion</code>.
+ * 
+ * This class is a copy of the AccordionHeader class, but instead of subclassing <code>Button</code>, it subclasses
+ * <code>CanvasButton</code>.
  *
- *  @see mx.containers.Accordion
+ * @see flexlib.controls.CanvasButton
+ * @see mx.containers.Accordion
  */
-public class AccordionHeader extends Button implements IDataRenderer
+public class CanvasButtonAccordionHeader extends CanvasButton implements IDataRenderer
 {
-	//include "../../core/Version.as";
-
+	
 	//--------------------------------------------------------------------------
 	//
 	//  Class mixins
@@ -65,7 +64,7 @@ public class AccordionHeader extends Button implements IDataRenderer
 	/**
 	 *  Constructor.
 	 */
-	public function AccordionHeader()
+	public function CanvasButtonAccordionHeader()
 	{
 		super();
 
@@ -140,6 +139,42 @@ public class AccordionHeader extends Button implements IDataRenderer
 		invalidateDisplayList();
 	}
 
+	private static function initializeStyles():void
+	{
+		var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("CanvasButtonAccordionHeader");
+		
+		if(!selector)
+		{
+			selector = new CSSStyleDeclaration();
+		}
+		
+		selector.defaultFactory = function():void
+		{
+			this.fontSize = 10;
+			this.fontWeight = "bold";
+			this.disabledSkin = mx.skins.halo.AccordionHeaderSkin;
+			this.downSkin = mx.skins.halo.AccordionHeaderSkin;
+			this.horizontalGap = 2;
+			this.overSkin = mx.skins.halo.AccordionHeaderSkin;
+			this.paddingLeft = 5;
+			this.paddingRight = 5;
+			this.selectedDisabledSkin = mx.skins.halo.AccordionHeaderSkin;
+			this.selectedDownSkin = mx.skins.halo.AccordionHeaderSkin;
+			this.selectedOverSkin = mx.skins.halo.AccordionHeaderSkin;
+			this.selectedUpSkin = mx.skins.halo.AccordionHeaderSkin;
+			this.skin = mx.skins.halo.AccordionHeaderSkin;
+			this.textAlign = "left";
+			this.upSkin = mx.skins.halo.AccordionHeaderSkin;
+		}
+		
+		StyleManager.setStyleDeclaration("CanvasButtonAccordionHeader", selector, false);
+			
+	}
+	
+	initializeStyles();
+
+
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden methods: UIComponent
@@ -151,8 +186,8 @@ public class AccordionHeader extends Button implements IDataRenderer
 	 */
 	override protected function initializeAccessibility():void
 	{
-		if (AccordionHeader.createAccessibilityImplementation != null)
-			AccordionHeader.createAccessibilityImplementation(this);
+		if (CanvasButtonAccordionHeader.createAccessibilityImplementation != null)
+			CanvasButtonAccordionHeader.createAccessibilityImplementation(this);
 	}
 
 	/**

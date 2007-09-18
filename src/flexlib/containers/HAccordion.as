@@ -35,15 +35,45 @@ package flexlib.containers
 	import mx.core.UIComponent;
 	import mx.core.mx_internal;
 	import mx.effects.Tween;
+	import mx.styles.CSSStyleDeclaration;
+	import mx.styles.StyleManager;
 	
 	use namespace mx_internal;
 	
 	[IconFile("HAccordion.png")]
 	
+	[Style(name="headerWidth", type="Number", format="Length", inherit="no")]
+	
+	[Exclude(name="headerHeight", kind="style")]
 	
 	public class HAccordion extends AccordionBase
 	{
+		private static function initializeStyles():void
+	{
+		var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("HAccordion");
+		
+		if(!selector)
+		{
+			selector = new CSSStyleDeclaration();
+		}
+		
+		selector.defaultFactory = function():void
+		{
+			this.backgroundColor = 0xFFFFFF;
+			this.borderStyle = "solid";
+			this.paddingBottom = -1;
+			this.paddingLeft = -1;
+			this.paddingRight = -1;
+			this.paddingTop = -1;
+			this.verticalGap = -1;
+			this.horizontalGap = -1;
+		}
+		
+		StyleManager.setStyleDeclaration("HAccordion", selector, false);
 			
+	}
+	
+	initializeStyles();
 
 		/**
 	     *  The height of the area, in pixels, in which content is displayed.
