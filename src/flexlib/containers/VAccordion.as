@@ -32,6 +32,10 @@ package flexlib.containers
 	import mx.core.EdgeMetrics;
 	import mx.core.IUIComponent;
 	import mx.core.mx_internal;
+	import flexlib.containers.accordionClasses.AccordionHeaderLocation;
+	import mx.core.UIComponent;
+	import mx.styles.CSSStyleDeclaration;
+	import mx.styles.StyleManager;
 	
 	use namespace mx_internal;
 	
@@ -39,6 +43,41 @@ package flexlib.containers
 	
 	public class VAccordion extends AccordionBase
 	{
+		[Inspectable(enumeration="below,above", defaultValue="above")]
+		/**
+		 * Location of the header renderer for each content item. Must be either
+		 * <code>AccordionHeaderLocation.ABOVE</code> or <code>AccordionHeaderLocation.BELOW</code>
+		 * 
+		 * @see flexlib.containers.accordionClasses.AccordionHeaderLocation
+		 */
+		public var headerLocation:String = AccordionHeaderLocation.ABOVE;
+		
+		private static function initializeStyles():void
+		{
+			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("VAccordion");
+			
+			if(!selector)
+			{
+				selector = new CSSStyleDeclaration();
+			}
+			
+			selector.defaultFactory = function():void
+			{
+				this.backgroundColor = 0xFFFFFF;
+				this.borderStyle = "solid";
+				this.paddingBottom = -1;
+				this.paddingLeft = -1;
+				this.paddingRight = -1;
+				this.paddingTop = -1;
+				this.verticalGap = -1;
+				this.horizontalGap = -1;
+			}
+			
+			StyleManager.setStyleDeclaration("VAccordion", selector, false);
+				
+		}
+		
+		initializeStyles();
 		
 		/**
 	     *  @private
@@ -195,11 +234,13 @@ package flexlib.containers
 	        {
 	            var header:Button = getHeaderAt(i);
 	            var content:IUIComponent = IUIComponent(getChildAt(i));
-	
-	            header.move(x, y);
-	            header.setActualSize(localContentWidth, headerHeight);
-	            y += headerHeight;
-	
+				
+				if(headerLocation != AccordionHeaderLocation.BELOW) {
+		            header.move(x, y);
+		            header.setActualSize(localContentWidth, headerHeight);
+		            y += headerHeight;
+				}
+				
 	            if (i == selectedIndex)
 	            {
 	                content.move(contentX, y);
@@ -244,6 +285,12 @@ package flexlib.containers
 	                        ? y : y - localContentHeight);
 	                content.visible = false;
 	            }
+	            
+	            if(headerLocation == AccordionHeaderLocation.BELOW) {
+		            header.move(x, y);
+		            header.setActualSize(localContentWidth, headerHeight);
+		            y += headerHeight;
+				}
 	
 	            y += verticalGap;
 	        }
@@ -255,5 +302,191 @@ package flexlib.containers
 	        // refresh the focus rect, the dimensions might have changed.
 	        drawHeaderFocus(focusedIndex, showFocusIndicator);
 	    }
+	    
+	    
+	    
+	    
+	    
+	    /**
+	     *  @private
+	     */
+	    override mx_internal function onTweenUpdate(value:Number):void
+	    {
+	        // Fetch the tween invariants we set up in startTween.
+	        var vm:EdgeMetrics = tweenViewMetrics;
+	        var contentWidth:Number = tweenContentWidth;
+	        var contentHeight:Number = tweenContentHeight;
+	        var oldSelectedIndex:int = tweenOldSelectedIndex;
+	        var newSelectedIndex:int = tweenNewSelectedIndex;
+	
+	        // The tweened value is the height of the new content area, which varies
+	        // from 0 to the contentHeight. As the new content area grows, the
+	        // old content area shrinks.
+	        var newContentHeight:Number = value;
+	        var oldContentHeight:Number = contentHeight - value;
+	
+	        // These offsets for the Y position of the content clips make the content
+	        // clips appear to be pushed up and pulled down.
+	        var oldOffset:Number = oldSelectedIndex < newSelectedIndex ? -newContentHeight : newContentHeight;
+	        var newOffset:Number = newSelectedIndex > oldSelectedIndex ? oldContentHeight : -oldContentHeight;
+	
+	        // Loop over all the headers to arrange them vertically.
+	        // The loop is intentionally over ALL the headers, not just the ones that
+	        // need to move; this makes the animation look equally smooth
+	        // regardless of how many headers are moving.
+	        // We also reposition the two visible content clips.
+	        var y:Number = vm.top;
+	        var verticalGap:Number = getStyle("verticalGap");
+	        var n:int = numChildren;
+	        for (var i:int = 0; i < n; i++)
+	        {
+	            var header:Button = getHeaderAt(i);
+	            var content:Container = Container(getChildAt(i));
+	
+				if(headerLocation == AccordionHeaderLocation.ABOVE) {
+	            	header.$y = y;
+	            	y += header.height;
+				}
+				
+	            if (i == oldSelectedIndex)
+	            {
+	                content.cacheAsBitmap = true;
+	                content.scrollRect = new Rectangle(0, -oldOffset,
+	                        contentWidth, contentHeight);
+	                content.visible = true;
+	                y += oldContentHeight;
+	
+	            }
+	            else if (i == newSelectedIndex)
+	            {
+	                content.cacheAsBitmap = true;
+	                content.scrollRect = new Rectangle(0, -newOffset,
+	                        contentWidth, contentHeight);
+	                content.visible = true;
+	                y += newContentHeight;
+	            }
+	            
+	            if(headerLocation == AccordionHeaderLocation.BELOW) {
+	            	header.$y = y;
+	            	y += header.height;
+				}
+	
+	            y += verticalGap;
+	        }
+	    }
+	
+	    /**
+	     *  @private
+	     */
+	    override mx_internal function onTweenEnd(value:Number):void
+	    {
+	        bSliding = false;
+	
+	        var oldSelectedIndex:int = tweenOldSelectedIndex;
+	
+	        var vm:EdgeMetrics = tweenViewMetrics;
+	
+	        var verticalGap:Number = getStyle("verticalGap");
+	        var headerHeight:Number = getHeaderHeight();
+	
+	        var localContentWidth:Number = calcContentWidth();
+	        var localContentHeight:Number = calcContentHeight();
+	
+	        var y:Number = vm.top;
+	        var content:Container;
+	
+			/*
+			 * OK, so we got a problem here. I *think* the problem is that the old
+			 * tween gets run a bit too much (ie if you select an item while a tween is
+			 * in progress, then the previous tween still finishes, which causes this function
+			 * to run and get passed an invaid value). The result is that the header jumps for
+			 * an instant before going back to the right position (which gets reset once the next 
+			 * onTweenUpdate of the new, correct Tween gets run).
+			 *
+			 * So what to do? Ideally we would check if the tween that triggered this function is
+			 * the current this.tween object. If not then we would ignore it. But Tween is pretty
+			 * stupid and doesn't allow us to know this basic information. Soo... my solution is
+			 * to not update the header positions on tween end. I think this is OK since basically
+			 * onTweenUpdate gets run enough to put the headers in the right spots.
+			 *
+			 * Another note: this bug only appeared once I tried allowing the headers to be below the 
+			 * content. Otherwise it was unoticeable (but I believe still technically incorrect). 
+			 * 
+			 * -Doug McCune
+			 */
+	        var n:int = numChildren;
+	        for (var i:int = 0; i < n; i++)
+	        {
+	            var header:Button = getHeaderAt(i);
+	            
+	            if(headerLocation == AccordionHeaderLocation.ABOVE) {
+	            	//header.$y = y;
+	            	y += headerHeight;
+				}
+	
+	            if (i == selectedIndex)
+	            {
+	                content = Container(getChildAt(i));
+	                content.cacheAsBitmap = false;
+	               // content.scrollRect = null;
+	               // content.visible = true;
+	                y += localContentHeight;
+	            }
+	            
+	            if(headerLocation == AccordionHeaderLocation.BELOW) {
+	            	//header.$y = y;
+	            	y += headerHeight;
+				}
+				
+	            y += verticalGap;
+	        }
+	
+	        if (oldSelectedIndex != -1)
+	        {
+	            content = Container(getChildAt(oldSelectedIndex));
+	            content.cacheAsBitmap = false;
+	            content.scrollRect = null;
+	            content.visible = false;
+	            content.tweeningProperties = null;
+	        }
+	
+	        // Delete the temporary tween invariants we set up in startTween.
+	        tweenViewMetrics = null;
+	        tweenContentWidth = NaN;
+	        tweenContentHeight = NaN;
+	        tweenOldSelectedIndex = 0;
+	        tweenNewSelectedIndex = 0;
+	
+	        tween = null;
+	
+	        UIComponent.resumeBackgroundProcessing();
+	
+	        Container(getChildAt(selectedIndex)).tweeningProperties = null;
+	
+	        // If we interrupted a Dissolve effect, restart it here
+	        if (currentDissolveEffect)
+	        {
+	            if (currentDissolveEffect.target != null)
+	            {
+	                currentDissolveEffect.play();
+	            }
+	            else
+	            {
+	                currentDissolveEffect.play([this]);
+	            }
+	        }
+	
+	        // Let the screen render the last frame of the animation before
+	        // we begin instantiating the new child.
+	        callLater(instantiateSelectedChild);
+	    }
+	    
+	    override protected function startTween(oldSelectedIndex:int, newSelectedIndex:int):void
+    	{
+    		if(tween)
+    			tween.pause();
+    			
+    		super.startTween(oldSelectedIndex, newSelectedIndex);
+    	}
 	}
 }

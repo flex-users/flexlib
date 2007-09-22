@@ -37,11 +37,17 @@ package flexlib.containers
 	import mx.effects.Tween;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
+	import flexlib.containers.accordionClasses.AccordionHeaderLocation;
 	
 	use namespace mx_internal;
 	
 	[IconFile("HAccordion.png")]
 	
+	/**
+	 *  Width of each accordion header, in pixels.
+	 *  This style is used instead of <code>headerWidth</code> of the normal
+	 *  <code>Accordion</code> or <code>VAccordion</code>.
+	 */
 	[Style(name="headerWidth", type="Number", format="Length", inherit="no")]
 	
 	[Exclude(name="headerHeight", kind="style")]
@@ -49,31 +55,42 @@ package flexlib.containers
 	public class HAccordion extends AccordionBase
 	{
 		private static function initializeStyles():void
-	{
-		var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("HAccordion");
-		
-		if(!selector)
 		{
-			selector = new CSSStyleDeclaration();
-		}
-		
-		selector.defaultFactory = function():void
-		{
-			this.backgroundColor = 0xFFFFFF;
-			this.borderStyle = "solid";
-			this.paddingBottom = -1;
-			this.paddingLeft = -1;
-			this.paddingRight = -1;
-			this.paddingTop = -1;
-			this.verticalGap = -1;
-			this.horizontalGap = -1;
-		}
-		
-		StyleManager.setStyleDeclaration("HAccordion", selector, false);
+			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("HAccordion");
 			
-	}
-	
-	initializeStyles();
+			if(!selector)
+			{
+				selector = new CSSStyleDeclaration();
+			}
+			
+			selector.defaultFactory = function():void
+			{
+				this.backgroundColor = 0xFFFFFF;
+				this.borderStyle = "solid";
+				this.paddingBottom = -1;
+				this.paddingLeft = -1;
+				this.paddingRight = -1;
+				this.paddingTop = -1;
+				this.verticalGap = -1;
+				this.horizontalGap = -1;
+			}
+			
+			StyleManager.setStyleDeclaration("HAccordion", selector, false);
+				
+		}
+		
+		initializeStyles();
+		
+		
+		[Inspectable(enumeration="left,right", defaultValue="left")]
+		/**
+		 * Location of the header renderer for each content item. Must be either
+		 * <code>AccordionHeaderLocation.LEFT</code> or <code>AccordionHeaderLocation.RIGHT</code>
+		 * 
+		 * @see flexlib.containers.accordionClasses.AccordionHeaderLocation
+		 */
+		public var headerLocation:String = AccordionHeaderLocation.LEFT;
+		
 
 		/**
 	     *  The height of the area, in pixels, in which content is displayed.
@@ -284,14 +301,14 @@ package flexlib.containers
 	            var header:Button = getHeaderAt(i);
 	            var content:IUIComponent = IUIComponent(getChildAt(i));
 	
-	            
 	            header.rotation = -90;
-	            header.move(x, y + localContentHeight);
-	            header.setActualSize(localContentHeight, headerWidth);
 	            
+	            if(headerLocation != AccordionHeaderLocation.RIGHT) {
+	            	header.move(x, y + localContentHeight);
+	            	header.setActualSize(localContentHeight, headerWidth);
+	            	x += headerWidth;
+	            }
 	            
-	            x += headerWidth;
-	
 	            if (i == selectedIndex)
 	            {
 	                content.move(x, contentY);
@@ -335,6 +352,12 @@ package flexlib.containers
 	                content.move(i < selectedIndex
 	                        ? x : x - localContentWidth, contentY);
 	                content.visible = false;
+	            }
+	            
+	            if(headerLocation == AccordionHeaderLocation.RIGHT) {
+	            	header.move(x, y + localContentHeight);
+	            	header.setActualSize(localContentHeight, headerWidth);
+	            	x += headerWidth;
 	            }
 	
 	            x += horizontalGap;
@@ -389,6 +412,21 @@ package flexlib.containers
 	        }
 	
 	        return contentWidth;
+	    }
+	    
+	    override protected function getHeaderWidth():Number
+	    {
+	        var headerWidth:Number = getStyle("headerWidth");
+	        
+	        if (isNaN(headerWidth))
+	        {
+	            headerWidth = 0;
+	            
+	            if (numChildren > 0)
+	            	headerWidth = getHeaderAt(0).measuredHeight;
+	        }
+	        
+	        return headerWidth;
 	    }
 	    
 	    
@@ -476,10 +514,12 @@ package flexlib.containers
 	        {
 	            var header:Button = getHeaderAt(i);
 	            var content:Container = Container(getChildAt(i));
-	
-	            header.$x = x;
-	            x += header.height;
-
+				
+				if(headerLocation != AccordionHeaderLocation.RIGHT) {
+	            	header.$x = x;
+	            	x += header.height;
+				}
+				
 	            if (i == oldSelectedIndex)
 	            {
 	                content.cacheAsBitmap = true;
@@ -497,7 +537,12 @@ package flexlib.containers
 	                content.visible = true;
 	                x += newContentWidth;
 	            }
-	
+				
+				if(headerLocation == AccordionHeaderLocation.RIGHT) {
+	            	header.$x = x;
+	            	x += header.height;
+				}
+				
 	            x += horizontalGap;
 	        }
 	    }
@@ -526,9 +571,12 @@ package flexlib.containers
 	        for (var i:int = 0; i < n; i++)
 	        {
 	            var header:Button = getHeaderAt(i);
-	            header.$x = x;
-	            x += headerWidth;
-	
+	            
+	            if(headerLocation != AccordionHeaderLocation.RIGHT) {
+	            	header.$x = x;
+	            	x += headerWidth;
+	            }
+	            
 	            if (i == selectedIndex)
 	            {
 	                content = Container(getChildAt(i));
@@ -537,6 +585,12 @@ package flexlib.containers
 	                content.visible = true;
 	                x += localContentWidth;
 	            }
+	            
+	            if(headerLocation == AccordionHeaderLocation.RIGHT) {
+	            	header.$x = x;
+	            	x += headerWidth;
+	            }
+	            
 	            x += horizontalGap;
 	        }
 	

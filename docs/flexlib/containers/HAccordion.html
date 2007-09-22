@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="HAccordion,flexlib.containers.HAccordion,contentHeight,contentWidth,measure" name="keywords">
+<meta content="HAccordion,flexlib.containers.HAccordion,headerLocation,contentHeight,contentWidth,measure,getHeaderWidth" name="keywords">
 <title>flexlib.containers.HAccordion</title>
 </head>
 <body>
@@ -57,9 +57,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
 </div>
 </div>
-<table id="summaryTableProperty" class="summaryTable hideInheritedProperty" cellpadding="3" cellspacing="0">
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#headerLocation">headerLocation</a> : String = "left"<div class="summaryTableDescription">
+   Location of the header renderer for each content item.</div>
+</td><td class="summaryTableOwnerCol">HAccordion</td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/AccordionBase.html#headerRenderer">headerRenderer</a> : IFactory<div class="summaryTableDescription">
@@ -199,6 +204,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#getHeaderWidth()">getHeaderWidth</a>():Number</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">HAccordion</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#measure()">measure</a>():void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">HAccordion</td>
@@ -291,7 +303,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <span class="signatureLink">headerWidth</span>
 </div>
-</td><td class="summaryTableDescription"><span class="label">Type: </span>Number &nbsp; <span class="label">Format: </span>Length &nbsp; <span class="label">CSS Inheritance: </span>no<br></td><td class="summaryTableOwnerCol">HAccordion</td>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Number &nbsp; <span class="label">Format: </span>Length &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+   Width of each accordion header, in pixels.
+   This style is used instead of <code>headerWidth</code> of the normal
+   <code>Accordion</code> or <code>VAccordion</code>.
+  </td><td class="summaryTableOwnerCol">HAccordion</td>
 </tr>
 <tr class="hideInheritedStyle">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -402,12 +418,46 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;protected function get contentWidth():Number</code>
 <br>
 </div>
+<a name="headerLocation"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">headerLocation</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var headerLocation:String = "left"</code><p>
+   Location of the header renderer for each content item. Must be either
+   <code>AccordionHeaderLocation.LEFT</code> or <code>AccordionHeaderLocation.RIGHT</code>
+   
+   </p><p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="accordionClasses/AccordionHeaderLocation.html" target="">flexlib.containers.accordionClasses.AccordionHeaderLocation</a>
+</div>
+</div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="getHeaderWidth()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getHeaderWidth</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function getHeaderWidth():Number</code>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Number</code></td>
+</tr>
+</table>
+</div>
 <a name="measure()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">measure</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">measure</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
