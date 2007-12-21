@@ -25,16 +25,12 @@ package flexlib.controls
 {
 	import mx.containers.Canvas;
 	import mx.controls.Button;
+	import mx.core.EdgeMetrics;
 	import mx.core.IContainer;
 	import mx.core.IFlexDisplayObject;
-	import mx.core.UIComponent;
+	import mx.core.ScrollPolicy;
 	import mx.core.UIComponentDescriptor;
 	import mx.core.mx_internal;
-	import mx.managers.IFocusManagerContainer;
-	import mx.core.IRawChildrenContainer;
-	import mx.core.IDataRenderer;
-	import flash.display.DisplayObject;
-	import mx.core.ScrollPolicy;
 	
 	use namespace mx_internal;
 
@@ -71,26 +67,26 @@ package flexlib.controls
 		
 		public function CanvasButton():void {
 			super();
-			
-			
 		}
 		
 		private var _childrenCreated:Boolean = false;
 		
 		override protected function createChildren():void {
-			super.createChildren();
+			//super.createChildren();
 			
 			//create our canvas and add it to the display list
 			canvas = new Canvas();
 			canvas.verticalScrollPolicy = _verticalScrollPolicy;
 			canvas.horizontalScrollPolicy = _horizontalScrollPolicy;
+			canvas.mouseChildren = super.mouseChildren;
+			canvas.buttonMode = super.buttonMode;
 			super.addChild(canvas);
 			
 			//if child components have been specified in MXML then we need 
 			//to add them all now
 			createComponents();
 			
-			mouseChildren = true;
+			//mouseChildren = true;
 			
 			_childrenCreated = true;	
 		}
@@ -209,8 +205,55 @@ package flexlib.controls
 	        if(canvas)
 	        	canvas.verticalScrollPolicy = value;
 	    }
-		
-		
-		
+		public override function get buttonMode():Boolean{
+			return super.buttonMode;
+		}
+		public override function set buttonMode(value:Boolean):void{
+			super.buttonMode = value;
+			if(canvas) canvas.buttonMode = value;
+		}
+		public override function get mouseChildren():Boolean{
+			return super.mouseChildren;
+		}
+		public override function set mouseChildren(enable:Boolean):void{
+			super.mouseChildren = enable;
+			if(canvas) canvas.mouseChildren = enable;
+		}
+ 		//+HAS - Stubs for Flex 3 Beta 3
+		protected var _creatingContentPane:Boolean;
+		public function get creatingContentPane():Boolean{
+			return this._creatingContentPane
+		}
+		public function set creatingContentPane(value:Boolean):void{
+			this._creatingContentPane = value;
+		}
+		protected var _defaultButton:IFlexDisplayObject;
+		public function get defaultButton():IFlexDisplayObject{
+			return this._defaultButton;
+		}
+		public function set defaultButton(value:IFlexDisplayObject):void{
+			this._defaultButton = value;
+		}
+		protected var _horizontalScrollPosition:Number;
+		public function get horizontalScrollPosition():Number{
+			return this._horizontalScrollPosition;
+		}
+		public function set horizontalScrollPosition(value:Number):void{
+			this._horizontalScrollPosition = value;
+		}
+		protected var _verticalScrollPosition:Number;
+		public function get verticalScrollPosition():Number{
+			return this._verticalScrollPosition;
+		}
+		public function set verticalScrollPosition(value:Number):void{
+			this._verticalScrollPosition = value;
+		}
+		protected var _viewMetrics:EdgeMetrics;
+		public function get viewMetrics():EdgeMetrics{
+			return this._viewMetrics;
+		}
+		public function set viewMetrics(value:EdgeMetrics):void{
+			this._viewMetrics = value;
+		}
 	}
 }
