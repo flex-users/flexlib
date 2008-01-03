@@ -23,18 +23,14 @@ SOFTWARE.
 
 package flexlib.controls
 {
-	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import mx.controls.Menu;
 	import mx.controls.listClasses.IListItemRenderer;
-	import mx.controls.menuClasses.IMenuBarItemRenderer;
 	import mx.controls.menuClasses.IMenuItemRenderer;
-	import mx.controls.scrollClasses.ScrollBar;
 	import mx.core.Application;
-	import mx.core.EdgeMetrics;
 	import mx.core.ScrollPolicy;
 	import mx.core.mx_internal;
 	import mx.managers.PopUpManager;
@@ -193,13 +189,11 @@ package flexlib.controls
 	        // check to see if the menu exists, if not create it
 	        if (!IMenuItemRenderer(row).menu)
 	        {
-	            /* The only differences between this method and the original method in mx.controls.Menu
-	             * are these two lines.
-	             */
-	            menu = new ScrollableMenu();
+	            menu = createSubMenu();
+	            
 	            menu.maxHeight = this.maxHeight;
 	            menu.verticalScrollPolicy = this.verticalScrollPolicy;
-	            
+	            menu.variableRowHeight = this.variableRowHeight;
 	            
 	            menu.parentMenu = this;
 	            menu.owner = this;
@@ -232,6 +226,20 @@ package flexlib.controls
 	        super.openSubMenu(row);
 	    }
 	    
+	    protected function createSubMenu():Menu {
+            return new ScrollableMenu();
+	    }
+	    
+	    private var xShow:Object=0;
+	    private var yShow:Object=0;
+	    
+	    override public function show(xShow:Object=null, yShow:Object=null):void {
+	    	this.xShow = xShow;
+	    	this.yShow = yShow;
+	    	
+	    	super.show(xShow, yShow);
+	    }
+	    
 	    /**
 	    * We overide the <code>measure()</code> method because we need to check if the menu is going off
 	    * the stage. If it's going to be too high, then we make it smaller to keep it from
@@ -254,7 +262,10 @@ package flexlib.controls
 				}
 			}
 			
-			var pt:Point = new Point(0, 0);
+			var xPos:Number = xShow != x ? Number(xShow) : 0;
+			var yPos:Number = yShow != y ? Number(yShow) : 0;
+			
+			var pt:Point = new Point(xPos, yPos);
 			pt = this.localToGlobal(pt);
 			
 			var stageHeightAvailable:Number = screen.y + screen.height - pt.y - 10;
@@ -264,6 +275,11 @@ package flexlib.controls
 			}     
 			
 			commitProperties();
+		}
+		
+		override public function move(x:Number, y:Number):void {
+			invalidateSize();
+			super.move(x, y);
 		}
     
   

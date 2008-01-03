@@ -82,6 +82,7 @@ public class PromptingTextInput extends TextInput
 		_prompt = value;
 		
 		invalidateProperties();
+		invalidateDisplayList();
 	}
 	
 	// ==============================================================

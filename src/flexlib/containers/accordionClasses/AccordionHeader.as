@@ -10,15 +10,12 @@
 package flexlib.containers.accordionClasses
 {
 
-import flexlib.baseClasses.AccordionBase;
-
 import flash.display.DisplayObject;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
 import mx.controls.Button;
 import mx.core.Container;
-import mx.core.EdgeMetrics;
 import mx.core.IDataRenderer;
 import mx.core.IFlexDisplayObject;
 import mx.core.mx_internal;
@@ -31,6 +28,8 @@ use namespace mx_internal;
 [ExcludeClass]
 
 [AccessibilityClass(implementation="mx.accessibility.AccordionHeaderAccImpl")]
+
+[Style(name="keepIconVertical", type="Boolean")]
 
 /**
  *  The AccordionHeader class defines the appearance of the navigation buttons
@@ -239,6 +238,11 @@ public class AccordionHeader extends Button implements IDataRenderer
 		// show focus by having the standard focus ring display outside.
 		if (focusObj)
 			setChildIndex(focusObj, numChildren - 1);
+			
+		if(currentIcon && getStyle('keepIconVertical') == true) {
+    		DisplayObject(currentIcon).rotation = 90;
+			currentIcon.x += currentIcon.width;
+		}
 	}
 
 	//--------------------------------------------------------------------------

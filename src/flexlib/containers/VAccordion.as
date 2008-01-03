@@ -413,6 +413,13 @@ package flexlib.containers
 			 * content. Otherwise it was unoticeable (but I believe still technically incorrect). 
 			 * 
 			 * -Doug McCune
+			 * 
+			 * UPDATE: 12-26-2007
+			 * Well, turns out that if you use the normal VAccordion then my hack to try to fix the animation
+			 * problem makes things worse. The lines I commented out actually do server a purpose, so
+			 * commenting them out is not a good fix for the issue I ran into before. Well shit, I guess
+			 * I'll have to play around with it more, but for now I'm leaving the function as it is in
+			 * the Flex SDK.
 			 */
 	        var n:int = numChildren;
 	        for (var i:int = 0; i < n; i++)
@@ -420,7 +427,8 @@ package flexlib.containers
 	            var header:Button = getHeaderAt(i);
 	            
 	            if(headerLocation == AccordionHeaderLocation.ABOVE) {
-	            	//header.$y = y;
+	            	//
+	            	header.$y = y;
 	            	y += headerHeight;
 				}
 	
@@ -428,13 +436,16 @@ package flexlib.containers
 	            {
 	                content = Container(getChildAt(i));
 	                content.cacheAsBitmap = false;
-	               // content.scrollRect = null;
-	               // content.visible = true;
+	                //
+	                content.scrollRect = null;
+	                //
+	                content.visible = true;
 	                y += localContentHeight;
 	            }
 	            
 	            if(headerLocation == AccordionHeaderLocation.BELOW) {
-	            	//header.$y = y;
+	            	//
+	            	header.$y = y;
 	            	y += headerHeight;
 				}
 				

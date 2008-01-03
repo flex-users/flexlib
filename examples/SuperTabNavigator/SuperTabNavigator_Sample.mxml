@@ -166,7 +166,7 @@ SOFTWARE.
 		<flexlib:SuperTabNavigator id="nav" scrollSpeed="25" dropShadowEnabled="true"
 			stopScrollingEvent="{MouseEvent.MOUSE_UP}" startScrollingEvent="{MouseEvent.MOUSE_DOWN}"
 			width="90%" height="90%" horizontalGap="0"
-			closePolicy="{SuperTab.CLOSE_ALWAYS}"   
+			closePolicy="{SuperTab.CLOSE_ROLLOVER}"   
 			/>
 			
 		<!-- I was going to call it SuperDuperTabNavigator, but I thought

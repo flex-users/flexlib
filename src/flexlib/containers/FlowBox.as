@@ -27,8 +27,8 @@ package flexlib.containers
 import flexlib.containers.utilityClasses.FlowLayout;
 
 import mx.containers.Box;
-import mx.core.mx_internal;
 import mx.containers.BoxDirection;
+import mx.core.mx_internal;
 
 use namespace mx_internal;
 	
@@ -62,6 +62,7 @@ public class FlowBox extends Box
 	 */
 	override public function set direction( value:String ):void
 	{
+		super.direction = BoxDirection.HORIZONTAL;
 		// Do nothing -- direction cannot be changed and we force
 		// a horizontal layout.
 	}

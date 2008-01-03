@@ -25,24 +25,26 @@ package flexlib.controls.tabBarClasses
 {
 	
 	import flash.display.DisplayObject;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.geom.ColorTransform;
-	import flash.geom.Rectangle;
 	import flash.text.TextFieldType;
 	
-	import mx.containers.Box;
+	import flexlib.events.SuperTabEvent;
+	
 	import mx.controls.Button;
 	import mx.controls.tabBarClasses.Tab;
 	import mx.core.UIComponent;
 	import mx.core.mx_internal;
-	import flexlib.scheduling.scheduleClasses.utils.Selection;
 	
 	use namespace mx_internal;
 	
-	[ExcludeClass]
+	/**
+	 * Fired when the the label of this tab is updated by the user double clicking and editing the 
+	 * tab label. Only possible if dougbleClickToEdit is true.
+	 */
+	[Event(name="tabUpdated", type="flexlib.events.SuperTabEvent")]
 	
 	/**
 	 *  Name of CSS style declaration that specifies the style to use for the 
@@ -96,6 +98,7 @@ package flexlib.controls.tabBarClasses
 			// mouse events.
 			this.mouseChildren = true;
 			
+			this.doubleClickEnabled = true;
 			this.addEventListener(MouseEvent.DOUBLE_CLICK, doubleClickHandler);
 		}
 	
@@ -176,37 +179,91 @@ package flexlib.controls.tabBarClasses
 			
 			addChild(indicator);
 			addChild(closeButton);
+			
+			closeButton.enabled = this.enabled;
 
 			
-			this.textField.addEventListener(Event.CHANGE, captureTextChange); 
-			
+			this.textField.addEventListener(Event.CHANGE, captureTextChange); 	
 		}
+		
+		/**
+		 * Boolean indicating if a double click on the tab will allow the editing of the tab label.
+		 * 
+		 * @default false.
+		 */
+		public var doubleClickToEdit:Boolean = false;
 
 		private function doubleClickHandler(event:MouseEvent):void {
-			this.editableLabel = true;
-			this.textField.addEventListener(FocusEvent.FOCUS_OUT, textUnfocusListener);
-			
+			if(doubleClickToEdit && this.enabled) {
+				this.editableLabel = true;
+			}
 		}		
 		
 		private function textUnfocusListener(event:Event):void {
+			this.label = textField.text;
+			
 			this.editableLabel = false;
-			this.textField.removeEventListener(FocusEvent.FOCUS_OUT, textUnfocusListener);
+			
+			dispatchEvent(new SuperTabEvent(SuperTabEvent.TAB_UPDATED, -1));
 		}
 		
+		private var _editableLabel:Boolean=false;
+		
 		public function get editableLabel():Boolean {
-			return this.textField.type == TextFieldType.INPUT 
-				&& this.textField.selectable;
+			return _editableLabel;
 		}
 		
 		public function set editableLabel(value:Boolean):void {
-			this.textField.type = value ? TextFieldType.INPUT : TextFieldType.DYNAMIC;
-			this.textField.selectable = value;
+			if(value != _editableLabel) {
+				_editableLabel = value;
+				
+				this.textField.type = value ? TextFieldType.INPUT : TextFieldType.DYNAMIC;
+				this.textField.selectable = value;
+				
+				if(value) {
+					this.addEventListener(MouseEvent.MOUSE_DOWN, cancelEvent, false, 10);
+					
+					this.textField.addEventListener(FocusEvent.FOCUS_OUT, textUnfocusListener);
+					this.textField.addEventListener(KeyboardEvent.KEY_DOWN, checkEnterKey);
+					this.textField.setSelection(0, textField.length-1);
+				}
+				else {
+					this.removeEventListener(MouseEvent.MOUSE_DOWN, cancelEvent);
+					
+					this.textField.removeEventListener(FocusEvent.FOCUS_OUT, textUnfocusListener);
+					this.textField.removeEventListener(KeyboardEvent.KEY_DOWN, checkEnterKey);
+					this.textField.setSelection(0, 0);
+					
+					this.textField.invalidateDisplayList();
+				}
+			}
+		}
+		
+		private function checkEnterKey(event:KeyboardEvent):void {
+			if(event.keyCode == 13) {
+				event.stopImmediatePropagation();
+				event.stopPropagation();
+				
+				this.editableLabel = false;
+				dispatchEvent(new SuperTabEvent(SuperTabEvent.TAB_UPDATED, -1));
+			}
 		}
 		
 		
 		private function captureTextChange(event:Event):void {
-			event.stopImmediatePropagation();
+			if(this.label != textField.text) {
+				this.label = textField.text;
+			}
 			
+			event.stopImmediatePropagation();
+		}
+		
+		override public function set enabled(value:Boolean):void {
+			super.enabled = value;
+			
+			if(closeButton) {
+				closeButton.enabled = value;
+			}
 		}
 		
 		
@@ -247,7 +304,7 @@ package flexlib.controls.tabBarClasses
 				else {
 					if(_closePolicy != SuperTab.CLOSE_NEVER) {
 						closeButton.visible = true;
-						closeButton.enabled = true;
+						closeButton.enabled = this.enabled;
 					}
 				}
 			}
@@ -262,13 +319,15 @@ package flexlib.controls.tabBarClasses
 				// Resize the text if we're showing the closeIcon, so the
 				// closeIcon won't overlap the text. This means the text may
 				// have to truncate using the "..." differently.
-				this.textField.width = closeButton.x - textField.x;
-				this.textField.truncateToFit();
+				//this.textField.width = closeButton.x - textField.x;
+				//this.textField.truncateToFit();
 				
 				// We place the closeButton 4 pixels from the top and 4 pixels from the right.
 				// Why 4 pixels? Because I said so. 
 				closeButton.x = unscaledWidth-closeButton.width - 4;
 				closeButton.y = 4;
+				
+				//setChildIndex(closeButton, numChildren - 1);
 			}
 		}
 		
@@ -277,6 +336,12 @@ package flexlib.controls.tabBarClasses
 		 * closeButton to enabled or disabled depending on the state.
 		 */
 		override protected function rollOverHandler(event:MouseEvent):void{
+			if(!enabled) {
+				event.stopImmediatePropagation();
+				event.stopPropagation();
+				return;
+			}
+			
 			_rolledOver = true;
 			
 			super.rollOverHandler(event);	
@@ -297,7 +362,9 @@ package flexlib.controls.tabBarClasses
 		 * it up to someone else to ensure that the tab is actually removed.
 		 */
 		private function closeClickHandler(event:MouseEvent):void {
-			dispatchEvent(new Event(CLOSE_TAB_EVENT));
+			if(this.enabled) {
+				dispatchEvent(new Event(CLOSE_TAB_EVENT));
+			}
 			event.stopImmediatePropagation();
 			event.stopPropagation();
 		}
@@ -307,7 +374,6 @@ package flexlib.controls.tabBarClasses
 			super.selected = value;
 			
 			callLater(invalidateSize);
-			//callLater(invalidateDisplayList);
 		}
 		
 		

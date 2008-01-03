@@ -31,20 +31,17 @@ package flexlib.controls
 	import flash.utils.Timer;
 	
 	import mx.controls.Button;
-	import mx.controls.List;
 	import mx.controls.Menu;
 	import mx.controls.listClasses.IListItemRenderer;
-	import mx.controls.listClasses.ListBase;
 	import mx.controls.menuClasses.IMenuItemRenderer;
 	import mx.controls.scrollClasses.ScrollBar;
 	import mx.core.Application;
-	import mx.core.ScrollControlBase;
 	import mx.core.ScrollPolicy;
 	import mx.core.mx_internal;
 	import mx.events.ScrollEvent;
 	import mx.managers.PopUpManager;
-	import mx.styles.StyleManager;
 	import mx.styles.CSSStyleDeclaration;
+	import mx.styles.StyleManager;
 	
 	use namespace mx_internal;
 	
@@ -168,7 +165,7 @@ package flexlib.controls
 		 */
 		private static function initializeStyles():void
 		{
-			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("SuperTabNavigator");
+			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ScrollableArrowMenu");
 			
 			if(!selector)
 			{
@@ -260,59 +257,10 @@ package flexlib.controls
 			this.addEventListener(ScrollEvent.SCROLL, checkButtons);
 		}
 		
-		/**
-		 * @private
-		 * 
-	     * We need to override openSubMenu as well, so that any subMenus opened by this Menu controls
-	     * will also be ScrollableMenus and will have the same maxHeight set
-	     */
-	    override mx_internal function openSubMenu(row:IListItemRenderer):void
-	    {
-	        supposedToLoseFocus = true;
-	
-	        var r:Menu = getRootMenu();
-	        var menu:ScrollableArrowMenu;
-	
-	        // check to see if the menu exists, if not create it
-	        if (!IMenuItemRenderer(row).menu)
-	        {
-	            /* The only differences between this method and the original method in mx.controls.Menu
-	             * are these four lines.
-	             */
-	            menu = new ScrollableArrowMenu();
-	            menu.maxHeight = this.maxHeight;
-	            menu.verticalScrollPolicy = this.verticalScrollPolicy;
-	            menu.arrowScrollPolicy = this.arrowScrollPolicy;
-	            
-	            menu.parentMenu = this;
-	            menu.owner = this;
-	            menu.showRoot = showRoot;
-	            menu.dataDescriptor = r.dataDescriptor;
-	            menu.styleName = r;
-	            menu.labelField = r.labelField;
-	            menu.labelFunction = r.labelFunction;
-	            menu.iconField = r.iconField;
-	            menu.iconFunction = r.iconFunction;
-	            menu.itemRenderer = r.itemRenderer;
-	            menu.rowHeight = r.rowHeight;
-	            menu.scaleY = r.scaleY;
-	            menu.scaleX = r.scaleX;
-	
-	            // if there's data and it has children then add the items
-	            if (row.data && 
-	                _dataDescriptor.isBranch(row.data) &&
-	                _dataDescriptor.hasChildren(row.data))
-	            {
-	                menu.dataProvider = _dataDescriptor.getChildren(row.data);
-	            }
-	            menu.sourceMenuBar = sourceMenuBar;
-	            menu.sourceMenuBarItem = sourceMenuBarItem;
-
-	            IMenuItemRenderer(row).menu = menu;
-	            PopUpManager.addPopUp(menu, r, false);
-	        }
-	        
-	        super.openSubMenu(row);
+	    override protected function createSubMenu():Menu {
+	    	var menu :ScrollableArrowMenu= new ScrollableArrowMenu();
+	    	menu.arrowScrollPolicy = this.arrowScrollPolicy;
+	    	return  menu;
 	    }
 		
 		/**
@@ -320,8 +268,6 @@ package flexlib.controls
 		 * at the very top and bottom.
 		 */
 		override protected  function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
-			measure();
-			
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			
 			
@@ -396,7 +342,7 @@ package flexlib.controls
 	    * @private
 	    */
 	    private function stopScrolling(event:Event):void {
-	    	stage.removeEventListener(MouseEvent.MOUSE_UP, stopScrolling);
+	    	event.currentTarget.removeEventListener(MouseEvent.MOUSE_UP, stopScrolling);
         	
 	    	if(timer && timer.running) {
 				timer.stop();

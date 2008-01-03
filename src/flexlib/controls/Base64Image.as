@@ -28,6 +28,7 @@ package flexlib.controls
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.utils.ByteArray;
 	
 	import mx.controls.Image;
@@ -55,12 +56,16 @@ package flexlib.controls
 			source = value;
 		}
 
+		private var _source:Object;
+		
 		/**
 		 * Attempt to auto detect if we're receiving a base64 encoded string
 		 * or a traditional value for the image source
 		 */
 		override public function set source( value:Object ) :void
 		{
+			_source = value;
+			
 			var decoder:Base64Decoder = new Base64Decoder();
 			var byteArray:ByteArray;
 
@@ -71,12 +76,21 @@ package flexlib.controls
 
 				var loader:Loader = new Loader();
 				loader.contentLoaderInfo.addEventListener( Event.COMPLETE, onBytesLoaded );
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 				loader.loadBytes( byteArray );
 			}
 			catch (error:Error)
 			{
 				super.source = value
 			}
+		}
+		
+		override public function get source():Object {
+			return _source;
+		}
+		
+		private function onIOError(event:IOErrorEvent):void {
+			super.source = _source;
 		}
 
 		/**
@@ -90,7 +104,6 @@ package flexlib.controls
 			bitmapData.draw( content );
 
 			super.source = new Bitmap( bitmapData );
-
 		}
 
 	}

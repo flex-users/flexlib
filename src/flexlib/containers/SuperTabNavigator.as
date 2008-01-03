@@ -27,13 +27,11 @@ package flexlib.containers
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 	
-	import flexlib.controls.tabBarClasses.SuperTab;
 	import flexlib.controls.ScrollableArrowMenu;
-	import flexlib.controls.ScrollableMenu;
 	import flexlib.controls.SuperTabBar;
+	import flexlib.controls.tabBarClasses.SuperTab;
+	import flexlib.events.SuperTabEvent;
 	import flexlib.events.TabReorderEvent;
 	import flexlib.skins.TabPopUpButtonSkin;
 	
@@ -44,16 +42,11 @@ package flexlib.containers
 	import mx.containers.Canvas;
 	import mx.containers.TabNavigator;
 	import mx.containers.ViewStack;
-	import mx.controls.Button;
 	import mx.controls.Menu;
 	import mx.controls.PopUpButton;
-	import mx.controls.Spacer;
-	import mx.controls.tabBarClasses.Tab;
-	import mx.core.ClassFactory;
 	import mx.core.Container;
 	import mx.core.EdgeMetrics;
 	import mx.core.ScrollPolicy;
-	import mx.core.UIComponent;
 	import mx.effects.Tween;
 	import mx.events.ChildExistenceChangedEvent;
 	import mx.events.IndexChangedEvent;
@@ -62,6 +55,12 @@ package flexlib.containers
 	import mx.styles.StyleManager;
 	
 	[IconFile("SuperTabNavigator.png")]
+	
+	/**
+	 * Fired when the close button of a tab is clicked. To stop the default action, which will remove the 
+	 * child from the collection of children, call event.preventDefault() in your listener.
+	 */
+	[Event(name="tabClose", type="flexlib.events.SuperTabEvent")]
 
 	/**
 	 *  Name of CSS style declaration that specifies style for the Button that appears
@@ -168,12 +167,7 @@ package flexlib.containers
 	    * @private
 	    */
 	    protected var menu:Menu;
-	    
-	    /**
-	    * @private
-	    */
-	    protected var spacer:Spacer;
-	    
+	   
 	  
 	  	/**
 	    * @private
@@ -419,6 +413,55 @@ package flexlib.containers
 		/**
 		 * @private
 		 */
+		private var _editableTabLabels:Boolean=false;
+		
+		/**
+		 * Boolean indicating if tab labels can be edited. If true, the user can double click on
+		 * a tab label and edit the label.
+		 */
+		public function get editableTabLabels():Boolean {
+			return _editableTabLabels;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set editableTabLabels(value:Boolean):void {
+			this._editableTabLabels = value;
+			
+			if(tabBar) {
+				(tabBar as SuperTabBar).editableTabLabels = value;
+			}
+		}
+		
+		/**
+		 * @private
+		 */
+		private var _allowTabSqueezing:Boolean = true;
+		
+		/**
+		 * Boolean indicating if tab width should be adjusted to try to squeeze all tabs so we don't need
+		 * scrolling. If true, tabs will be squeezed until they reach the <code>minTabWidth</code> value, at which
+		 * point they scroll. If false, tabs will never be resized smaller than their default widths.
+		 * 
+		 * @default true
+		 */
+		public function get allowTabSqueezing():Boolean {
+			return _allowTabSqueezing;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set allowTabSqueezing(value:Boolean):void {
+			_allowTabSqueezing = value;
+			invalidateDisplayList();
+		}
+		
+		
+		/**
+		 * @private
+		 */
 		private static function initializeStyles():void
 		{
 			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("SuperTabNavigator");
@@ -557,12 +600,15 @@ package flexlib.containers
 	    	
 	    	if (!tabBar){
 	    		// We're using our custom SuperTabBar class instead of TabBar
-				tabBar = new SuperTabBar();
+				tabBar = createTabBar();
+				
 				tabBar.name = "tabBar";
 				tabBar.focusEnabled = false;
 				tabBar.styleName = this;
 				(tabBar as SuperTabBar).dragEnabled = this._dragEnabled;
 				(tabBar as SuperTabBar).dropEnabled = this._dropEnabled;
+				(tabBar as SuperTabBar).editableTabLabels = this._editableTabLabels;
+				(tabBar as SuperTabBar).closePolicy = _closePolicy;
 				
 				tabBar.setStyle("borderStyle", "none");
 				tabBar.setStyle("paddingTop", 0);
@@ -576,10 +622,9 @@ package flexlib.containers
 				tabBar.setStyle("right", NaN);
 				tabBar.setStyle("top", NaN);
 				tabBar.setStyle("bottom", NaN);
+				tabBar.setStyle("horizontalCenter", NaN);
 				
-				
-				
-				(tabBar as SuperTabBar).closePolicy = SuperTab.CLOSE_ROLLOVER;
+				(tabBar as SuperTabBar).addEventListener(SuperTabEvent.TAB_CLOSE, handleTabClose);
 			}
 			
 			// We need to create our tabBar above BEFORE calling creteChildren
@@ -624,17 +669,13 @@ package flexlib.containers
 	        	holder.addChild(canvas);
 	        }
 	        
-	        // Now we add a spacer that will take up the rest of the box width
-	        spacer = new Spacer();
-	        spacer.percentWidth = 100;
-	       // holder.addChild(spacer);
-	        
 	        // We create the menu once. This doesn't get shown until we click
 	        // the Button. But it can get created here so we don't have
 	        // to create it every time.
 	        if(!menu) {
 	        	//menu = new Menu();
 	        	menu = new ScrollableArrowMenu();
+	        	menu.setStyle("textAlign", "left");
 	        	
 	        	// If we wanted to change the scroll policy for the scrolling menu we
 	        	// could modify the following two lines. For example, turning 
@@ -653,13 +694,14 @@ package flexlib.containers
 	        	
 	        	popupButton.styleName = getStyle("popupButtonStyleName");
 	        	
-	        	// So now holder has 3 children: canvas, spacer, and popupButton
+	        	// So now holder has 2 children: canvas and popupButton
 	        	holder.addChild(popupButton);
 	        }
 	        
 	        
 	        tabBar.addEventListener(ChildExistenceChangedEvent.CHILD_ADD, tabsChanged);
 	        tabBar.addEventListener(ChildExistenceChangedEvent.CHILD_REMOVE, tabsChanged);
+	        SuperTabBar(tabBar).addEventListener(SuperTabEvent.TAB_UPDATED, tabsChanged);
 	        
 	        // This is a custom event that gets fired from SuperTabBar if the tabs are
 	        // dragged and reordered.
@@ -672,6 +714,15 @@ package flexlib.containers
 	        this.addEventListener(IndexChangedEvent.CHILD_INDEX_CHANGE,indexChangeListener);
 	    }
 	    
+	    /**
+	    * For extensibility, if you want to use a custom extended version of SuperTabBar, you can do so by
+	    * overriding the <code>createTabBar</code> method and returning an instance of any class that extends
+	    * <code>SuperTabBar</code>.
+	    */
+	    protected function createTabBar():SuperTabBar {
+	    	return new SuperTabBar();
+	    }
+	    
 	    private function indexChangeListener(event:IndexChangedEvent):void {
 	    	if(stopIndexChangeEvent) {
 	    		stopIndexChangeEvent = false;
@@ -679,21 +730,36 @@ package flexlib.containers
 	    	}
 	    }
 	    
+	    private function handleTabClose(event:SuperTabEvent):void {
+	    	var clone:SuperTabEvent = event.clone() as SuperTabEvent;
+	    	dispatchEvent(clone);
+	    	
+	    	if(clone.isDefaultPrevented()) {
+	    		event.preventDefault();
+	    	}
+	    }
+	    
+	    private var _closePolicy:String = SuperTab.CLOSE_ROLLOVER;
+	    
 	    /**
 	    * The close policy for tabs. 
 	    * @see flexlib.controls.SuperTabBar
 	    */
 	    public function get closePolicy():String {
-	    	return (tabBar as SuperTabBar).closePolicy;
+	    	return _closePolicy;
 	    }
 	    
 	    /**
 	     *  @private
 	     */
 	    public function set closePolicy(value:String):void {
-	    	var old:String = (tabBar as SuperTabBar).closePolicy;
-	    	(tabBar as SuperTabBar).closePolicy = value;
-	    	if(old != value) {
+	    	if(_closePolicy != value) {
+	    		_closePolicy = value;
+	    		
+	    		if(tabBar != null) {
+	    			(tabBar as SuperTabBar).closePolicy = value;
+	    		}
+	    		
 	    		invalidateDisplayList();
 	    	}
 	    }
@@ -811,10 +877,6 @@ package flexlib.containers
 	    override protected function updateDisplayList(unscaledWidth:Number,
                                                   unscaledHeight:Number):void
 	    {
-	    	
-				
-	    	
-	    	 
 	        //We need to calculate the tab widths first, so we call super.updateDisplayList later
 	        
 	        // Are we supposed to be showing the Button?
@@ -828,8 +890,6 @@ package flexlib.containers
 	        	popupButton.includeInLayout = popupButton.visible = false;
 	        }
 	        
-	        spacer.includeInLayout = popupButton.includeInLayout;
-	        
 	        var vm:EdgeMetrics = viewMetrics;
 	        var w:Number = unscaledWidth - vm.left - vm.right;
 	
@@ -842,55 +902,14 @@ package flexlib.containers
 				tabBarSpace -= popupButton.width;
 			}
 			
+			var tempWidth:Number = tabBar.getStyle("tabWidth");
+			tabBar.clearStyle("tabWidth");
+			tabBar.setStyle("tabWidth", NaN);
+			tabBar.validateNow();
 			var pw:Number = Math.max(tabBar.getExplicitOrMeasuredWidth(), tabBarSpace);
+	        tabBar.setStyle("tabWidth", tempWidth);
 	        
-	        
-	        // The following code tries to determine if we need to force the tabs to be
-	        // smaller than their natural width. If we can squeeze them all in and keep
-	        // them larger than whatever minTabWidth is set to, then we should squeeze them.
-	        // If we can't squeeze them in then we need to scroll them.
-	        if(pw > tabBarSpace) {
-	       		var numTabs:Number = tabBar.numChildren;
-	       		var tabSizeNeeded:Number = Math.max((tabBarSpace - this.getStyle("horizontalGap")*(numTabs - 1))/numTabs, _minTabWidth);
-	       		
-				if(forcedTabWidth != tabSizeNeeded) {
-					if(originalTabWidthStyle == -1) {
-						originalTabWidthStyle = this.getStyle("tabWidth");
-					}
-					
-       				forcedTabWidth = tabSizeNeeded;
-       				this.setStyle("tabWidth", forcedTabWidth);
-       				tabBar.setStyle("tabWidth", forcedTabWidth);
-       				
-					callLater(invalidateDisplayList);
-					return;
-	   			}
-	       	}
-	       	else {
-	       		if(forcedTabWidth == -1 && this.getStyle("tabWidth") != originalTabWidthStyle && originalTabWidthStyle != -1) {
-	       			
-	       			if(this.getStyle("tabWidth") != undefined) {
-						if(isNaN(originalTabWidthStyle)) {
-							this.clearStyle("tabWidth");
-							tabBar.clearStyle("tabWidth");
-						}
-						else {
-							this.setStyle("tabWidth", originalTabWidthStyle);
-							tabBar.setStyle("tabWidth", originalTabWidthStyle);
-							originalTabWidthStyle = -1;
-		    			}
-		    			
-		    			callLater(invalidateDisplayList);
-		    			return;
-	       			}
-	       		}
-	       		forcedTabWidth = -1;
-	       	}
-	        
-	        if(forcedTabWidth != -1) {
-				pw = (forcedTabWidth * tabBar.numChildren) + (this.getStyle("horizontalGap") * (tabBar.numChildren-1));
-			}
-			
+	        var tabBarWidth:Number = tabBar.measuredWidth;
 	        
 	        holder.move(0, 1);
 	        holder.setActualSize(unscaledWidth, th);
@@ -902,7 +921,6 @@ package flexlib.containers
 				canvasWidth -= popupButton.width;
 			}
 			
-			canvas.move(0,0);
 			canvas.width = canvasWidth;
 			canvas.height = th;
 			canvas.explicitButtonHeight = th - 1;
@@ -922,28 +940,36 @@ package flexlib.containers
 			//or the component won't get drawn right at all. And we can't call super.super.updateDisplayList, so we
 			//have to reset the width of tabBar after our call to updateDisplayList
 			
-			if(pw > unscaledWidth) {
-				tabBar.setActualSize(pw, th);
+			if(tabBarWidth >= canvasWidth) {
+				if(_allowTabSqueezing) {
+					var measuredTabBarWidth:Number = tabBar.numChildren * _minTabWidth + (tabBar.numChildren-1) * getStyle("horizontalGap");
+					tabBar.width = Math.max(canvasWidth, measuredTabBarWidth);
+				}
+				else {
+					tabBar.width = tabBarWidth;
+				}
 			}
+			else {
+				tabBar.width = tabBarWidth;
+			}
+			
 			
 			/* we only care about horizontalAlign if we're not taking up too
 			   much space already */
-			if(pw < canvasWidth) {
+			if(tabBarWidth < canvasWidth) {
 				
-				switch (getStyle("horizontalAlign"))
-		        {
-		        case "left":
-		            tabBar.move(0, tabBar.y);
-		            break;
-		        case "right":
-		            tabBar.move(unscaledWidth - tabBar.width, tabBar.y);
-		            break;
-		        case "center":
-		            tabBar.move((unscaledWidth - tabBar.width) / 2, tabBar.y);
+				switch (getStyle("horizontalAlign")) {
+			        case "left":
+			            tabBar.move(0, tabBar.y);
+			            break;
+			        case "right":
+			            tabBar.move(unscaledWidth - tabBar.width, tabBar.y);
+			            break;
+			        case "center":
+			            tabBar.move((unscaledWidth - tabBar.width) / 2, tabBar.y);
 		        }
 			}
-			
-			
+
 	    }
 	    
 	    override public function styleChanged(styleProp:String):void {
@@ -1031,7 +1057,7 @@ package flexlib.containers
 	    * 
 	    * Listener that gets caled when a tab is added or removed.
 	    */
-	    private function tabsChanged(event:ChildExistenceChangedEvent):void {
+	    private function tabsChanged(event:Event):void {
 	    	callLater(reorderTabList);
 	    }
 	    

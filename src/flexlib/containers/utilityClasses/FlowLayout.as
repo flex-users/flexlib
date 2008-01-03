@@ -24,10 +24,12 @@ SOFTWARE.
 package flexlib.containers.utilityClasses
 {
 
+import mx.containers.BoxDirection;
 import mx.containers.utilityClasses.BoxLayout;
-import mx.core.mx_internal;
 import mx.core.EdgeMetrics;
 import mx.core.IFlexDisplayObject;
+import mx.core.UIComponent;
+import mx.core.mx_internal;
 
 use namespace mx_internal;
 	
@@ -43,6 +45,8 @@ public class FlowLayout extends BoxLayout
 	public function FlowLayout()
 	{
 		super();
+		
+		direction = BoxDirection.HORIZONTAL;
 	}
 	
 	/**
@@ -51,7 +55,16 @@ public class FlowLayout extends BoxLayout
 	 */
 	override public function measure():void
 	{
+		direction = BoxDirection.VERTICAL;
 		super.measure();
+		direction = BoxDirection.HORIZONTAL;
+		
+		if(!isNaN(target.explicitWidth)) {
+			doLayout(target.explicitWidth, false);
+		}
+		else if(!isNaN(target.percentWidth) && target.parent is UIComponent && !isNaN(UIComponent(target.parent).explicitWidth)) {
+			doLayout(UIComponent(target.parent).explicitWidth * target.percentWidth/100, false);
+		}
 		
 		// TODO: This is tricky.  Because the FlowLayout can accomodate
 		// multiple width and heights, it's hard to determine what the
@@ -68,6 +81,11 @@ public class FlowLayout extends BoxLayout
 	{
 		super.updateDisplayList( unscaledWidth, unscaledHeight );
 		
+		doLayout(unscaledWidth, true);
+	}
+	
+	private function doLayout(unscaledWidth:Number, moveChildren:Boolean):void
+	{
 		var vm:EdgeMetrics = target.viewMetricsAndPadding;
 		
 		var hAlign:Number = getHorizontalAlignValue();
@@ -86,13 +104,22 @@ public class FlowLayout extends BoxLayout
 		var rowExcessSpace:Number;
 		var top:Number;
 		
+		var maxX:Number;
+		var maxY:Number;
+		
 		for ( var i:int = 0; i < len; i++ )
 		{
 			child = IFlexDisplayObject( target.getChildAt( i ) );
 			
+			if(child is UIComponent && !UIComponent(child).includeInLayout) {
+				continue;
+			}
+			
 			// If the child can't be placed in the current row....
 			if ( currentRowLastX + child.width > unscaledWidth - vm.right )
 			{
+				currentRowLastX -= hGap;
+				
 				rowExcessSpace = unscaledWidth - vm.right - currentRowLastX;
 				rowExcessSpace *= hAlign;
 				currentRowLastX = rowExcessSpace == 0 ? vm.left : rowExcessSpace;
@@ -102,9 +129,12 @@ public class FlowLayout extends BoxLayout
 				for ( var j:int = 0; j < currentRowChildren.length; j++ )
 				{
 					tmpChild = currentRowChildren[ j ];
+					
 					top = ( currentRowHeight - tmpChild.height ) * vAlign;
-					tmpChild.move( Math.floor( currentRowLastX ), currentRowY + Math.floor( top ) );
-					currentRowLastX += hGap + tmpChild.width;
+					if(moveChildren) {
+						tmpChild.move( Math.floor( currentRowLastX ), currentRowY + Math.floor( top ) );
+					}
+					currentRowLastX += tmpChild.width + hGap;
 				}
 				
 				// Start a new row
@@ -120,7 +150,7 @@ public class FlowLayout extends BoxLayout
 			//child.move( currentRowLastX, currentRowY );
 			
 			// Move on to the next x location in the row
-			currentRowLastX += hGap + child.width;
+			currentRowLastX += child.width + hGap;
 			
 			// Add the child to the current row so we can adjust the
 			// coordinates based on vAlign and hAlign
@@ -134,16 +164,27 @@ public class FlowLayout extends BoxLayout
 		// Done laying out the children, finish up the children that
 		// are in the last row -- adjust the children for
 		// their vertical and horizontal align values
+		
+		//remove the single extra padding we have
+		currentRowLastX -= hGap;
+		
 		rowExcessSpace = unscaledWidth - vm.right - currentRowLastX;
 		rowExcessSpace *= hAlign;
-		currentRowLastX = rowExcessSpace ? vm.left : rowExcessSpace;
-				
+		currentRowLastX = rowExcessSpace == 0 ? vm.left : rowExcessSpace;
+		
+		
 		for ( j = 0; j < currentRowChildren.length; j++ )
 		{
 			tmpChild = currentRowChildren[ j ];
 			top = ( currentRowHeight - tmpChild.height ) * vAlign;
-			tmpChild.move( Math.floor( currentRowLastX ), currentRowY + Math.floor( top ) );
+			if(moveChildren) {
+				tmpChild.move( Math.floor( currentRowLastX ), currentRowY + Math.floor( top ) );
+			}
 			currentRowLastX += hGap + tmpChild.width;
+		}
+		
+		if(!moveChildren) {
+			target.measuredHeight  = currentRowY + currentRowHeight + vm.bottom + vm.top;
 		}
 		
 	}

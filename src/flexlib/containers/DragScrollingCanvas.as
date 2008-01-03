@@ -24,6 +24,7 @@ SOFTWARE.
 package flexlib.containers
 {
 	import flash.events.Event;
+	import flash.events.EventPhase;
 	import flash.events.MouseEvent;
 	
 	import mx.containers.Canvas;
@@ -107,6 +108,47 @@ package flexlib.containers
 		}
 		
 		/**
+	     * @private
+	     * Private Array of children that should NOT trigger dragging
+	     */
+	    private var _undraggableChildren:Array=null;
+	    
+	    /**
+	     * Array of child components that will not trigger the dragging. Only applicable if <code>childrenDoDrag</code>
+	     * is true.
+	     */
+	    public function get undraggableChildren():Array {
+	    	return _undraggableChildren;
+	    }
+	    
+	    /**
+	     * @public
+	     */
+	    public function set undraggableChildren(value:Array):void {
+	    	_undraggableChildren = value;
+	    }
+	    
+	    /**
+	     * @private
+	     */
+	    private var _undraggableClasses:Array=null;
+	    
+	    /**
+	     * Array of Classes that will not trigger the dragging. Only applicable if <code>childrenDoDrag</code>
+	     * is true.
+	     */
+	    public function get undraggableClasses():Array {
+	    	return _undraggableClasses;
+	    }
+	    
+	    /**
+	     * @public
+	     */
+	    public function set undraggableClasses(value:Array):void {
+	    	_undraggableClasses = value;
+	    }
+		
+		/**
 		 * @private
 		 * Our dragging handler. This is similar to the function found in the Panel 
 		 * component, except we need to store the horizontalScrollPosition and the 
@@ -123,9 +165,27 @@ package flexlib.containers
 	         		return;
 	        }
 	        
-	        // If childrenDoDrag is set to true then we always do draggin on a mouse 
+			if(_undraggableChildren != null)
+			{
+				for each(var child:* in _undraggableChildren)
+				{
+					if(event.target == child)
+						return;
+				}
+			}
+			
+			if(_undraggableClasses != null)
+			{
+				for each(var testClass:Class in _undraggableClasses)
+				{
+					if(event.target is testClass)
+						return;
+				}
+			}
+	        
+	        // If childrenDoDrag is set to true then we always do dragging on a mouse 
 	        // down event, we don't care what was clicked on. If childrenDoDrag is false 
-	        // then we only want to drag is we have been clicked directly.
+	        // then we only want to drag if we have been clicked directly.
 	        if(_childrenDoDrag || event.target == this) {
 	        	
 	        	regX = event.stageX;

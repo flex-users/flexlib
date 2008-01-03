@@ -134,6 +134,7 @@ SOFTWARE.
             	
             	var menu:ScrollableArrowMenu = ScrollableArrowMenu.createMenu(null, menubarXML, false);
                 menu.labelField="@label";
+                menu.iconField = "@icon";
                 
                 if(specify.selected) {
                 	menu.maxHeight = step.value;
@@ -182,7 +183,7 @@ SOFTWARE.
     </mx:Script>
     
     <mx:XMLList id="treeDP2">
-        <node label="Inbox"/>
+        <node label="Inbox" icon="../assets/home.png" />
         <node label="Calendar"/>
         <node label="Deleted Items"/>
         <node label="Inbox"/>

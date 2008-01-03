@@ -54,7 +54,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#source">source</a> : Object<div class="summaryTableDescription">[write-only]
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#source">source</a> : Object<div class="summaryTableDescription">
    Attempt to auto detect if we're receiving a base64 encoded string
    or a traditional value for the image source
    </div>
@@ -96,10 +96,12 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>source:Object</code>&nbsp;&nbsp;[write-only]<p>
+<code>source:Object</code>&nbsp;&nbsp;[read-write]<p>
    Attempt to auto detect if we're receiving a base64 encoded string
    or a traditional value for the image source
    </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get source():Object</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set source(value:Object):void</code>
 <br>

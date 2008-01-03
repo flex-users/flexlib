@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<project name="flexlib" basedir="../" default="lib">
+<project name="flexlib" basedir="/flexprojects/flexlib/trunk" default="lib">
 
 	<!-- Define variables/paths used in this build script -->
 	
@@ -67,14 +67,14 @@ SOFTWARE.
 			<arg line="-sp ${tests.dir}" />
 			
 			<!-- Include the necessary framework libraries in the class path -->
-			<arg line="-l '${flex2sdk.lib.dir}'" />
+			<arg line="-l '${flexsdk.lib.dir}'" />
 			
 			<!-- Include in the flexunit.swc in the class path -->
 			<arg line="-l '${flexunit.swc}'" />
 			
 			<!-- Include locale-specific items in the path -->
-			<arg line="-locale ${flex2sdk.locale}" />
-			<arg line="-l '${flex2sdk.locale.dir}'" />
+			<arg line="-locale ${flexsdk.locale}" />
+			<arg line="-l '${flexsdk.locale.dir}'" />
 		</exec>
 	</target>
 	
@@ -83,7 +83,7 @@ SOFTWARE.
 	-->
 	<target name="test" depends="compileTests">
 		<!--
-			If/When we add support for determinig the status of unit tests
+			If/When we add support for determining the status of unit tests
 			as part of the ANT build process, we need to change the spawn to
 			"no" so that ANT waits until the test runner closes before
 			proceeding.
@@ -109,7 +109,15 @@ SOFTWARE.
 			<arg line="-include-namespaces http://code.google.com/p/flexlib/" />
 			
 			<!-- Exclude the core flex framework from the library -->
-			<arg line="-el '${flex2sdk.lib.dir}'" />
+			<arg line="-el '${flexsdk.lib.dir}'" />
+			
+			<!-- Flex 3 SDK moved playerglobal.swc in the frameworks/libs/player directory, so we have to 
+				 explicitly include that as well. Only for SDK 3. -->
+			<!-- But since the Flex 2 SDK doesn't include this directory we can't include if we're
+				 compiling for Flex 2, so we gotta leave it out until we compile for Flex 3
+			<arg line="-el '${flexsdk.lib.dir}/player'" />
+			-->
+			
 		</exec>
 	</target>
 	
@@ -159,11 +167,11 @@ SOFTWARE.
 					<arg line="-l '${bin.dir}/${library.name}.swc'" />
 					
 					<!-- Include the necessary framework libraries in the class path -->
-					<arg line="-l '${flex2sdk.lib.dir}'" />
+					<arg line="-l '${flexsdk.lib.dir}'" />
 					
 					<!-- Include locale-specific items in the path -->
-					<arg line="-locale ${flex2sdk.locale}" />
-					<arg line="-l '${flex2sdk.locale.dir}'" />
+					<arg line="-locale ${flexsdk.locale}" />
+					<arg line="-l '${flexsdk.locale.dir}'" />
 				</exec>
 			</sequential>
 		</for>
@@ -190,9 +198,9 @@ SOFTWARE.
 					<arg line="'@{file}'" />
 					<arg line="-o '${exampleFolderName}/${exampleApplicationName}_Sample.swf'" />
 					<arg line="-l '${bin.dir}/${library.name}.swc'" />
-					<arg line="-l '${flex2sdk.lib.dir}'" />
-					<arg line="-locale ${flex2sdk.locale}" />
-					<arg line="-l '${flex2sdk.locale.dir}'" />
+					<arg line="-l '${flexsdk.lib.dir}'" />
+					<arg line="-locale ${flexsdk.locale}" />
+					<arg line="-l '${flexsdk.locale.dir}'" />
 				</exec>
 			</sequential>
 		</for>
@@ -221,7 +229,7 @@ SOFTWARE.
 			<!-- Include the library name in the window title -->
 			<arg line="-window-title '${library.name}' "/>
 			
-			<arg line="-templates-path '${flex2sdk.templates.dir}' "/>
+			<arg line="-templates-path '${flexsdk.templates.dir}' "/>
 		</exec>
 	</target>
 	

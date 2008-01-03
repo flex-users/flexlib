@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="SuperTabNavigator,flexlib.containers.SuperTabNavigator,POPUPPOLICY_AUTO,POPUPPOLICY_ON,POPUPPOLICY_OFF,popUpButtonPolicy,startScrollingEvent,stopScrollingEvent,scrollSpeed,dragEnabled,dropEnabled,minTabWidth,closePolicy,initialize,setClosePolicyForTab,updateDisplayList,styleChanged" name="keywords">
+<meta content="SuperTabNavigator,flexlib.containers.SuperTabNavigator,POPUPPOLICY_AUTO,POPUPPOLICY_ON,POPUPPOLICY_OFF,popUpButtonPolicy,startScrollingEvent,stopScrollingEvent,scrollSpeed,dragEnabled,dropEnabled,minTabWidth,editableTabLabels,allowTabSqueezing,closePolicy,initialize,createTabBar,setClosePolicyForTab,updateDisplayList,styleChanged" name="keywords">
 <title>flexlib.containers.SuperTabNavigator</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 <td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/containers/SuperTabNavigator.html&amp;flexlib/containers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;SuperTabNavigator</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;SuperTabNavigator</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class SuperTabNavigator"); titleBar_setSubNav(false,true,true,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class SuperTabNavigator"); titleBar_setSubNav(false,true,true,false,true,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -108,6 +108,12 @@ setMXMLOnly();
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#allowTabSqueezing">allowTabSqueezing</a> : Boolean<div class="summaryTableDescription">
+   Boolean indicating if tab width should be adjusted to try to squeeze all tabs so we don't need
+   scrolling.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#closePolicy">closePolicy</a> : String<div class="summaryTableDescription">
      The close policy for tabs.</div>
 </td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
@@ -122,6 +128,11 @@ setMXMLOnly();
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#dropEnabled">dropEnabled</a> : Boolean<div class="summaryTableDescription">
    Boolean indicating whether or not this SuperTabNavigator allows
    tabs to be dropped on the tab bar.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#editableTabLabels">editableTabLabels</a> : Boolean<div class="summaryTableDescription">
+   Boolean indicating if tab labels can be edited.</div>
 </td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
 </tr>
 <tr class="">
@@ -207,9 +218,37 @@ setMXMLOnly();
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#createTabBar()">createTabBar</a>():<a href="../controls/SuperTabBar.html">SuperTabBar</a>
+</div>
+<div class="summaryTableDescription">
+     For extensibility, if you want to use a custom extended version of SuperTabBar, you can do so by
+     overriding the <code>createTabBar</code> method and returning an instance of any class that extends
+     <code>SuperTabBar</code>.</div>
+</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#updateDisplayList()">updateDisplayList</a>(unscaledWidth:Number, unscaledHeight:Number):void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:tabClose">tabClose</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+  Fired when the close button of a tab is clicked.</td><td class="summaryTableOwnerCol">SuperTabNavigator</td>
 </tr>
 </table>
 </div>
@@ -262,10 +301,30 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="allowTabSqueezing"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">allowTabSqueezing</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>allowTabSqueezing:Boolean</code>&nbsp;&nbsp;[read-write]<p>
+   Boolean indicating if tab width should be adjusted to try to squeeze all tabs so we don't need
+   scrolling. If true, tabs will be squeezed until they reach the <code>minTabWidth</code> value, at which
+   point they scroll. If false, tabs will never be resized smaller than their default widths.
+   
+   </p><p>The default value is <code>true</code>.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get allowTabSqueezing():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set allowTabSqueezing(value:Boolean):void</code>
+<br>
+</div>
 <a name="closePolicy"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">closePolicy</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">closePolicy</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -324,6 +383,23 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get dropEnabled():Boolean</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set dropEnabled(value:Boolean):void</code>
+<br>
+</div>
+<a name="editableTabLabels"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">editableTabLabels</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>editableTabLabels:Boolean</code>&nbsp;&nbsp;[read-write]<p>
+   Boolean indicating if tab labels can be edited. If true, the user can double click on
+   a tab label and edit the label.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get editableTabLabels():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set editableTabLabels(value:Boolean):void</code>
 <br>
 </div>
 <a name="minTabWidth"></a>
@@ -449,10 +525,29 @@ showHideInherited();
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="createTabBar()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">createTabBar</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function createTabBar():<a href="../controls/SuperTabBar.html">SuperTabBar</a></code><p>
+     For extensibility, if you want to use a custom extended version of SuperTabBar, you can do so by
+     overriding the <code>createTabBar</code> method and returning an instance of any class that extends
+     <code>SuperTabBar</code>.
+     </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../controls/SuperTabBar.html">SuperTabBar</a></code></td>
+</tr>
+</table>
+</div>
 <a name="initialize()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">initialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">initialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -512,6 +607,20 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:tabClose"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">tabClose</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/SuperTabEvent.html"><code>flexlib.events.SuperTabEvent</code></a>
+<br>
+<p></p><p>
+  Fired when the close button of a tab is clicked. To stop the default action, which will remove the 
+  child from the collection of children, call event.preventDefault() in your listener.
+  </p></div>
 <br>
 <br>
 <hr>

@@ -347,6 +347,10 @@ package flexlib.containers
 			
 			positionButtons(unscaledWidth, unscaledHeight);
 			
+			//when compiled against Flex 3 SDK the call to enableOrDisableButtons happens before
+			//the scroll properties (horizontalScrolLPosition and maxHorizontalScrollPosittion) are set on
+			//inner Canvas, so we do callLater instead. I'm not sure what changed from Flex 2-3 SDK to cause this, 
+			//but hey, it seems to work using callLater, so there we go
 			callLater(enableOrDisableButtons);
 		}
 		
@@ -366,34 +370,6 @@ package flexlib.containers
 			downButton.move(buttonWidth, unscaledHeight - buttonWidth);
 			upButton.setActualSize(unscaledWidth - buttonWidth*2, buttonWidth);
 			downButton.setActualSize(unscaledWidth - buttonWidth*2, buttonWidth);
-				
-			/*
-			if(leftButton.visible) {
-				upButton.move(buttonWidth, 0);
-				downButton.move(buttonWidth, unscaledHeight - buttonWidth);
-					
-				if(rightButton.visible) {
-					upButton.setActualSize(unscaledWidth - buttonWidth * 2, buttonWidth);
-					downButton.setActualSize(unscaledWidth - buttonWidth * 2, buttonWidth);
-				}
-				else {
-					upButton.setActualSize(unscaledWidth - buttonWidth, buttonWidth);
-					downButton.setActualSize(unscaledWidth - buttonWidth, buttonWidth);
-				}
-			}
-			else {
-				upButton.move(0, 0);
-				downButton.move(0, unscaledHeight - buttonWidth);
-				
-				if(rightButton.visible) {
-					upButton.setActualSize(unscaledWidth - buttonWidth, buttonWidth);
-					downButton.setActualSize(unscaledWidth - buttonWidth, buttonWidth);
-				}
-				else {
-					upButton.setActualSize(unscaledWidth, buttonWidth);
-					downButton.setActualSize(unscaledWidth, buttonWidth);
-				}
-			}*/
 		}
 		
 		
@@ -488,7 +464,7 @@ package flexlib.containers
 	    		upButton.visible = upButton.enabled = upButton.includeInLayout = innerCanvas.verticalScrollPosition > 0;
 	    		downButton.visible = downButton.enabled = downButton.includeInLayout = innerCanvas.verticalScrollPosition < innerCanvas.maxVerticalScrollPosition;
 	    	}
-	    
+	    	
 	    	positionButtons(this.width, this.height);
 	    }
 		

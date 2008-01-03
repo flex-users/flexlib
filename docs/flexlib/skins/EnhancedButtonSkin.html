@@ -58,11 +58,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    selected-fill-colors: An array of colors to use for the fill gradient of the selected state.
   </li>
   <li> 
-   over-fill-colors An array of colors to use for the fill gradient of the over state.  
+   over-fill-colors: An array of colors to use for the fill gradient of the over state.  
   </li>
   <li>
-   disabled-fill-colors An array of colors to use for the fill gradient of the disabled state.
+   disabled-fill-colors: An array of colors to use for the fill gradient of the disabled state.
  </li>
+  <li>
+    down-fill-colors: An array of colors to use for the fill gradient of the down state.
+  </li>
  </ul>
  
  <ul>
@@ -82,6 +85,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   disabled-fill-color-ratios:  An array of values from 0 to 255 that indicate the position of the colors in the disabled gradient.
                      Must match the cardinality of the fill-colors, or else a default will be used.
  </li>
+  <li>
+    down-fill-color-ratios: An array of values from 0 to 255 that indicate the position of the colors in the down gradient.
+            Must match the cardinality of the fill-colors, or else a default will be used.
+  </li>
  </ul>
  
  <ul>

@@ -44,6 +44,12 @@ package flexlib.containers
 	[IconFile("HAccordion.png")]
 	
 	/**
+	 * If true, the icon for each accordion header will remain vertical instead of being rotated by 90
+	 * degrees (like the entire header).
+	 */
+	[Style(name="keepIconVertical", type="Boolean")]
+	
+	/**
 	 *  Width of each accordion header, in pixels.
 	 *  This style is used instead of <code>headerWidth</code> of the normal
 	 *  <code>Accordion</code> or <code>VAccordion</code>.

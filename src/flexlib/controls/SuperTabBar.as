@@ -23,18 +23,17 @@ SOFTWARE.
 
 package flexlib.controls {
 	
-	import flexlib.containers.SuperTabNavigator;
-	import flexlib.controls.tabBarClasses.SuperTab;
-	import flexlib.events.TabReorderEvent;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import flexlib.controls.tabBarClasses.SuperTab;
+	import flexlib.events.SuperTabEvent;
+	import flexlib.events.TabReorderEvent;
+	
 	import mx.collections.IList;
-	import mx.containers.Canvas;
 	import mx.containers.ViewStack;
 	import mx.controls.Button;
 	import mx.controls.TabBar;
@@ -53,6 +52,19 @@ package flexlib.controls {
 	 * list of tabs.
 	 */
 	[Event(name="tabsReordered", type="flexlib.events.TabReorderEvent")]
+	
+	/**
+	 * Fired when the close button of a tab is clicked. To stop the default action, which will remove the 
+	 * child from the collection of children, call event.preventDefault() in your listener.
+	 */
+	[Event(name="tabClose", type="flexlib.events.SuperTabEvent")]
+	
+	/**
+	 * Fired when the the label or icon of a child is updated and the tab gets updated to reflect
+	 * the new icon or label. SuperTabNavigator listens for this to refresh the PopUpMenuButton data provider.
+	 */
+	[Event(name="tabUpdated", type="flexlib.events.SuperTabEvent")]
+	
 	
 	[IconFile("SuperTabBar.png")]
 	
@@ -205,6 +217,30 @@ package flexlib.controls {
 			return (getChildAt(index) as SuperTab).closePolicy;
 		}
 		
+		private var _editableTabLabels:Boolean=false;
+		
+		/**
+		 * Boolean indicating if tab labels can be edited. If true, the user can double click on
+		 * a tab label and edit the label.
+		 */
+		public function get editableTabLabels():Boolean {
+			return _editableTabLabels;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set editableTabLabels(value:Boolean):void {
+			this._editableTabLabels = value;
+			
+			var n:int = numChildren;
+	        for (var i:int = 0; i < n; i++)
+	        {
+	            var child:SuperTab = SuperTab(getChildAt(i));
+				child.doubleClickToEdit = value;
+	        }
+		}
+		
 		/**
 		 * Constructor
 		 */
@@ -212,7 +248,16 @@ package flexlib.controls {
 			super();
 			
 			// we make sure that when we make new tabs they will be SuperTabs
-			navItemFactory = new ClassFactory(SuperTab);
+			navItemFactory = new ClassFactory(getTabClass());
+		}
+		
+		/**
+		 * For extensibility, if you extend <code>SuperTabBar</code> with a custom tab bar implementation,
+		 * you can override the <code>getTabClass</code> function to return the class for the tabs that should
+		 * be used. The class that you return must extend <code>flexlib.controls.tabBarClasses.SuperTab</code>.
+		 */
+		protected function getTabClass():Class {
+			return SuperTab;
 		}
 		
 		/**
@@ -225,6 +270,7 @@ package flexlib.controls {
 			var tab:SuperTab = super.createNavItem(label,icon) as SuperTab;
 			
 			tab.closePolicy = this.closePolicy;
+			tab.doubleClickToEdit = this.editableTabLabels;
 			
 			if(dragEnabled) {
 				addDragListeners(tab);
@@ -236,8 +282,30 @@ package flexlib.controls {
 			
 			// We need to listen for the close event fired from each tab.
 			tab.addEventListener(SuperTab.CLOSE_TAB_EVENT, onCloseTabClicked, false, 0, true);
+			tab.addEventListener(SuperTabEvent.TAB_UPDATED, onTabUpdated);
 			
 			return tab;
+		}
+		
+		private function onTabUpdated(event:SuperTabEvent):void {
+			var tab:SuperTab = event.currentTarget as SuperTab;
+			var index:Number = this.getChildIndex(tab);
+			
+			var dpItem:Object;
+			
+			if(dataProvider is IList){
+				dpItem = dataProvider.getItemAt(index);
+			}
+			else if(dataProvider is ViewStack){
+				dpItem = dataProvider.getChildAt(index);
+			}
+			
+			if(labelField) {
+				dpItem[labelField] = tab.label;
+			}
+			else if(dpItem.hasOwnProperty('label')) {
+				dpItem.label = tab.label;
+			}
 		}
 		
 		/**
@@ -299,12 +367,22 @@ package flexlib.controls {
 		 * from the dataProvider (which removes it from the ViewStack).
 		 */
 		public function onCloseTabClicked(event:Event):void{
+			
 			var index:int = getChildIndex(DisplayObject(event.currentTarget));
-			if(dataProvider is IList){
-				dataProvider.removeItemAt(index);
-			}
-			else if(dataProvider is ViewStack){
-				dataProvider.removeChildAt(index);
+			
+			//we will dispatch a SuperTabEvent.TAB_CLOSE event. The only reason we are really doing
+			//this is to allow a developer to listen for the event and call event.preventDefault(), which
+			//will then stop the default action (remove the child)
+			var tabCloseEvent:SuperTabEvent = new SuperTabEvent(SuperTabEvent.TAB_CLOSE, index, false, true);
+			dispatchEvent(tabCloseEvent);
+			
+			if(!tabCloseEvent.isDefaultPrevented()) {
+				if(dataProvider is IList){
+					dataProvider.removeItemAt(index);
+				}
+				else if(dataProvider is ViewStack){
+					dataProvider.removeChildAt(index);
+				}
 			}
 		}
 		
@@ -460,6 +538,18 @@ package flexlib.controls {
 		
 		public function resetTabs():void {
 			this.resetNavItems();
+		}
+		
+		override protected function updateNavItemLabel(index:int, label:String):void {
+			super.updateNavItemLabel(index, label);
+			
+			dispatchEvent(new SuperTabEvent(SuperTabEvent.TAB_UPDATED, index));
+		}
+		
+		override protected function updateNavItemIcon(index:int, icon:Class):void {
+			super.updateNavItemIcon(index, icon);
+			
+			dispatchEvent(new SuperTabEvent(SuperTabEvent.TAB_UPDATED, index));
 		}
 		
 	}

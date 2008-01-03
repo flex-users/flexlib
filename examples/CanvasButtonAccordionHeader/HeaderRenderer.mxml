@@ -22,11 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <CanvasButtonAccordionHeader verticalScrollPolicy="off" horizontalScrollPolicy="off" 
-	xmlns="http://code.google.com/p/flexlib/" 
+	xmlns="http://code.google.com/p/flexlib/" mouseChildren="true"
 	xmlns:mx="http://www.adobe.com/2006/mxml">
 	<mx:Script>
 		<![CDATA[
-		
+	
 			[Bindable]
 			private var _label:String;
 			
@@ -51,7 +51,7 @@ SOFTWARE.
 		</mx:ComboBox>
 	</mx:VBox>
 	 
-	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="right" verticalGap="-1">
+	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="right" paddingRight="5">
 		<mx:CheckBox click="event.stopImmediatePropagation()" mouseDown="event.stopImmediatePropagation()" />
 	</mx:VBox>
 	

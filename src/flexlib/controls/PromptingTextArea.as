@@ -82,6 +82,7 @@ public class PromptingTextArea extends TextArea
 		_prompt = value;
 		
 		invalidateProperties();
+		invalidateDisplayList();
 	}
 	
 	// ==============================================================

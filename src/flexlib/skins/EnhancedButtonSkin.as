@@ -50,11 +50,14 @@ import mx.utils.GraphicsUtil;
  * 		selected-fill-colors: An array of colors to use for the fill gradient of the selected state.
  * 	</li>
  * 	<li>	
- * 		over-fill-colors An array of colors to use for the fill gradient of the over state.	 
+ * 		over-fill-colors: An array of colors to use for the fill gradient of the over state.	 
  * 	</li>
  * 	<li>
- * 		disabled-fill-colors An array of colors to use for the fill gradient of the disabled state.
+ * 		disabled-fill-colors: An array of colors to use for the fill gradient of the disabled state.
  *	</li>
+ *  <li>
+ *    down-fill-colors: An array of colors to use for the fill gradient of the down state.
+ *  </li>
  * </ul>
  * 
  * <ul>
@@ -74,6 +77,10 @@ import mx.utils.GraphicsUtil;
  *		disabled-fill-color-ratios:  An array of values from 0 to 255 that indicate the position of the colors in the disabled gradient.
  *                	    Must match the cardinality of the fill-colors, or else a default will be used.
  *	</li>
+ *  <li>
+ *    down-fill-color-ratios: An array of values from 0 to 255 that indicate the position of the colors in the down gradient.
+ * 											Must match the cardinality of the fill-colors, or else a default will be used.
+ *  </li>
  * </ul>
  * 
  * <ul>
@@ -249,11 +256,18 @@ public class EnhancedButtonSkin extends Border
 			disFillColors = fillColors;
 		}
 		
+		var downFillColors:Array = getStyle( "downFillColors" );
+		// not set to a default value to allow for backwards compatibility (from .2)
+		if ( downFillColors != null )
+		{
+			var downFillColorRatios:Array = getColorRatios( "downFillColorRatios", downFillColors.length );
+			var downFillAlphas:Array = getAlphas( "downFillAlphas", downFillColors.length );
+		}
+
 		var upFillColorRatios:Array = getColorRatios( "fillColorRatios", fillColors.length );
 		var overFillColorRatios:Array = getColorRatios( "overFillColorRatios", overFillColors.length );
 		var selectedFillColorRatios:Array = getColorRatios( "selectedFillColorRatios", selectedFillColors.length );
 		var disFillColorRatios:Array = getColorRatios( "disabledFillColorRatios", disFillColors.length );
-		
 		
 		var fillAlphas:Array = getAlphas( "fillAlphas", fillColors.length );
 		var overFillAlphas:Array = getAlphas( "overFillAlphas", overFillColors.length );
@@ -280,7 +294,7 @@ public class EnhancedButtonSkin extends Border
 		StyleManager.getColorNames(selectedFillColors);
 
 	    
-	    var highlightAlphas:Array = getStyle("highlightAlphas");
+	  var highlightAlphas:Array = getStyle("highlightAlphas");
 	 
 		// Border props
 		var themeColor:uint = getStyle("themeColor");
@@ -462,7 +476,6 @@ public class EnhancedButtonSkin extends Border
 				
 				break;
 			}
-									
 			case "downSkin":
 			case "selectedDownSkin":
 			{
@@ -473,11 +486,23 @@ public class EnhancedButtonSkin extends Border
 					verticalGradientMatrix(0, 0, w , h )); 
 												
 				// button fill
-				drawRoundRect(
-					bt, bt, w - 2*bt, h - 2*bt, cr1,
-					[ derStyles.fillColorPress1, derStyles.fillColorPress2], fillAlphas[0],
-					verticalGradientMatrix(bt, bt, w - 2*bt, h - 2*bt));  
-										  
+				if ( downFillColors != null )
+				{
+					drawRoundRect(
+						bt, bt, w - 2*bt, h - 2*bt, cr1,
+						downFillColors, downFillAlphas,
+						verticalGradientMatrix(bt, bt, w - 2*bt, h - 2*bt),
+						GradientType.LINEAR,
+						downFillColorRatios);  
+				}
+				else // use derived style if no custom defined (backwards compatibility from .2)
+				{
+					drawRoundRect(
+						bt, bt, w - 2*bt, h - 2*bt, cr1,
+						[ derStyles.fillColorPress1, derStyles.fillColorPress2], fillAlphas[0],
+						verticalGradientMatrix(bt, bt, w - 2*bt, h - 2*bt));  
+				}						  
+
 				// top highlight
 				drawRoundRect(
 					bt+1, bt+1, (w-2*bt)-2, ( (h-2*bt)-2) / 2,
@@ -488,7 +513,6 @@ public class EnhancedButtonSkin extends Border
 				
 				break;
 			}
-						
 			case "disabledSkin":
 			case "selectedDisabledSkin":
 			{
