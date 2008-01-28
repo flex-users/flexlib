@@ -127,6 +127,10 @@ package flexlib.controls.sliderClasses
 			}
 		}
 		
+		public function get dragHitArea():UIComponent {
+			return highlightHitArea;
+		}
+		
 		/**
 		 * @private
 		 * 

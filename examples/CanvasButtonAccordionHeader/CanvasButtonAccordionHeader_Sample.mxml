@@ -24,7 +24,7 @@ SOFTWARE.
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:flexlib="http://code.google.com/p/flexlib/" 
 	>
-	
+
 	<mx:Accordion headerRenderer="HeaderRenderer" width="400" height="400" headerHeight="40">
 		<mx:Canvas label="Child 1">
 			<mx:Label text="Contents of Child 1" />

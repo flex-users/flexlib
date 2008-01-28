@@ -32,9 +32,7 @@ package flexlib.containers
 	import mx.containers.Canvas;
 	import mx.controls.Button;
 	import mx.core.Container;
-	import mx.core.EdgeMetrics;
 	import mx.core.ScrollPolicy;
-	import mx.events.ScrollEvent;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
 
@@ -466,6 +464,22 @@ package flexlib.containers
 	    	}
 	    	
 	    	positionButtons(this.width, this.height);
+	    }
+	    
+	    override public function getChildAt(index:int):DisplayObject {
+	    	return innerCanvas.getChildAt(index);
+	    }
+	    
+	    override public function getChildByName(name:String):DisplayObject {
+	    	return innerCanvas.getChildByName(name);
+	    }
+	    
+	    override public function getChildIndex(child:DisplayObject):int {
+	    	return innerCanvas.getChildIndex(child);
+	    }
+	    
+	    override public function getChildren():Array {
+	    	return innerCanvas.getChildren();
 	    }
 		
 	}

@@ -107,6 +107,9 @@ public class FlowLayout extends BoxLayout
 		var maxX:Number;
 		var maxY:Number;
 		
+		var paddingRight:Number = target.getStyle("paddingRight") + target.borderMetrics.right;
+		var paddingLeft:Number = target.getStyle("paddingLeft") + target.borderMetrics.left;
+		
 		for ( var i:int = 0; i < len; i++ )
 		{
 			child = IFlexDisplayObject( target.getChildAt( i ) );
@@ -116,13 +119,13 @@ public class FlowLayout extends BoxLayout
 			}
 			
 			// If the child can't be placed in the current row....
-			if ( currentRowLastX + child.width > unscaledWidth - vm.right )
+			if ( currentRowLastX + child.width > unscaledWidth - paddingRight )
 			{
 				currentRowLastX -= hGap;
 				
-				rowExcessSpace = unscaledWidth - vm.right - currentRowLastX;
+				rowExcessSpace = unscaledWidth - paddingRight - currentRowLastX;
 				rowExcessSpace *= hAlign;
-				currentRowLastX = rowExcessSpace == 0 ? vm.left : rowExcessSpace;
+				currentRowLastX = rowExcessSpace == 0 ? paddingLeft : rowExcessSpace;
 								
 				// Go back through the row and adjust the children for
 				// their vertical and horizontal align values
@@ -139,7 +142,7 @@ public class FlowLayout extends BoxLayout
 				
 				// Start a new row
 				currentRowY += currentRowHeight + vGap;
-				currentRowLastX = vm.left;
+				currentRowLastX = paddingLeft;
 				currentRowHeight = 0;
 				currentRowChildren = [];	
 				
@@ -160,6 +163,8 @@ public class FlowLayout extends BoxLayout
 			// entire row
 			currentRowHeight = Math.max( child.height, currentRowHeight );
 		}
+	
+		
 		
 		// Done laying out the children, finish up the children that
 		// are in the last row -- adjust the children for
@@ -168,9 +173,10 @@ public class FlowLayout extends BoxLayout
 		//remove the single extra padding we have
 		currentRowLastX -= hGap;
 		
-		rowExcessSpace = unscaledWidth - vm.right - currentRowLastX;
+		rowExcessSpace = unscaledWidth - paddingRight - currentRowLastX;
 		rowExcessSpace *= hAlign;
-		currentRowLastX = rowExcessSpace == 0 ? vm.left : rowExcessSpace;
+		currentRowLastX = rowExcessSpace == 0 ? paddingLeft : rowExcessSpace;
+		
 		
 		
 		for ( j = 0; j < currentRowChildren.length; j++ )
@@ -186,7 +192,6 @@ public class FlowLayout extends BoxLayout
 		if(!moveChildren) {
 			target.measuredHeight  = currentRowY + currentRowHeight + vm.bottom + vm.top;
 		}
-		
 	}
 
 } // end class

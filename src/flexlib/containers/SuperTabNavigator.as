@@ -61,6 +61,8 @@ package flexlib.containers
 	 * child from the collection of children, call event.preventDefault() in your listener.
 	 */
 	[Event(name="tabClose", type="flexlib.events.SuperTabEvent")]
+	
+	[Event(name="tabsReordered", type="flexlib.events.TabReorderEvent")]
 
 	/**
 	 *  Name of CSS style declaration that specifies style for the Button that appears
@@ -627,7 +629,7 @@ package flexlib.containers
 				(tabBar as SuperTabBar).addEventListener(SuperTabEvent.TAB_CLOSE, handleTabClose);
 			}
 			
-			// We need to create our tabBar above BEFORE calling creteChildren
+			// We need to create our tabBar above BEFORE calling createChildren
 			// because otherwise it would get created in the super class.
 			// Once we create it then the super class will skip it. It still hasn't
 			// been added as a child however (this gets done below).
@@ -772,6 +774,13 @@ package flexlib.containers
 	     *  @private
 	     */
 	    private function tabsReordered(event:TabReorderEvent):void {
+	    	var clone:Event = event.clone();
+	    	dispatchEvent(clone);
+	    	
+	    	if(clone.isDefaultPrevented()) {
+	    		return;
+	    	}
+	    	
 	    	// The relatedObject of our custom event is the SuperTabBar component
 	    	// where the tab originated. This is so we can properly move tabs from
 	    	// one navigator to another.
@@ -1090,6 +1099,12 @@ package flexlib.containers
 			menu.iconField="icon";
 			
 			menu.dataProvider = popupMenuDP;	
+			
+			//we re-assign the menu to the popup button each time just to be safe to
+			//ensure that the PopUpBUtton hasn't set its popUp to null, which it has a 
+			//tendency to do (I think only since Flex 3)
+			//fixes issue #71: http://code.google.com/p/flexlib/issues/detail?id=71
+			popupButton.popUp = menu;
 	    }
 	}
 }

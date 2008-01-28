@@ -66,6 +66,9 @@
     <!-- Tobias Patton (effectiveUI) -->
     <component id="IconLoader" class = "flexlib.controls.IconLoader" />
     
+    <!-- Dave Glasser (iDashboards) & Doug McCune -->
+    <component id="WindowShade" class = "flexlib.containers.WindowShade" />
+    
     
     
 </componentPackage>

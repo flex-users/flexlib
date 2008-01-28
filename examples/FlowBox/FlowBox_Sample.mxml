@@ -26,74 +26,77 @@ SOFTWARE.
 	xmlns:flexlib="http://code.google.com/p/flexlib/"
 	layout="vertical">
 
-	<mx:Panel title="hAlign = left, vAlign = top" >
-		<flexlib:FlowBox width="250" height="250">
-			
-			<mx:Button label="Button"/> 
-			<mx:TextInput />
-			<mx:Label text="Label" />
-			<mx:Button label="Another Button"/> 
-			<mx:Button label="Button With a Longer Label"/> 
-			<mx:Label text="Some Label" />
-			<mx:HBox backgroundColor="#FF0000" height="50" width="10" />
-			<mx:Label text="Some Other Label" />
-			<mx:Label text="Hello" color="#FF0000"/>
-			
-		</flexlib:FlowBox>		
-	</mx:Panel>
+	<mx:Label text="hAlign = left, vAlign = top" />
+	<flexlib:FlowBox width="250"
+		borderStyle="solid" backgroundColor="#FFFFFF"
+		horizontalGap="5" verticalGap="5">
+		
+		<mx:Button label="Button"/> 
+		<mx:TextInput />
+		<mx:Label text="Label" />
+		<mx:Button label="Another Button"/> 
+		<mx:Button label="Button With a Longer Label"/> 
+		<mx:Label text="Some Label" />
+		<mx:HBox backgroundColor="#FF0000" height="50" width="10" />
+		<mx:Label text="Some Other Label" />
+		<mx:Label text="Hello" color="#FF0000"/>
+		
+	</flexlib:FlowBox>		
 	
-	<mx:Panel title="hAlign = center, vAlign = middle">
-		<flexlib:FlowBox width="250" height="250"
-			horizontalAlign="center"
-			verticalAlign="middle">
-			
-			<mx:Button label="Button"/> 
-			<mx:TextInput />
-			<mx:Label text="Label" />
-			<mx:Button label="Another Button"/> 
-			<mx:Button label="Button With a Longer Label"/> 
-			<mx:Label text="Some Label" />
-			<mx:HBox backgroundColor="#FF0000" height="50" width="10" />
-			<mx:Label text="Some Other Label" />
-			<mx:Label text="Hello" color="#FF0000"/>
-			
-		</flexlib:FlowBox>	
-	</mx:Panel>
+	<mx:Label text="hAlign = center, vAlign = middle" />
+	<flexlib:FlowBox width="250"
+		horizontalAlign="center"
+		verticalAlign="middle"
+		borderStyle="solid" backgroundColor="#FFFFFF"
+		horizontalGap="5" verticalGap="5">
+		
+		<mx:Button label="Button"/> 
+		<mx:TextInput />
+		<mx:Label text="Label" />
+		<mx:Button label="Another Button"/> 
+		<mx:Button label="Button With a Longer Label"/> 
+		<mx:Label text="Some Label" />
+		<mx:HBox backgroundColor="#FF0000" height="50" width="10" />
+		<mx:Label text="Some Other Label" />
+		<mx:Label text="Hello" color="#FF0000"/>
+		
+	</flexlib:FlowBox>	
 	
-	<mx:Panel title="hAlign = right, vAlign = bottom">
-		<flexlib:FlowBox width="250" height="250"
-			horizontalAlign="right"
-			verticalAlign="bottom">
-			
-			<mx:Button label="Button"/> 
-			<mx:TextInput />
-			<mx:Label text="Label" />
-			<mx:Button label="Another Button"/> 
-			<mx:Button label="Button With a Longer Label"/> 
-			<mx:Label text="Some Label" />
-			<mx:HBox backgroundColor="#FF0000" height="50" width="10" />
-			<mx:Label text="Some Other Label" />
-			<mx:Label text="Hello" color="#FF0000"/>
-			
-		</flexlib:FlowBox>
-	</mx:Panel>
+	<mx:Label text="hAlign = right, vAlign = bottom" />
+	<flexlib:FlowBox width="250"
+		horizontalAlign="right"
+		verticalAlign="bottom" 
+		borderStyle="solid" backgroundColor="#FFFFFF"
+		horizontalGap="5" verticalGap="5">
+		
+		<mx:Button label="Button"/> 
+		<mx:TextInput />
+		<mx:Label text="Label" />
+		<mx:Button label="Another Button"/> 
+		<mx:Button label="Button With a Longer Label"/> 
+		<mx:Label text="Some Label" />
+		<mx:HBox backgroundColor="#FF0000" height="50" width="10" />
+		<mx:Label text="Some Other Label" />
+		<mx:Label text="Hello" color="#FF0000"/>
+		
+	</flexlib:FlowBox>
 	
-	<mx:Panel title="hGap = 0, vGap = 0">
-		<flexlib:FlowBox width="250" height="250"
-			borderStyle="solid" backgroundColor="#FFFFFF"
-			horizontalGap="0" verticalGap="0">
-			
-			<mx:Button label="Button"/> 
-			<mx:TextInput />
-			<mx:Label text="Label" />
-			<mx:Button label="Another Button"/> 
-			<mx:Button label="Button With a Longer Label"/> 
-			<mx:Label text="Some Label" />
-			<mx:HBox backgroundColor="#FF0000" height="50" width="10" />
-			<mx:Label text="Some Other Label" />
-			<mx:Label text="Hello" color="#FF0000"/>
-			
-		</flexlib:FlowBox>	
-	</mx:Panel>
+	
+	<mx:Label text="hGap = 0, vGap = 0" />
+	<flexlib:FlowBox width="250"
+		borderStyle="solid" backgroundColor="#FFFFFF"
+		horizontalGap="0" verticalGap="0">
+		
+		<mx:Button label="Button"/> 
+		<mx:TextInput />
+		<mx:Label text="Label" />
+		<mx:Button label="Another Button"/> 
+		<mx:Button label="Button With a Longer Label"/> 
+		<mx:Label text="Some Label" />
+		<mx:HBox backgroundColor="#FF0000" height="50" width="10" />
+		<mx:Label text="Some Other Label" />
+		<mx:Label text="Hello" color="#FF0000"/>
+		
+	</flexlib:FlowBox>	
 	
 </mx:Application>

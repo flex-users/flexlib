@@ -465,7 +465,7 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    private var labelObjects:UIComponent;
+    protected var labelObjects:UIComponent;
 
     /**
      *  @private

@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="ExtendedSlider,flexlib.controls.sliderClasses.ExtendedSlider,lockRegionsWhileDragging,highlightHitArea,createChildren,positionDataTip" name="keywords">
+<meta content="ExtendedSlider,flexlib.controls.sliderClasses.ExtendedSlider,lockRegionsWhileDragging,highlightHitArea,dragHitArea,createChildren,positionDataTip" name="keywords">
 <title>flexlib.controls.sliderClasses.ExtendedSlider</title>
 </head>
 <body>
@@ -93,6 +93,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../baseClasses/SliderBase.html#direction">direction</a> : String<div class="summaryTableDescription">
       The orientation of the slider control.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../baseClasses/SliderBase.html">SliderBase</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#dragHitArea">dragHitArea</a> : UIComponent<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">ExtendedSlider</td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../baseClasses/SliderBase.html#labels">labels</a> : Array<div class="summaryTableDescription">
@@ -554,10 +558,22 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="dragHitArea"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">dragHitArea</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>dragHitArea:UIComponent</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get dragHitArea():UIComponent</code>
+<br>
+</div>
 <a name="highlightHitArea"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">highlightHitArea</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">highlightHitArea</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">

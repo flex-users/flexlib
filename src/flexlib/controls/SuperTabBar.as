@@ -22,13 +22,14 @@ SOFTWARE.
 */
 
 package flexlib.controls {
-	
+
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import flexlib.containers.SuperTabNavigator;
 	import flexlib.controls.tabBarClasses.SuperTab;
 	import flexlib.events.SuperTabEvent;
 	import flexlib.events.TabReorderEvent;
@@ -531,7 +532,7 @@ package flexlib.controls {
 					newIndex += 1;
 				}
 				
-				this.dispatchEvent(new TabReorderEvent(SuperTabBar.TABS_REORDERED, false, false, parentBar, oldIndex, newIndex));
+				this.dispatchEvent(new TabReorderEvent(SuperTabBar.TABS_REORDERED, false, true, parentBar, oldIndex, newIndex));
 			}	
 			
 		}
@@ -542,6 +543,11 @@ package flexlib.controls {
 		
 		override protected function updateNavItemLabel(index:int, label:String):void {
 			super.updateNavItemLabel(index, label);
+			
+			//fix for issue # 77: http://code.google.com/p/flexlib/issues/detail?id=77
+			if(dataProvider is SuperTabNavigator) {
+				SuperTabNavigator(dataProvider).invalidateDisplayList();
+			}
 			
 			dispatchEvent(new SuperTabEvent(SuperTabEvent.TAB_UPDATED, index));
 		}

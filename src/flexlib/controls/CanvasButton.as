@@ -72,7 +72,7 @@ package flexlib.controls
 		private var _childrenCreated:Boolean = false;
 		
 		override protected function createChildren():void {
-			//super.createChildren();
+			super.createChildren();
 			
 			//create our canvas and add it to the display list
 			canvas = new Canvas();

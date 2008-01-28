@@ -373,6 +373,8 @@ package flexlib.containers
 	
 	            y += verticalGap;
 	        }
+	        
+	       
 	    }
 	
 	    /**
@@ -498,6 +500,11 @@ package flexlib.containers
     			tween.pause();
     			
     		super.startTween(oldSelectedIndex, newSelectedIndex);
+    		
+    		 invalidateSize();
+	        invalidateDisplayList();
+	        validateNow();
+	       
     	}
 	}
 }

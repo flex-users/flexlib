@@ -1330,7 +1330,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     /**
      *  @private
      */
-    private function headerClickHandler(event:Event):void
+    protected function headerClickHandler(event:Event):void
     {
         var header:Button = Button(event.currentTarget);
         var oldIndex:int = selectedIndex;
@@ -1344,7 +1344,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     /**
      *  @private
      */
-    private function commitSelectedIndex():void
+    protected function commitSelectedIndex():void
     {
         if (proposedSelectedIndex == -1)
             return;
@@ -1538,7 +1538,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
             newSelectedChild.setActualSize(tweenContentWidth, tweenContentHeight);
         }
 
-        UIComponent.suspendBackgroundProcessing();
+        //UIComponent.suspendBackgroundProcessing();
     }
 
     /**

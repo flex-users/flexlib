@@ -327,7 +327,7 @@ package flexlib.controls.tabBarClasses
 				closeButton.x = unscaledWidth-closeButton.width - 4;
 				closeButton.y = 4;
 				
-				//setChildIndex(closeButton, numChildren - 1);
+				setChildIndex(closeButton, numChildren - 1);
 			}
 		}
 		
