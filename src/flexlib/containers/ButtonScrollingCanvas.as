@@ -31,7 +31,6 @@ package flexlib.containers
 	
 	import mx.containers.Canvas;
 	import mx.controls.Button;
-	import mx.core.Container;
 	import mx.core.ScrollPolicy;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
@@ -283,7 +282,7 @@ package flexlib.containers
 		 * remove all the children and switch them over to innerCanvas.
 		 */
 		override public function addChild(child:DisplayObject):DisplayObject {
-			if(innerCanvas) {
+			if(_childrenCreated) {
 				return innerCanvas.addChild(child);
 			}
 			else {
@@ -467,19 +466,28 @@ package flexlib.containers
 	    }
 	    
 	    override public function getChildAt(index:int):DisplayObject {
-	    	return innerCanvas.getChildAt(index);
+	    	return _childrenCreated ? innerCanvas.getChildAt(index) : super.getChildAt(index);
+	    }
+	    
+	    override public function addChildAt(child:DisplayObject, index:int):DisplayObject {
+	    	if(_childrenCreated) {
+	    		return innerCanvas.addChildAt(child, index);
+	    	}
+	    	else {
+	    		return super.addChildAt(child, index);
+	    	}
 	    }
 	    
 	    override public function getChildByName(name:String):DisplayObject {
-	    	return innerCanvas.getChildByName(name);
+	    	return _childrenCreated ? innerCanvas.getChildByName(name) : super.getChildByName(name);
 	    }
 	    
 	    override public function getChildIndex(child:DisplayObject):int {
-	    	return innerCanvas.getChildIndex(child);
+	    	return _childrenCreated ? innerCanvas.getChildIndex(child) : super.getChildIndex(child);
 	    }
 	    
 	    override public function getChildren():Array {
-	    	return innerCanvas.getChildren();
+	    	return _childrenCreated ? innerCanvas.getChildren() : super.getChildren();
 	    }
 		
 	}
