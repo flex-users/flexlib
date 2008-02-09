@@ -82,6 +82,8 @@ package flexlib.controls
 			canvas.buttonMode = super.buttonMode;
 			super.addChild(canvas);
 			
+			canvas.initializeRepeaterArrays(this);
+			
 			//if child components have been specified in MXML then we need 
 			//to add them all now
 			createComponents();

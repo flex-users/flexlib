@@ -24,12 +24,11 @@ package flexlib.containers {
 	import flash.events.MouseEvent;
 	
 	import mx.controls.Button;
-	import mx.controls.LinkButton;
 	import mx.core.EdgeMetrics;
+	import mx.core.IFactory;
 	import mx.core.LayoutContainer;
 	import mx.core.ScrollPolicy;
 	import mx.effects.Resize;
-	import mx.effects.easing.Sine;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
 	import mx.utils.StringUtil;
@@ -65,7 +64,7 @@ package flexlib.containers {
      * @default mx.controls.Button
      */ 
     [Style(name="headerClass", type="Class", inherit="no")]
-
+    
     /**
      * Name of CSS style declaration that specifies styles for the headerButton.
      */
@@ -150,6 +149,31 @@ package flexlib.containers {
 		 */
         private var _headerButton:Button = null;
         
+        private var headerChanged:Boolean;
+        
+        /**
+        * @private
+        * The header renderer factory that will get used to create the header. 
+        */
+        private var _headerRenderer:IFactory;
+        
+        /**
+        * To control the header used on the WindowShade component you can either set the <code>headerClass</code> or the
+        * <code>headerRenderer</code>. The <code>headerRenderer</code> works similar to the itemRenderer of a List control.
+        * You can set this using MXML using any Button control. This would let you customize things like button skin. You could
+        * even combine this with the CanvasButton component to make complex headers.
+        */
+        public function set headerRenderer(value:IFactory):void {
+        	_headerRenderer = value;
+        	
+        	headerChanged = true;
+        	invalidateProperties();
+        }
+        
+        public function get headerRenderer():IFactory {
+        	return _headerRenderer;
+        }
+        
         /**
         * @private
         * Boolean dirty flag to let us know if we need to change the icon in the commitProperties method.
@@ -173,9 +197,14 @@ package flexlib.containers {
                 }
             }
             
-            var headerClass:Class = getStyle("headerClass");
-           	_headerButton = new headerClass();
-			
+            if(_headerRenderer) {
+            	_headerButton = _headerRenderer.newInstance() as Button;
+            }
+            else {
+            	var headerClass:Class = getStyle("headerClass");
+          	 	_headerButton = new headerClass();
+            }
+            
             applyHeaderButtonStyles(_headerButton);
 
             _headerButton.addEventListener(MouseEvent.CLICK, headerButton_clickHandler);
@@ -227,10 +256,29 @@ package flexlib.containers {
         public function get opened():Boolean {
             return _opened;
         }
+        
+        private var _headerLocation:String = "top";
+		
+		[Bindable]
+		[Inspectable(enumeration="top,bottom", defaultValue="top")]
+		/**
+		 * Specifies where the header button is placed relative tot he content of this WindowShade. Possible
+		 * values are <code>top</code> and <code>bottom</code>.
+		 */
+		public function set headerLocation(value:String):void {
+			_headerLocation = value;
+			invalidateSize();
+			invalidateDisplayList();
+		}
+		
+		public function get headerLocation():String {
+			return _headerLocation;
+		}
 
         /**
          * @private
          */
+         [Bindable]
         public function set opened(value:Boolean):void {
             var old:Boolean = _opened;
             
@@ -252,7 +300,8 @@ package flexlib.containers {
             super.styleChanged(styleProp);
             
             if(styleProp == "headerClass") {
-                createOrReplaceHeaderButton();
+                headerChanged = true;
+                invalidateProperties();
             }
             else if(styleProp == "headerStyleName" || styleProp == "headerTextAlign" || styleProp == "toggleHeader" 
             	|| styleProp == "openIcon" || styleProp == "closeIcon") {
@@ -278,6 +327,11 @@ package flexlib.containers {
 			
 			super.commitProperties();
 			
+			if(headerChanged) {
+				createOrReplaceHeaderButton();
+				headerChanged = false;
+			}
+			
             if(_openedChanged) {
                 
                 if(_opened) {
@@ -297,7 +351,13 @@ package flexlib.containers {
         override protected function updateDisplayList(w:Number, h:Number):void {
             super.updateDisplayList(w, h);
             
-            _headerButton.move(0,0);
+            if(_headerLocation == "top") {
+            	_headerButton.move(0,0);
+            }
+            else if(_headerLocation == "bottom") {
+            	_headerButton.move(0,h - _headerButton.getExplicitOrMeasuredHeight());
+            }
+            
 			_headerButton.setActualSize(w, _headerButton.getExplicitOrMeasuredHeight());
         }
 
@@ -324,8 +384,15 @@ package flexlib.containers {
 	        vm.bottom = o.bottom;
 	        
 	        var hHeight:Number = _headerButton.getExplicitOrMeasuredHeight();
-	        if (!isNaN(hHeight))
-	            vm.top += hHeight;
+	        if (!isNaN(hHeight)) {
+	        	if(_headerLocation == "top") {
+	        		 vm.top += hHeight;
+	        	}
+	        	else if(_headerLocation == "bottom") {
+	        		 vm.bottom += hHeight;
+	        	}
+	        }
+	           
 
 	        return vm;
     	}
@@ -338,10 +405,10 @@ package flexlib.containers {
             
             if(_opened) {
             	//if this WindowShade is opened then we have to include the height of the header button
-                measuredHeight += _headerButton.getExplicitOrMeasuredHeight();
+                //measuredHeight += _headerButton.getExplicitOrMeasuredHeight();
             }
             else {
-            	//if the WIndowSHade is closed then the height is only the height of the header button
+            	//if the WindowShade is closed then the height is only the height of the header button
             	measuredHeight = _headerButton.getExplicitOrMeasuredHeight();
             }
         }

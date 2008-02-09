@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="WindowShade,flexlib.containers.WindowShade,opened,viewMetrics,createOrReplaceHeaderButton,applyHeaderButtonStyles" name="keywords">
+<meta content="WindowShade,flexlib.containers.WindowShade,headerRenderer,opened,headerLocation,viewMetrics,createOrReplaceHeaderButton,applyHeaderButtonStyles" name="keywords">
 <title>flexlib.containers.WindowShade</title>
 </head>
 <body>
@@ -58,6 +58,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#headerLocation">headerLocation</a> : String<div class="summaryTableDescription">
+   Specifies where the header button is placed relative tot he content of this WindowShade.</div>
+</td><td class="summaryTableOwnerCol">WindowShade</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#headerRenderer">headerRenderer</a> : IFactory<div class="summaryTableDescription">
+        To control the header used on the WindowShade component you can either set the <code>headerClass</code> or the
+        <code>headerRenderer</code>.</div>
+</td><td class="summaryTableOwnerCol">WindowShade</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#opened">opened</a> : Boolean<div class="summaryTableDescription">
@@ -205,22 +216,53 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
-<a name="opened"></a>
+<a name="headerLocation"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">opened</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">headerLocation</td><td class="detailHeaderType">property</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>opened:Boolean</code>&nbsp;&nbsp;[read-write]<p>
-         Sets or gets the state of this WindowShade, either opened (true) or closed (false).
-         </p><span class="label">Implementation</span>
+<code>headerLocation:String</code>&nbsp;&nbsp;[read-write]<p>
+   Specifies where the header button is placed relative tot he content of this WindowShade. Possible
+   values are <code>top</code> and <code>bottom</code>.
+   </p><p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get opened():Boolean</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get headerLocation():String</code>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set opened(value:Boolean):void</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set headerLocation(value:String):void</code>
 <br>
 </div>
+<a name="headerRenderer"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">headerRenderer</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>headerRenderer:IFactory</code>&nbsp;&nbsp;[read-write]<p>
+        To control the header used on the WindowShade component you can either set the <code>headerClass</code> or the
+        <code>headerRenderer</code>. The <code>headerRenderer</code> works similar to the itemRenderer of a List control.
+        You can set this using MXML using any Button control. This would let you customize things like button skin. You could
+        even combine this with the CanvasButton component to make complex headers.
+        </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get headerRenderer():IFactory</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set headerRenderer(value:IFactory):void</code>
+<br>
+</div>
+<a name="opened"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">opened</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var opened:Boolean</code><p>
+         Sets or gets the state of this WindowShade, either opened (true) or closed (false).
+         </p></div>
 <a name="viewMetrics"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
