@@ -1,0 +1,1057 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="MDIManager,flexlib.mdi.managers.MDIManager,tileMinimize,tileMinimizeWidth,showMinimizedTiles,tilePadding,minTilePadding,enforceBoundaries,effects,CONTEXT_MENU_LABEL_TILE,CONTEXT_MENU_LABEL_TILE_FILL,CONTEXT_MENU_LABEL_CASCADE,CONTEXT_MENU_LABEL_SHOW_ALL,windowList,global,container,add,position,addContextMenu,executeDefaultBehavior,addCenter,bringToFront,center,removeAll,remove,manage,absPos,getOpenWindowList,tile,resize,cascade,showAllWindows" name="keywords">
+<title>flexlib.mdi.managers.MDIManager</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'MDIManager - flexlib';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?flexlib/mdi/managers/MDIManager.html&amp;flexlib/mdi/managers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;MDIManager</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class MDIManager"); titleBar_setSubNav(true,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">flexlib.mdi.managers</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class MDIManager</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">MDIManager <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+</table>
+<p></p>
+  Class responsible for applying effects and default behaviors to MDIWindow instances such as
+  tiling, cascading, minimizing, maximizing, etc.
+  <p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#container">container</a> : UIComponent<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#effects">effects</a> : <a href="../effects/IMDIEffectsDescriptor.html">IMDIEffectsDescriptor</a>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#enforceBoundaries">enforceBoundaries</a> : Boolean = true<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#global">global</a> : <a href="../managers/MDIManager.html">MDIManager</a>
+<div class="summaryTableDescription">[static][read-only]</div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#minTilePadding">minTilePadding</a> : Number = 5<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#showMinimizedTiles">showMinimizedTiles</a> : Boolean = false<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#tileMinimize">tileMinimize</a> : Boolean = true<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#tileMinimizeWidth">tileMinimizeWidth</a> : int = 200<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#tilePadding">tilePadding</a> : Number = 8<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#windowList">windowList</a> : Array<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#MDIManager()">MDIManager</a>(container:UIComponent, effects:<a href="../effects/IMDIEffectsDescriptor.html">IMDIEffectsDescriptor</a> = null)</div>
+<div class="summaryTableDescription">
+        Contstructor()
+      </div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#absPos()">absPos</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>, x:int, y:int):void</div>
+<div class="summaryTableDescription">
+    Positions a window in an absolute position 
+   
+    </div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#add()">add</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addCenter()">addCenter</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addContextMenu()">addContextMenu</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>, contextMenu:ContextMenu = null):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#bringToFront()">bringToFront</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
+<div class="summaryTableDescription">
+   Brings a window to the front of the screen.</div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#cascade()">cascade</a>():void</div>
+<div class="summaryTableDescription">
+    Cascades all managed windows from top left to bottom right 
+   
+   </div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#center()">center</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
+<div class="summaryTableDescription">
+   Positions a window in the center of the available screen.</div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#executeDefaultBehavior()">executeDefaultBehavior</a>(event:Event):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getOpenWindowList()">getOpenWindowList</a>():Array</div>
+<div class="summaryTableDescription">
+   Gets a list of open windows for scenarios when only open windows need to be managed
+   
+   </div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#manage()">manage</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
+<div class="summaryTableDescription">
+   Pushes a window onto the managed window stack 
+   
+    </div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#position()">position</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
+<div class="summaryTableDescription">
+    Positions a window on the screen 
+    
+    <p>This is primarly used as the default space on the screen to position the window.</p>
+   
+    </div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#remove()">remove</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
+<div class="summaryTableDescription">
+    Removes a window instance from the managed window stack 
+    </div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeAll()">removeAll</a>():void</div>
+<div class="summaryTableDescription">
+   Removes all windows from managed window stack; 
+   </div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#resize()">resize</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#showAllWindows()">showAllWindows</a>():void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#tile()">tile</a>(fillAvailableSpace:Boolean = false, gap:Number = 0):void</div>
+<div class="summaryTableDescription">
+    Tiles the window across the screen
+    
+    <p>By default, windows will be tiled to all the same size and use only the space they can accomodate.</div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:cascade">cascade</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the windows are cascaded.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:tile">tile</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the windows are tiled.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowAdd">windowAdd</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when a window is added to the manager.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowClose">windowClose</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the minimize button is clicked.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowDrag">windowDrag</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched while the window is being dragged.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowDragEnd">windowDragEnd</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the window stops being dragged.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowDragStart">windowDragStart</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the window begins being dragged.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowFocusEnd">windowFocusEnd</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the window loses focus and no longer has topmost z-index of MDIManager's children.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowFocusStart">windowFocusStart</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the window gains focus and is given topmost z-index of MDIManager's children.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowMaximize">windowMaximize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the maximize button is clicked or when the window is in a
+   normal state (not minimized or maximized) and the titleBar is double clicked.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowMinimize">windowMinimize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the minimize button is clicked.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowResize">windowResize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched while the mouse is down on a resize handle.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowResizeEnd">windowResizeEnd</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the mouse is released from a resize handle.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowResizeStart">windowResizeStart</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when a resize handle is pressed.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:windowRestore">windowRestore</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   If the window is minimized, this event is dispatched when the titleBar is clicked.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+</table>
+</div>
+<a name="constantSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Constants</div>
+<table id="summaryTableConstant" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#CONTEXT_MENU_LABEL_CASCADE">CONTEXT_MENU_LABEL_CASCADE</a> : String = "Cascade"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#CONTEXT_MENU_LABEL_SHOW_ALL">CONTEXT_MENU_LABEL_SHOW_ALL</a> : String = "Show All Windows"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#CONTEXT_MENU_LABEL_TILE">CONTEXT_MENU_LABEL_TILE</a> : String = "Tile"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#CONTEXT_MENU_LABEL_TILE_FILL">CONTEXT_MENU_LABEL_TILE_FILL</a> : String = "Tile + Fill"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="container"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">container</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>container:UIComponent</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get container():UIComponent</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set container(value:UIComponent):void</code>
+<br>
+</div>
+<a name="effects"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">effects</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var effects:<a href="../effects/IMDIEffectsDescriptor.html">IMDIEffectsDescriptor</a></code>
+</div>
+<a name="enforceBoundaries"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">enforceBoundaries</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var enforceBoundaries:Boolean = true</code>
+</div>
+<a name="global"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">global</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>global:<a href="../managers/MDIManager.html">MDIManager</a></code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public static function get global():<a href="../managers/MDIManager.html">MDIManager</a></code>
+<br>
+</div>
+<a name="minTilePadding"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">minTilePadding</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var minTilePadding:Number = 5</code>
+</div>
+<a name="showMinimizedTiles"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">showMinimizedTiles</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var showMinimizedTiles:Boolean = false</code>
+</div>
+<a name="tileMinimize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">tileMinimize</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var tileMinimize:Boolean = true</code>
+</div>
+<a name="tileMinimizeWidth"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">tileMinimizeWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var tileMinimizeWidth:int = 200</code>
+</div>
+<a name="tilePadding"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">tilePadding</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var tilePadding:Number = 8</code>
+</div>
+<a name="windowList"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowList</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var windowList:Array</code>
+<p>This property can be used as the source for data binding.</p>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="MDIManager()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">MDIManager</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function MDIManager(container:UIComponent, effects:<a href="../effects/IMDIEffectsDescriptor.html">IMDIEffectsDescriptor</a> = null)</code><p>
+        Contstructor()
+      </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">container</span>:UIComponent</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">effects</span>:<a href="../effects/IMDIEffectsDescriptor.html">IMDIEffectsDescriptor</a></code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="absPos()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">absPos</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function absPos(window:<a href="../containers/MDIWindow.html">MDIWindow</a>, x:int, y:int):void</code><p>
+    Positions a window in an absolute position 
+   
+    </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to position
+   
+    </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">x</span>:int</code> &mdash; The x position of the window
+   
+    </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">y</span>:int</code> &mdash; The y position of the window 
+   </td>
+</tr>
+</table>
+</div>
+<a name="add()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">add</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function add(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code></td>
+</tr>
+</table>
+</div>
+<a name="addCenter()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addCenter</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addCenter(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code></td>
+</tr>
+</table>
+</div>
+<a name="addContextMenu()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addContextMenu</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addContextMenu(window:<a href="../containers/MDIWindow.html">MDIWindow</a>, contextMenu:ContextMenu = null):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">contextMenu</span>:ContextMenu</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="bringToFront()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">bringToFront</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function bringToFront(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
+   Brings a window to the front of the screen. 
+   
+    </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to bring to front
+   </td>
+</tr>
+</table>
+</div>
+<a name="cascade()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">cascade</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function cascade():void</code><p>
+    Cascades all managed windows from top left to bottom right 
+   
+   </p></div>
+<a name="center()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">center</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function center(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
+   Positions a window in the center of the available screen. 
+   
+    </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; to center
+   </td>
+</tr>
+</table>
+</div>
+<a name="executeDefaultBehavior()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">executeDefaultBehavior</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function executeDefaultBehavior(event:Event):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">event</span>:Event</code></td>
+</tr>
+</table>
+</div>
+<a name="getOpenWindowList()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getOpenWindowList</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getOpenWindowList():Array</code><p>
+   Gets a list of open windows for scenarios when only open windows need to be managed
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code> &mdash; Array
+   </td>
+</tr>
+</table>
+</div>
+<a name="manage()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">manage</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function manage(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
+   Pushes a window onto the managed window stack 
+   
+    </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window:MDIWindow to push onto managed windows stack 
+   </td>
+</tr>
+</table>
+</div>
+<a name="position()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">position</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function position(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
+    Positions a window on the screen 
+    
+    </p><p>This is primarly used as the default space on the screen to position the window.</p>
+   
+    <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to position
+   </td>
+</tr>
+</table>
+</div>
+<a name="remove()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">remove</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function remove(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
+    Removes a window instance from the managed window stack 
+    </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to remove 
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeAll()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeAll</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function removeAll():void</code><p>
+   Removes all windows from managed window stack; 
+   </p></div>
+<a name="resize()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">resize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function resize(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code></td>
+</tr>
+</table>
+</div>
+<a name="showAllWindows()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">showAllWindows</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function showAllWindows():void</code>
+</div>
+<a name="tile()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">tile</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function tile(fillAvailableSpace:Boolean = false, gap:Number = 0):void</code><p>
+    Tiles the window across the screen
+    
+    </p><p>By default, windows will be tiled to all the same size and use only the space they can accomodate.
+    If you set fillAvailableSpace = true, tile will use all the space available to tile the windows with
+    the windows being arranged by varying heights and widths. 
+        </p>
+   
+    <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">fillAvailableSpace</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; Variable to determine whether to use the fill the entire available screen
+   
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">gap</span>:Number</code> (default = <code>0</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:cascade"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">cascade</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the windows are cascaded.
+     </p></div>
+<a name="event:tile"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">tile</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the windows are tiled.
+     </p></div>
+<a name="event:windowAdd"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowAdd</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when a window is added to the manager.
+     </p></div>
+<a name="event:windowClose"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowClose</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the minimize button is clicked.
+     </p></div>
+<a name="event:windowDrag"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowDrag</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched while the window is being dragged.
+     </p></div>
+<a name="event:windowDragEnd"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowDragEnd</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the window stops being dragged.
+     </p></div>
+<a name="event:windowDragStart"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowDragStart</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the window begins being dragged.
+     </p></div>
+<a name="event:windowFocusEnd"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowFocusEnd</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the window loses focus and no longer has topmost z-index of MDIManager's children.
+     </p></div>
+<a name="event:windowFocusStart"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowFocusStart</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the window gains focus and is given topmost z-index of MDIManager's children.
+     </p></div>
+<a name="event:windowMaximize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowMaximize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the maximize button is clicked or when the window is in a
+   normal state (not minimized or maximized) and the titleBar is double clicked.
+     </p></div>
+<a name="event:windowMinimize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowMinimize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the minimize button is clicked.
+     </p></div>
+<a name="event:windowResize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowResize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched while the mouse is down on a resize handle.
+     </p></div>
+<a name="event:windowResizeEnd"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowResizeEnd</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when the mouse is released from a resize handle.
+     </p></div>
+<a name="event:windowResizeStart"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowResizeStart</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when a resize handle is pressed.
+     </p></div>
+<a name="event:windowRestore"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">windowRestore</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
+<br>
+<p></p><p>
+   If the window is minimized, this event is dispatched when the titleBar is clicked. 
+   If the window is maxmimized, this event is dispatched upon clicking the restore button
+   or double clicking the titleBar.
+     </p></div>
+<a name="constantDetail"></a>
+<div class="detailSectionHeader">Constant detail</div>
+<a name="CONTEXT_MENU_LABEL_CASCADE"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">CONTEXT_MENU_LABEL_CASCADE</td><td class="detailHeaderType">constant</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const CONTEXT_MENU_LABEL_CASCADE:String = "Cascade"</code>
+</div>
+<a name="CONTEXT_MENU_LABEL_SHOW_ALL"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">CONTEXT_MENU_LABEL_SHOW_ALL</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const CONTEXT_MENU_LABEL_SHOW_ALL:String = "Show All Windows"</code>
+</div>
+<a name="CONTEXT_MENU_LABEL_TILE"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">CONTEXT_MENU_LABEL_TILE</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const CONTEXT_MENU_LABEL_TILE:String = "Tile"</code>
+</div>
+<a name="CONTEXT_MENU_LABEL_TILE_FILL"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">CONTEXT_MENU_LABEL_TILE_FILL</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const CONTEXT_MENU_LABEL_TILE_FILL:String = "Tile + Fill"</code>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

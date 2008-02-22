@@ -69,6 +69,12 @@
     <!-- Dave Glasser (iDashboards) & Doug McCune -->
     <component id="WindowShade" class = "flexlib.containers.WindowShade" />
     
+    <!-- Ben Clinkinbeard, Brian Holmes, Brendan Meutzner -->
+    <component id="MDIWindow" class="flexlib.mdi.containers.MDIWindow" />
+	<component id="MDICanvas" class="flexlib.mdi.containers.MDICanvas" />
+    <component id="MDIVistaEffects" class="flexlib.mdi.effects.effectsLib.MDIVistaEffects" />
+    <component id="MDILinearEffects" class="flexlib.mdi.effects.effectsLib.MDILinearEffects" />
+    <component id="MDIRelationalEffects" class="flexlib.mdi.effects.effectsLib.MDIRelationalEffects" />
     
     
 </componentPackage>
