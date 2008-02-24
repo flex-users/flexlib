@@ -1,6 +1,6 @@
 /*
-Copyright (c) 2007 FlexMDI Contributors.  See:
-    http://code.google.com/p/flexlib.mdi/wiki/ProjectContributors
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
