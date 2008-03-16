@@ -29,6 +29,8 @@ package flexlib.containers {
 	import mx.core.LayoutContainer;
 	import mx.core.ScrollPolicy;
 	import mx.effects.Resize;
+    import mx.effects.effectClasses.ResizeInstance;
+    import mx.events.EffectEvent;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
 	import mx.utils.StringUtil;
@@ -186,6 +188,8 @@ package flexlib.containers {
             //default scroll policies are off
             this.verticalScrollPolicy = ScrollPolicy.OFF;
             this.horizontalScrollPolicy = ScrollPolicy.OFF;
+
+            addEventListener(EffectEvent.EFFECT_END, onEffectEnd);
         }
 
         protected function createOrReplaceHeaderButton():void {
@@ -417,12 +421,24 @@ package flexlib.containers {
 		 * @private
 		 */
 		private var resize:Resize;
+
+        /**
+         * @private
+         */
+        private var resizeInstance:ResizeInstance;
+
+        /**
+         * @private
+         */
+        private var resetExplicitHeight:Boolean;
 		
         /**
          * @private
          */
         protected function runResizeEffect():void {
 			if(resize && resize.isPlaying) {
+                // before the call to end() returns, the onEffectEnd method will have been called
+                // for the currently playing resize.
 				resize.end();
 			}
 			
@@ -437,11 +453,31 @@ package flexlib.containers {
             }
             
             resize = new Resize(this);
+
+            // If this WindowShade currently has no explicit height set, we want to
+            // restore that state when the resize effect is finished, in the onEffectEnd method.
+            // If it does, then the final height set by the effect will be retained.
+            resetExplicitHeight = isNaN(explicitHeight);
+
             resize.heightTo = Math.min(maxHeight, measuredHeight);
 
             resize.duration = duration;
-            
-            resize.play();
+
+            var instances:Array = resize.play();
+            if(instances && instances.length) {
+                resizeInstance = instances[0];
+            }
+        }
+
+        /**
+         * @private
+         */
+        protected function onEffectEnd(evt:EffectEvent):void {
+            // Make sure this is our effect ending
+            if(evt.effectInstance == resizeInstance) {
+                if(resetExplicitHeight) explicitHeight = NaN;
+                resizeInstance = null;
+            }
         }
 
         /**
