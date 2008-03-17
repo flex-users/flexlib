@@ -48,86 +48,86 @@ SOFTWARE.
 	    
 	    Form {
 	    	padding-top:0;
-	    	padding-bottom:0;	
+	    	padding-bottom:5;	
 	    }
 	</mx:Style>
   
 	<mx:VBox>
-      <flexlib:WindowShade styleName="linkButtonWindowShade" 
+      <flexlib:WindowShade id="ws1" styleName="linkButtonWindowShade" 
       	label="Personal Information" width="100%">
           <mx:Form>
             <mx:FormItem label="First name" horizontalAlign="left">
-                <mx:TextInput width="200"/>
+                <mx:TextInput tabEnabled="{ws1.opened}" width="200"/>
             </mx:FormItem>
             <mx:FormItem label="Last name">
-                <mx:TextInput width="200"/>
+                <mx:TextInput tabEnabled="{ws1.opened}" width="200"/>
             </mx:FormItem>
             <mx:FormItem label="Date of birth (mm/dd/yyyy)">
-                <mx:TextInput width="200"/>
+                <mx:TextInput tabEnabled="{ws1.opened}" width="200"/>
             </mx:FormItem>
             <mx:FormItem label="SSN">
-                <mx:TextInput width="200"/>
+                <mx:TextInput tabEnabled="{ws1.opened}" width="200"/>
             </mx:FormItem>
           </mx:Form>
       </flexlib:WindowShade>
       
-      <flexlib:WindowShade styleName="linkButtonWindowShade" 
+      <flexlib:WindowShade id="ws2" styleName="linkButtonWindowShade" 
       	label="Shipping Address" opened="false" width="100%">
           <mx:Form>
             <mx:FormItem label="Address" width="100%">
-              <mx:TextInput width="100%"/>
+              <mx:TextInput tabEnabled="{ws2.opened}" width="100%"/>
             </mx:FormItem>
             <mx:FormItem label="Suite / Apt." width="100%">
-              <mx:TextInput width="100%"/>
+              <mx:TextInput tabEnabled="{ws2.opened}" width="100%"/>
             </mx:FormItem>
             <mx:HBox>
               <mx:FormItem label="City">
-                <mx:TextInput width="100"/>
+                <mx:TextInput tabEnabled="{ws2.opened}" width="100"/>
               </mx:FormItem>
               <mx:FormItem label="State">
-                <mx:TextInput width="30"/>
+                <mx:TextInput tabEnabled="{ws2.opened}" width="30"/>
               </mx:FormItem>
               <mx:FormItem label="Zip Code">
-                <mx:TextInput width="60"/>
+                <mx:TextInput tabEnabled="{ws2.opened}" width="60"/>
               </mx:FormItem>
             </mx:HBox>
           </mx:Form>
       </flexlib:WindowShade>
       
-      <flexlib:WindowShade styleName="linkButtonWindowShade"
+      <flexlib:WindowShade id="ws3" styleName="linkButtonWindowShade"
       	label="Billing Address" opened="false" width="100%">
           <mx:Form>
             <mx:FormItem label="Address" width="100%">
-              <mx:TextInput width="100%"/>
+              <mx:TextInput tabEnabled="{ws3.opened}" width="100%"/>
             </mx:FormItem>
             <mx:FormItem label="Suite / Apt." width="100%">
-              <mx:TextInput width="100%"/>
+              <mx:TextInput tabEnabled="{ws3.opened}" width="100%"/>
             </mx:FormItem>
             <mx:HBox>
               <mx:FormItem label="City">
-                <mx:TextInput width="100"/>
+                <mx:TextInput tabEnabled="{ws3.opened}" width="100"/>
               </mx:FormItem>
               <mx:FormItem label="State">
-                <mx:TextInput width="30"/>
+                <mx:TextInput tabEnabled="{ws3.opened}" width="30"/>
               </mx:FormItem>
               <mx:FormItem label="Zip Code">
-                <mx:TextInput width="60"/>
+                <mx:TextInput tabEnabled="{ws3.opened}" width="60"/>
               </mx:FormItem>
             </mx:HBox>
           </mx:Form>
       </flexlib:WindowShade>
       
-      <flexlib:WindowShade styleName="linkButtonWindowShade"
+      <flexlib:WindowShade id="ws4" styleName="linkButtonWindowShade"
       	label="Contact Information" opened="false" width="100%">
           <mx:Form>
             <mx:FormItem label="E-mail address">
-                <mx:TextInput width="200"/>
+                <mx:TextInput tabEnabled="{ws4.opened}" width="200"/>
             </mx:FormItem>
             <mx:FormItem label="Home Phone">
-                <mx:TextInput width="200"/>
+                <mx:TextInput tabEnabled="{ws4.opened}" width="200"/>
             </mx:FormItem>
             <mx:FormItem label="Work Phone">
-                <mx:TextInput width="200"/>
+                <mx:TextInput tabEnabled="{ws4.opened}" width="200"/>
             </mx:FormItem>
         </mx:Form>
      </flexlib:WindowShade>
