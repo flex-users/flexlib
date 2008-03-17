@@ -214,6 +214,9 @@ package flexlib.containers {
             _headerButton.addEventListener(MouseEvent.CLICK, headerButton_clickHandler);
             
             rawChildren.addChild(_headerButton);
+
+            // Fix for Issue #85
+            _headerButton.tabEnabled = false;
         }
 
         protected function applyHeaderButtonStyles(button:Button):void {
