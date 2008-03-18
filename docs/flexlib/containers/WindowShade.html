@@ -19,7 +19,7 @@
 <td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/containers/WindowShade.html&amp;flexlib/containers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;WindowShade</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;WindowShade</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class WindowShade"); titleBar_setSubNav(false,true,true,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class WindowShade"); titleBar_setSubNav(false,true,true,false,true,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -117,6 +117,56 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#createOrReplaceHeaderButton()">createOrReplaceHeaderButton</a>():void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">WindowShade</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:closeBegin">closeBegin</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+     Dispatched when the WindowShade is about to be closed.</td><td class="summaryTableOwnerCol">WindowShade</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:closeEnd">closeEnd</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+     Dispatched when the WindowShade has finished closing.</td><td class="summaryTableOwnerCol">WindowShade</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:openBegin">openBegin</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+     Dispatched when the WindowShade is about to be opened.</td><td class="summaryTableOwnerCol">WindowShade</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:openedChanged">openedChanged</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+     Dispatched when the <code>opened</code> property is changed, either through user action
+     or programatically.</td><td class="summaryTableOwnerCol">WindowShade</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:openEnd">openEnd</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+     Dispatched when the WindowShade has finished opening.</td><td class="summaryTableOwnerCol">WindowShade</td>
 </tr>
 </table>
 </div>
@@ -311,6 +361,77 @@ showHideInherited();
 <div class="detailBody">
 <code>protected function createOrReplaceHeaderButton():void</code>
 </div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:closeBegin"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">closeBegin</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/WindowShadeEvent.html"><code>flexlib.events.WindowShadeEvent</code></a>
+<br>
+<p></p><p>
+     Dispatched when the WindowShade is about to be closed. This event cannot be cancelled.
+     
+     </p><p>In most cases, an event of this type will be followed by an event of type WindowShadeEvent.CLOSE_END (<code>closeEnd</code>); however,
+     if the user clicks the header button before the closing transition has run to completion, the <code>closeEnd</code> event will
+     not be dispatched, since the WindowShade will not be left in the closed state.</p>
+           </div>
+<a name="event:closeEnd"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">closeEnd</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/WindowShadeEvent.html"><code>flexlib.events.WindowShadeEvent</code></a>
+<br>
+<p></p><p>
+     Dispatched when the WindowShade has finished closing. This event cannot be cancelled.
+           </p></div>
+<a name="event:openBegin"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">openBegin</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/WindowShadeEvent.html"><code>flexlib.events.WindowShadeEvent</code></a>
+<br>
+<p></p><p>
+     Dispatched when the WindowShade is about to be opened.
+     
+     </p><p>In most cases, an event of this type will be followed by an event of type WindowShadeEvent.OPEN_END (<code>openEnd</code>); however,
+     if the user clicks the header button before the closing transition has run to completion, the <code>openEnd</code> event will
+     not be dispatched, since the WindowShade will not be left in the opened state.</p>
+           </div>
+<a name="event:openedChanged"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">openedChanged</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/WindowShadeEvent.html"><code>flexlib.events.WindowShadeEvent</code></a>
+<br>
+<p></p><p>
+     Dispatched when the <code>opened</code> property is changed, either through user action
+     or programatically. This event is cancelable. When cancelled through a call to Event.preventDefault(),
+     the <code>opened</code> property will be restored to its previous state.
+           </p></div>
+<a name="event:openEnd"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">openEnd</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../events/WindowShadeEvent.html"><code>flexlib.events.WindowShadeEvent</code></a>
+<br>
+<p></p><p>
+     Dispatched when the WindowShade has finished opening. This event cannot be cancelled.
+           </p></div>
 <br>
 <br>
 <hr>
