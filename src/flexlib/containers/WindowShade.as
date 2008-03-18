@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2007 FlexLib Contributors.  See:
+Copyright (c) 2007 - 2008 FlexLib Contributors.  See:
     http://code.google.com/p/flexlib/wiki/ProjectContributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -22,6 +22,7 @@ SOFTWARE.
 */
 package flexlib.containers {
 	import flash.events.MouseEvent;
+    import flexlib.events.WindowShadeEvent;
 	
 	import mx.controls.Button;
 	import mx.core.EdgeMetrics;
@@ -31,6 +32,7 @@ package flexlib.containers {
 	import mx.effects.Resize;
     import mx.effects.effectClasses.ResizeInstance;
     import mx.events.EffectEvent;
+    import mx.events.PropertyChangeEvent;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
 	import mx.utils.StringUtil;
@@ -87,6 +89,53 @@ package flexlib.containers {
       * @default false
       */
      [Style(name="toggleHeader", type="Boolean", inherit="no")]
+
+
+
+    /**
+     * Dispatched when the <code>opened</code> property is changed, either through user action
+     * or programatically. This event is cancelable. When cancelled through a call to Event.preventDefault(),
+     * the <code>opened</code> property will be restored to its previous state.
+     *
+     *  @eventType flexlib.events.WindowShadeEvent.OPENED_CHANGED
+     */
+     [Event(name="openedChanged", type="flexlib.events.WindowShadeEvent")]
+
+    /**
+     * Dispatched when the WindowShade is about to be opened.
+     * 
+     * <p>In most cases, an event of this type will be followed by an event of type WindowShadeEvent.OPEN_END (<code>openEnd</code>); however,
+     * if the user clicks the header button before the closing transition has run to completion, the <code>openEnd</code> event will
+     * not be dispatched, since the WindowShade will not be left in the opened state.</p>
+     *
+     *  @eventType flexlib.events.WindowShadeEvent.OPEN_BEGIN
+     */
+     [Event(name="openBegin", type="flexlib.events.WindowShadeEvent")]
+
+    /**
+     * Dispatched when the WindowShade has finished opening. This event cannot be cancelled.
+     *
+     *  @eventType flexlib.events.WindowShadeEvent.OPEN_END
+     */
+     [Event(name="openEnd", type="flexlib.events.WindowShadeEvent")]
+
+    /**
+     * Dispatched when the WindowShade is about to be closed. This event cannot be cancelled.
+     * 
+     * <p>In most cases, an event of this type will be followed by an event of type WindowShadeEvent.CLOSE_END (<code>closeEnd</code>); however,
+     * if the user clicks the header button before the closing transition has run to completion, the <code>closeEnd</code> event will
+     * not be dispatched, since the WindowShade will not be left in the closed state.</p>
+     *
+     *  @eventType flexlib.events.WindowShadeEvent.CLOSE_BEGIN
+     */
+     [Event(name="closeBegin", type="flexlib.events.WindowShadeEvent")]
+
+    /**
+     * Dispatched when the WindowShade has finished closing. This event cannot be cancelled.
+     *
+     *  @eventType flexlib.events.WindowShadeEvent.CLOSE_END
+     */
+     [Event(name="closeEnd", type="flexlib.events.WindowShadeEvent")]
 
     /**
      * This control displays a button, which when clicked, will cause a panel to "unroll" beneath
@@ -290,15 +339,47 @@ package flexlib.containers {
             var old:Boolean = _opened;
             
             _opened = value;
-            _openedChanged = _openedChanged || old != _opened;
+            _openedChanged = _openedChanged || (old != _opened);
            
             if(_openedChanged && initialized) {
+                // we only want to dispatch the WindowShadeEvent.OPENED_CHANGED when the property actually changes. The _openedChanged
+                // flag may be set from a previous call with the same value. In that case we want to leave it set 
+                // for the commitProperties() method.
+                if((old != _opened) && willTrigger(WindowShadeEvent.OPENED_CHANGED)) {
+                    var evt:WindowShadeEvent = new WindowShadeEvent(WindowShadeEvent.OPENED_CHANGED, false, true);
+                    dispatchEvent(evt);
+                    var cancelled:Boolean = evt.isDefaultPrevented();
+                    if(evt.isDefaultPrevented()) {
+                        // restore the old setting. We use callLater so it happens after the PropertyChangeEvent fired
+                        // by the binding wrapper.
+                        callLater(restoreOpened, [old]);
+                        return;
+                    }
+                }
+
                 measure();
                	runResizeEffect();
                 
                 invalidateProperties();
             }
         }
+
+
+        /**
+         * @private
+         * 
+         * This exists to allow us to restore a previous opened state when a WindowShadeEvent.OPENED_CHANGED event is 
+         * cancelled, while bypassing the code that changes the visual state of the WindowShade and dispatches the WindowShadeEvent.
+         */
+         protected function restoreOpened(value:Boolean):void {
+             var old:Boolean = _opened;
+             _opened = value;
+             _openedChanged = _openedChanged || (old != _opened);
+             if(_opened != old) {
+                 dispatchEvent(PropertyChangeEvent.createUpdateEvent(this, "opened", old, _opened));
+             }
+         }
+
 
         /**
          * @private
@@ -434,16 +515,32 @@ package flexlib.containers {
          * @private
          */
         private var resetExplicitHeight:Boolean;
+
+
+        private var transitionCompleted:Boolean = true;
 		
         /**
          * @private
          */
         protected function runResizeEffect():void {
 			if(resize && resize.isPlaying) {
+
+                // The user has clicked the header button before an open or close transition has run
+                // to completion. We'll set the transitionCompleted flag to false to prevent the
+                // completion event from being dispatched in onEffectEnd.
+                transitionCompleted = false;
+
                 // before the call to end() returns, the onEffectEnd method will have been called
                 // for the currently playing resize.
 				resize.end();
 			}
+
+            transitionCompleted = true;
+
+            var beginEvent:String = _opened ? WindowShadeEvent.OPEN_BEGIN : WindowShadeEvent.CLOSE_BEGIN;
+            if(willTrigger(beginEvent)) {
+                dispatchEvent(new WindowShadeEvent(beginEvent, false, false));
+            }
 			
             var duration:Number = _opened ? getStyle("openDuration") : getStyle("closeDuration");
             if(duration == 0) { 
@@ -451,7 +548,12 @@ package flexlib.containers {
             	
             	invalidateSize();
             	invalidateDisplayList();
-            	
+
+                var endEvent:String = _opened ? WindowShadeEvent.OPEN_END : WindowShadeEvent.CLOSE_END;
+                if(willTrigger(endEvent)) {
+                    dispatchEvent(new WindowShadeEvent(endEvent, false, false));
+                }
+
             	return;
             }
             
@@ -480,6 +582,16 @@ package flexlib.containers {
             if(evt.effectInstance == resizeInstance) {
                 if(resetExplicitHeight) explicitHeight = NaN;
                 resizeInstance = null;
+
+                // the transitionCompleted flag will be false if the user clicked the headerButton
+                // twice in succession. We only want to fire events for transitions that run
+                // all the way to completion.
+                if(transitionCompleted) {
+                    var endEvent:String = _opened ? WindowShadeEvent.OPEN_END : WindowShadeEvent.CLOSE_END;
+                    if(willTrigger(endEvent)) {
+                        dispatchEvent(new WindowShadeEvent(endEvent, false, false));
+                    }
+                }
             }
         }
 
