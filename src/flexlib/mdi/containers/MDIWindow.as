@@ -364,6 +364,12 @@ package flexlib.mdi.containers
 		private var _showCloseButton:Boolean = true;
 		
 		/**
+		 * @private
+		 * Flag to determine whether or not window controls are visible.
+		 */
+		private var _showControls:Boolean = true;
+		
+		/**
 		 * Height of window when minimized.
 		 */
 		private var _minimizeHeight:Number;
@@ -1193,7 +1199,7 @@ package flexlib.mdi.containers
 			_showCloseButton = value;
 			if(closeBtn && closeBtn.visible != value)
 			{
-				closeBtn.visible = value;
+				closeBtn.visible = closeBtn.includeInLayout = value;
 				invalidateDisplayList();
 			}
 		}
@@ -1632,9 +1638,17 @@ package flexlib.mdi.containers
 			}
 		}
 		
+		public function get showControls():Boolean
+		{
+			return _showControls;
+		}
+		
 		public function set showControls(value:Boolean):void
 		{
-			Container(windowControls).visible = value;
+			if(value != _showControls)
+			{
+				_showControls = Container(windowControls).visible = value;
+			}
 		}
 		
 		private function get windowState():int
