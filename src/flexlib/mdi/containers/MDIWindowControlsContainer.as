@@ -89,26 +89,35 @@ package flexlib.mdi.containers
 		{
 			super.updateDisplayList(w, h);
 			
-			// since we're in rawChildren we don't get measured and laid out by our parent
-			// this routine finds the bounds of our children and sets our size accordingly
-			var minX:Number = 9999;
-			var minY:Number = 9999;
-			var maxX:Number = -9999;
-			var maxY:Number = -9999;
-			for each(var child:DisplayObject in this.getChildren())
+			if(window.showControls)
 			{
-				minX = Math.min(minX, child.x);
-				minY = Math.min(minY, child.y);
-				maxX = Math.max(maxX, child.x + child.width);
-				maxY = Math.max(maxY, child.y + child.height);
+				// respect window's showCloseButton property
+				closeBtn.visible = closeBtn.includeInLayout = window.showCloseButton;
+				
+				// since we're in rawChildren we don't get measured and laid out by our parent
+				// this routine finds the bounds of our children and sets our size accordingly
+				var minX:Number = 9999;
+				var minY:Number = 9999;
+				var maxX:Number = -9999;
+				var maxY:Number = -9999;
+				for each(var child:DisplayObject in this.getChildren())
+				{
+					if(child != window.closeBtn || child == window.closeBtn && window.showCloseButton)
+					{
+						minX = Math.min(minX, child.x);
+						minY = Math.min(minY, child.y);
+						maxX = Math.max(maxX, child.x + child.width);
+						maxY = Math.max(maxY, child.y + child.height);
+					}
+				}
+				this.setActualSize(maxX - minX, maxY - minY);
+				
+				// now that we're sized we set our position
+				// right aligned, respecting border width
+				this.x = window.width - this.width - Number(window.getStyle("borderThicknessRight"));
+				// vertically centered
+				this.y = (window.titleBarOverlay.height - this.height) / 2;
 			}
-			this.setActualSize(maxX - minX, maxY - minY);
-			
-			// now that we're sized we set our position
-			// right aligned, respecting border width
-			this.x = window.width - this.width - Number(window.getStyle("borderThicknessRight"));
-			// vertically centered
-			this.y = (window.titleBarOverlay.height - this.height) / 2;
 			
 			// lay out the title field and icon (if present)
 			var tf:UITextField = window.getTitleTextField();
