@@ -293,6 +293,14 @@ package flexlib.containers {
         }
 
         /**
+         * The text that appears on the headerButton.
+         */
+        override public function get label():String {
+            // This override is here only to keep the ASDoc tool from incorrectly marking this a write-only property.
+            return super.label;
+        }
+
+        /**
          * @private
          */
         override public function set label(value:String):void {
