@@ -37,6 +37,7 @@ package flexlib.mdi.managers
 	import flexlib.mdi.effects.IMDIEffectsDescriptor;
 	import flexlib.mdi.effects.MDIEffectsDescriptorBase;
 	import flexlib.mdi.effects.effectClasses.MDIGroupEffectItem;
+	import flexlib.mdi.events.MDIEffectEvent;
 	import flexlib.mdi.events.MDIManagerEvent;
 	import flexlib.mdi.events.MDIWindowEvent;
 	
@@ -166,11 +167,31 @@ package flexlib.mdi.managers
 	[Event(name="tile", type="flexlib.mdi.events.MDIManagerEvent")]
 	
 	/**
+	 *  Dispatched when an effect begins.
+	 *
+	 *  @eventType mx.events.EffectEvent.EFFECT_START
+	 */
+	[Event(name="effectStart", type="mx.events.EffectEvent")]
+	
+	/**
+	 *  Dispatched when an effect ends.
+	 *
+	 *  @eventType mx.events.EffectEvent.EFFECT_END
+	 */
+	[Event(name="effectEnd", type="mx.events.EffectEvent")]
+	
+	/**
 	 * Class responsible for applying effects and default behaviors to MDIWindow instances such as
 	 * tiling, cascading, minimizing, maximizing, etc.
 	 */
 	public class MDIManager extends EventDispatcher
 	{
+		/**
+		 * Temporary storage location for use in dispatching MDIEffectEvents.
+		 * 
+		 * @private
+		 */
+		private var mgrEventCollection:ArrayCollection = new ArrayCollection();
 		
 		private static var globalMDIManager:MDIManager;
 		public static function get global():MDIManager
@@ -202,7 +223,7 @@ package flexlib.mdi.managers
 		public static const CONTEXT_MENU_LABEL_SHOW_ALL:String = "Show All Windows";
 		
 		/**
-     	*   Contstructor()
+     	*   Constructor()
      	*/
 		public function MDIManager(container:UIComponent, effects:IMDIEffectsDescriptor = null):void
 		{
@@ -457,80 +478,106 @@ package flexlib.mdi.managers
 					case MDIManagerEvent.WINDOW_ADD:
 						// get the effect here because this doesn't pass thru windowEventProxy()
 						mgrEvent.effect = this.effects.getWindowAddEffect(mgrEvent.window, this);
-						mgrEvent.effect.play();
 					break;
 					
 					case MDIManagerEvent.WINDOW_MINIMIZE:						
 						mgrEvent.effect.addEventListener(EffectEvent.EFFECT_END, onMinimizeEffectEnd);
-						mgrEvent.effect.play();
 					break;
 					
 					case MDIManagerEvent.WINDOW_RESTORE:
 						removeTileInstance(mgrEvent.window);
-						mgrEvent.effect.play();
 					break;
 					
 					case MDIManagerEvent.WINDOW_MAXIMIZE:
 						removeTileInstance(mgrEvent.window);
-						maximizeWindow(mgrEvent.window);
+						mgrEvent.effect = getMaximizeWindowEffect(mgrEvent.window);
 					break;
 					
 					case MDIManagerEvent.WINDOW_CLOSE:
 						removeTileInstance(mgrEvent.window);
 						mgrEvent.effect.addEventListener(EffectEvent.EFFECT_END, onCloseEffectEnd);
-						mgrEvent.effect.play();
 					break;
 					
 					case MDIManagerEvent.WINDOW_FOCUS_START:
 						mgrEvent.window.hasFocus = true;
 						mgrEvent.window.validateNow();
 						container.setChildIndex(mgrEvent.window, container.numChildren - 1);
-						mgrEvent.effect.play();
 					break;
 					
 					case MDIManagerEvent.WINDOW_FOCUS_END:
 						mgrEvent.window.hasFocus = false;
 						mgrEvent.window.validateNow();
-						mgrEvent.effect.play();
 					break;
-		
+					
+					// no, nothing happens in these cases. but it might someday.
 					case MDIManagerEvent.WINDOW_DRAG_START:
-						mgrEvent.effect.play();
-					break;
-		
 					case MDIManagerEvent.WINDOW_DRAG:
-						mgrEvent.effect.play();
-					break;
-		
 					case MDIManagerEvent.WINDOW_DRAG_END:
-						mgrEvent.effect.play();
-					break;
-					
 					case MDIManagerEvent.WINDOW_RESIZE_START:
-						mgrEvent.effect.play();
-					break;
-					
 					case MDIManagerEvent.WINDOW_RESIZE:
-						mgrEvent.effect.play();
-					break;
-					
 					case MDIManagerEvent.WINDOW_RESIZE_END:
-						mgrEvent.effect.play();
 					break;
 					
 					case MDIManagerEvent.CASCADE:
 						// get the effect here because this doesn't pass thru windowEventProxy()
 						mgrEvent.effect = this.effects.getCascadeEffect(mgrEvent.effectItems, this);
-						mgrEvent.effect.play();
 					break;
 					
 					case MDIManagerEvent.TILE:
 						// get the effect here because this doesn't pass thru windowEventProxy()
 						mgrEvent.effect = this.effects.getTileEffect(mgrEvent.effectItems, this);
-						mgrEvent.effect.play();
 					break;
 				}
-			}			
+				
+				// add this event to collection for lookup in the effect handler
+				mgrEventCollection.addItem(mgrEvent);
+				
+				// listen for start and end of effect
+				mgrEvent.effect.addEventListener(EffectEvent.EFFECT_START, onMgrEffectEvent)
+				mgrEvent.effect.addEventListener(EffectEvent.EFFECT_END, onMgrEffectEvent);
+				
+				mgrEvent.effect.play();
+			}
+		}
+		
+		/**
+		 * Handler for start and end events of all effects initiated by MDIManager.
+		 * 
+		 * @param event
+		 */
+		private function onMgrEffectEvent(event:EffectEvent):void
+		{
+			// iterate over stored events
+			for each(var mgrEvent:MDIManagerEvent in mgrEventCollection)
+			{
+				// is this the manager event that corresponds to this effect?
+				if(mgrEvent.effect == event.effectInstance.effect)
+				{
+					// for group events (tile and cascade) event.window is null
+					// and we have to dig in a bit to get the window list
+					var windows:Array = new Array();
+					if(mgrEvent.window)
+					{
+						windows.push(mgrEvent.window);
+					}
+					else
+					{
+						for each(var group:MDIGroupEffectItem in mgrEvent.effectItems)
+						{
+							windows.push(group.window);
+						}
+					}
+					// create and dispatch event
+					dispatchEvent(new MDIEffectEvent(event.type, mgrEvent.type, windows));					
+					
+					// if the effect is over remove the manager event from collection
+					if(event.type == EffectEvent.EFFECT_END)
+					{
+						mgrEventCollection.removeItemAt(mgrEventCollection.getItemIndex(mgrEvent));
+					}
+					return;
+				}
+			}
 		}
 		
 		private function onMinimizeEffectEnd(event:EffectEvent):void
@@ -646,7 +693,7 @@ package flexlib.mdi.managers
 				for(var winIndex:int = 0; winIndex < openWins.length; winIndex++)
 				{
 					if(MDIWindow(openWins[winIndex]).maximized)
-						maximizeWindow(MDIWindow(openWins[winIndex]));
+						getMaximizeWindowEffect(MDIWindow(openWins[winIndex])).play();
 				}
 			}
 			
@@ -668,16 +715,16 @@ package flexlib.mdi.managers
 		 * @param window MDIWindowinstance to maximize
 		 * 
 		 **/
-		private function maximizeWindow(window:MDIWindow):void
+		private function getMaximizeWindowEffect(window:MDIWindow):Effect
 		{
 			var maxTiles:int = this.container.width / this.tileMinimizeWidth;
 			if(showMinimizedTiles)
 			{
-				this.effects.getWindowMaximizeEffect(window, this, getBottomOffsetHeight(maxTiles, window.minimizeHeight, this.minTilePadding)).play();
+				return this.effects.getWindowMaximizeEffect(window, this, getBottomOffsetHeight(maxTiles, window.minimizeHeight, this.minTilePadding));
 			}
 			else
 			{
-				this.effects.getWindowMaximizeEffect(window, this).play();
+				return this.effects.getWindowMaximizeEffect(window, this);
 			}
 		}
 		
@@ -859,14 +906,16 @@ package flexlib.mdi.managers
 		}				
 		
 		/**
-		 * Pushes a window onto the managed window stack 
+		 * Pushes an existing window onto the managed window stack. 
 		 * 
 		 *  @param win Window:MDIWindow to push onto managed windows stack 
 		 * */
 		public function manage(window:MDIWindow):void
 		{	
-			if(window != null)
+			if(window != null && windowList.indexOf(window) < 0)
+			{
 				windowList.push(window);
+			}
 		}
 		
 		/**
