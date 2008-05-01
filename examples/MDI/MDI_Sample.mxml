@@ -26,8 +26,8 @@ SOFTWARE.
 	creationComplete="onCreationComplete()" xmlns:ns="sample_content.*">
 	<mx:Script>
 		<![CDATA[
-			import mx.events.ItemClickEvent;
-			import flash.utils.getTimer;
+			import mx.events.EffectEvent;
+			import flexlib.mdi.events.MDIEffectEvent;
 			import flexlib.mdi.events.MDIWindowEvent;
 			import flexlib.mdi.effects.MDIEffectsDescriptorBase;
 			import flexlib.mdi.effects.effectsLib.MDILinearEffects;
@@ -88,6 +88,21 @@ SOFTWARE.
 				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_RESIZE_START, windowEventHandler);
 				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_RESIZE, windowEventHandler);
 				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_RESIZE_END, windowEventHandler);
+				
+				mdiCanvas.windowManager.addEventListener(EffectEvent.EFFECT_START, effectHandler);
+				mdiCanvas.windowManager.addEventListener(EffectEvent.EFFECT_END, effectHandler);
+			}
+			
+			private function effectHandler(event:MDIEffectEvent):void
+			{
+				var names:String = "";
+				for each(var win:MDIWindow in event.windows)
+				{
+					names += (names.length == 0) ? win.title : ", " + win.title;
+				}
+				eventMonitor.text += names + ": " + event.mdiEventType + " " + event.type + "\n";
+				eventMonitor.verticalScrollPosition = eventMonitor.maxVerticalScrollPosition;
+				eventMonitor.validateNow();
 			}
 			
 			// default event handler
