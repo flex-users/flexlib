@@ -111,7 +111,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#MDIManager()">MDIManager</a>(container:UIComponent, effects:<a href="../effects/IMDIEffectsDescriptor.html">IMDIEffectsDescriptor</a> = null)</div>
 <div class="summaryTableDescription">
-        Contstructor()
+        Constructor()
       </div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
@@ -194,9 +194,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#manage()">manage</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
 <div class="summaryTableDescription">
-   Pushes a window onto the managed window stack 
-   
-    </div>
+   Pushes an existing window onto the managed window stack.</div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 <tr class="">
@@ -269,6 +267,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </div>
 </td><td class="summaryTableDescription summaryTableCol">
    Dispatched when the windows are cascaded.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:effectEnd">effectEnd</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when an effect ends.</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:effectStart">effectStart</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when an effect begins.</td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -526,7 +540,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function MDIManager(container:UIComponent, effects:<a href="../effects/IMDIEffectsDescriptor.html">IMDIEffectsDescriptor</a> = null)</code><p>
-        Contstructor()
+        Constructor()
       </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -712,7 +726,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function manage(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
-   Pushes a window onto the managed window stack 
+   Pushes an existing window onto the managed window stack. 
    
     </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -834,6 +848,30 @@ showHideInherited();
 <br>
 <p></p><p>
    Dispatched when the windows are cascaded.
+     </p></div>
+<a name="event:effectEnd"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">effectEnd</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>mx.events.EffectEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when an effect ends.
+     </p></div>
+<a name="event:effectStart"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">effectStart</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>mx.events.EffectEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when an effect begins.
      </p></div>
 <a name="event:tile"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
