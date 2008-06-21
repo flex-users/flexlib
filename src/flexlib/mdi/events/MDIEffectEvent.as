@@ -20,13 +20,13 @@ package flexlib.mdi.events
 		/**
 		 * Constructor
 		 * 
-		 * @param eventType EffectEvent.EFFECT_START or EfectEvent.EFFECT_END
+		 * @param type EffectEvent.EFFECT_START or EfectEvent.EFFECT_END
 		 * @param mdiEventType Corresponding mdi event type like minimize, maximize, tile, etc. Will be one of MDIManagerEvent's static types.
 		 * @param windows List of windows involved in effect. Will be a single element except for cascade and tile.
 		 */
-		public function MDIEffectEvent(eventType:String, mdiEventType:String, windows:Array)
+		public function MDIEffectEvent(type:String, mdiEventType:String, windows:Array)
 		{
-			super(eventType);
+			super(type);
 			
 			this.mdiEventType = mdiEventType;
 			this.windows = windows;
