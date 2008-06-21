@@ -105,8 +105,8 @@ SOFTWARE.
 			<arg line="-sp '${src.dir}'" />
 			
 			<!-- Specify the manifest.xml file and namespace to use -->
-			<arg line="-namespace http://code.google.com/p/flexlib/ ${src.dir}/manifest.xml" />
-			<arg line="-include-namespaces http://code.google.com/p/flexlib/" />
+			<arg line="-namespace http://flexlib.googlecode.com/ ${src.dir}/manifest.xml" />
+			<arg line="-include-namespaces http://flexlib.googlecode.com/" />
 			
 			<!-- Exclude the core flex framework from the library -->
 			<arg line="-el '${flexsdk.lib.dir}'" />
