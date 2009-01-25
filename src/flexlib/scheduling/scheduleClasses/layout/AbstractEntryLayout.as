@@ -144,7 +144,7 @@ package flexlib.scheduling.scheduleClasses.layout
 		{
 			var rowLocatorItem : RowLocatorItem = new RowLocatorItem();
 			rowLocatorItem.row = row;
-			rowLocatorItem.rowItem = row;
+			rowLocatorItem.rowItem = rowItem;
 			setRowLocatorItem( item, rowLocatorItem );
 		}			
 			
