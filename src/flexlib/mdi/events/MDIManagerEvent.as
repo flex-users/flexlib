@@ -57,19 +57,21 @@ package flexlib.mdi.events
 		public var manager:MDIManager;
 		public var effect:Effect;
 		public var effectItems:Array;
-		
-		public function MDIManagerEvent(type:String, window:MDIWindow, manager:MDIManager, effect:Effect = null, effectItems:Array = null, bubbles:Boolean = false)
+		public var resizeHandle:String;
+
+		public function MDIManagerEvent(type:String, window:MDIWindow, manager:MDIManager, effect:Effect = null, effectItems:Array = null, resizeHandle:String = null, bubbles:Boolean = false)
 		{
 			super(type, bubbles, true);
 			this.window = window;
 			this.manager = manager;
 			this.effect = effect;
 			this.effectItems = effectItems;
+			this.resizeHandle = resizeHandle;
 		}
 		
 		override public function clone():Event
 		{
-			return new MDIManagerEvent(type, window, manager, effect, effectItems, bubbles);
+			return new MDIManagerEvent(type, window, manager, effect, effectItems, resizeHandle, bubbles);
 		}
 	}
 }

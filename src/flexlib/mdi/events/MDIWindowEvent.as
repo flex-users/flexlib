@@ -49,15 +49,18 @@ package flexlib.mdi.events
 		
 		public var window:MDIWindow;
 		
-		public function MDIWindowEvent(type:String, window:MDIWindow, bubbles:Boolean = false)
+		public var resizeHandle:String;
+		
+		public function MDIWindowEvent(type:String, window:MDIWindow, resizeHandle:String = null, bubbles:Boolean = false)
 		{
 			super(type, bubbles, true);
 			this.window = window;
+			this.resizeHandle = resizeHandle;
 		}
 		
 		override public function clone():Event
 		{
-			return new MDIWindowEvent(type, window, bubbles);
+			return new MDIWindowEvent(type, window, resizeHandle, bubbles);
 		}
 	}
 }
