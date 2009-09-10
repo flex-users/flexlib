@@ -29,7 +29,7 @@ import mx.styles.CSSStyleDeclaration;
 import mx.styles.StyleManager;
 
 /**
- *  A utility to dynmacially inject values from CSSStyleDeclarations into a target 
+ *  A utility to dynamically inject values from CSSStyleDeclarations into a target 
  *  object.
  * 
  *  NOTE: This code is being developed and has not be thoroughly tested... 
