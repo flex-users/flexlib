@@ -37,7 +37,7 @@ import mx.styles.StyleManager;
  *  
  *  @author Adam Flater
  */ 
-public class CSSPropertyInjector
+public dynamic class CSSPropertyInjector
 {
 
     //--------------------------------------------------------------------------
@@ -163,7 +163,7 @@ public class CSSPropertyInjector
         //  and styles.. and one of these values has changed... 
         //  the style declaration is retreived and applied
         if ( ( __target != null || __targets != null ) && 
-             ( __styles != null || useIntrospection == true ) &&
+             ( __styles != null || __useIntrospection == true ) &&
              __styleName != null &&  
              ( __targetChanged == true || __targetsChanged == true ||
                __styleNameChanged == true || __stylesChanged == true ) )
@@ -241,10 +241,19 @@ public class CSSPropertyInjector
     {
         for each ( var style : String in styles )
         {
-            if ( target.hasOwnProperty( style ) && 
-                 __cssStyleDeclaration.getStyle( style ) != null )
+            if ( target.hasOwnProperty( style ) )
             {
-                target[ style ] = __cssStyleDeclaration.getStyle( style );
+                //  Look for a value for [style] in the CSSStyeDeclaration
+                if ( __cssStyleDeclaration.getStyle( style ) != null )
+                {
+                    target[ style ] = __cssStyleDeclaration.getStyle( style );
+                }
+                //  If the CSSStyeDeclaration lookup is null.. Look for a 
+                //  default value on the CSSPropertyInjector
+                else if ( this[ style ] != null )
+                {
+                    target[ style ] = this[ style ];
+                }
             }
         }
     }
