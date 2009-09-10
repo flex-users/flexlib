@@ -76,5 +76,7 @@
     <component id="MDILinearEffects" class="flexlib.mdi.effects.effectsLib.MDILinearEffects" />
     <component id="MDIRelationalEffects" class="flexlib.mdi.effects.effectsLib.MDIRelationalEffects" />
     
+    <!-- Adam Flater -->
+    <component id="CSSPropertyInjector" class="flexlib.css.CSSPropertyInjector" />
     
 </componentPackage>
