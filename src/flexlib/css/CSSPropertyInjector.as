@@ -238,8 +238,6 @@ public dynamic class CSSPropertyInjector
             {
                 styles.push( propName );
             }
-            
-            trace( styles, "\n" );
         }
         
         if ( target != null )
