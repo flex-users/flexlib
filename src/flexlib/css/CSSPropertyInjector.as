@@ -178,7 +178,7 @@ public dynamic class CSSPropertyInjector
     protected function getCSSStyleDeclarations() : void
     {
         __cssStyleDeclarations = [];
-        if ( styleName != null )
+        if ( styleName != null && getCSSStyleDeclaration( styleName ) != null )
         {
             __cssStyleDeclarations.push( getCSSStyleDeclaration( styleName ) );
         }
@@ -187,7 +187,10 @@ public dynamic class CSSPropertyInjector
         {
             for each ( var name : String in styleNames )
             {
-                __cssStyleDeclarations.push( getCSSStyleDeclaration( name ) );
+                if ( getCSSStyleDeclaration( name ) != null )
+                {
+                    __cssStyleDeclarations.push( getCSSStyleDeclaration( name ) );
+                }
             }
         }
     }
