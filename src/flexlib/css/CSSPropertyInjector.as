@@ -23,10 +23,10 @@ SOFTWARE.
 
 package flexlib.css
 {
-import flash.utils.describeType;
-
+import mx.core.UIComponent;
 import mx.styles.CSSStyleDeclaration;
 import mx.styles.StyleManager;
+import mx.utils.ObjectUtil;
 
 /**
  *  A utility to dynamically inject values from CSSStyleDeclarations into a target 
@@ -52,6 +52,7 @@ public dynamic class CSSPropertyInjector
     public function CSSPropertyInjector()
     {
         super();
+        
     }
     
 
@@ -61,21 +62,6 @@ public dynamic class CSSPropertyInjector
     //
     //--------------------------------------------------------------------------
 
-    /**
-     *  Uses introspection to determine the properties of the target object. These
-     *  properties are used in place of <code>styles</code>.
-     */    
-    public function get useIntrospection() : Boolean 
-    {
-        return __useIntrospection;
-    }
-    public function set useIntrospection( val : Boolean ) : void
-    {
-        __useIntrospection = val;
-        __useIntrospectionChanged = true;
-        invalidateProperties();
-    }
-    
     /**
      *  The target object to apply the CSS values to.
      */
@@ -119,20 +105,26 @@ public dynamic class CSSPropertyInjector
     }
 
     /**
-     *  A set of styles to read from the CSSStyleDeclration and set on the target(s). If
-     *  useIntrospection is true, these are ignored. 
-     * 
-     *  Note: it is much more efficient to specify a set of styles and set 
-     *  useIntrospection to false.
+     *  The style names of the CSSDeclarations to inject from.
      */
-    public function get styles() : Array 
+    public function get styleNames() : Object 
     {
-        return __styles;
+        return __styleNames;
     }
-    public function set styles( val : Array ) : void
+    public function set styleNames( val : Object ) : void
     {
-        __styles = val;
-        __stylesChanged = true;
+    	if ( val == null || ( !( val is Array ) && !( val is String ) ) ) return;
+    	
+    	if ( val is Array )
+    	{
+        	__styleNames = val as Array;
+     	}
+     	else if ( val is String )
+     	{
+     		__styleNames = ( val as String ).split( "," );
+     	}
+     
+        __styleNamesChanged = true;
         invalidateProperties();
     }
 
@@ -163,17 +155,16 @@ public dynamic class CSSPropertyInjector
         //  and styles.. and one of these values has changed... 
         //  the style declaration is retreived and applied
         if ( ( __target != null || __targets != null ) && 
-             ( __styles != null || __useIntrospection == true ) &&
-             __styleName != null &&  
+             ( __styleName != null || __styleNames != null ) &&  
              ( __targetChanged == true || __targetsChanged == true ||
-               __styleNameChanged == true || __stylesChanged == true ) )
+               __styleNameChanged == true || __styleNamesChanged == true ) )
         {
-            if ( __styleNameChanged == true )
+            if ( __styleNameChanged == true || __styleNamesChanged == true )
             {
-                getCSSStyleDeclaration();
+                getCSSStyleDeclarations();
             }
             
-            __targetChanged = __targetsChanged = __styleNameChanged = __stylesChanged = false;
+            __targetChanged = __targetsChanged = __styleNameChanged = false;
             
             applyStyles();
         }
@@ -182,16 +173,41 @@ public dynamic class CSSPropertyInjector
     /**
      *  @protected
      * 
+     *  Loads the CSSStyleDeclarations from the StyleManager.
+     */
+    protected function getCSSStyleDeclarations() : void
+    {
+    	__cssStyleDeclarations = [];
+    	if ( styleName != null )
+    	{
+    		__cssStyleDeclarations.push( getCSSStyleDeclaration( styleName ) );
+    	}
+    	
+    	if ( styleNames != null )
+    	{
+    		for each ( var name : String in styleNames )
+    		{
+    			__cssStyleDeclarations.push( getCSSStyleDeclaration( name ) );
+    		}
+    	}
+    }
+    
+    /**
+     *  @protected
+     * 
      *  Loads the CSSStyleDeclaration from the StyleManager.
      */
-    protected function getCSSStyleDeclaration() : void
+    protected function getCSSStyleDeclaration( styleName : String ) : CSSStyleDeclaration
     {
-        __cssStyleDeclaration = StyleManager.getStyleDeclaration( styleName );
+    	var cssStyleDeclaration : CSSStyleDeclaration = null;
+        cssStyleDeclaration = StyleManager.getStyleDeclaration( styleName );
         
-        if ( __cssStyleDeclaration == null )
+        if ( cssStyleDeclaration == null )
         {
-            __cssStyleDeclaration = StyleManager.getStyleDeclaration( "." + styleName );
+            cssStyleDeclaration = StyleManager.getStyleDeclaration( "." + styleName );
         }
+        
+        return cssStyleDeclaration;
     }
     
     /**
@@ -201,22 +217,30 @@ public dynamic class CSSPropertyInjector
      */
     protected function applyStyles() : void
     {
-        var styles : Array = this.styles;
-        
-        if ( useIntrospection == true )
-        {
-            var description : XML = describeType( target );
-            var propNames : Array = [];
-            for each ( var accessor : XML in description.accessor )
-            {
-                propNames.push( accessor.@name.toString() );
-            }
-            for each ( var variable : XML in description.variable )
-            {
-                propNames.push( variable.@name.toString() );
-            }
-            styles = propNames;
-        }
+        var styles : Array = []; 
+		var styleObj : Object = null;
+		
+		for each ( var cssStyleDeclaration : CSSStyleDeclaration in __cssStyleDeclarations )
+		{
+			styleObj = {};
+			
+			if ( cssStyleDeclaration.factory != null ) 
+			{
+				cssStyleDeclaration.factory.apply( styleObj );
+			}	
+			if ( cssStyleDeclaration.defaultFactory != null )
+			{
+				cssStyleDeclaration.defaultFactory.apply( styleObj );
+			}
+			
+			var temp : Array = ObjectUtil.getClassInfo( styleObj ).properties as Array;
+			for ( var propName : String in styleObj ) 
+			{
+				styles.push( propName );
+			}
+			
+			trace( styles, "\n" );
+		}
         
         if ( target != null )
         {
@@ -239,21 +263,36 @@ public dynamic class CSSPropertyInjector
      */
     protected function assignStylesToTarget( styles : Array, target : Object ) : void
     {
+    	var cssStyleDeclaration : CSSStyleDeclaration = null;
+    	var val : * = undefined;
+    	
         for each ( var style : String in styles )
         {
-            if ( target.hasOwnProperty( style ) )
-            {
+        	for each ( cssStyleDeclaration in __cssStyleDeclarations )
+        	{
                 //  Look for a value for [style] in the CSSStyeDeclaration
-                if ( __cssStyleDeclaration.getStyle( style ) != null )
+                if ( cssStyleDeclaration.getStyle( style ) != null )
                 {
-                    target[ style ] = __cssStyleDeclaration.getStyle( style );
+                    val = cssStyleDeclaration.getStyle( style );
                 }
                 //  If the CSSStyeDeclaration lookup is null.. Look for a 
                 //  default value on the CSSPropertyInjector
                 else if ( this[ style ] != null )
                 {
-                    target[ style ] = this[ style ];
+                    val = this[ style ];
                 }
+                
+                //  If there is a property, assign the value
+        		if ( target.hasOwnProperty( style ) )
+        		{
+        			target[ style ] = val;
+        		}
+        		//  If there is no property and target is a UIComponent 
+        		//  set the value as a style.
+        		else if ( target is UIComponent )
+        		{
+        			target.setStyle( style, val );
+        		}
             }
         }
     }
@@ -274,13 +313,10 @@ public dynamic class CSSPropertyInjector
     protected var __styleName : String = null;
     protected var __styleNameChanged : Boolean = false;
     
-    protected var __styles : Array = null;
-    protected var __stylesChanged : Boolean = false;
+    protected var __styleNames : Array = null;
+    protected var __styleNamesChanged : Boolean = false;
     
-    protected var __useIntrospection : Boolean = true;
-    protected var __useIntrospectionChanged : Boolean = false;
-    
-    protected var __cssStyleDeclaration : CSSStyleDeclaration = null;
+    protected var __cssStyleDeclarations : Array = [];
     
 } //  end class
 } //  end package
