@@ -23,10 +23,21 @@ SOFTWARE.
 
 package flexlib.css
 {
+import flash.events.EventDispatcher;
+import flash.events.IEventDispatcher;
+import flash.system.ApplicationDomain;
+import flash.system.SecurityDomain;
+import flash.utils.Dictionary;
+import flash.utils.getDefinitionByName;
+import flash.utils.getQualifiedClassName;
+
+import mx.core.UIComponent;
+import mx.events.FlexEvent;
+import mx.events.StateChangeEvent;
+import mx.events.StyleEvent;
 import mx.styles.CSSStyleDeclaration;
 import mx.styles.IStyleClient;
 import mx.styles.StyleManager;
-import mx.utils.ObjectUtil;
 
 /**
  *  A utility to dynamically inject values from CSSStyleDeclarations into a target 
@@ -39,6 +50,42 @@ import mx.utils.ObjectUtil;
  */ 
 public dynamic class CSSPropertyInjector
 {
+    //--------------------------------------------------------------------------
+    //
+    //  Class methods
+    //
+    //--------------------------------------------------------------------------
+
+	public static function loadStyleDeclarations( url : String, update : Boolean = false,
+						                          trustContent : Boolean = false,
+						                          applicationDomain : ApplicationDomain = null,
+						                          securityDomain : SecurityDomain = null 
+						                        ) : IEventDispatcher
+	{
+		var dispatcher : IEventDispatcher =
+			StyleManager.loadStyleDeclarations( 
+				url, update, trustContent, 
+				applicationDomain, securityDomain 
+			);
+		
+		dispatcher.addEventListener( 
+			StyleEvent.COMPLETE, 
+			CSSPropertyInjector.handleStyleEventComplete 
+		);
+		
+		return dispatcher;
+	}
+	
+	protected static function handleStyleEventComplete( event : StyleEvent ) : void
+	{
+		dispatcher.dispatchEvent( event.clone() );
+	}
+	
+	protected static var dispatcher : EventDispatcher = null;
+	{
+		dispatcher = new EventDispatcher();
+	}
+
 
     //--------------------------------------------------------------------------
     //
@@ -53,6 +100,11 @@ public dynamic class CSSPropertyInjector
     {
         super();
         
+        CSSPropertyInjector.dispatcher.addEventListener( 
+        	StyleEvent.COMPLETE, 
+			this.handleStyleEventComplete, 
+        	false, 0, true 
+        );
     }
     
 
@@ -65,12 +117,27 @@ public dynamic class CSSPropertyInjector
     /**
      *  The target object to apply the CSS values to.
      */
+    public function get state() : String 
+    {
+        return __state;
+    }
+    public function set state( val : String ) : void
+    {
+        __state = val;
+        __stateChanged = true;
+        invalidateProperties();
+    }
+
+    /**
+     *  The target object to apply the CSS values to.
+     */
     public function get target() : Object 
     {
         return __target;
     }
     public function set target( val : Object ) : void
     {
+
         __target = val;
         __targetChanged = true;
         invalidateProperties();
@@ -135,6 +202,13 @@ public dynamic class CSSPropertyInjector
     //
     //--------------------------------------------------------------------------
 
+	protected function handleStyleEventComplete( event : StyleEvent ) : void
+	{
+		__styleNameChanged = true;
+		
+		invalidateProperties();
+	}
+
     /**
      *  Added to adhere to the framework lifecycle naming convention. Just calls 
      *  commitProperties().
@@ -151,6 +225,39 @@ public dynamic class CSSPropertyInjector
      */
     protected function commitProperties() : void
     {
+    	if ( __stateChanged == true )
+    	{
+    		__stateChanged = false;
+    		
+    		applyStyles( state );
+    	}
+    	
+    	var skinnableComponentType : Class = null;
+    	try
+    	{
+    		skinnableComponentType = getDefinitionByName( "flex.core.SkinnableComponent" ) as Class; 
+	    	if ( __targetChanged == true && target is skinnableComponentType )
+	    	{
+	    		if ( target.skin == null ) 
+	    		{
+	    			target.addEventListener( 
+	    				FlexEvent.CREATION_COMPLETE, function( event : FlexEvent ) : void
+							{
+								event.target.skin.addEventListener( StateChangeEvent.CURRENT_STATE_CHANGE, handleCurrentStateChange );
+							}
+					);
+	    		}
+	    		else
+	    		{
+		    		target.skin.addEventListener( 
+		    			StateChangeEvent.CURRENT_STATE_CHANGE, 
+		    			handleCurrentStateChange 
+					);
+		    	}
+	    	} 
+    	}
+    	catch( error : Error ) {}
+    	
         //  if at least target or targets is set as well as styleName
         //  and styles.. and one of these values has changed... 
         //  the style declaration is retreived and applied
@@ -162,12 +269,18 @@ public dynamic class CSSPropertyInjector
             if ( __styleNameChanged == true || __styleNamesChanged == true )
             {
                 getCSSStyleDeclarations();
+                buildAggregateMappings();
             }
             
             __targetChanged = __targetsChanged = __styleNameChanged = false;
             
             applyStyles();
         }
+    }
+    
+    protected function handleCurrentStateChange( event : StateChangeEvent ) : void
+    {
+    	applyStyles( event.newState );
     }
     
     /**
@@ -177,7 +290,9 @@ public dynamic class CSSPropertyInjector
      */
     protected function getCSSStyleDeclarations() : void
     {
+    	__pseudoSelectors = new Dictionary();
         __cssStyleDeclarations = [];
+        
         if ( styleName != null && getCSSStyleDeclaration( styleName ) != null )
         {
             __cssStyleDeclarations.push( getCSSStyleDeclaration( styleName ) );
@@ -193,8 +308,19 @@ public dynamic class CSSPropertyInjector
                 }
             }
         }
+        
+        var isTargetIStyleClient : Boolean = target is IStyleClient;
+        
+        if ( isTargetIStyleClient == false && targets != null )
+        {
+        	for each ( var obj : Object in targets )
+        	{
+        		isTargetIStyleClient = obj is IStyleClient;
+        		if ( isTargetIStyleClient == true ) break;
+        	}
+        }
     }
-    
+
     /**
      *  @protected
      * 
@@ -210,7 +336,106 @@ public dynamic class CSSPropertyInjector
             cssStyleDeclaration = StyleManager.getStyleDeclaration( "." + styleName );
         }
         
+        if ( cssStyleDeclaration == null )
+        {
+        	var qualClassName : String = null;
+        	if ( target != null )
+        	{
+	        	qualClassName = getQualifiedClassName( target ).split( "::" ).join( "." );
+				cssStyleDeclaration = StyleManager.getStyleDeclaration( 
+											qualClassName + 
+									   	    ( styleName.charAt( 0 ) == "." ? "" : "." ) + 
+									   	    styleName 
+								   	  );
+			}
+			
+			if ( targets != null && cssStyleDeclaration == null )
+			{
+				for each ( var target : Object in targets )
+				{
+		        	qualClassName = getQualifiedClassName( target ).split( "::" ).join( "." );
+					cssStyleDeclaration = StyleManager.getStyleDeclaration( 
+												qualClassName + 
+										   	    ( styleName.charAt( 0 ) == "." ? "" : "." ) + 
+										   	    styleName 
+									   	  );
+									   	  
+					if ( cssStyleDeclaration != null ) break;
+				}
+			}
+        }
+        
+		var pseudoName : String = null;
+		for each ( var selector : String in StyleManager.selectors )
+		{
+			pseudoName = null;
+			
+			//  Flex 4
+			if ( selector.indexOf( styleName + ":" ) != -1  )
+			{
+				pseudoName = selector.split( ":" )[ 1 ];
+				if ( __pseudoSelectors[ pseudoName ] == null ) __pseudoSelectors[ pseudoName ] = [];	
+				__pseudoSelectors[ pseudoName ].push( StyleManager.getStyleDeclaration( selector ) );
+			}
+			
+			// Flex 3
+			else if ( selector.indexOf( styleName ) != -1 )
+			{
+				pseudoName = selector.substr( selector.indexOf( styleName ) + styleName.length );
+				pseudoName = pseudoName.toLowerCase();
+			}
+			
+			if ( pseudoName != null )
+			{
+				if ( __pseudoSelectors[ pseudoName ] == null ) __pseudoSelectors[ pseudoName ] = [];	
+				__pseudoSelectors[ pseudoName ].push( StyleManager.getStyleDeclaration( selector ) );
+			}
+		}
+        
         return cssStyleDeclaration;
+    }
+
+    /**
+     *  @protected
+     * 
+     *  Builds the dictionaries that map the aggregate selectors and pseudo selectors
+     */
+    protected function buildAggregateMappings() : void
+    {
+    	__aggregateStyles = createAggregateMapping( __cssStyleDeclarations );
+
+    	__aggregatePseudoMappings = new Dictionary();
+    	
+    	var mapping : Dictionary = null;
+    	for ( var key : String in __pseudoSelectors )
+    	{
+    		mapping = createAggregateMapping( __pseudoSelectors[ key ] as Array );
+    		__aggregatePseudoMappings[ key ] =  mapping;
+    	}
+    	
+    	return;
+    }
+    
+    /**
+     *  @protected
+     * 
+     *  Aggregates a set of CSSStyleDeclarations into a dictionary mapping
+     */
+    protected function createAggregateMapping( cssStyleDeclarations : Array ) : Dictionary 
+    {
+    	var styles : Array = null;
+    	var mapping : Dictionary = new Dictionary();
+    	
+    	for each ( var styleDec : CSSStyleDeclaration in cssStyleDeclarations )
+    	{
+    		styles = getStyles( styleDec );
+    		for each ( var style : String in styles )
+    		{
+    			mapping[ style ] = styleDec.getStyle( style );
+    		}
+    	}
+    	
+    	return mapping;
     }
     
     /**
@@ -218,41 +443,18 @@ public dynamic class CSSPropertyInjector
      *  
      *  Applies the style values in __cssStyleDeclaration to the target object(s)
      */
-    protected function applyStyles() : void
+    protected function applyStyles( state : String = null ) : void
     {
-        var styles : Array = []; 
-        var styleObj : Object = null;
-        
-        for each ( var cssStyleDeclaration : CSSStyleDeclaration in __cssStyleDeclarations )
+        if ( this.target != null )
         {
-            styleObj = {};
-            
-            if ( cssStyleDeclaration.factory != null ) 
-            {
-                cssStyleDeclaration.factory.apply( styleObj );
-            }    
-            if ( cssStyleDeclaration.defaultFactory != null )
-            {
-                cssStyleDeclaration.defaultFactory.apply( styleObj );
-            }
-            
-            var temp : Array = ObjectUtil.getClassInfo( styleObj ).properties as Array;
-            for ( var propName : String in styleObj ) 
-            {
-                styles.push( propName );
-            }
-        }
-        
-        if ( target != null )
-        {
-            assignStylesToTarget( styles, this.target );
+            assignStylesToTarget( this.target, state );
         }
         
         if ( targets != null )
         {
             for each ( var target : Object in targets )
             {
-                assignStylesToTarget( styles, target );
+                assignStylesToTarget( target, state );
             }
         }
     }
@@ -260,42 +462,76 @@ public dynamic class CSSPropertyInjector
     /**
      *  @protected
      * 
+     *  Returns a set of style names for a given CSSStyleDeclaration.
+     * 
+     *  NOTE: This only works for CSS that is compiled into the app as it relies on the proto
+     *        chaining mechanism.
+     */
+    protected function getStyles( cssStyleDeclaration : CSSStyleDeclaration, arr : Array = null ) : Array 
+    {
+        var styleObj : Object = {};
+        var ret : Array = ( arr != null ? arr : [] );
+        
+        if ( cssStyleDeclaration.factory != null ) 
+        {
+            cssStyleDeclaration.factory.apply( styleObj );
+        }    
+        if ( cssStyleDeclaration.defaultFactory != null )
+        {
+            cssStyleDeclaration.defaultFactory.apply( styleObj );
+        }
+        
+        for ( var propName : String in styleObj ) 
+        {
+            ret.push( propName );
+        } 
+        
+        return ret;   	
+    }
+    
+    /**
+     *  @protected
+     * 
      *  Assigns a set of styles to a target object
      */
-    protected function assignStylesToTarget( styles : Array, target : Object ) : void
+    protected function assignStylesToTarget( target : Object, state : String = null,
+    										 styles : Dictionary = null ) : void
     {
-        var cssStyleDeclaration : CSSStyleDeclaration = null;
         var val : * = undefined;
         
-        for each ( var style : String in styles )
+        if ( styles == null ) styles = __aggregateStyles;
+        
+        for ( var key : String in __aggregateStyles )
         {
-            for each ( cssStyleDeclaration in __cssStyleDeclarations )
+        	val = styles[ key ];
+        	
+            //  If the CSSStyeDeclaration lookup is null.. Look for a 
+            //  default (overriding) value on the CSSPropertyInjector
+            if ( this[ key ] != null )
             {
-                //  Look for a value for [style] in the CSSStyeDeclaration
-                if ( cssStyleDeclaration.getStyle( style ) != null )
-                {
-                    val = cssStyleDeclaration.getStyle( style );
-                }
-                //  If the CSSStyeDeclaration lookup is null.. Look for a 
-                //  default value on the CSSPropertyInjector
-                else if ( this[ style ] != null )
-                {
-                    val = this[ style ];
-                }
-                
-                //  If there is a property, assign the value
-                if ( target.hasOwnProperty( style ) )
-                {
-                    target[ style ] = val;
-                }
-                //  If there is no property and target is a UIComponent 
-                //  set the value as a style.
-                else if ( target is IStyleClient )
-                {
-                   ( target as IStyleClient ).setStyle( style, val );
-                }
+                val = this[ key ];
+            }
+            
+            //  If there is a property, assign the value
+            if ( target.hasOwnProperty( key ) && target[ key ] != val )
+            {
+                target[ key ] = val;
+            }
+            
+            //  If there is no property and target is an IStyleClient 
+            //  set the value as a style.
+            else if ( target is IStyleClient )
+            {
+               ( target as IStyleClient ).setStyle( key, val );
             }
         }
+        
+        if ( state != null )
+        {
+        	assignStylesToTarget( target, null, __aggregatePseudoMappings[ state ] ); 
+        }
+    
+//		if ( target is UIComponent ) (target as UIComponent).invalidateDisplayList();
     }
     
     
@@ -311,6 +547,9 @@ public dynamic class CSSPropertyInjector
     protected var __targets : Array = null;
     protected var __targetsChanged : Boolean = false;
     
+    protected var __state : String = null;
+    protected var __stateChanged : Boolean = false;
+    
     protected var __styleName : String = null;
     protected var __styleNameChanged : Boolean = false;
     
@@ -318,6 +557,9 @@ public dynamic class CSSPropertyInjector
     protected var __styleNamesChanged : Boolean = false;
     
     protected var __cssStyleDeclarations : Array = [];
+    protected var __pseudoSelectors : Dictionary = null;
+    protected var __aggregateStyles : Dictionary = null;
+    protected var __aggregatePseudoMappings : Dictionary = null;
     
 } //  end class
 } //  end package
