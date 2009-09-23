@@ -31,7 +31,7 @@ import flash.utils.Dictionary;
 import flash.utils.getDefinitionByName;
 import flash.utils.getQualifiedClassName;
 
-import mx.core.UIComponent;
+import mx.binding.utils.BindingUtils;
 import mx.events.FlexEvent;
 import mx.events.StateChangeEvent;
 import mx.events.StyleEvent;
@@ -50,6 +50,10 @@ import mx.styles.StyleManager;
  */ 
 public dynamic class CSSPropertyInjector
 {
+	protected static const TARGET : String = "target";
+	protected static const STYLENAME : String = "styleName";
+	protected static const STYLENAMES : String = "styleNames";
+	
     //--------------------------------------------------------------------------
     //
     //  Class methods
@@ -512,12 +516,31 @@ public dynamic class CSSPropertyInjector
                 val = this[ key ];
             }
             
+        	var propName : String = null;
+        	var injector : CSSPropertyInjector = null;
+        	
             //  If there is a property, assign the value
             if ( target.hasOwnProperty( key ) && target[ key ] != val )
             {
-                target[ key ] = val;
+        		target[ key ] = val;
             }
             
+        	else if ( key.indexOf( STYLENAMES ) == 0 )
+        	{
+        		propName = key.substr( STYLENAMES.length, 1 ).toLowerCase() + key.substr( STYLENAMES.length+1 );
+        		injector = new CSSPropertyInjector();
+        		BindingUtils.bindProperty( injector, TARGET, target, propName );
+        		injector.styleNames = val;
+        	}     
+            
+        	else if ( key.indexOf( STYLENAME ) == 0 )
+        	{
+        		propName = key.substr( STYLENAME.length, 1 ).toLowerCase() + key.substr( STYLENAME.length+1 );
+        		injector = new CSSPropertyInjector();
+        		BindingUtils.bindProperty( injector, TARGET, target, propName );
+        		injector.styleName = val;
+        	}
+        	
             //  If there is no property and target is an IStyleClient 
             //  set the value as a style.
             else if ( target is IStyleClient )
