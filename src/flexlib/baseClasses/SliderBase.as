@@ -1,9 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  Copyright (C) 2003-2006 Adobe Macromedia Software LLC and its licensors.
-//  All Rights Reserved. The following is Source Code and is subject to all
-//  restrictions on such code as contained in the End User License Agreement
-//  accompanying this product.
+//  ADOBE SYSTEMS INCORPORATED
+//  Copyright 2004-2007 Adobe Systems Incorporated
+//  All Rights Reserved.
+//
+//  NOTICE: Adobe permits you to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -25,25 +27,26 @@ import flash.utils.getTimer;
 import mx.controls.sliderClasses.SliderDataTip;
 import mx.controls.sliderClasses.SliderDirection;
 import mx.controls.sliderClasses.SliderLabel;
+
+import mx.core.FlexVersion;
 import mx.core.IFlexDisplayObject;
-import mx.core.UIComponent;
 import mx.core.mx_internal;
+import mx.core.UIComponent;
 import mx.effects.Tween;
 import mx.events.FlexEvent;
 import mx.events.SliderEvent;
 import mx.events.SliderEventClickTarget;
-import mx.formatters.NumberBase;
+import mx.formatters.NumberFormatter;
 import mx.managers.ISystemManager;
 import mx.managers.SystemManager;
-import mx.resources.ResourceBundle;
 import mx.styles.ISimpleStyleClient;
-
+import mx.styles.StyleProxy;
 
 use namespace mx_internal;
 
-
-
-//include "../../styles/metadata/FillStyles.as";
+//--------------------------------------
+//  Events
+//--------------------------------------
 
 /**
  *  Dispatched when the slider changes value due to mouse or keyboard interaction.
@@ -81,20 +84,18 @@ use namespace mx_internal;
  */
 [Event(name="thumbRelease", type="mx.events.SliderEvent")]
 
+//--------------------------------------
+//  Styles
+//--------------------------------------
+
+//include "../../styles/metadata/FillStyles.as";
+
 /**
  *  The color of the black section of the border. 
  *  
  *  @default 0x919999
  */
 [Style(name="borderColor", type="uint", format="Color", inherit="no")]
-
-/**
- *  Colors used to tint the slider thumb.
- *  Pass the same color for both values for a "flat" looking control.
- *
- *  @default [ 0xFFFFFF, 0xCCCCCC, 0xFFFFFF, 0xEEEEEE; ]
- */
-[Style(name="fillColors", type="Array", arrayType="uint", format="Color", inherit="no")]
 
 /**
  *  Invert the direction of the thumbs. 
@@ -239,6 +240,13 @@ use namespace mx_internal;
 [Style(name="dataTipPrecision", type="int", inherit="no")]
 
 /**
+ *  The default skin for the slider thumb.
+ * 
+ *  @default SliderThumbSkin
+ */
+[Style(name="thumbSkin", type="Class", inherit="no", states="up, over, down, disabled")]
+
+/**
  *  The skin for the slider thumb up state.
  *
  *  @default SliderThumbSkin
@@ -276,11 +284,19 @@ use namespace mx_internal;
  */
 [Style(name="trackSkin", type="Class", inherit="no")]
 
+//--------------------------------------
+//  Other metadata
+//--------------------------------------
+
+[AccessibilityClass(implementation="mx.accessibility.SliderAccImpl")]
+
+[ResourceBundle("SharedResources")]
+
 /**
  *  SliderBase is a copy/paste version of the original Slider class in the Flex framework.
  * 
  * 	<p>The only modifications made to this class were to change some properties and
- * methods from private to protected so we can override them in a subclass.</p>
+ *  methods from private to protected so we can override them in a subclass.</p>
  * 
  *  The Slider class is the base class for the Flex slider controls.
  *  The slider controls let users select a value by moving a slider thumb 
@@ -359,62 +375,16 @@ public class SliderBase extends UIComponent
 
     //--------------------------------------------------------------------------
     //
-    //  Class initialization
-    //
-    //--------------------------------------------------------------------------
-
-    loadResources();
-
-    //--------------------------------------------------------------------------
-    //
-    //  Class resources
-    //
-    //--------------------------------------------------------------------------
-
-    [ResourceBundle("SharedResources")]
-
-    /**
-     *  @private
-     */
-    private static var sharedResources:ResourceBundle;
-
-    /**
-     *  @private
-     */
-    private static var resourceDecimalSeparatorFrom:String;
-
-    /**
-     *  @private
-     */
-    private static var resourceThousandsSeparatorFrom:String;
-
-    /**
-     *  @private
-     */
-    private static var resourceDecimalSeparatorTo:String;
-
-    //--------------------------------------------------------------------------
-    //
-    //  Class methods
+    //  Class mixins
     //
     //--------------------------------------------------------------------------
 
     /**
      *  @private
-     *  Loads resources for this class.
+     *  Placeholder for mixin by SliderAccImpl.
      */
-    private static function loadResources():void
-    {
-        resourceDecimalSeparatorFrom =
-            sharedResources.getString("decimalSeparatorFrom");
+    mx_internal static var createAccessibilityImplementation:Function;
 
-        resourceThousandsSeparatorFrom =
-            sharedResources.getString("thousandsSeparatorFrom");
-
-        resourceDecimalSeparatorTo =
-            sharedResources.getString("decimalSeparatorTo")     
-    }
-    
     //--------------------------------------------------------------------------
     //
     //  Constructor
@@ -465,7 +435,7 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    protected var labelObjects:UIComponent;
+    private var labelObjects:UIComponent;
 
     /**
      *  @private
@@ -485,12 +455,12 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    protected var dataTip:SliderDataTip;
+    mx_internal var dataTip:SliderDataTip;
 
     /**
      *  @private
      */
-    protected var trackHighlightChanged:Boolean = true;
+    private var trackHighlightChanged:Boolean = true;
 
     /**
      *  @private
@@ -500,8 +470,7 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    protected var dataFormatter:NumberBase;
-
+    protected var dataFormatter:NumberFormatter;
 
     /**
      *  @private
@@ -519,12 +488,29 @@ public class SliderBase extends UIComponent
     */
     mx_internal var keyInteraction:Boolean = false;
     
-
     //--------------------------------------------------------------------------
     //
     //  Overridden properties
     //
     //--------------------------------------------------------------------------
+
+    //----------------------------------
+    //  baselinePosition
+    //----------------------------------
+
+    /**
+     *  @private
+     */
+    override public function get baselinePosition():Number
+    {
+        if (FlexVersion.compatibilityVersion < FlexVersion.VERSION_3_0)
+            return super.baselinePosition;
+
+        if (!validateBaselinePosition())
+            return NaN;
+
+        return int(0.75 * height);
+    }
 
     //----------------------------------
     //  enabled
@@ -884,7 +870,7 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    protected var _thumbClass:Class = SliderThumb;
+    private var _thumbClass:Class = SliderThumb;
 
     /**
      *  A reference to the class to use for each thumb.
@@ -1045,6 +1031,18 @@ public class SliderBase extends UIComponent
         }
     }
 
+    //----------------------------------
+    //  thumbStyleFilters
+    //----------------------------------
+
+    /**
+     *  Set of styles to pass from the Slider to the thumbs.
+     *  @see mx.styles.StyleProxy
+     */
+    protected function get thumbStyleFilters():Object
+    {
+        return null;
+    }
     //----------------------------------
     //  tickInterval
     //----------------------------------
@@ -1215,15 +1213,18 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
+    override protected function initializeAccessibility():void
+    {
+        if (SliderBase.createAccessibilityImplementation != null)
+            SliderBase.createAccessibilityImplementation(this);
+    }
+
+    /**
+     *  @private
+     */
     override protected function createChildren():void
     {
         super.createChildren();
-
-        // Setup number formatter - Was ".",",",".",""
-        dataFormatter = new NumberBase(
-            resourceDecimalSeparatorFrom, 
-            resourceThousandsSeparatorFrom,
-            resourceDecimalSeparatorTo, "");
 
         if (!innerSlider)
         {
@@ -1361,14 +1362,7 @@ public class SliderBase extends UIComponent
                 }
             }
         }
-
-        if (thumbsChanged)
-        {
-            thumbsChanged = false;
-
-            createThumbs();
-        }
-
+        
         if (ticksChanged)
         {
             ticksChanged = false;
@@ -1381,6 +1375,13 @@ public class SliderBase extends UIComponent
             labelsChanged = false;
 
             createLabels();
+        }
+
+        if (thumbsChanged)
+        {
+            thumbsChanged = false;
+
+            createThumbs();
         }
 
         
@@ -1550,12 +1551,21 @@ public class SliderBase extends UIComponent
                                                   unscaledHeight:Number):void
     {
         super.updateDisplayList(unscaledWidth, unscaledHeight);
+        
+//      graphics.beginFill(0xEEEEEE);
+//      graphics.drawRect(0, 0, unscaledWidth, unscaledHeight);
+//      graphics.endFill();
 
         var isHorizontal:Boolean = (_direction == SliderDirection.HORIZONTAL);
         var numLabels:int = labelObjects ? labelObjects.numChildren : 0;
         var numThumbs:int = thumbs ? thumbs.numChildren : 0;
         var trackMargin:Number = getStyle("trackMargin");
         var widestThumb:Number = 6;
+        
+        if(thumbs == null) {
+        	return;
+        }
+        
         var firstThumb:SliderThumb = SliderThumb(thumbs.getChildAt(0));
         if (thumbs && firstThumb)
             widestThumb = firstThumb.getExplicitOrMeasuredWidth();
@@ -1616,7 +1626,7 @@ public class SliderBase extends UIComponent
         var trackY:Number = (((isHorizontal ? unscaledHeight : unscaledWidth) -
             (Number(bounds.lower) - Number(bounds.upper))) / 2) - Number(bounds.upper);
 
-        track.move(Math.round(trackLeftOffset), trackY);
+        track.move(Math.round(trackLeftOffset), Math.round(trackY));
         track.setActualSize((isHorizontal ? unscaledWidth: unscaledHeight) - (trackLeftOffset * 2), track.height);
 
         // Layout the thumbs' y positions.
@@ -1688,7 +1698,7 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    protected function createHighlightTrack():void
+    private function createHighlightTrack():void
     {
         var showTrackHighlight:Boolean = getStyle("showTrackHighlight");
         if (!highlightTrack && showTrackHighlight)
@@ -1708,7 +1718,7 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    protected function createThumbs():void
+    private function createThumbs():void
     {
         var n:int;
         var i:int;
@@ -1719,6 +1729,8 @@ public class SliderBase extends UIComponent
             n = thumbs.numChildren;
             for (i = n - 1; i >= 0; i--)
             {
+                // we don't need to bother to remove the event listeners here
+                // they will be removed by the garbage collector automatically
                 thumbs.removeChildAt(i);
             }
         }
@@ -1738,7 +1750,7 @@ public class SliderBase extends UIComponent
             thumb = SliderThumb(new _thumbClass());
 
             thumb.owner = this;
-            thumb.styleName = this;
+            thumb.styleName = new StyleProxy(this, thumbStyleFilters);
             thumb.thumbIndex = i;
             thumb.visible = true;
             thumb.enabled = enabled;
@@ -1747,6 +1759,7 @@ public class SliderBase extends UIComponent
             thumb.downSkinName = "thumbDownSkin";
             thumb.disabledSkinName = "thumbDisabledSkin";
             thumb.overSkinName = "thumbOverSkin";
+            thumb.skinName = "thumbSkin";
 
             thumbs.addChild(thumb);
 
@@ -2014,9 +2027,12 @@ public class SliderBase extends UIComponent
      */
     mx_internal function onThumbPress(thumb:Object):void
     {
-
         if (showDataTip)
         {
+            // Setup number formatter
+            dataFormatter = new NumberFormatter();
+            dataFormatter.precision = getStyle("dataTipPrecision");
+
             if (!dataTip)
             {
                 dataTip = SliderDataTip(new sliderDataTipClass());
@@ -2031,14 +2047,16 @@ public class SliderBase extends UIComponent
 
             var formattedVal:String;
             if (_dataTipFormatFunction != null)
-                formattedVal = this._dataTipFormatFunction(getValueFromX(thumb.xPosition));
+            {
+                formattedVal = this._dataTipFormatFunction(
+                    getValueFromX(thumb.xPosition));
+            }
             else
-                formattedVal = dataFormatter.formatPrecision(String(getValueFromX(thumb.xPosition)),
-                                            getStyle("dataTipPrecision"));
+            {
+                formattedVal = dataFormatter.format(getValueFromX(thumb.xPosition));
+            }
 
             dataTip.text = formattedVal;
-
-            //dataTip.text = String(getValueFromX(thumb.xPosition));
 
             // Tool tip has been freshly created and new text assigned to it.
             // Hence force a validation so that we can set the
@@ -2050,6 +2068,7 @@ public class SliderBase extends UIComponent
         keyInteraction = false;
 
         var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_PRESS);
+        event.value = getValueFromX(thumb.xPosition);;
         event.thumbIndex = thumb.thumbIndex;
         dispatchEvent(event);
     }
@@ -2065,7 +2084,10 @@ public class SliderBase extends UIComponent
 
         setValueFromPos(thumb.thumbIndex);
 
+        dataFormatter = null;
+
         var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_RELEASE);
+        event.value = getValueFromX(thumb.xPosition);;
         event.thumbIndex = thumb.thumbIndex;
         dispatchEvent(event);
     }
@@ -2078,12 +2100,11 @@ public class SliderBase extends UIComponent
         var value:Number = getValueFromX(thumb.xPosition);
         
         if (showDataTip)
-        {
+        {           
             dataTip.text = _dataTipFormatFunction != null ?
-                           _dataTipFormatFunction(value) :
-                           dataFormatter.formatPrecision(
-                               String(value), getStyle("dataTipPrecision"));
-            
+                           _dataTipFormatFunction(value) : 
+                           dataFormatter.format(value);
+                           
             dataTip.setActualSize(dataTip.getExplicitOrMeasuredWidth(),
                                   dataTip.getExplicitOrMeasuredHeight());
             
@@ -2097,6 +2118,7 @@ public class SliderBase extends UIComponent
         }
 
         var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_DRAG);
+        event.value = value;
         event.thumbIndex = thumb.thumbIndex;
         dispatchEvent(event);
     }
@@ -2170,6 +2192,7 @@ public class SliderBase extends UIComponent
         
         var o:Point = new Point(relX, relY);
         var r:Point = localToGlobal(o);
+		r = dataTip.parent.globalToLocal(r);
 
         dataTip.x = r.x < 0 ? 0 : r.x;
         dataTip.y = r.y < 0 ? 0 : r.y;
@@ -2213,7 +2236,7 @@ public class SliderBase extends UIComponent
     {
         var maxX:Number = track.x + track.width;
         var minX:Number = track.x;
-        if(allowThumbOverlap)
+        if (allowThumbOverlap)
         {
             return { max: maxX, min: minX };    
         }
@@ -2296,7 +2319,7 @@ public class SliderBase extends UIComponent
      *  @private
      *  Utility for committing a value of a given thumb.
      */
-    protected function setValueFromPos(thumbIndex:int):void
+    private function setValueFromPos(thumbIndex:int):void
     {
         var thumb:SliderThumb = SliderThumb(thumbs.getChildAt(thumbIndex));
         setValueAt(getValueFromX(thumb.xPosition), thumbIndex);
@@ -2407,7 +2430,7 @@ public class SliderBase extends UIComponent
      */
     public function setThumbValueAt(index:int, value:Number):void
     {
-        setValueAt(value, index);
+        setValueAt(value, index, true);
         valuesChanged = true;
 
         invalidateProperties();
@@ -2523,7 +2546,7 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    protected function thumb_focusInHandler(event:FocusEvent):void
+    private function thumb_focusInHandler(event:FocusEvent):void
     {
         dispatchEvent(event);
     }
@@ -2531,7 +2554,7 @@ public class SliderBase extends UIComponent
     /**
      *  @private
      */
-    protected function thumb_focusOutHandler(event:FocusEvent):void
+    private function thumb_focusOutHandler(event:FocusEvent):void
     {
         dispatchEvent(event);
     }

@@ -493,6 +493,8 @@ package flexlib.containers {
 	        return vm;
     	}
     	
+    	public var closedHeight:Number = 0;
+    	
         /**
          * @private
          */
@@ -505,7 +507,7 @@ package flexlib.containers {
             }
             else {
             	//if the WindowShade is closed then the height is only the height of the header button
-            	measuredHeight = _headerButton.getExplicitOrMeasuredHeight();
+            	measuredHeight = closedHeight + _headerButton.getExplicitOrMeasuredHeight();
             }
         }
 

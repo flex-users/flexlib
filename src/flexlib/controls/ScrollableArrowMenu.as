@@ -273,7 +273,7 @@ package flexlib.controls
 			
 			var w:Number = unscaledWidth;
 			
-			if(verticalScrollBar) {
+			if(verticalScrollBar && verticalScrollBar.visible) {
 				w = unscaledWidth - ScrollBar.THICKNESS;
 			}
 			

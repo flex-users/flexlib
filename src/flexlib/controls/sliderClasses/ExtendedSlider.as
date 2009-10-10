@@ -35,6 +35,8 @@ package flexlib.controls.sliderClasses
 	import mx.core.mx_internal;
 	import mx.events.SliderEvent;
 	import mx.events.SliderEventClickTarget;
+	import mx.formatters.NumberFormatter;
+	
 	use namespace mx_internal;
 
 	
@@ -237,6 +239,10 @@ package flexlib.controls.sliderClasses
 			
 	        if (showDataTip)
 	        {
+	        	// Setup number formatter
+            	dataFormatter = new NumberFormatter();
+            	dataFormatter.precision = getStyle("dataTipPrecision");
+            
 	        	var dataTip:SliderDataTip = dataTips[thumb.thumbIndex];
 	        	
 	            if (!dataTip)
@@ -256,14 +262,16 @@ package flexlib.controls.sliderClasses
 	
 	            var formattedVal:String;
 	            if (_dataTipFormatFunction != null)
-	                formattedVal = this._dataTipFormatFunction(getValueFromX(thumb.xPosition));
+	            {
+	                formattedVal = this._dataTipFormatFunction(
+	                    getValueFromX(thumb.xPosition));
+	            }
 	            else
-	                formattedVal = dataFormatter.formatPrecision(String(getValueFromX(thumb.xPosition)),
-	                                            getStyle("dataTipPrecision"));
-	
+	            {
+	                formattedVal = dataFormatter.format(getValueFromX(thumb.xPosition));
+	            }
+	            
 	            dataTip.text = formattedVal;
-	
-	            //dataTip.text = String(getValueFromX(thumb.xPosition));
 	
 	            // Tool tip has been freshly created and new text assigned to it.
 	            // Hence force a validation so that we can set the
@@ -274,9 +282,10 @@ package flexlib.controls.sliderClasses
 	        }
 	        keyInteraction = false;
 	
-	        var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_PRESS);
-	        event.thumbIndex = thumb.thumbIndex;
-	        dispatchEvent(event);
+	       var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_PRESS);
+	       event.value = getValueFromX(thumb.xPosition);;
+	       event.thumbIndex = thumb.thumbIndex;
+	       dispatchEvent(event);
 	    }
 	    
 	    /**
@@ -293,9 +302,8 @@ package flexlib.controls.sliderClasses
 	        if (showDataTip)
 	        {
 	            dataTip.text = _dataTipFormatFunction != null ?
-	                           _dataTipFormatFunction(value) :
-	                           dataFormatter.formatPrecision(
-	                               String(value), getStyle("dataTipPrecision"));
+                           _dataTipFormatFunction(value) : 
+                           dataFormatter.format(value);
 	            
 	            dataTip.setActualSize(dataTip.getExplicitOrMeasuredWidth(),
 	                                  dataTip.getExplicitOrMeasuredHeight());
@@ -310,6 +318,7 @@ package flexlib.controls.sliderClasses
 	        }
 	
 	        var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_DRAG);
+	        event.value = value;
 	        event.thumbIndex = thumb.thumbIndex;
 	        dispatchEvent(event);
 	    }
@@ -347,8 +356,9 @@ package flexlib.controls.sliderClasses
 	
 	        if(dispatch) {
 	        	var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_RELEASE);
-	        	event.thumbIndex = thumb.thumbIndex;
-	        	dispatchEvent(event);
+		        event.value = getValueFromX(thumb.xPosition);;
+		        event.thumbIndex = thumb.thumbIndex;
+		        dispatchEvent(event);
 	        }
 	    }
 	    

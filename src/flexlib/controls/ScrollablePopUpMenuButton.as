@@ -23,11 +23,18 @@ SOFTWARE.
 
 package flexlib.controls
 {
+	import flash.display.DisplayObject;
+	
 	import flexlib.baseClasses.PopUpMenuButtonBase;
 	
+	import mx.controls.scrollClasses.ScrollBar;
+	import mx.controls.scrollClasses.ScrollThumb;
 	import mx.core.IUIComponent;
+	import mx.core.ScrollPolicy;
 	import mx.core.mx_internal;
 	import mx.events.FlexEvent;
+	import mx.events.FlexMouseEvent;
+	import mx.events.ListEvent;
 	import mx.events.MenuEvent;
 	import mx.managers.PopUpManager;
 	
@@ -70,10 +77,13 @@ package flexlib.controls
 			super();
 		}
 		
+		public var hideOnActivity:Boolean = true;
+		private var bBlockClose:Boolean = false;
+		
 		/**
 	    * @private
 	    */
-	    private var _verticalScrollPolicy:String;
+	    private var _verticalScrollPolicy:String = ScrollPolicy.AUTO;
 	    
 	    /**
 	    * Controls the vertical scrolling of the ScrollablePopUpMenuButton.
@@ -101,7 +111,7 @@ package flexlib.controls
 		/**
 		 * @private
 		 */
-		private var _arrowScrollPolicy:String;
+		private var _arrowScrollPolicy:String = ScrollPolicy.OFF;
 	    
 	    /**
 	    * The scrolling policy that determines when to show the up and down buttons for scrolling.
@@ -114,6 +124,50 @@ package flexlib.controls
 	    public function get arrowScrollPolicy():String {
 			return this._arrowScrollPolicy;
 		}
+
+		/**
+		 *  @private
+		 *  Storage for the rowCount property.
+		 */
+		private var _rowCount:int = -1;
+		
+		/**
+		 * Indicates if the row count property was explicitely set.
+		 */
+		protected var explicitRowCountSet:Boolean = false;
+		
+		/**
+		 *  Maximum number of rows visible in the Menu.
+		 *  This property works in conjunction with the maxHeight property. If this property is never set,
+		 *  the height of the menu is solely controlled using maxHeight. If this property is set,
+		 *  the menu will exactly have <code>rowCount</code> rows except if the number of rows times a
+		 *  row's height exceed maxHeight. In this case, the menu will have as many rows as possible without
+		 *  exceeding maxHeight.
+		 * 
+		 *  If this property has been set and it needs to revert to having the menu height solely controlled by
+		 *  maxHeight, set this property to -1.
+		 * 
+		 *  @default -1
+		 * 
+		 *  @see #maxHeight()
+		 */
+		public function get rowCount():int
+		{
+			var dataLength:int = (dataProvider && dataProvider.hasOwnProperty("length")) ? dataProvider.length : _rowCount;
+		    return Math.min(dataLength, _rowCount);
+		}
+
+	    /**
+	     *  @private
+	     */
+	    public function set rowCount(value:int):void
+	    {
+	        _rowCount = value;
+			explicitRowCountSet = (value > 0) ? true : false;
+				
+	        if (popUpMenu)
+	            popUpMenu.rowCount = value;
+	    }
 		
 	    /**
 	    * @private
@@ -157,14 +211,20 @@ package flexlib.controls
 	        if (!popUpMenu)
 	        {
 	        	popUpMenu = new ScrollableArrowMenu();
-	            popUpMenu.maxHeight = this.maxHeight;
-	          
+	            ScrollableArrowMenu(popUpMenu).hideOnActivity = hideOnActivity;
+	            popUpMenu.addEventListener(
+                    ListEvent.ITEM_CLICK, popUpItemClickHandler, false, 999);
+                    
+	          	popUpMenu.maxHeight = this.maxHeight;
+	          	
 	            popUpMenu.labelField = labelField;
 	            popUpMenu.labelFunction = labelFunction;
 	            popUpMenu.showRoot = showRoot;
+	            if (explicitRowCountSet) popUpMenu.rowCount = rowCount;
 	            popUpMenu.dataDescriptor = dataDescriptor;
 	            popUpMenu.dataProvider = dataProvider;
 
+				popUpMenu.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE, mouseDownOutsideHandler, false, 999);
 	            popUpMenu.addEventListener(MenuEvent.ITEM_CLICK, menuChangeHandler);
 	            popUpMenu.addEventListener(FlexEvent.VALUE_COMMIT,
 	                                       menuValueCommitHandler);
@@ -190,6 +250,46 @@ package flexlib.controls
 	
 	        return popUpMenu;
 	    }
+	    
+	    private function popUpItemClickHandler(event:ListEvent):void {
+	    	if(hideOnActivity == false) {
+	    		bBlockClose = true;
+	    	}
+	    }
+	    
+	    override public function close():void {
+	    	if(bBlockClose == false) {
+	    		super.close();
+	    	}
+	    	
+	    	bBlockClose = false;
+	    }
 		
+		private function mouseDownOutsideHandler(event:FlexMouseEvent):void {
+			if(event.relatedObject is ScrollThumb || event.relatedObject is ScrollBar) {
+				event.stopImmediatePropagation();
+			}
+			else {
+				if(hideOnActivity == false) {
+					var p:DisplayObject = event.target.parent;
+					
+					while(p != null) {
+						
+						if(p == popUpMenu) {
+							event.stopImmediatePropagation();
+							break;	
+						}
+						
+						p = p.parent;
+					}
+				}
+			}
+		}
+		
+		override public function set dataProvider(value:Object):void {
+			if(popUpMenu)
+				popUpMenu.verticalScrollPosition = 0;
+			super.dataProvider = value;
+		}
 	}
 }

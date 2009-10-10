@@ -24,6 +24,7 @@ SOFTWARE.
 package flexlib.containers
 {
 	import flexlib.baseClasses.AccordionBase;
+	import flexlib.containers.accordionClasses.AccordionHeaderLocation;
 	
 	import flash.geom.Rectangle;
 	
@@ -32,7 +33,6 @@ package flexlib.containers
 	import mx.core.EdgeMetrics;
 	import mx.core.IUIComponent;
 	import mx.core.mx_internal;
-	import flexlib.containers.accordionClasses.AccordionHeaderLocation;
 	import mx.core.UIComponent;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
@@ -490,8 +490,8 @@ package flexlib.containers
 	        }
 	
 	        // Let the screen render the last frame of the animation before
-	        // we begin instantiating the new child.
-	        callLater(instantiateSelectedChild);
+        	// we begin instantiating the new child.
+        	callLater(instantiateChild, [selectedChild]);
 	    }
 	    
 	    override protected function startTween(oldSelectedIndex:int, newSelectedIndex:int):void

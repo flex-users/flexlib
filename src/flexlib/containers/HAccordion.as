@@ -637,7 +637,7 @@ package flexlib.containers
 	
 	        // Let the screen render the last frame of the animation before
 	        // we begin instantiating the new child.
-	        callLater(instantiateSelectedChild);
+	        callLater(instantiateChild, [selectedChild]);
 	    }
 		
 	}

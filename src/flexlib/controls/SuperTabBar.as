@@ -46,6 +46,8 @@ package flexlib.controls {
 	import mx.core.mx_internal;
 	import mx.events.DragEvent;
 	import mx.managers.DragManager;
+	import mx.styles.CSSStyleDeclaration;
+	import mx.styles.StyleManager;
 
 	
 	/**
@@ -105,10 +107,87 @@ package flexlib.controls {
 		
 		use namespace mx_internal;
 		
+		[Embed (source="../assets/assets.swf", symbol="firefox_close_up")]
+		private static var DEFAULT_CLOSE_UP:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="firefox_close_over")]
+		private static var DEFAULT_CLOSE_OVER:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="firefox_close_down")]
+		private static var DEFAULT_CLOSE_DOWN:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="firefox_close_disabled")]
+		private static var DEFAULT_CLOSE_DISABLED:Class;
+		
+		[Embed (source="../assets/assets.swf", symbol="indicator")]
+		private static var DEFAULT_INDICATOR:Class;
+		
 		/**
 		 * Event that is dispatched when the tabs are re-ordered in the SuperTabBar.
 		 */
 		public static const TABS_REORDERED:String = "tabsReordered";
+		
+		private static function initializeStyles():void
+		{
+			var selector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("SuperTabBar");
+			
+			if(!selector)
+			{
+				selector = new CSSStyleDeclaration();
+			}
+			
+			selector.defaultFactory = function():void
+			{
+				this.tabStyleName = "superTab";
+			}
+			
+			// Style for the SuperTabs
+			var tabStyleName:String = selector.getStyle("tabStyleName");
+			var tSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + tabStyleName);
+			
+			if(!tSelector)
+			{
+				tSelector = new CSSStyleDeclaration();
+			}
+			
+			tSelector.defaultFactory = function():void
+			{
+				this.textAlign = "left";
+				this.indicatorClass = DEFAULT_INDICATOR;	
+				this.tabCloseButtonStyleName = "tabCloseButton";
+			}
+			
+			StyleManager.setStyleDeclaration("." + tabStyleName, tSelector, false);
+			
+			// Style for the close button on each tab
+			var tabCloseStyleName:String = tSelector.getStyle("tabCloseButtonStyleName");
+			var cSelector:CSSStyleDeclaration = StyleManager.getStyleDeclaration("." + tabCloseStyleName);
+			
+			if(!cSelector)
+			{
+				cSelector = new CSSStyleDeclaration();
+			}
+			
+			cSelector.defaultFactory = function():void
+			{
+				this.upSkin = DEFAULT_CLOSE_UP;	
+				this.overSkin = DEFAULT_CLOSE_OVER;	
+				this.downSkin = DEFAULT_CLOSE_DOWN;	
+				this.disabledSkin = DEFAULT_CLOSE_DISABLED;	
+			}
+			
+			StyleManager.setStyleDeclaration("." + tabCloseStyleName, cSelector, false);
+			
+			StyleManager.setStyleDeclaration("SuperTabBar", selector, false);
+		}
+		
+		initializeStyles();
+		
+		override public function initialize():void {
+			super.initialize();
+			
+			SuperTabBar.initializeStyles();
+		}
 		
 		/**
 		 * @private

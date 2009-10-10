@@ -1,9 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  Copyright (C) 2003-2006 Adobe Macromedia Software LLC and its licensors.
-//  All Rights Reserved. The following is Source Code and is subject to all
-//  restrictions on such code as contained in the End User License Agreement
-//  accompanying this product.
+//  ADOBE SYSTEMS INCORPORATED
+//  Copyright 2003-2007 Adobe Systems Incorporated
+//  All Rights Reserved.
+//
+//  NOTICE: Adobe permits you to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -11,6 +13,7 @@ package flexlib.baseClasses
 {
 
 import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
 import flash.events.Event;
 import flash.events.FocusEvent;
 import flash.events.KeyboardEvent;
@@ -18,18 +21,19 @@ import flash.events.MouseEvent;
 import flash.geom.Rectangle;
 import flash.ui.Keyboard;
 import flash.utils.getTimer;
-
-import flexlib.containers.accordionClasses.AccordionHeader;
-
 import mx.automation.IAutomationObject;
+import flexlib.containers.accordionClasses.AccordionHeader;
 import mx.controls.Button;
 import mx.core.ClassFactory;
 import mx.core.ComponentDescriptor;
 import mx.core.Container;
 import mx.core.ContainerCreationPolicy;
 import mx.core.EdgeMetrics;
+import mx.core.FlexVersion;
 import mx.core.IDataRenderer;
 import mx.core.IFactory;
+import mx.managers.IFocusManagerComponent;
+import mx.managers.IHistoryManagerClient;
 import mx.core.IInvalidating;
 import mx.core.IUIComponent;
 import mx.core.ScrollPolicy;
@@ -42,14 +46,11 @@ import mx.events.FlexEvent;
 import mx.events.IndexChangedEvent;
 import mx.graphics.RoundedRectangle;
 import mx.managers.HistoryManager;
-import mx.managers.IFocusManagerComponent;
-import mx.managers.IHistoryManagerClient;
-import mx.styles.CSSStyleDeclaration;
 import mx.styles.StyleManager;
+import mx.styles.CSSStyleDeclaration;
+import mx.styles.StyleProxy;
 
 use namespace mx_internal;
-
-
 
 [RequiresDataBinding(true)]
 
@@ -64,53 +65,94 @@ use namespace mx_internal;
  */
 [Event(name="change", type="mx.events.IndexChangedEvent")]
 
-// The fill related styles are applied to the children of the Accordion, ie: the AccordionHeaders
-//include "../styles/metadata/FillStyles.as"
-//include "../styles/metadata/SelectedFillColorsStyle.as"
-
-// The focus styles are applied to the Accordion itself
-//include "../styles/metadata/FocusStyles.as"
-
-[Style(name="fillAlphas", type="Array", arrayType="Number", inherit="no")]
-[Style(name="fillColors", type="Array", arrayType="uint", format="Color", inherit="no")]
-[Style(name="focusAlpha", type="Number", inherit="no")]
-[Style(name="focusRoundedCorners", type="String", inherit="no")]
-[Style(name="selectedFillColors", type="Array", arrayType="uint", format="Color", inherit="no")]
-
-
+//--------------------------------------
+//  Styles
+//--------------------------------------
 
 /**
- *  Name of CSS style declaration that specifies styles for the accordion
+ *  Specifies the alpha transparency values used for the background fill of components.
+ *  You should set this to an Array of either two or four numbers.
+ *  Elements 0 and 1 specify the start and end values for
+ *  an alpha gradient.
+ *  If elements 2 and 3 exist, they are used instead of elements 0 and 1
+ *  when the component is in a mouse-over state.
+ *  The global default value is <code>[ 0.60, 0.40, 0.75, 0.65 ]</code>.
+ *  Some components, such as the ApplicationControlBar container,
+ *  have a different default value. For the ApplicationControlBar container, 
+ *  the default value is <code>[ 0.0, 0.0 ]</code>.
+ */
+[Style(name="fillAlphas", type="Array", arrayType="Number", inherit="no", deprecatedReplacement="headerStyleName", deprecatedSince="3.0")]
+
+/**
+ *  Specifies the colors used to tint the background fill of the component.
+ *  You should set this to an Array of either two or four uint values
+ *  that specify RGB colors.
+ *  Elements 0 and 1 specify the start and end values for
+ *  a color gradient.
+ *  If elements 2 and 3 exist, they are used instead of elements 0 and 1
+ *  when the component is in a mouse-over state.
+ *  For a flat-looking control, set the same color for elements 0 and 1
+ *  and for elements 2 and 3,
+ *  The default value is
+ *  <code>[ 0xFFFFFF, 0xCCCCCC, 0xFFFFFF, 0xEEEEEE ]</code>.
+ *  <p>Some components, such as the ApplicationControlBar container,
+ *  have a different default value. For the ApplicationControlBar container, 
+ *  the default value is <code>[ 0xFFFFFF, 0xFFFFFF ]</code>.</p>
+ */
+[Style(name="fillColors", type="Array", arrayType="uint", format="Color", inherit="no", deprecatedReplacement="headerStyleName", deprecatedSince="3.0")]
+
+/**
+ *  Specifies the alpha transparency value of the focus skin.
+ *  
+ *  @default 0.4
+ */
+[Style(name="focusAlpha", type="Number", inherit="no", deprecatedReplacement="headerStyleName", deprecatedSince="3.0")]
+
+/**
+ *  Specifies which corners of the focus rectangle should be rounded.
+ *  This value is a space-separated String that can contain any
+ *  combination of <code>"tl"</code>, <code>"tr"</code>, <code>"bl"</code>
+ *  and <code>"br"</code>.
+ *  For example, to specify that the right side corners should be rounded,
+ *  but the left side corners should be square, use <code>"tr br"</code>.
+ *  The <code>cornerRadius</code> style property specifies
+ *  the radius of the rounded corners.
+ *  The default value depends on the component class; if not overridden for
+ *  the class, default value is <code>"tl tr bl br"</code>.
+ * 
+ */
+[Style(name="focusRoundedCorners", type="String", inherit="no", deprecatedReplacement="headerStyleName", deprecatedSince="3.0")]
+
+/**
+ *  Skin used to draw the focus rectangle.
+ *
+ *  @default mx.skins.halo.HaloFocusRect
+ */
+[Style(name="focusSkin", type="Class", inherit="no", deprecatedReplacement="headerStyleName", deprecatedSince="3.0")]
+
+/**
+ *  Thickness, in pixels, of the focus rectangle outline.
+ *
+ *  @default 2
+ */
+[Style(name="focusThickness", type="Number", format="Length", inherit="no", deprecatedReplacement="headerStyleName", deprecatedSince="3.0")]
+
+/**
+ *  Name of the CSS style declaration that specifies styles for the accordion
  *  headers (tabs).
+ * 
+ *  <p>You can use this class selector to set the values of all the style properties 
+ *  of the AccordionHeader class, including <code>fillAlphas</code>, <code>fillColors</code>, 
+ *  <code>focusAlpha</code>, <code>focusRounderCorners</code>, 
+ *  <code>focusSkin</code>, <code>focusThickness</code>, and <code>selectedFillColors</code>.</p>
  */
 [Style(name="headerStyleName", type="String", inherit="no")]
-
-/**
- *  Number of pixels between the container's top border and its content area.
- *  The default value is -1, so the top border of the first header
- *  overlaps the Accordion container's top border.
- */
-[Style(name="paddingTop", type="Number", format="Length", inherit="no")]
-
-/**
- *  Number of pixels between the container's bottom border and its content area.
- *  The default value is -1, so the bottom border of the last header
- *  overlaps the Accordion container's bottom border.
- */
-[Style(name="paddingBottom", type="Number", format="Length", inherit="no")]
 
 /**
  *  Number of pixels between children in the horizontal direction.
  *  The default value is 8.
  */
 [Style(name="horizontalGap", type="Number", format="Length", inherit="no")]
-
-/**
- *  Number of pixels between children in the vertical direction.
- *  The default value is -1, so the top and bottom borders
- *  of adjacent headers overlap.
- */
-[Style(name="verticalGap", type="Number", format="Length", inherit="no")]
 
 /**
  *  Height of each accordion header, in pixels.
@@ -131,6 +173,29 @@ use namespace mx_internal;
 [Style(name="openEasingFunction", type="Function", inherit="no")]
 
 /**
+ *  Number of pixels between the container's bottom border and its content area.
+ *  The default value is -1, so the bottom border of the last header
+ *  overlaps the Accordion container's bottom border.
+ */
+[Style(name="paddingBottom", type="Number", format="Length", inherit="no")]
+
+/**
+ *  Number of pixels between the container's top border and its content area.
+ *  The default value is -1, so the top border of the first header
+ *  overlaps the Accordion container's top border.
+ */
+[Style(name="paddingTop", type="Number", format="Length", inherit="no")]
+
+/**
+ *  The two colors used to tint the background of the component
+ *  when in its selected state.
+ *  Pass the same color for both values for "flat" looking control.
+ *  The default value is <code>undefined</code>, which means the colors
+ *  are derived from <code>themeColor</code>.
+ */
+[Style(name="selectedFillColors", type="Array", arrayType="uint", format="Color", inherit="no", deprecatedReplacement="headerStyleName", deprecatedSince="3.0")]
+
+/**
  *  Color of header text when rolled over.
  *  The default value is 0x2B333C.
  */
@@ -141,6 +206,13 @@ use namespace mx_internal;
  *  The default value is 0x2B333C.
  */
 [Style(name="textSelectedColor", type="uint", format="Color", inherit="yes")]
+
+/**
+ *  Number of pixels between children in the vertical direction.
+ *  The default value is -1, so the top and bottom borders
+ *  of adjacent headers overlap.
+ */
+[Style(name="verticalGap", type="Number", format="Length", inherit="no")]
 
 //--------------------------------------
 //  Excluded APIs
@@ -164,6 +236,11 @@ use namespace mx_internal;
 
 [Exclude(name="scroll", kind="event")]
 
+/*
+[Exclude(name="focusBlendMode", kind="style")]
+[Exclude(name="focusSkin", kind="style")]
+[Exclude(name="focusThickness", kind="style")]
+*/
 [Exclude(name="horizontalScrollBarStyleName", kind="style")]
 [Exclude(name="verticalScrollBarStyleName", kind="style")]
 
@@ -176,7 +253,7 @@ use namespace mx_internal;
 [DefaultTriggerEvent("change")]
 
 /**
- * 	AccordionBase is a copy/paste version of the original Accordion class in the Flex framework.
+ * AccordionBase is a copy/paste version of the original Accordion class in the Flex framework.
  * 
  *  <p>The only modifications made to this class were to change some properties and
  * methods from private to protected so we can override them in a subclass.</p>
@@ -190,12 +267,41 @@ use namespace mx_internal;
  *  When the user clicks a navigator button, the associated child container
  *  is displayed.
  *  The transition to the new child uses an animation to make it clear to
- *  the user that one child is disappearing and a different one is appearing.</P>
+ *  the user that one child is disappearing and a different one is appearing.</p>
  *
  *  <p>The Accordion container does not extend the ViewStack container,
  *  but it implements all the properties, methods, styles, and events
  *  of the ViewStack container, such as <code>selectedIndex</code>
  *  and <code>selectedChild</code>.</p>
+ *
+ *  <p>An Accordion container has the following default sizing characteristics:</p>
+ *     <table class="innertable">
+ *        <tr>
+ *           <th>Characteristic</th>
+ *           <th>Description</th>
+ *        </tr>
+ *        <tr>
+ *           <td>Default size</td>
+ *           <td>The width and height of the currently active child.</td>
+ *        </tr>
+ *        <tr>
+ *           <td>Container resizing rules</td>
+ *           <td>Accordion containers are only sized once to fit the size of the first child container by default. 
+ *               They do not resize when you navigate to other child containers by default. 
+ *               To force Accordion containers to resize when you navigate to a different child container, 
+ *               set the resizeToContent property to true.</td>
+ *        </tr>
+ *        <tr>
+ *           <td>Child sizing rules</td>
+ *           <td>Children are sized to their default size. The child is clipped if it is larger than the Accordion container. 
+ *               If the child is smaller than the Accordion container, it is aligned to the upper-left corner of the 
+ *               Accordion container.</td>
+ *        </tr>
+ *        <tr>
+ *           <td>Default padding</td>
+ *           <td>-1 pixel for the top, bottom, left, and right values.</td>
+ *        </tr>
+ *     </table>
  *
  *  @mxml
  *
@@ -212,10 +318,6 @@ use namespace mx_internal;
  *    selectedIndex="undefined"
  *  
  *    <strong>Styles</strong>
- *    fillAlphas="[0.60, 0.40, 0.75, 0.65]"
- *    fillColors="[0xFFFFFF, 0xCCCCCC, 0xFFFFFF, 0xEEEEEE]"
- *    focusAlpha="0.5"
- *    focusRoundedCorners="tl tr bl br"
  *    headerHeight="depends on header font styles"
  *    headerStyleName="<i>No default</i>"
  *    horizontalGap="8"
@@ -223,7 +325,6 @@ use namespace mx_internal;
  *    openEasingFunction="undefined"
  *    paddingBottom="-1"
  *    paddingTop="-1"
- *    selectedFillColors="undefined"
  *    textRollOverColor="0xB333C"
  *    textSelectedColor="0xB333C"
  *    verticalGap="-1"
@@ -285,13 +386,10 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
         // Accordion always clips content, it just handles it by itself
         super.clipContent = false;
 
-        addEventListener(Event.ADDED, addedHandler);
-        addEventListener(Event.REMOVED, removedHandler);
-
         addEventListener(ChildExistenceChangedEvent.CHILD_ADD, childAddHandler);
         addEventListener(ChildExistenceChangedEvent.CHILD_REMOVE, childRemoveHandler);
 
-		showInAutomationHierarchy = true;
+        showInAutomationHierarchy = true;
     }
 
     //--------------------------------------------------------------------------
@@ -322,11 +420,11 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
      */
     private var bInLoadState:Boolean = false;
 
-	/**
-	 *  @private
-	 */
-	private var firstTime:Boolean = true;
-	
+    /**
+     *  @private
+     */
+    private var firstTime:Boolean = true;
+    
     /**
      *  @private
      */
@@ -352,6 +450,13 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     protected var accMinHeight:Number;
     protected var accPreferredWidth:Number;
     protected var accPreferredHeight:Number;
+    
+    /**
+     *  @private
+     *  When a child is added or removed, this flag is set true
+     *  and it causes a re-measure.  
+     */
+    private var childAddedOrRemoved:Boolean = false;
 
     /**
      *  @private
@@ -404,6 +509,45 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
      */
     override public function set autoLayout(value:Boolean):void
     {
+    }
+
+    //----------------------------------
+    //  baselinePosition
+    //----------------------------------
+
+    /**
+     *  @private
+     *  The baselinePosition of an Accordion is calculated
+     *  for the label of the first header.
+     *  If there are no children, a child is temporarily added
+     *  to do the computation.
+     */
+    override public function get baselinePosition():Number
+    {
+        if (FlexVersion.compatibilityVersion < FlexVersion.VERSION_3_0)
+            return super.baselinePosition;
+            
+        if (!validateBaselinePosition())
+            return NaN;
+
+        var isEmpty:Boolean = numChildren == 0;
+        if (isEmpty)
+        {
+            var child0:Container = new Container();
+            addChild(child0);
+            validateNow();
+        }
+        
+        var header0:Button = getHeaderAt(0);
+        var result:Number = header0.y + header0.baselinePosition;
+        
+        if (isEmpty)
+        {
+            removeChildAt(0);
+            validateNow();
+        }
+        
+        return result;
     }
 
     //----------------------------------
@@ -582,8 +726,8 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
         _headerRenderer = value;
 
         dispatchEvent(new Event("headerRendererChanged"));
-    }
-
+    }   
+   
     //----------------------------------
     //  historyManagementEnabled
     //----------------------------------
@@ -725,7 +869,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
 
     /**
      *  The zero-based index of the currently visible child container.
-     *  Child indexes are in the range 0, 1, 2, ... , n - 1, where n is the number
+     *  Child indexes are in the range 0, 1, 2, ..., n - 1, where n is the number
      *  of children.
      *  The default value is 0, corresponding to the first child.
      *  If there are no children, this property is <code>-1</code>.
@@ -869,7 +1013,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
         }
 
         // Make sure the new selected child is instantiated
-        instantiateSelectedChild();
+        instantiateChild(selectedChild);
     }
 
     /**
@@ -920,11 +1064,13 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
         
         if (firstTime)
         {
-        	firstTime = false;
-        	
-			// Add a "removed" listener to the system manager so we can
-			// un-register from the history manager if this application is unloaded.
-			systemManager.addEventListener(Event.REMOVED, systemManager_removedHandler);
+            firstTime = false;
+            
+            // Add "addedToStage" and "removedFromStage" listeners so we can 
+            // register/un-register from the history manager when this component
+            // is added or removed from the display list.
+            addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler, false, 0, true);
+            addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler, false, 0, true);
         }
     }
 
@@ -933,8 +1079,109 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
      */
     override protected function measure():void
     {
-    	/* measure() gets implemented by a subclass, either HAccordion or VAccordion */
         super.measure();
+        
+        /* measure() gets implemented by a subclass, either HAccordion or VAccordion */
+		/**
+        var minWidth:Number = 0;
+        var minHeight:Number = 0;
+        var preferredWidth:Number = 0;
+        var preferredHeight:Number = 0;
+
+        var paddingLeft:Number = getStyle("paddingLeft");
+        var paddingRight:Number = getStyle("paddingRight");
+        var headerHeight:Number = getHeaderHeight();
+
+        // In general, we only measure once and thereafter use cached values.
+        // There are three exceptions: when resizeToContent is true,
+        // when a layout style like headerHeight changes,
+        // and when a child is added or removed.
+        //
+        // We need to copy the cached values into the measured fields
+        // again to handle the case where scaleX or scaleY is not 1.0.
+        // When the Accordion is zoomed, code in UIComponent.measureSizes
+        // scales the measuredWidth/Height values every time that
+        // measureSizes is called.  (bug 100749)
+        if (accPreferredWidth && !_resizeToContent &&
+            !layoutStyleChanged && !childAddedOrRemoved)
+        {
+            measuredMinWidth = accMinWidth;
+            measuredMinHeight = accMinHeight;
+            measuredWidth = accPreferredWidth;
+            measuredHeight = accPreferredHeight;
+            return;
+        }
+
+        layoutStyleChanged = false;
+        childAddedOrRemoved = false;
+
+        var n:int = numChildren;
+        for (var i:int = 0; i < n; i++)
+        {
+            var button:Button = getHeaderAt(i);
+            var child:IUIComponent = IUIComponent(getChildAt(i));
+
+            minWidth = Math.max(minWidth, button.minWidth);
+            minHeight += headerHeight;
+            preferredWidth = Math.max(preferredWidth, minWidth);
+            preferredHeight += headerHeight;
+
+            // The headers preferredWidth is messing up the accordion measurement. This may not
+            // be needed anyway because we're still using the headers minWidth to determine our overall
+            // minWidth.
+
+            if (i == selectedIndex)
+            {
+                preferredWidth = Math.max(preferredWidth, child.getExplicitOrMeasuredWidth());
+                preferredHeight += child.getExplicitOrMeasuredHeight();
+
+                minWidth = Math.max(minWidth, child.minWidth);
+                minHeight += child.minHeight;
+            }
+
+        }
+
+        // Add space for borders and margins
+        var vm:EdgeMetrics = viewMetricsAndPadding;
+        var widthPadding:Number = vm.left + vm.right;
+        var heightPadding:Number = vm.top + vm.bottom;
+
+        // Need to adjust the widthPadding if paddingLeft and paddingRight are negative numbers
+        // (see explanation in updateDisplayList())
+        if (paddingLeft < 0)
+            widthPadding -= paddingLeft;
+
+        if (paddingRight < 0)
+            widthPadding -= paddingRight;
+
+        minWidth += widthPadding;
+        preferredWidth += widthPadding;
+        minHeight += heightPadding;
+        preferredHeight += heightPadding;
+
+        measuredMinWidth = minWidth;
+        measuredMinHeight = minHeight;
+        measuredWidth = preferredWidth;
+        measuredHeight = preferredHeight;
+
+        // If we're called before instantiateSelectedChild, then bail.
+        // We'll be called again later (instantiateSelectedChild calls
+        // invalidateSize), and we don't want to load values into the
+        // cache until we're fully initialized.  (bug 102639)
+        // This check was moved from the beginning of this function to
+        // here to fix bugs 103665/104213.
+        if (selectedChild && Container(selectedChild).numChildrenCreated == -1)
+            return;
+
+        // Don't remember sizes if we don't have any children
+        if (numChildren == 0)
+            return;
+
+        accMinWidth = minWidth;
+        accMinHeight = minHeight;
+        accPreferredWidth = preferredWidth;
+        accPreferredHeight = preferredHeight;
+        **/
     }
 
     /**
@@ -947,8 +1194,114 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     override protected function updateDisplayList(unscaledWidth:Number,
                                                   unscaledHeight:Number):void
     {
-    	/* updateDisplayList() gets implemented by a subclass, either HAccordion or VAccordion */
         super.updateDisplayList(unscaledWidth, unscaledHeight);
+
+		/* updateDisplayList() gets implemented by a subclass, either HAccordion or VAccordion */
+		/**
+        // Don't do layout if we're tweening because the tweening
+        // code is handling it.
+        if (tween)
+            return;
+
+        // Measure the border.
+        var bm:EdgeMetrics = borderMetrics;
+        var paddingLeft:Number = getStyle("paddingLeft");
+        var paddingRight:Number = getStyle("paddingRight");
+        var paddingTop:Number = getStyle("paddingTop");
+        var verticalGap:Number = getStyle("verticalGap");
+
+        // Determine the width and height of the content area.
+        var localContentWidth:Number = calcContentWidth();
+        var localContentHeight:Number = calcContentHeight();
+
+        // Arrange the headers, the content clips,
+        // based on selectedIndex.
+        var x:Number = bm.left + paddingLeft;
+        var y:Number = bm.top + paddingTop;
+
+        // Adjustments. These are required since the default halo
+        // appearance has verticalGap and all margins set to -1
+        // so the edges of the headers overlap each other and the
+        // border of the accordion. These overlaps cause problems with
+        // the content area clipping, so we adjust for them here.
+        var contentX:Number = x;
+        var adjContentWidth:Number = localContentWidth;
+        var headerHeight:Number = getHeaderHeight();
+
+        if (paddingLeft < 0)
+        {
+            contentX -= paddingLeft;
+            adjContentWidth += paddingLeft;
+        }
+
+        if (paddingRight < 0)
+            adjContentWidth += paddingRight;
+
+        var n:int = numChildren;
+        for (var i:int = 0; i < n; i++)
+        {
+            var header:Button = getHeaderAt(i);
+            var content:IUIComponent = IUIComponent(getChildAt(i));
+
+            header.move(x, y);
+            header.setActualSize(localContentWidth, headerHeight);
+            y += headerHeight;
+
+            if (i == selectedIndex)
+            {
+                content.move(contentX, y);
+                content.visible = true;
+
+                var contentW:Number = adjContentWidth;
+                var contentH:Number = localContentHeight;
+
+                if (!isNaN(content.percentWidth))
+                {
+                    if (contentW > content.maxWidth)
+                        contentW = content.maxWidth;
+                }
+                else
+                {
+                    if (contentW > content.getExplicitOrMeasuredWidth())
+                        contentW = content.getExplicitOrMeasuredWidth();
+                }
+
+                if (!isNaN(content.percentHeight))
+                {
+                    if (contentH > content.maxHeight)
+                        contentH = content.maxHeight;
+                }
+                else
+                {
+                    if (contentH > content.getExplicitOrMeasuredHeight())
+                        contentH = content.getExplicitOrMeasuredHeight();
+                }
+
+                if (content.width != contentW ||
+                    content.height != contentH)
+                {
+                    content.setActualSize(contentW, contentH);
+                }
+
+                y += localContentHeight;
+            }
+            else
+            {
+                content.move(contentX, i < selectedIndex
+                        ? y : y - localContentHeight);
+                content.visible = false;
+            }
+
+            y += verticalGap;
+        }
+
+        // Make sure blocker is in front
+        if (blocker)
+            rawChildren.setChildIndex(blocker, numChildren - 1);
+
+        // refresh the focus rect, the dimensions might have changed.
+        drawHeaderFocus(_focusedIndex, showFocusIndicator);
+        */
     }
 
     /**
@@ -1018,22 +1371,38 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
             styleProp == "styleName")
         {
             var headerStyleName:Object = getStyle("headerStyleName");
+            var header:Button;
+            
             if (headerStyleName)
             {
-                var headerStyleDecl:CSSStyleDeclaration = 
-                    StyleManager.getStyleDeclaration("." + headerStyleName);
-                if (headerStyleDecl)
-                {
-                    // Need to reset the header style declaration and 
-                    // regenerate their style cache
-                    for (var i:int = 0; i < numChildren; i++)
+                if (FlexVersion.compatibilityVersion < FlexVersion.VERSION_3_0)
+                {               
+                    var headerStyleDecl:CSSStyleDeclaration = 
+                        StyleManager.getStyleDeclaration("." + headerStyleName);
+                    if (headerStyleDecl)
                     {
-                        var header:Button = getHeaderAt(i);
+                        // Need to reset the header style declaration and 
+                        // regenerate their style cache
+                        for (var i:int = 0; i < numChildren; i++)
+                        {
+                            header = getHeaderAt(i);
+                            if (header)
+                            {
+                                header.styleDeclaration = headerStyleDecl;
+                                header.regenerateStyleCache(true);
+                                header.styleChanged(null);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (var j:int = 0; j < numChildren; j++)
+                    {
+                        header = getHeaderAt(j);
                         if (header)
                         {
-                            header.styleDeclaration = headerStyleDecl;
-                            header.regenerateStyleCache(true);
-                            header.styleChanged(null);
+                            header.styleName = headerStyleName;
                         }
                     }
                 }
@@ -1184,8 +1553,8 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     
     /**
      *  @private
-     *  Returns the height of the header control. All header controls are the same
-     *  height.
+     *  Returns the width of the header control. All header controls are the same
+     *  width.
      */
     protected function getHeaderWidth():Number
     {
@@ -1230,18 +1599,29 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
         // If needed, the headers will be shuffled below.
         var header:Button = Button(headerRenderer.newInstance());
         header.name = HEADER_NAME_BASE + (numChildren - 1);
-        header.styleName = this;
+        
+        if (FlexVersion.compatibilityVersion < FlexVersion.VERSION_3_0)
+        {
+            header.styleName = this;
+        }
         
         var headerStyleName:String = getStyle("headerStyleName");
         if (headerStyleName)
         {
-            var headerStyleDecl:CSSStyleDeclaration = StyleManager.
+            if (FlexVersion.compatibilityVersion < FlexVersion.VERSION_3_0)
+            {
+                 var headerStyleDecl:CSSStyleDeclaration = StyleManager.
                         getStyleDeclaration("." + headerStyleName);
                         
-            if (headerStyleDecl)
-                header.styleDeclaration = headerStyleDecl;
+                if (headerStyleDecl)
+                    header.styleDeclaration = headerStyleDecl;
+            }
+            else
+            {
+                header.styleName = headerStyleName;
+            }
         }
-
+ 
         header.addEventListener(MouseEvent.CLICK, headerClickHandler);
 
         IDataRenderer(header).data = content;
@@ -1330,7 +1710,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     /**
      *  @private
      */
-    protected function headerClickHandler(event:Event):void
+    private function headerClickHandler(event:Event):void
     {
         var header:Button = Button(event.currentTarget);
         var oldIndex:int = selectedIndex;
@@ -1344,7 +1724,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     /**
      *  @private
      */
-    protected function commitSelectedIndex():void
+    private function commitSelectedIndex():void
     {
         if (proposedSelectedIndex == -1)
             return;
@@ -1439,7 +1819,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
             if (oldIndex != -1)
                 Container(getChildAt(oldIndex)).setVisible(false);
 
-            instantiateSelectedChild();
+            instantiateChild(selectedChild);
         }
         else
         {
@@ -1453,27 +1833,27 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     /**
      *  @private
      */
-    protected function instantiateSelectedChild():void
+    protected function instantiateChild(child:Container):void
     {
         // fix for bug#137430
         // when the selectedChild index is -1 (invalid value due to any reason)
         // selectedContainer will not be valid. Before we proceed
         // we need to make sure of its validity.
-        if (!selectedChild)
+        if (!child)
             return;
 
         // Performance optimization: don't call createComponents if we know
         // that createComponents has already been called.
-        if (selectedChild && selectedChild.numChildrenCreated == -1)
-            selectedChild.createComponentsFromDescriptors();
+        if (child && child.numChildrenCreated == -1)
+            child.createComponentsFromDescriptors();
 
         // Do the initial measurement/layout pass for the newly-instantiated
         // descendants.
         invalidateSize();
         invalidateDisplayList();
 
-        if (selectedChild is IInvalidating)
-            IInvalidating(selectedChild).invalidateSize();
+        if (child is IInvalidating)
+            IInvalidating(child).invalidateSize();
     }
 
     /**
@@ -1538,7 +1918,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
             newSelectedChild.setActualSize(tweenContentWidth, tweenContentHeight);
         }
 
-        //UIComponent.suspendBackgroundProcessing();
+        UIComponent.suspendBackgroundProcessing();
     }
 
     /**
@@ -1561,8 +1941,12 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
 
         // These offsets for the Y position of the content clips make the content
         // clips appear to be pushed up and pulled down.
-        var oldOffset:Number = oldSelectedIndex < newSelectedIndex ? -newContentHeight : newContentHeight;
-        var newOffset:Number = newSelectedIndex > oldSelectedIndex ? oldContentHeight : -oldContentHeight;
+        var oldOffset:Number = oldSelectedIndex < newSelectedIndex ?
+                               -newContentHeight :
+                               newContentHeight;
+        var newOffset:Number = newSelectedIndex > oldSelectedIndex ?
+                               oldContentHeight :
+                               -oldContentHeight;
 
         // Loop over all the headers to arrange them vertically.
         // The loop is intentionally over ALL the headers, not just the ones that
@@ -1677,7 +2061,7 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
 
         // Let the screen render the last frame of the animation before
         // we begin instantiating the new child.
-        callLater(instantiateSelectedChild);
+        callLater(instantiateChild, [selectedChild]);
     }
 
     //--------------------------------------------------------------------------
@@ -1715,9 +2099,9 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
             case Keyboard.PAGE_UP:
             {
                 drawHeaderFocus(_focusedIndex, false);
-                _focusedIndex = selectedIndex = (selectedIndex > 0
-                                 ? selectedIndex - 1
-                                 : numChildren - 1);
+                _focusedIndex = selectedIndex = (selectedIndex > 0 ?
+                                selectedIndex - 1 :
+                                numChildren - 1);
                 drawHeaderFocus(_focusedIndex, true);
                 event.stopPropagation();
                 dispatchChangeEvent(prevValue, selectedIndex, event);
@@ -1760,9 +2144,9 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
             case Keyboard.LEFT:
             {
                 drawHeaderFocus(_focusedIndex, false);
-                _focusedIndex = (_focusedIndex > 0
-                                 ? _focusedIndex - 1
-                                 : numChildren - 1);
+                _focusedIndex = (_focusedIndex > 0 ?
+                                 _focusedIndex - 1 :
+                                 numChildren - 1);
                 drawHeaderFocus(_focusedIndex, true);
                 event.stopPropagation();
                 break;
@@ -1787,41 +2171,24 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
     //  Event handlers
     //
     //--------------------------------------------------------------------------
-
+    
     /**
      *  @private
-     *  Handles "added" event.
+     *  Handles "addedToStage" event
      */
-    private function addedHandler(event:Event):void
+    private function addedToStageHandler(event:Event):void
     {
-        if (event.target != this)
-            return;
-
         if (historyManagementEnabled)
-            HistoryManager.register(this);
-    }
-
-    /**
-     *  @private
-     *  Handles "removed" event.
-     */
-    private function removedHandler(event:Event):void
-    {
-        if (event.target != this)
-            return;
-
-        HistoryManager.unregister(this);
+                HistoryManager.register(this);
     }
     
     /**
      *  @private
-     *  Handles "removed" event from system manager
+     *  Handles "removedFromStage" event
      */
-    private function systemManager_removedHandler(event:Event):void
+    private function removedFromStageHandler(event:Event):void
     {
-        // Our system manager has been unloaded, unregister from the HistoryManager.
-        if (event.target == systemManager)
-            HistoryManager.unregister(this);
+        HistoryManager.unregister(this);
     }
     
     /**
@@ -1829,6 +2196,8 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
      */
     private function childAddHandler(event:ChildExistenceChangedEvent):void
     {
+        childAddedOrRemoved = true;
+        
         var child:DisplayObject = event.relatedObject;
         
         // Accordion creates all of its children initially invisible.
@@ -1841,8 +2210,9 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
         // If the child's label or icon changes, Accordion needs to know so that
         // the header label can be updated. This event is handled by
         // labelChanged().
-        child.addEventListener("labelChanged", labelChangedHandler);
-        child.addEventListener("iconChanged", iconChangedHandler);
+        // note: weak listeners
+        child.addEventListener("labelChanged", labelChangedHandler, false, 0, true);
+        child.addEventListener("iconChanged",  iconChangedHandler,  false, 0, true);
 
         // If we just created the first child and no selected index has
         // been proposed, then propose this child to be selected.
@@ -1859,8 +2229,8 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
             drawHeaderFocus(_focusedIndex, showFocusIndicator);
         }
         
-		if(child as IAutomationObject);
-			IAutomationObject(child).showInAutomationHierarchy = true;
+        if (child as IAutomationObject);
+            IAutomationObject(child).showInAutomationHierarchy = true;
     }
 
     /**
@@ -1868,6 +2238,8 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
      */
     private function childRemoveHandler(event:ChildExistenceChangedEvent):void
     {
+        childAddedOrRemoved = true;
+        
         if (numChildren == 0)
             return;
 
@@ -1875,6 +2247,10 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
         var oldIndex:int = selectedIndex;
         var newIndex:int;
         var index:int = getChildIndex(child);
+
+        // Remove Event Listeners, in case children are referenced elsewhere.
+        child.removeEventListener("labelChanged", labelChangedHandler);
+        child.removeEventListener("iconChanged",  iconChangedHandler);
         
         var nChildren:int = numChildren - 1;
             // number of children remaining after child has been removed
@@ -1918,9 +2294,23 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
             // Otherwise, select the next one. This next child now
             // has the same index as the one we just deleted,
             if (index == nChildren)
+            {
                 newIndex = oldIndex - 1;
+                
+                // if something's selected, instantiate it
+                if (newIndex != -1)
+                    instantiateChild(Container(getChildAt(newIndex)));
+            }
             else
+            {
                 newIndex = oldIndex;
+                
+                // can't do selectedChild because we need to actually do
+                // newIndex + 1 because currently that's what the index 
+                // of the child is (SDK-12622) since this one isn't
+                // actually removed from the display list yet
+                instantiateChild(Container(getChildAt(newIndex+1)));
+            }
 
             // Select the new selected index header.
             var newHeader:Button = getHeaderAt(newIndex);
@@ -1941,8 +2331,6 @@ public class AccordionBase extends Container implements IHistoryManagerClient, I
         }
 
         _selectedIndex = newIndex;
-
-        instantiateSelectedChild();
 
         dispatchEvent(new FlexEvent(FlexEvent.VALUE_COMMIT));
 

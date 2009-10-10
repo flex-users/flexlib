@@ -166,9 +166,6 @@ package flexlib.controls.tabBarClasses
 			closeButton.addEventListener(MouseEvent.MOUSE_DOWN, cancelEvent, false, 0, true); 
 			closeButton.addEventListener(MouseEvent.CLICK, cancelEvent, false, 0, true); 
 		
-			// This allows someone to specify a CSS style for the close button
-			closeButton.styleName = getStyle("tabCloseButtonStyleName");
-			
 			var indicatorClass:Class = getStyle("indicatorClass") as Class;
 			if(indicatorClass) {
 				indicator = new indicatorClass() as DisplayObject;
@@ -182,6 +179,8 @@ package flexlib.controls.tabBarClasses
 			
 			closeButton.enabled = this.enabled;
 
+			// This allows someone to specify a CSS style for the close button
+			closeButton.styleName = getStyle("tabCloseButtonStyleName");
 			
 			this.textField.addEventListener(Event.CHANGE, captureTextChange); 	
 		}
@@ -327,6 +326,11 @@ package flexlib.controls.tabBarClasses
 				closeButton.x = unscaledWidth-closeButton.width - 4;
 				closeButton.y = 4;
 				
+				var closeButtonStyleName:String = getStyle("tabCloseButtonStyleName");
+				if(closeButtonStyleName != null && closeButtonStyleName != closeButton.styleName) {
+					closeButton.styleName = closeButtonStyleName;
+				}
+					
 				setChildIndex(closeButton, numChildren - 1);
 			}
 		}
