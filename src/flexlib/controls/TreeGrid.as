@@ -25,26 +25,32 @@ package flexlib.controls
 {
 
 import flash.events.Event;
+import flash.events.KeyboardEvent;
+import flash.ui.Keyboard;
 import flash.xml.XMLNode;
 
-import flexlib.controls.treeGridClasses.TreeGridColumn;
 import flexlib.controls.treeGridClasses.TreeGridListData;
 
 import mx.collections.ArrayCollection;
 import mx.collections.ICollectionView;
-import mx.collections.IList;
 import mx.collections.IViewCursor;
 import mx.collections.ListCollectionView;
+import mx.collections.Sort;
+import mx.collections.SortField;
 import mx.collections.XMLListCollection;
 import mx.controls.DataGrid;
 import mx.controls.dataGridClasses.DataGridColumn;
-import mx.controls.dataGridClasses.DataGridListData;
 import mx.controls.listClasses.BaseListData;
 import mx.controls.listClasses.IListItemRenderer;
 import mx.controls.treeClasses.DefaultDataDescriptor;
-import mx.controls.treeClasses.ITreeDataDescriptor;
+import mx.controls.treeClasses.ITreeDataDescriptor2;
 import mx.events.CollectionEvent;
 import mx.events.CollectionEventKind;
+import mx.events.DataGridEvent;
+import mx.utils.UIDUtil;
+import mx.controls.treeClasses.ITreeDataDescriptor;
+import flash.events.MouseEvent;
+import mx.events.ListEvent;
 
 
 [Style(name="disclosureOpenIcon", type="Class", format="EmbeddedFile", inherit="no")]	
@@ -61,12 +67,20 @@ import mx.events.CollectionEventKind;
 
 [Style(name="verticalTrunks", type="String", enumeration="none,normal,dotted", inherit="no")]
 
+[Style(name="trunkColor", type="uint", format="Color", inherit="yes")]
+
 /**
  * 
  */
 public class TreeGrid extends DataGrid
 {
 
+	[Embed(source='../assets/defaultTreeAssets.swf#TreeDisclosureClosed')]
+	private var defaultDisclosureClosedClass:Class;
+	
+	[Embed(source='../assets/defaultTreeAssets.swf#TreeDisclosureOpen')]
+	private var defaultDisclosureOpenClass:Class;
+	
 	/**
 	 *  @private
 	 *  Used to hold a list of items that are opened or set opened.
@@ -125,12 +139,130 @@ public class TreeGrid extends DataGrid
 	 */
 	private var _displayedModel : ArrayCollection = new ArrayCollection();
 
+	/**
+	 * @private
+	 * The last sort that was set by clicking on the column headers.
+	 */
+	private var lastSort:Sort;
 
 	public function TreeGrid()
 	{
 		super();
 		
 		setStyle("indentation", 18);
+		
+		doubleClickEnabled = true;
+		
+		addEventListener( KeyboardEvent.KEY_UP, keyboardHandler );
+		
+		addEventListener(DataGridEvent.HEADER_RELEASE,
+			headerReleaseHandler,
+			false, 999);
+		
+		addEventListener(ListEvent.ITEM_DOUBLE_CLICK, doubleClickHandler);
+	}
+	
+	private function doubleClickHandler(event:ListEvent):void {
+		if(isItemOpen(event.itemRenderer.data)) {
+			closeItemAt(event.rowIndex, event.itemRenderer.data);
+		}
+		else {
+			openItemAt(event.rowIndex, event.itemRenderer.data);
+		}
+	}
+	
+	/**
+	 * We want to prevent the defeault behavior, which would be the sort functionality
+	 * of the DataGrid class. The default sort behavior will not take the hierarchical
+	 * nature of the data into account and will make the rows lose their hierarchy.
+	 */
+	private function headerReleaseHandler(event:DataGridEvent):void {
+		event.preventDefault();
+		sortByColumn(event.columnIndex);
+	}
+	
+	/**
+	 * This is essentailly the same sortByColumn function that is in DataGrid, but
+	 * modified only slightly. The main difference is the call to hierarchicalSort
+	 * at the end, which will sort the dataProvider and all the child items hierarchically.
+	 */
+	private function sortByColumn(index:int):void
+	{
+		var c:DataGridColumn = columns[index];
+		var desc:Boolean = c.sortDescending;
+		
+		// do the sort if we're allowed to
+		if (c.sortable)
+		{
+			var s:Sort = lastSort;
+			var f:SortField;
+			if (s)
+			{
+				s.compareFunction = null;
+				// analyze the current sort to see what we've been given
+				var sf:Array = s.fields;
+				if (sf)
+				{
+					for (var i:int = 0; i < sf.length; i++)
+					{
+						
+						if (sf[i].name == c.dataField)
+						{
+							// we're part of the current sort
+							f = sf[i]
+							// flip the logic so desc is new desired order
+							desc = !f.descending;
+							break;
+						}
+					}
+				}
+			}
+			else
+				s = new Sort;
+			
+			if (!f) {
+				f = new SortField(c.dataField);
+			}
+			
+			c.sortDescending = desc;
+			
+			// if you have a labelFunction you must supply a sortCompareFunction
+			f.name = c.dataField;
+			if (c.sortCompareFunction != null)
+			{
+				f.compareFunction = c.sortCompareFunction;
+			}
+			else
+			{
+				f.compareFunction = null;
+			}
+			f.descending = desc;
+			s.fields = [f];
+			
+			lastSort = s;
+		}
+		
+		hierarchicalSort(_rootModel, s);
+	}
+	
+	/**
+	 * Performs a sort of the ICollectionView and then gets all the children of
+	 * the node (if there are any) and performs the same sort on the children recursively.
+	 */
+	private function hierarchicalSort(items:ICollectionView, sort:Sort):void {
+		items.sort = sort;
+		items.refresh();
+		
+		var n:int = items.length;
+		for(var i:int=0; i<n; i++) {
+			var item:Object = items[i];
+			
+			var children:ICollectionView = _dataDescriptor.getChildren(item);
+			
+			if(children) {
+				hierarchicalSort(children, sort);
+			}
+		}
 	}
 	
 	public function dispatchTreeEvent(type:String,
@@ -161,6 +293,16 @@ public class TreeGrid extends DataGrid
 	 */
 	private var dataProviderChanged : Boolean = false;
 	
+	/**
+	 * The TreeGrid can take a number of different kinds of data providers, such as collections,
+	 * xml, string, etc. These dataproviders all get converted to some form of collection class
+	 * in the setter for dataProvider. This means we may lose the actual reference to the dataProvider
+	 * object that the user passed in. So we store a reference to this object so we know if the user
+	 * is setting a completely new dataProvider or just updating the old dataProvider that was
+	 * previously set.
+	 */
+	private var _dataProviderAsSet : Object;
+	
 	[Inspectable(category="Data", defaultValue="undefined")]
 	override public function set dataProvider( value : Object ) : void
 	{
@@ -168,7 +310,13 @@ public class TreeGrid extends DataGrid
 			_rootModel.removeEventListener(
 							CollectionEvent.COLLECTION_CHANGE, 
 							collectionChangeHandler);
-											
+
+		if (_dataProviderAsSet != null && UIDUtil.getUID(value) == UIDUtil.getUID(_dataProviderAsSet)){
+			openItemsChanged = true;
+		}else{
+			_dataProviderAsSet = value;
+		}
+													
 		// handle strings and xml
 		if (typeof(value)=="string")
 			value = new XML(value);
@@ -206,11 +354,19 @@ public class TreeGrid extends DataGrid
 		  {
 			  _rootModel = new ArrayCollection();
 		  }
-		
+
+		_rootModel.addEventListener(CollectionEvent.COLLECTION_CHANGE, rootModelChangeHandler);		
 		//flag for processing in commitProps
 		dataProviderChanged = true;
 		invalidateProperties();
 	}
+	
+	protected function rootModelChangeHandler(event:CollectionEvent):void {
+		dataProviderChanged = true;
+		openItemsChanged = true;
+		invalidateProperties();
+	}
+	
 	
 	override public function get dataProvider() : Object
 	{
@@ -281,6 +437,31 @@ public class TreeGrid extends DataGrid
 		return _hasRoot;
 	}
 	
+	private function keyboardHandler( event : KeyboardEvent ) : void {
+		switch( event.keyCode ) {
+			case Keyboard.LEFT:
+				expandSelectedNode();
+				event.preventDefault();
+				break;
+			case Keyboard.RIGHT:
+				closeSelectedNode();
+				event.preventDefault();
+				break;
+		}
+	}
+	
+	private function expandSelectedNode():void {
+		if( _dataDescriptor.hasChildren( selectedItem ) && isItemOpen( selectedItem ) ) {
+			closeItemAt( selectedIndex, selectedItem );
+		}
+	}
+	
+	private function closeSelectedNode():void {
+		if( _dataDescriptor.hasChildren( selectedItem ) && !isItemOpen( selectedItem ) ) {
+			openItemAt( selectedIndex, selectedItem );
+		}
+	}
+	
 	override protected function commitProperties() : void
 	{
 		if ( showRootChanged )
@@ -340,6 +521,15 @@ public class TreeGrid extends DataGrid
 				}	
 			}
 			
+			/* Before calling super.dataProvider we want to store the vertical and horizontal
+			 * scroll positions, as well as the list of selected items. After we set super.dataProvider
+			 * we need to always rest the selcted items, and if the open items have changed then we 
+			 * need to reset the scroll positions.
+			 */
+			var vScrollPos:int = verticalScrollPosition;
+			var hScrollPos:int = horizontalScrollPosition;
+			var savedSelection : Array = selectedItems;
+			
 			super.dataProvider = _displayedModel;
 
 		 //TODO: maybe we can use HierarchicalCollectionView?
@@ -368,6 +558,65 @@ public class TreeGrid extends DataGrid
 		
 		if ( openItemsChanged )
 		{
+			verticalScrollPosition = vScrollPos;
+			horizontalScrollPosition = hScrollPos;
+			
+			
+			for each(var item:* in openItems){
+				// only expand an item iff it's a direct child from the root.  openItemAt is recursive so don't worry about those here.
+				/*
+				if( _showRoot && _rootModel.contains( item )) {
+					var i : int = getItemIndex(item);
+					if( i >= 0 && i < collection.length ) {
+						openItemAt(i,item);
+					}
+				}
+				else if( !_showRoot) {
+					for(var j:int=0; j<_rootModel.length; j++) {
+						var rootChild:Object = _rootModel[j];
+						var children:ICollectionView = dataDescriptor.getChildren(rootChild, _rootModel);
+						
+						if(children.contains(item)) {
+							var i : int = getItemIndex(item);
+							if( i >= 0 && i < collection.length ) {
+								openItemAt(i,item);
+							}
+						}
+					}
+				}
+				*/
+				
+				var rootNodes:Object;
+				if(_showRoot || _hasRoot == false) {
+					rootNodes = _rootModel;
+				}
+				else {
+					rootNodes = [_rootModel[0]];
+				}
+				
+				for(var i:int=0; i<rootNodes.length; i++) {
+					var rootChild:Object = rootNodes[i];
+					var itemIndex:int;
+					
+					if(rootChild == item) {
+						itemIndex = getItemIndex(item);
+						if( itemIndex >= 0 && itemIndex < collection.length ) {
+							openItemAt(itemIndex,item);
+						}
+					}
+					else {
+						var children:ICollectionView = dataDescriptor.getChildren(rootChild, _rootModel);
+						
+						if(children && children.contains(item)) {
+							itemIndex = getItemIndex(item);
+							if( itemIndex >= 0 && itemIndex < collection.length ) {
+								openItemAt(itemIndex,item);
+							}
+						}
+					}
+				}
+			}
+			
 			openItemsChanged = false;
 			//setting open items resets the collection
 			var event : CollectionEvent =
@@ -375,6 +624,8 @@ public class TreeGrid extends DataGrid
 			   event.kind = CollectionEventKind.RESET;
 			   collection.dispatchEvent(event);
 		}
+		
+		super.selectedItems = savedSelection;
 		
 		super.commitProperties();
 	}
@@ -425,6 +676,10 @@ public class TreeGrid extends DataGrid
 		// this is hidden by non-branches but kept so we know how wide it is so things align
 		treeListData.disclosureIcon = getStyle(open ? "disclosureOpenIcon" :
 													  "disclosureClosedIcon");
+		if(treeListData.disclosureIcon == null) {
+			treeListData.disclosureIcon = open ? defaultDisclosureOpenClass : defaultDisclosureClosedClass;
+		}
+		
 		treeListData.open = open;
 		treeListData.hasChildren = branch;
 		treeListData.depth = getItemDepth( item, treeListData.rowIndex );
@@ -439,6 +694,9 @@ public class TreeGrid extends DataGrid
 			treeListData.trunkOffsetTop = getStyle("paddingTop");
 			treeListData.trunkOffsetBottom = getStyle("paddingBottom");
 			treeListData.hasSibling = !isLastItem( treeListData );
+			
+			var trunkColor:Object = getStyle("trunkColor");
+			treeListData.trunkColor = trunkColor ? uint(trunkColor) : 0xffffff;
 		}
 	}
 	
@@ -775,32 +1033,63 @@ public class TreeGrid extends DataGrid
 	}
 	
 	/**
-	 * 
+	 * @return the number of rows added to the display model
 	 */
-	public function openItemAt( rowNum : Number, item : Object = null ) : void
+	public function openItemAt( rowNum : Number, item : Object = null ) : Number
 	{
-		var uid : String = itemToUID( item );
-		_openItems[ uid ] = item;
-		
-		this.selectedIndex = -1;
-		
+		//if there was no item passed in then retrieve it via row number
 		if ( item == null )
 			item = ListCollectionView( _displayedModel ).getItemAt( rowNum );
 		
-		// add the rows for the children at this level
-		for ( var i : int = 0; i < _dataDescriptor.getChildren( item ).length; i++ )
-		{
-			ListCollectionView( _displayedModel ).addItemAt( _dataDescriptor.getChildren( item )[i], rowNum + i + 1 );
-		}
+		//if the item is not already open
+		//if (!isItemOpen(item))
+		//{
+			//add the item to the list of open items
+			var uid : String = itemToUID( item );
+			_openItems[ uid ] = item;
 		
-		for ( i = 0; i < _dataDescriptor.getChildren( item ).length; i++ )
-		{
-			if ( isItemOpen( _dataDescriptor.getChildren( item )[ i ] ) )
+			var savedSelection : Array = this.selectedItems;
+			this.clearSelected();
+		
+			var children:ICollectionView = _dataDescriptor.getChildren( item );
+			
+			//if there are children then go and open them up, otherwise skip to the bottom and return 0
+			if ( children )
 			{
-				openItemAt( rowNum + i + 1, _dataDescriptor.getChildren( item )[i] );
+				// add the rows for the children at this level
+				for ( var i : int = 0; i < children.length; i++ )
+				{
+					var child:Object = children[i];
+					if(ListCollectionView( _displayedModel ).contains(child) == false) {
+						ListCollectionView( _displayedModel ).addItemAt( child, rowNum + i + 1 );
+					}
+				}
+				
+				var offset:Number = 0;
+				
+				for ( i = 0; i < children.length; i++ )
+				{
+					var vChild:Object = children[ i ];
+					
+					if ( isItemOpen( vChild ) )
+					{
+						offset += openItemAt( rowNum + i + 1 + offset, vChild );
+					}
+				}
 			}
-		}
+			
+			super.selectedItems = savedSelection;
+			
+			//return the number of children that were opened
+			return _dataDescriptor.getChildren( item ).length + offset;
+		//}
+		//else {
+			//if the item was already open then return 0
+		//	return 0;
+		//}
 	}
+
+
 	
 } // end class
 } // end package

@@ -109,6 +109,8 @@ public class TreeGridListData extends DataGridListData
 	
 	public var trunkOffsetBottom : Number;
 	
+	public var trunkColor:uint = 0xffffff;
+	
     //----------------------------------
 	//  node
     //----------------------------------

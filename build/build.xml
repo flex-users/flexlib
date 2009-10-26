@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<project name="flexlib" basedir="/projects/misc/flexlib" default="lib">
+<project name="flexlib" basedir="/flexprojects/flexlib/trunk" default="lib">
 
 	<!-- Define variables/paths used in this build script -->
 	
@@ -115,8 +115,9 @@ SOFTWARE.
 				 explicitly include that as well. Only for SDK 3. -->
 			<!-- But since the Flex 2 SDK doesn't include this directory we can't include if we're
 				 compiling for Flex 2, so we gotta leave it out until we compile for Flex 3
-			<arg line="-el '${flexsdk.lib.dir}/player'" />
 			-->
+			<arg line="-el '${flexsdk.lib.dir}/player/9'" />
+			
 			
 		</exec>
 	</target>

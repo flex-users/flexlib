@@ -54,10 +54,6 @@ import mx.styles.IStyleClient;
 
 [Event(name="dataChange", type="mx.events.FlexEvent")]
 
-[Style(name="testColor", type="uint", format="Color", inherit="yes")]
-
-[Style(name="verticalTrunks", type="String", enumeration="none,normal,dotted", inherit="no")]
-
 /**
  * 
  */
@@ -302,7 +298,8 @@ public class TreeGridItemRenderer extends UIComponent
 		if(trunk)
 		{
 			trunk.graphics.clear();
-			trunk.graphics.lineStyle( 1, 0xFFFFFF, 0.5 );
+			
+			trunk.graphics.lineStyle( 1, _listData.trunkColor, 0.5 );
 			
 			for( var i : int = 0; i < _listData.depth - 1; i++ )
 			{
@@ -425,8 +422,7 @@ public class TreeGridItemRenderer extends UIComponent
 			else
         		labelColor = getStyle("color");
 			
-			var test:Number = getStyle("testColor");
-       		label.setColor(labelColor);
+			label.setColor(labelColor);
 		}
 	}
 	
