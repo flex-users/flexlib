@@ -1,5 +1,7 @@
 package flexlib.scheduling.util
 {
+	import flexunit.framework.Assert;
+
 	public class DateUtilTest
 	{
 		[Test]
@@ -15,7 +17,7 @@ package flexlib.scheduling.util
 			public static const CENTURY_IN_MILLISECONDS : Number = 100 * 12 * 30 * 24 * 60 * 60 * 1000;
 			public static const MILLENIUM_IN_MILLISECONDS : Number = 1000 * 100 * 12 * 30 * 24 * 60 * 60 * 1000;
 			*/
-			Assert.isTrue( DateUtil.MINUTE_IN_MILLISECONDS == (60 * 1000) )
+			Assert.assertTrue( DateUtil.MINUTE_IN_MILLISECONDS == (60 * 1000) )
 		}
 
 	}
