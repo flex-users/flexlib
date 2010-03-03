@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<flex-config>
+    <compiler>
+        <source-path>
+            <path-element>../../src</path-element>
+        </source-path>
+
+        <external-library-path>
+            <path-element>@FLEX_SDK@/frameworks/libs/player/10/playerglobal.swc</path-element>
+        </external-library-path>
+        <library-path>
+            <path-element>@FLEX_SDK@/frameworks/libs</path-element>
+            <path-element>@FLEX_SDK@/frameworks/locale/{locale}</path-element>
+        </library-path>
+    </compiler>
+    <output>../../bin/</output>
+    <compiler.debug>true</compiler.debug>
+    <compiler.optimize>false</compiler.optimize>
+
+    <compiler.keep-as3-metadata>
+        <name>Bindable</name>
+        <name>Managed</name>
+        <name>ChangeEvent</name>
+        <name>NonCommittingChangeEvent</name>
+        <name>Transient</name>
+    </compiler.keep-as3-metadata>
+</flex-config>
