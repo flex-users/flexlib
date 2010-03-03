@@ -1,45 +1,230 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!--
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Project coordinates -->
   <groupId>flexlib</groupId>
   <artifactId>flexlib</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>2.5-SNAPSHOT</version>
   <packaging>swc</packaging>
 
-  <name>FlexLib</name>
-  <description>A lib, composed of Flex. Primarily.</description>
+  <!-- Project infos -->
+  <name>flexlib</name>
+  <inceptionYear>2007</inceptionYear>
+  <description><![CDATA[The FlexLib project is a community effort to create open source user interface components for Adobe Flex.]]></description>
+  <url>http://code.google.com/p/flexlib</url>
 
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>src-test</testSourceDirectory>
-    <plugins>
-      <plugin>
-        <groupId>org.sonatype.flexmojos</groupId>
-        <artifactId>flexmojos-maven-plugin</artifactId>
-        <version>3.4.2</version>
-        <extensions>true</extensions>
-        <incremental>true</incremental>
-      </plugin>
-    </plugins>
-  </build>
+  <!-- License -->
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
 
+  <!-- Team: TODO -->
+  <developers />
+  <contributors />
+
+  <!-- Mailing-list -->
+  <mailingLists>
+    <mailingList>
+      <name>Project Google group</name>
+      <post>flexlib@googlegroups.com</post>
+      <subscribe>flexlib@googlegroups.com</subscribe>
+      <unsubscribe>flexlib@googlegroups.com</unsubscribe>
+      <archive>http://groups.google.com/group/flexlib</archive>
+    </mailingList>
+  </mailingLists>
+
+  <!-- Versioning -->
+  <scm>
+    <connection>scm:svn:http://flexlib.googlecode.com/svn</connection>
+    <developerConnection>scm:svn:https://flexlib.googlecode.com/svn</developerConnection>
+    <url>http://flexlib.googlecode.com/svn</url>
+  </scm>
+
+  <!-- Issues management -->
+  <issueManagement>
+    <system>Google code</system>
+    <url>http://code.google.com/p/flexlib/issues/list</url>
+  </issueManagement>
+
+  <!-- Properties -->
+  <properties>
+
+    <!-- Dependencies versions -->
+    <dependency.flex-sdk.version>3.5.0.12683</dependency.flex-sdk.version>
+    <dependency.flexunit.version>4.0-rc-1</dependency.flexunit.version>
+
+    <!-- Plugins versions -->
+    <plugin.flex-mojos.version>3.5.0</plugin.flex-mojos.version>
+    <plugin.maven-resources-plugin.version>2.4.2</plugin.maven-resources-plugin.version>
+    <plugin.wagon-webdav-jackrabbit.version>1.0-beta-6</plugin.wagon-webdav-jackrabbit.version>
+    <plugin.flex-pmd-maven-plugin.version>1.0.RC5</plugin.flex-pmd-maven-plugin.version>
+
+    <!-- Miscellaneous settings -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <library.namespace>http://code.google.com/p/flexlib/</library.namespace>
+
+  </properties>
+
+  <!-- Build prerequisites -->
+  <prerequisites>
+    <maven>2.2.1</maven>
+  </prerequisites>
+
+  <!-- Project modules : TODO -->
+  <modules />
+
+  <!-- Distribution management :TODO -->
+  <distributionManagement />
+
+  <!-- Dependencies -->
   <dependencies>
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>flex-framework</artifactId>
-      <version>3.2.0.3958</version>
+      <version>${dependency.flex-sdk.version}</version>
       <type>pom</type>
     </dependency>
-<!-- 
+    <dependency>
+      <groupId>com.adobe.flex</groupId>
+      <artifactId>compiler</artifactId>
+      <version>${dependency.flex-sdk.version}</version>
+      <type>pom</type>
+    </dependency>
     <dependency>
       <groupId>com.adobe.flexunit</groupId>
       <artifactId>flexunit</artifactId>
-      <version>4.0-beta-2</version>
+      <version>${dependency.flexunit.version}</version>
       <type>swc</type>
       <scope>test</scope>
     </dependency>
-    -->
   </dependencies>
+
+  <!-- Build -->
+  <build>
+
+    <!-- Sources directories -->
+    <sourceDirectory>${basedir}/src</sourceDirectory>
+    <testSourceDirectory>${basedir}/src-test</testSourceDirectory>
+
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+        <version>${plugin.flex-mojos.version}</version>
+        <extensions>true</extensions>
+        <dependencies>
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${dependency.flex-sdk.version}</version>
+            <type>pom</type>
+          </dependency>
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>compiler</artifactId>
+            <version>${dependency.flex-sdk.version}</version>
+            <type>pom</type>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <addMavenDescriptor>false</addMavenDescriptor>
+          <namespaces>
+            <namespace>
+              <uri>${library.namespace}</uri>
+              <manifest>${basedir}/src/manifest.xml</manifest>
+            </namespace>
+          </namespaces>
+          <includeNamespaces>
+            <namespace>${library.namespace}</namespace>
+          </includeNamespaces>
+        </configuration>
+      </plugin>
+    </plugins>
+
+  </build>
+
+  <!-- Repositories -->
+  <repositories>
+    <repository>
+      <id>flex-mojos-repository</id>
+      <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>flex-mojos-internal-repository</id>
+      <url>http://repository.sonatype.org/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>flex-mojos-plugin-repository</id>
+      <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>flex-mojos-internal-plugins-repository</id>
+      <url>http://repository.sonatype.org/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>flexpmd-opensource-adobe</id>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <name>FlexPMD repository on opensource.adobe.com</name>
+      <url>http://opensource.adobe.com/svn/opensource/flexpmd/maven-repository/release/</url>
+    </pluginRepository>
+  </pluginRepositories>
 
 </project>
