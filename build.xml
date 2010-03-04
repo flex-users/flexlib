@@ -32,6 +32,9 @@
     <condition property="platformSpecificPropertyFile" value="build.win.properties">
         <os family="windows" />
     </condition>
+    <condition property="platformSpecificPropertyFile" value="build.unix.properties">
+        <os family="unix" />
+    </condition>
 
     <property file="./setup/config/${platformSpecificPropertyFile}" />
     <property file="./build.properties" />
