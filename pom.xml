@@ -27,12 +27,12 @@
 
   <!-- Project coordinates -->
   <groupId>flexlib</groupId>
-  <artifactId>flexlib</artifactId>
+  <artifactId>flexlib-parent</artifactId>
   <version>2.5-SNAPSHOT</version>
-  <packaging>swc</packaging>
+  <packaging>pom</packaging>
 
   <!-- Project infos -->
-  <name>flexlib</name>
+  <name>FlexLib</name>
   <inceptionYear>2007</inceptionYear>
   <description><![CDATA[The FlexLib project is a community effort to create open source user interface components for Adobe Flex.]]></description>
   <url>http://code.google.com/p/flexlib</url>
@@ -97,77 +97,34 @@
     <maven>2.2.1</maven>
   </prerequisites>
 
-  <!-- Project modules : TODO -->
-  <modules />
-
   <!-- Distribution management :TODO -->
   <distributionManagement />
 
-  <!-- Dependencies -->
-  <dependencies>
-    <dependency>
-      <groupId>com.adobe.flex.framework</groupId>
-      <artifactId>flex-framework</artifactId>
-      <version>${dependency.flex-sdk.version}</version>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>com.adobe.flex</groupId>
-      <artifactId>compiler</artifactId>
-      <version>${dependency.flex-sdk.version}</version>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>com.adobe.flexunit</groupId>
-      <artifactId>flexunit</artifactId>
-      <version>${dependency.flexunit.version}</version>
-      <type>swc</type>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+  <!-- Modules -->
+  <modules>
+    <module>src</module>
+    <module>src-test</module>
+    <module>examples</module>
+    <module>docs</module>
+  </modules>
 
-  <!-- Build -->
+  <!-- Default build -->
   <build>
-
-    <!-- Sources directories -->
-    <sourceDirectory>${basedir}/src</sourceDirectory>
-    <testSourceDirectory>${basedir}/src-test</testSourceDirectory>
-
     <plugins>
       <plugin>
-        <groupId>org.sonatype.flexmojos</groupId>
-        <artifactId>flexmojos-maven-plugin</artifactId>
-        <version>${plugin.flex-mojos.version}</version>
-        <extensions>true</extensions>
-        <dependencies>
-          <dependency>
-            <groupId>com.adobe.flex.framework</groupId>
-            <artifactId>flex-framework</artifactId>
-            <version>${dependency.flex-sdk.version}</version>
-            <type>pom</type>
-          </dependency>
-          <dependency>
-            <groupId>com.adobe.flex</groupId>
-            <artifactId>compiler</artifactId>
-            <version>${dependency.flex-sdk.version}</version>
-            <type>pom</type>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <addMavenDescriptor>false</addMavenDescriptor>
-          <namespaces>
-            <namespace>
-              <uri>${library.namespace}</uri>
-              <manifest>${basedir}/src/manifest.xml</manifest>
-            </namespace>
-          </namespaces>
-          <includeNamespaces>
-            <namespace>${library.namespace}</namespace>
-          </includeNamespaces>
-        </configuration>
+        <artifactId>maven-clean-plugin</artifactId>
+        <inherited>true</inherited>
+        <executions>
+          <execution>
+            <id>clean-tmp-directory</id>
+            <phase>install</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
-
   </build>
 
   <!-- Repositories -->
