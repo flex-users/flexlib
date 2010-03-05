@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Copyright (c) 2007 FlexLib Contributors.  See:
-     http://code.google.com/p/flexlib/wiki/ProjectContributors
+     http://com.google.code/p/flexlib/wiki/ProjectContributors
 
      Permission is hereby granted, free of charge, to any person obtaining a copy of
      this software and associated documentation files (the "Software"), to deal in
@@ -27,11 +27,11 @@
 
   <!-- Project coordinates -->
   <parent>
-    <groupId>flexlib</groupId>
+    <groupId>com.google.code.flexlib</groupId>
     <artifactId>flexlib-parent</artifactId>
     <version>2.5-SNAPSHOT</version>
   </parent>
-  <groupId>flexlib</groupId>
+  <groupId>com.google.code.flexlib</groupId>
   <artifactId>examples</artifactId>
   <version>2.5-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -39,5 +39,97 @@
   <!-- Project infos -->
   <name>FlexLib :: Examples</name>
   <description><![CDATA[Examples for the flexlib library.]]></description>
+
+  <!-- Modules -->
+  <modules>
+    <module>AdvancedForm</module>
+    <module>Base64Image</module>
+    <module>CanvasButton</module>
+    <module>CanvasButtonAccordionHeader</module>
+    <module>ConvertibleTreeList</module>
+    <module>DragCanvas</module>
+    <module>DraggableSlider</module>
+    <module>EnhancedButton</module>                 <!-- FIXME: This example is broken. -->
+    <module>Fire</module>
+    <module>FlowBox</module>
+    <module>FlowContainer</module>
+    <module>HAccordion</module>
+<!--    <module>Highlighter</module>-->             <!-- FIXME: This example is broken. -->
+    <module>IconLoader</module>                     <!-- FIXME: Resources must be added to the FlashPlayer trust zone. -->
+    <module>ImageMap</module>
+    <module>MDI</module>                            <!-- FIXME: Exception when changing styles. -->
+    <module>MultipleDockingToolBars</module>
+    <module>PromptingTextInput</module>
+    <module>ScheduleViewer1</module>
+    <module>ScheduleViewer2</module>
+    <module>ScheduleViewer3</module>
+    <module>ScheduleViewer4</module>
+    <module>ScheduleViewer5</module>
+    <module>ScrollableMenu</module>                 <!-- FIXME: crashes the Flash player. -->
+    <module>SimpleDockingToolBar</module>
+    <module>SuperTabNavigator</module>
+    <module>TreeGrid</module>
+    <module>VerticalMenuBar</module>
+    <module>WindowShade</module>
+  </modules>
+
+  <!-- Dependencies management -->
+  <dependencyManagement>
+    <dependencies>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>flex-framework</artifactId>
+      <version>${dependency.flex-sdk.version}</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>com.adobe.flex</groupId>
+      <artifactId>compiler</artifactId>
+      <version>${dependency.flex-sdk.version}</version>
+      <type>pom</type>
+    </dependency>
+      <dependency>
+        <groupId>com.google.code.flexlib</groupId>
+        <artifactId>flexlib</artifactId>
+        <version>${project.version}</version>
+        <type>swc</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!-- Build -->
+  <build>
+    <sourceDirectory>${basedir}</sourceDirectory>
+    <directory>${basedir}/../../tmp</directory>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonatype.flexmojos</groupId>
+          <artifactId>flexmojos-maven-plugin</artifactId>
+          <version>${plugin.flex-mojos.version}</version>
+          <extensions>true</extensions>
+          <inherited>false</inherited>
+          <dependencies>
+            <dependency>
+              <groupId>com.adobe.flex.framework</groupId>
+              <artifactId>flex-framework</artifactId>
+              <version>${dependency.flex-sdk.version}</version>
+              <type>pom</type>
+            </dependency>
+            <dependency>
+              <groupId>com.adobe.flex</groupId>
+              <artifactId>compiler</artifactId>
+              <version>${dependency.flex-sdk.version}</version>
+              <type>pom</type>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <output>${basedir}/${project.artifactId}_Sample.${project.packaging}</output>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
 </project>

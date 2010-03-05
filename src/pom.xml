@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Copyright (c) 2007 FlexLib Contributors.  See:
-     http://code.google.com/p/flexlib/wiki/ProjectContributors
+     http://com.google.code/p/flexlib/wiki/ProjectContributors
 
      Permission is hereby granted, free of charge, to any person obtaining a copy of
      this software and associated documentation files (the "Software"), to deal in
@@ -27,11 +27,11 @@
 
   <!-- Project coordinates -->
   <parent>
-    <groupId>flexlib</groupId>
+    <groupId>com.google.code.flexlib</groupId>
     <artifactId>flexlib-parent</artifactId>
     <version>2.5-SNAPSHOT</version>
   </parent>
-  <groupId>flexlib</groupId>
+  <groupId>com.google.code.flexlib</groupId>
   <artifactId>flexlib</artifactId>
   <version>2.5-SNAPSHOT</version>
   <packaging>swc</packaging>
@@ -54,11 +54,19 @@
       <version>${dependency.flex-sdk.version}</version>
       <type>pom</type>
     </dependency>
+    <dependency>
+      <groupId>com.adobe.flexunit</groupId>
+      <artifactId>flexunit</artifactId>
+      <version>${dependency.flexunit.version}</version>
+      <type>swc</type>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <!-- Build -->
   <build>
     <sourceDirectory>${basedir}</sourceDirectory>
+    <testSourceDirectory>${basedir}/../src-test</testSourceDirectory>
     <directory>${basedir}/../tmp</directory>
     <plugins>
       <plugin>
