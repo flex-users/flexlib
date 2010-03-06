@@ -40,48 +40,21 @@
   <name>FlexLib :: Library</name>
   <description><![CDATA[The flexlib library.]]></description>
 
-  <!-- Dependencies -->
-  <dependencies>
-    <dependency>
-      <groupId>com.adobe.flex.framework</groupId>
-      <artifactId>flex-framework</artifactId>
-      <version>${dependency.flex-sdk.version}</version>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>com.adobe.flex</groupId>
-      <artifactId>compiler</artifactId>
-      <version>${dependency.flex-sdk.version}</version>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>com.adobe.flexunit</groupId>
-      <artifactId>flexunit</artifactId>
-      <version>${dependency.flexunit.version}</version>
-      <type>swc</type>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <!-- Build -->
+  <!-- Default build -->
   <build>
+
+    <!-- Directories -->
     <sourceDirectory>${basedir}</sourceDirectory>
     <testSourceDirectory>${basedir}/../src-test</testSourceDirectory>
     <directory>${basedir}/../tmp</directory>
+
     <plugins>
       <plugin>
         <groupId>org.sonatype.flexmojos</groupId>
         <artifactId>flexmojos-maven-plugin</artifactId>
         <version>${plugin.flex-mojos.version}</version>
         <extensions>true</extensions>
-        <inherited>false</inherited>
         <dependencies>
-          <dependency>
-            <groupId>com.adobe.flex.framework</groupId>
-            <artifactId>flex-framework</artifactId>
-            <version>${dependency.flex-sdk.version}</version>
-            <type>pom</type>
-          </dependency>
           <dependency>
             <groupId>com.adobe.flex</groupId>
             <artifactId>compiler</artifactId>
@@ -89,6 +62,14 @@
             <type>pom</type>
           </dependency>
         </dependencies>
+        <executions>
+          <execution>
+            <id>compile-flexlib-swc</id>
+            <goals>
+              <goal>compile-swc</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <addMavenDescriptor>false</addMavenDescriptor>
           <namespaces>
@@ -101,9 +82,68 @@
             <namespace>${library.namespace}</namespace>
           </includeNamespaces>
           <output>${basedir}/../bin/${project.artifactId}.${project.packaging}</output>
+          <optimize>true</optimize>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <!-- Profiles -->
+  <profiles>
+
+    <!-- Profile that generates the asdoc -->
+    <profile>
+      <id>asdoc</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.flexmojos</groupId>
+            <artifactId>flexmojos-maven-plugin</artifactId>
+            <version>${plugin.flex-mojos.version}</version>
+            <extensions>true</extensions>
+            <dependencies>
+              <dependency>
+                <groupId>com.adobe.flex</groupId>
+                <artifactId>compiler</artifactId>
+                <version>${dependency.flex-sdk.version}</version>
+                <type>pom</type>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>generate-asdoc</id>
+                <goals>
+                  <goal>asdoc</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <outputDirectory>${basedir}/../docs</outputDirectory>
+              <footer>FlexLib - http://code.google.com/p/flexlib</footer>
+              <leftFramesetWidth>280</leftFramesetWidth>
+              <mainTitle>FlexLib ${project.version} API documentation</mainTitle>
+              <windowTitle>FlexLib ${project.version} asdoc</windowTitle>
+              <namespaces>
+                <namespace>
+                  <uri>${library.namespace}</uri>
+                  <manifest>${basedir}/manifest.xml</manifest>
+                </namespace>
+              </namespaces>
+              <docNamespaces>
+                <namespace>
+                  <uri>${library.namespace}</uri>
+                  <manifest>${basedir}/manifest.xml</manifest>
+                </namespace>
+              </docNamespaces>
+              <packageDescriptions>
+                <flexlib.containers>FlexLib containers</flexlib.containers>
+              </packageDescriptions>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

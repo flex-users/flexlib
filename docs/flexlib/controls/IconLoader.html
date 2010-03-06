@@ -4,19 +4,19 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="IconLoader,flexlib.controls.IconLoader,source,scaleContent" name="keywords">
+<meta content="IconLoader,flexlib.controls.IconLoader,scaleContent,source" name="keywords">
 <title>flexlib.controls.IconLoader</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'IconLoader - flexlib';
+				asdocTitle = 'IconLoader - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/IconLoader.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/IconLoader.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;IconLoader</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
@@ -141,7 +141,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var scaleContent:Boolean</code><p>
+<code>scaleContent:Boolean</code>&nbsp;&nbsp;[read-write]<p>
    Enables or disables scaling of the icon content to fit this control's bounds.
    
    </p><p>When this property is set to <code>true</code>, the icon's image will be scaled
@@ -159,6 +159,12 @@ showHideInherited();
    
    <p>The default value is <code>false</code>.</p>
 <p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get scaleContent():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set scaleContent(value:Boolean):void</code>
+<br>
 </div>
 <a name="source"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -167,7 +173,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var source:Object</code><p>
+<code>source:Object</code>&nbsp;&nbsp;[read-write]<p>
    Sets the location of the icon data.
    
    </p><p>This property can be set to either a String or a class that extends ByteArray. In the case
@@ -180,6 +186,12 @@ showHideInherited();
    <p>Note that when using the &#64;Embed(...) directive, the <code>mime-type</code> property of
    the &#64;Embed directive must be set to <code>application/octet-stream</code></p>
    <p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get source():Object</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set source(value:Object):void</code>
+<br>
 </div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -198,9 +210,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

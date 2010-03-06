@@ -4,19 +4,19 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="SliderBase,flexlib.baseClasses.SliderBase,allowThumbOverlap,allowTrackClick,liveDragging,showDataTip,dataTipFormatFunction,direction,labels,maximum,minimum,sliderThumbClass,sliderDataTipClass,snapInterval,thumbCount,tickInterval,tickValues,value,values,measure,updateDisplayList,getThumbAt,setThumbValueAt" name="keywords">
+<meta content="SliderBase,flexlib.baseClasses.SliderBase,allowThumbOverlap,allowTrackClick,liveDragging,showDataTip,dataTipFormatFunction,direction,labels,maximum,minimum,sliderDataTipClass,sliderThumbClass,snapInterval,thumbCount,thumbStyleFilters,tickInterval,tickValues,value,values,getThumbAt,measure,setThumbValueAt,updateDisplayList" name="keywords">
 <title>flexlib.baseClasses.SliderBase</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'SliderBase - flexlib';
+				asdocTitle = 'SliderBase - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/baseClasses/SliderBase.html&amp;flexlib/baseClasses/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/baseClasses/SliderBase.html&amp;flexlib/baseClasses/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;SliderBase</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
@@ -48,7 +48,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   SliderBase is a copy/paste version of the original Slider class in the Flex framework.
  
   <p>The only modifications made to this class were to change some properties and
- methods from private to protected so we can override them in a subclass.</p>
+  methods from private to protected so we can override them in a subclass.</p>
  
   The Slider class is the base class for the Flex slider controls.
   The slider controls let users select a value by moving a slider thumb 
@@ -229,6 +229,20 @@ setMXMLOnly();
 </tr>
 </table>
 </div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#thumbStyleFilters">thumbStyleFilters</a> : Object<div class="summaryTableDescription">[read-only]
+      Set of styles to pass from the Slider to the thumbs.</div>
+</td><td class="summaryTableOwnerCol">SliderBase</td>
+</tr>
+</table>
+</div>
 <a name="methodSummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Methods</div>
@@ -247,7 +261,8 @@ setMXMLOnly();
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getThumbAt()">getThumbAt</a>(index:int):SliderThumb</div>
+<a class="signatureLink" href="#getThumbAt()">getThumbAt</a>(index:int):<a href="../controls/sliderClasses/SliderThumb.html">SliderThumb</a>
+</div>
 <div class="summaryTableDescription">
       Returns the thumb object at the given index.</div>
 </td><td class="summaryTableOwnerCol">SliderBase</td>
@@ -379,16 +394,6 @@ setMXMLOnly();
     The default value is <code>undefined</code>.</td><td class="summaryTableOwnerCol">SliderBase</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol"><a name="style:fillColors"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<span class="signatureLink">fillColors</span>
-</div>
-</td><td class="summaryTableDescription"><span class="label">Type: </span>Array &nbsp; <span class="label">Format: </span>Color &nbsp; <span class="label">CSS Inheritance: </span>no<br>
-  Colors used to tint the slider thumb.
-  Pass the same color for both values for a "flat" looking control.
-    The default value is <code>[ 0xFFFFFF, 0xCCCCCC, 0xFFFFFF, 0xEEEEEE; ]</code>.</td><td class="summaryTableOwnerCol">SliderBase</td>
-</tr>
-<tr class="">
 <td class="summaryTablePaddingCol"><a name="style:invertThumbDirection"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <span class="signatureLink">invertThumbDirection</span>
@@ -486,6 +491,16 @@ setMXMLOnly();
 </td><td class="summaryTableDescription"><span class="label">Type: </span>Class &nbsp; <span class="label">CSS Inheritance: </span>no<br>
   The skin for the slider thumb over state.
     The default value is <code>SliderThumbSkin</code>.</td><td class="summaryTableOwnerCol">SliderBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol"><a name="style:thumbSkin"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<span class="signatureLink">thumbSkin</span>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Class &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  The default skin for the slider thumb.
+ 
+   The default value is <code>SliderThumbSkin</code>.</td><td class="summaryTableOwnerCol">SliderBase</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol"><a name="style:thumbUpSkin"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -854,6 +869,24 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set thumbCount(value:int):void</code>
 <br>
 </div>
+<a name="thumbStyleFilters"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">thumbStyleFilters</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>thumbStyleFilters:Object</code>&nbsp;&nbsp;[read-only]<p>
+      Set of styles to pass from the Slider to the thumbs.
+      </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;protected function get thumbStyleFilters():Object</code>
+<br>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">mx.styles.StyleProxy</div>
+</div>
 <a name="tickInterval"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -967,7 +1000,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getThumbAt(index:int):SliderThumb</code><p>
+<code>public function getThumbAt(index:int):<a href="../controls/sliderClasses/SliderThumb.html">SliderThumb</a></code><p>
       Returns the thumb object at the given index. Use this method to
       style and customize individual thumbs in a slider control.
            </p><span class="label">Parameters</span>
@@ -981,8 +1014,11 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>SliderThumb</code> &mdash; A reference to the SliderThumb object.
-     </td>
+<td width="20"></td><td><code><a href="../controls/sliderClasses/SliderThumb.html">SliderThumb</a></code> &mdash; 
+                        A reference to the SliderThumb object.
+     
+                        
+                     </td>
 </tr>
 </table>
 </div>
@@ -1142,9 +1178,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

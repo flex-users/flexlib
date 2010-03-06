@@ -4,22 +4,22 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="PopUpMenuButtonBase,flexlib.baseClasses.PopUpMenuButtonBase,popUp,dataDescriptor,dataProvider,labelField,labelFunction,showRoot" name="keywords">
+<meta content="PopUpMenuButtonBase,flexlib.baseClasses.PopUpMenuButtonBase,dataDescriptor,dataProvider,iconField,iconFunction,labelField,labelFunction,showRoot,popUp" name="keywords">
 <title>flexlib.baseClasses.PopUpMenuButtonBase</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'PopUpMenuButtonBase - flexlib';
+				asdocTitle = 'PopUpMenuButtonBase - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/baseClasses/PopUpMenuButtonBase.html&amp;flexlib/baseClasses/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/baseClasses/PopUpMenuButtonBase.html&amp;flexlib/baseClasses/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;PopUpMenuButtonBase</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;PopUpMenuButtonBase</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class PopUpMenuButtonBase"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class PopUpMenuButtonBase"); titleBar_setSubNav(false,true,true,false,true,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -48,7 +48,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   PopUpMenuButtonBase is a copy/paste version of the original PopUpMenuButton class in the Flex framework.
  
   <p>The only modifications made to this class were to change some properties and
- methods from private to protected so we can override them in a subclass.</p>
+  methods from private to protected so we can override them in a subclass.</p>
  
   <p>The PopUpMenuButton control creates a PopUpButton control with a main
   sub-button and a secondary sub-button.
@@ -58,14 +58,36 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   supports only a single-level menu. This means that the menu cannot contain
   cascading submenus.</p>
  
-  <p>The main sub-button of the PopUpMenuButton control can have a text
-  label, an icon, or both on its face.
-  When a user selects an item from the drop-down menu or clicks the main 
-  button of the PopUpMenuButton control, the control dispatches an 
-  <code>itemClick</code> event.
-  When a user clicks the main button of the 
-  control, the control also dispatches a <code>click</code> event. 
-  You can customize the look of a PopUpMenuButton control.</p>
+  <p>The main sub-button of the PopUpMenuButton control can have a 
+     text label, an icon, or both on its face.
+     When a user selects an item from the drop-down menu or clicks 
+     the main button of the PopUpMenuButton control, the control 
+     dispatches an <code>itemClick</code> event.
+     When a user clicks the main button of the 
+     control, the control also dispatches a <code>click</code> event. 
+     You can customize the look of a PopUpMenuButton control.</p>
+   <p>The PopUpMenuButton control has the following sizing 
+     characteristics:</p>
+     <table class="innertable">
+        <tr>
+           <th>Characteristic</th>
+           <th>Description</th>
+        </tr>
+        <tr>
+           <td>Default size</td>
+           <td>Sufficient to accommodate the label and any icon on 
+               the main button, and the icon on the pop-up button. 
+               The control does not reserve space for the menu.</td>
+        </tr>
+        <tr>
+           <td>Minimum size</td>
+           <td>0 pixels.</td>
+        </tr>
+        <tr>
+           <td>Maximum size</td>
+           <td>10000 by 10000.</td>
+        </tr>
+     </table>
    <p></p>
 <a name="mxmlSyntaxSummary"></a><span class="classHeaderTableLabel">MXML Syntax</span><span style="display:none" id="showMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="collapsedImage" alt="collapsed" title="collapsed" src="../../images/collapsed.gif"> Show MXML Syntax</a>
 <br>
@@ -79,7 +101,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
     <strong>Properties</strong>
     dataDescriptor="<i>instance of DefaultDataDescriptor</i>"
     dataProvider="undefined"
-    labelField="null"
+    iconField="icon"
+    iconFunction="undefined"
+    labelField="label"
     labelFunction="undefined"
     showRoot="false|true"
     &nbsp;
@@ -87,7 +111,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
     change=<i>No default</i>
   /&gt;
   </pre>
-  
+   
    </div>
 <script type="text/javascript" language="javascript">
 <!--
@@ -115,6 +139,17 @@ setMXMLOnly();
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#dataProvider">dataProvider</a> : Object<div class="summaryTableDescription">
       DataProvider for popUpMenu.</div>
+</td><td class="summaryTableOwnerCol">PopUpMenuButtonBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#iconField">iconField</a> : String<div class="summaryTableDescription">
+      Name of the field in the <code>dataProvider</code> Array that contains the icon to
+      show for each menu item.</div>
+</td><td class="summaryTableOwnerCol">PopUpMenuButtonBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#iconFunction">iconFunction</a> : Function<div class="summaryTableDescription">
+      A function that determines the icon to display for each menu item.</div>
 </td><td class="summaryTableOwnerCol">PopUpMenuButtonBase</td>
 </tr>
 <tr class="">
@@ -174,6 +209,27 @@ setMXMLOnly();
 </tr>
 </table>
 </div>
+<a name="styleSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Styles</div>
+<table id="summaryTableStyle" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Style</th><th>Description</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol"><a name="style:popUpStyleName"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<span class="signatureLink">popUpStyleName</span>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>String &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  The name of a CSS style declaration used by the dropdown menu.  
+  This property allows you to control the appearance of the dropdown menu.
+  The default value sets the <code>fontWeight</code> to <code>normal</code> and 
+  the <code>textAlign</code> to <code>left</code>.
+    The default value is <code>"popUpMenu"</code>.</td><td class="summaryTableOwnerCol">PopUpMenuButtonBase</td>
+</tr>
+</table>
+</div>
 <script type="text/javascript" language="javascript">
 <!--
 showHideInherited();
@@ -226,6 +282,68 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get dataProvider():Object</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set dataProvider(value:Object):void</code>
+<br>
+</div>
+<a name="iconField"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">iconField</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>iconField:String</code>&nbsp;&nbsp;[read-write]<p>
+      Name of the field in the <code>dataProvider</code> Array that contains the icon to
+      show for each menu item.
+      The <code>iconFunction</code> property, if set, overrides this property.
+     
+      </p><p>The renderers will look in the data provider object for a property of 
+      the name supplied as the iconField.  If the value of the property is a 
+      Class, it will instantiate that class and expect it to be an instance 
+      of an IFlexDisplayObject. If the value of the property is a String, 
+      it will look to see if a Class exists with that name in the application, 
+      and if it can't find one, it will also look for a property on the 
+      document with that name and expect that property to map to a Class.</p>
+     
+      If the data provider is an E4X XML object, you must set this property
+      explicitly; for example, use &#064;icon to specify the <code>icon</code> attribute.
+           <p>The default value is <code>"icon"</code>.</p>
+<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get iconField():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set iconField(value:String):void</code>
+<br>
+</div>
+<a name="iconFunction"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">iconFunction</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>iconFunction:Function</code>&nbsp;&nbsp;[read-write]<p>
+      A function that determines the icon to display for each menu item.
+      If you omit this property, Flex uses the contents of the field or attribute
+      determined by the <code>iconField</code> property.
+      If you specify this property, Flex ignores any <code>iconField</code>
+      property value.
+           By default the menu does not try to display icons with the text 
+      in the rows.  However, by specifying an icon function, you can specify 
+      a Class for a graphic that will be created and displayed as an icon 
+      in the row. 
+           </p><p>The iconFunction takes a single argument which is the item
+      in the data provider and returns a Class.</p>
+     
+      <blockquote>
+      <code>iconFunction(item:Object):Class</code>
+      </blockquote>
+           <p>The default value is <code>null</code>.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get iconFunction():Function</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set iconFunction(value:Function):void</code>
 <br>
 </div>
 <a name="labelField"></a>
@@ -355,9 +473,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

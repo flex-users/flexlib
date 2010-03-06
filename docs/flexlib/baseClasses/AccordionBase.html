@@ -4,19 +4,19 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="AccordionBase,flexlib.baseClasses.AccordionBase,tweenContentWidth,tweenContentHeight,tweenOldSelectedIndex,tweenNewSelectedIndex,tween,accMinHeight,accPreferredWidth,accPreferredHeight,contentHeight,contentWidth,headerRenderer,historyManagementEnabled,resizeToContent,selectedChild,selectedIndex,saveState,loadState,getHeaderAt" name="keywords">
+<meta content="AccordionBase,flexlib.baseClasses.AccordionBase,accMinHeight,accPreferredHeight,accPreferredWidth,tween,tweenContentHeight,tweenContentWidth,tweenNewSelectedIndex,tweenOldSelectedIndex,contentHeight,contentWidth,headerRenderer,historyManagementEnabled,resizeToContent,selectedChild,selectedIndex,getHeaderAt,loadState,saveState" name="keywords">
 <title>flexlib.baseClasses.AccordionBase</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'AccordionBase - flexlib';
+				asdocTitle = 'AccordionBase - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/baseClasses/AccordionBase.html&amp;flexlib/baseClasses/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/baseClasses/AccordionBase.html&amp;flexlib/baseClasses/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;AccordionBase</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
@@ -48,7 +48,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  AccordionBase is a copy/paste version of the original Accordion class in the Flex framework.
+ AccordionBase is a copy/paste version of the original Accordion class in the Flex framework.
  
   <p>The only modifications made to this class were to change some properties and
  methods from private to protected so we can override them in a subclass.</p>
@@ -62,11 +62,39 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   When the user clicks a navigator button, the associated child container
   is displayed.
   The transition to the new child uses an animation to make it clear to
-  the user that one child is disappearing and a different one is appearing.</P>
+  the user that one child is disappearing and a different one is appearing.</p>
    <p>The Accordion container does not extend the ViewStack container,
   but it implements all the properties, methods, styles, and events
   of the ViewStack container, such as <code>selectedIndex</code>
   and <code>selectedChild</code>.</p>
+   <p>An Accordion container has the following default sizing characteristics:</p>
+     <table class="innertable">
+        <tr>
+           <th>Characteristic</th>
+           <th>Description</th>
+        </tr>
+        <tr>
+           <td>Default size</td>
+           <td>The width and height of the currently active child.</td>
+        </tr>
+        <tr>
+           <td>Container resizing rules</td>
+           <td>Accordion containers are only sized once to fit the size of the first child container by default. 
+               They do not resize when you navigate to other child containers by default. 
+               To force Accordion containers to resize when you navigate to a different child container, 
+               set the resizeToContent property to true.</td>
+        </tr>
+        <tr>
+           <td>Child sizing rules</td>
+           <td>Children are sized to their default size. The child is clipped if it is larger than the Accordion container. 
+               If the child is smaller than the Accordion container, it is aligned to the upper-left corner of the 
+               Accordion container.</td>
+        </tr>
+        <tr>
+           <td>Default padding</td>
+           <td>-1 pixel for the top, bottom, left, and right values.</td>
+        </tr>
+     </table>
    <p></p>
 <a name="mxmlSyntaxSummary"></a><span class="classHeaderTableLabel">MXML Syntax</span><span style="display:none" id="showMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="collapsedImage" alt="collapsed" title="collapsed" src="../../images/collapsed.gif"> Show MXML Syntax</a>
 <br>
@@ -83,10 +111,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
     selectedIndex="undefined"
   
     <strong>Styles</strong>
-    fillAlphas="[0.60, 0.40, 0.75, 0.65]"
-    fillColors="[0xFFFFFF, 0xCCCCCC, 0xFFFFFF, 0xEEEEEE]"
-    focusAlpha="0.5"
-    focusRoundedCorners="tl tr bl br"
     headerHeight="depends on header font styles"
     headerStyleName="<i>No default</i>"
     horizontalGap="8"
@@ -94,7 +118,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
     openEasingFunction="undefined"
     paddingBottom="-1"
     paddingTop="-1"
-    selectedFillColors="undefined"
     textRollOverColor="0xB333C"
     textSelectedColor="0xB333C"
     verticalGap="-1"
@@ -277,28 +300,87 @@ setMXMLOnly();
 <div class="summarySignature">
 <span class="signatureLink">fillAlphas</span>
 </div>
-</td><td class="summaryTableDescription"><span class="label">Type: </span>Array &nbsp; <span class="label">CSS Inheritance: </span>no<br></td><td class="summaryTableOwnerCol">AccordionBase</td>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Array &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  Specifies the alpha transparency values used for the background fill of components.
+  You should set this to an Array of either two or four numbers.
+  Elements 0 and 1 specify the start and end values for
+  an alpha gradient.
+  If elements 2 and 3 exist, they are used instead of elements 0 and 1
+  when the component is in a mouse-over state.
+  The global default value is <code>[ 0.60, 0.40, 0.75, 0.65 ]</code>.
+  Some components, such as the ApplicationControlBar container,
+  have a different default value. For the ApplicationControlBar container, 
+  the default value is <code>[ 0.0, 0.0 ]</code>.
+ </td><td class="summaryTableOwnerCol">AccordionBase</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol"><a name="style:fillColors"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <span class="signatureLink">fillColors</span>
 </div>
-</td><td class="summaryTableDescription"><span class="label">Type: </span>Array &nbsp; <span class="label">Format: </span>Color &nbsp; <span class="label">CSS Inheritance: </span>no<br></td><td class="summaryTableOwnerCol">AccordionBase</td>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Array &nbsp; <span class="label">Format: </span>Color &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  Specifies the colors used to tint the background fill of the component.
+  You should set this to an Array of either two or four uint values
+  that specify RGB colors.
+  Elements 0 and 1 specify the start and end values for
+  a color gradient.
+  If elements 2 and 3 exist, they are used instead of elements 0 and 1
+  when the component is in a mouse-over state.
+  For a flat-looking control, set the same color for elements 0 and 1
+  and for elements 2 and 3,
+  The default value is
+  <code>[ 0xFFFFFF, 0xCCCCCC, 0xFFFFFF, 0xEEEEEE ]</code>.
+  <p>Some components, such as the ApplicationControlBar container,
+  have a different default value. For the ApplicationControlBar container, 
+  the default value is <code>[ 0xFFFFFF, 0xFFFFFF ]</code>.</p>
+ </td><td class="summaryTableOwnerCol">AccordionBase</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol"><a name="style:focusAlpha"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <span class="signatureLink">focusAlpha</span>
 </div>
-</td><td class="summaryTableDescription"><span class="label">Type: </span>Number &nbsp; <span class="label">CSS Inheritance: </span>no<br></td><td class="summaryTableOwnerCol">AccordionBase</td>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Number &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  Specifies the alpha transparency value of the focus skin.
+  
+   The default value is <code>0.4</code>.</td><td class="summaryTableOwnerCol">AccordionBase</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol"><a name="style:focusRoundedCorners"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <span class="signatureLink">focusRoundedCorners</span>
 </div>
-</td><td class="summaryTableDescription"><span class="label">Type: </span>String &nbsp; <span class="label">CSS Inheritance: </span>no<br></td><td class="summaryTableOwnerCol">AccordionBase</td>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>String &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  Specifies which corners of the focus rectangle should be rounded.
+  This value is a space-separated String that can contain any
+  combination of <code>"tl"</code>, <code>"tr"</code>, <code>"bl"</code>
+  and <code>"br"</code>.
+  For example, to specify that the right side corners should be rounded,
+  but the left side corners should be square, use <code>"tr br"</code>.
+  The <code>cornerRadius</code> style property specifies
+  the radius of the rounded corners.
+  The default value depends on the component class; if not overridden for
+  the class, default value is <code>"tl tr bl br"</code>.
+ 
+ </td><td class="summaryTableOwnerCol">AccordionBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol"><a name="style:focusSkin"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<span class="signatureLink">focusSkin</span>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Class &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  Skin used to draw the focus rectangle.
+    The default value is <code>mx.skins.halo.HaloFocusRect</code>.</td><td class="summaryTableOwnerCol">AccordionBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol"><a name="style:focusThickness"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<span class="signatureLink">focusThickness</span>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Number &nbsp; <span class="label">Format: </span>Length &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  Thickness, in pixels, of the focus rectangle outline.
+    The default value is <code>2</code>.</td><td class="summaryTableOwnerCol">AccordionBase</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol"><a name="style:headerHeight"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -317,8 +399,13 @@ setMXMLOnly();
 <span class="signatureLink">headerStyleName</span>
 </div>
 </td><td class="summaryTableDescription"><span class="label">Type: </span>String &nbsp; <span class="label">CSS Inheritance: </span>no<br>
-  Name of CSS style declaration that specifies styles for the accordion
+  Name of the CSS style declaration that specifies styles for the accordion
   headers (tabs).
+ 
+  <p>You can use this class selector to set the values of all the style properties 
+  of the AccordionHeader class, including <code>fillAlphas</code>, <code>fillColors</code>, 
+  <code>focusAlpha</code>, <code>focusRounderCorners</code>, 
+  <code>focusSkin</code>, <code>focusThickness</code>, and <code>selectedFillColors</code>.</p>
  </td><td class="summaryTableOwnerCol">AccordionBase</td>
 </tr>
 <tr class="">
@@ -377,7 +464,13 @@ setMXMLOnly();
 <div class="summarySignature">
 <span class="signatureLink">selectedFillColors</span>
 </div>
-</td><td class="summaryTableDescription"><span class="label">Type: </span>Array &nbsp; <span class="label">Format: </span>Color &nbsp; <span class="label">CSS Inheritance: </span>no<br></td><td class="summaryTableOwnerCol">AccordionBase</td>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Array &nbsp; <span class="label">Format: </span>Color &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  The two colors used to tint the background of the component
+  when in its selected state.
+  Pass the same color for both values for "flat" looking control.
+  The default value is <code>undefined</code>, which means the colors
+  are derived from <code>themeColor</code>.
+ </td><td class="summaryTableOwnerCol">AccordionBase</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol"><a name="style:textRollOverColor"></a>&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -579,7 +672,7 @@ showHideInherited();
 <div class="detailBody">
 <code>selectedIndex:int</code>&nbsp;&nbsp;[read-write]<p>
       The zero-based index of the currently visible child container.
-      Child indexes are in the range 0, 1, 2, ... , n - 1, where n is the number
+      Child indexes are in the range 0, 1, 2, ..., n - 1, where n is the number
       of children.
       The default value is 0, corresponding to the first child.
       If there are no children, this property is <code>-1</code>.
@@ -725,9 +818,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

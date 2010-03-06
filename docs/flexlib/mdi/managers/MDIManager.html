@@ -4,19 +4,19 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="MDIManager,flexlib.mdi.managers.MDIManager,tileMinimize,tileMinimizeWidth,showMinimizedTiles,tilePadding,minTilePadding,enforceBoundaries,effects,CONTEXT_MENU_LABEL_TILE,CONTEXT_MENU_LABEL_TILE_FILL,CONTEXT_MENU_LABEL_CASCADE,CONTEXT_MENU_LABEL_SHOW_ALL,windowList,global,container,add,position,addContextMenu,executeDefaultBehavior,addCenter,bringToFront,center,removeAll,remove,manage,absPos,getOpenWindowList,tile,resize,cascade,showAllWindows" name="keywords">
+<meta content="MDIManager,flexlib.mdi.managers.MDIManager,CONTEXT_MENU_LABEL_CASCADE,CONTEXT_MENU_LABEL_SHOW_ALL,CONTEXT_MENU_LABEL_TILE,CONTEXT_MENU_LABEL_TILE_FILL,effects,enforceBoundaries,minTilePadding,showMinimizedTiles,snapDistance,tileMinimize,tileMinimizeWidth,tilePadding,container,global,absPos,add,addCenter,addContextMenu,bringToFront,cascade,center,executeDefaultBehavior,getOpenWindowList,manage,position,remove,removeAll,resize,showAllWindows,tile" name="keywords">
 <title>flexlib.mdi.managers.MDIManager</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'MDIManager - flexlib';
+				asdocTitle = 'MDIManager - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?flexlib/mdi/managers/MDIManager.html&amp;flexlib/mdi/managers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?flexlib/mdi/managers/MDIManager.html&amp;flexlib/mdi/managers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;MDIManager</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
@@ -82,6 +82,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#snapDistance">snapDistance</a> : Number = 0<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MDIManager</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#tileMinimize">tileMinimize</a> : Boolean = true<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
@@ -91,10 +95,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#tilePadding">tilePadding</a> : Number = 8<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">MDIManager</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#windowList">windowList</a> : Array<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 </table>
@@ -120,9 +120,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#absPos()">absPos</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>, x:int, y:int):void</div>
 <div class="summaryTableDescription">
-    Positions a window in an absolute position 
-   
-    </div>
+    Positions a window in an absolute position
+       </div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 <tr class="">
@@ -159,9 +158,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#cascade()">cascade</a>():void</div>
 <div class="summaryTableDescription">
-    Cascades all managed windows from top left to bottom right 
-   
-   </div>
+    Cascades all managed windows from top left to bottom right
+      </div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 <tr class="">
@@ -185,8 +183,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#getOpenWindowList()">getOpenWindowList</a>():Array</div>
 <div class="summaryTableDescription">
    Gets a list of open windows for scenarios when only open windows need to be managed
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 <tr class="">
@@ -202,11 +199,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#position()">position</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
 <div class="summaryTableDescription">
-    Positions a window on the screen 
-    
-    <p>This is primarly used as the default space on the screen to position the window.</p>
-   
-    </div>
+    Positions a window on the screen
+       <p>This is primarly used as the default space on the screen to position the window.</p>
+       </div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 <tr class="">
@@ -214,7 +209,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#remove()">remove</a>(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</div>
 <div class="summaryTableDescription">
-    Removes a window instance from the managed window stack 
+    Removes a window instance from the managed window stack
     </div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
@@ -223,7 +218,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#removeAll()">removeAll</a>():void</div>
 <div class="summaryTableDescription">
-   Removes all windows from managed window stack; 
+   Removes all windows from managed window stack;
    </div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
@@ -247,8 +242,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#tile()">tile</a>(fillAvailableSpace:Boolean = false, gap:Number = 0):void</div>
 <div class="summaryTableDescription">
     Tiles the window across the screen
-    
-    <p>By default, windows will be tiled to all the same size and use only the space they can accomodate.</div>
+       <p>By default, windows will be tiled to all the same size and use only the space they can accomodate.</div>
 </td><td class="summaryTableOwnerCol">MDIManager</td>
 </tr>
 </table>
@@ -493,6 +487,15 @@ showHideInherited();
 <div class="detailBody">
 <code>public var showMinimizedTiles:Boolean = false</code>
 </div>
+<a name="snapDistance"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">snapDistance</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var snapDistance:Number = 0</code>
+</div>
 <a name="tileMinimize"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -519,16 +522,6 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var tilePadding:Number = 8</code>
-</div>
-<a name="windowList"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">windowList</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var windowList:Array</code>
-<p>This property can be used as the source for data binding.</p>
 </div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -564,28 +557,25 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function absPos(window:<a href="../containers/MDIWindow.html">MDIWindow</a>, x:int, y:int):void</code><p>
-    Positions a window in an absolute position 
-   
-    </p><span class="label">Parameters</span>
+    Positions a window in an absolute position
+       </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to position
-   
-    </td>
+       </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">x</span>:int</code> &mdash; The x position of the window
-   
-    </td>
+       </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">y</span>:int</code> &mdash; The y position of the window 
+<td width="20px"></td><td><code><span class="label">y</span>:int</code> &mdash; The y position of the window
    </td>
 </tr>
 </table>
@@ -646,9 +636,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function bringToFront(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
-   Brings a window to the front of the screen. 
-   
-    </p><span class="label">Parameters</span>
+   Brings a window to the front of the screen.
+       </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to bring to front
@@ -664,9 +653,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function cascade():void</code><p>
-    Cascades all managed windows from top left to bottom right 
-   
-   </p></div>
+    Cascades all managed windows from top left to bottom right
+      </p></div>
 <a name="center()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -675,9 +663,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function center(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
-   Positions a window in the center of the available screen. 
-   
-    </p><span class="label">Parameters</span>
+   Positions a window in the center of the available screen.
+       </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; to center
@@ -708,8 +695,7 @@ showHideInherited();
 <div class="detailBody">
 <code>public function getOpenWindowList():Array</code><p>
    Gets a list of open windows for scenarios when only open windows need to be managed
-   
-   </p><p></p>
+      </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -726,12 +712,11 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function manage(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
-   Pushes an existing window onto the managed window stack. 
-   
-    </p><span class="label">Parameters</span>
+   Pushes an existing window onto the managed window stack.
+       </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window:MDIWindow to push onto managed windows stack 
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window:MDIWindow to push onto managed windows stack
    </td>
 </tr>
 </table>
@@ -744,11 +729,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function position(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
-    Positions a window on the screen 
-    
-    </p><p>This is primarly used as the default space on the screen to position the window.</p>
-   
-    <span class="label">Parameters</span>
+    Positions a window on the screen
+       </p><p>This is primarly used as the default space on the screen to position the window.</p>
+       <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to position
@@ -764,11 +747,11 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function remove(window:<a href="../containers/MDIWindow.html">MDIWindow</a>):void</code><p>
-    Removes a window instance from the managed window stack 
+    Removes a window instance from the managed window stack
     </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to remove 
+<td width="20px"></td><td><code><span class="label">window</span>:<a href="../containers/MDIWindow.html">MDIWindow</a></code> &mdash; Window to remove
    </td>
 </tr>
 </table>
@@ -781,7 +764,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function removeAll():void</code><p>
-   Removes all windows from managed window stack; 
+   Removes all windows from managed window stack;
    </p></div>
 <a name="resize()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -815,18 +798,15 @@ showHideInherited();
 <div class="detailBody">
 <code>public function tile(fillAvailableSpace:Boolean = false, gap:Number = 0):void</code><p>
     Tiles the window across the screen
-    
-    </p><p>By default, windows will be tiled to all the same size and use only the space they can accomodate.
+       </p><p>By default, windows will be tiled to all the same size and use only the space they can accomodate.
     If you set fillAvailableSpace = true, tile will use all the space available to tile the windows with
-    the windows being arranged by varying heights and widths. 
+    the windows being arranged by varying heights and widths.
         </p>
-   
-    <span class="label">Parameters</span>
+       <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">fillAvailableSpace</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; Variable to determine whether to use the fill the entire available screen
-   
-   </td>
+      </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
@@ -1040,7 +1020,7 @@ showHideInherited();
 <span class="label">Event object type: </span><a href="../events/MDIManagerEvent.html"><code>flexlib.mdi.events.MDIManagerEvent</code></a>
 <br>
 <p></p><p>
-   If the window is minimized, this event is dispatched when the titleBar is clicked. 
+   If the window is minimized, this event is dispatched when the titleBar is clicked.
    If the window is maxmimized, this event is dispatched upon clicking the restore button
    or double clicking the titleBar.
      </p></div>
@@ -1087,9 +1067,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

@@ -4,19 +4,19 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="WindowShade,flexlib.containers.WindowShade,headerRenderer,label,opened,headerLocation,viewMetrics,createOrReplaceHeaderButton,applyHeaderButtonStyles" name="keywords">
+<meta content="WindowShade,flexlib.containers.WindowShade,closedHeight,headerLocation,headerRenderer,label,opened,viewMetrics,applyHeaderButtonStyles,createOrReplaceHeaderButton" name="keywords">
 <title>flexlib.containers.WindowShade</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'WindowShade - flexlib';
+				asdocTitle = 'WindowShade - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/containers/WindowShade.html&amp;flexlib/containers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/containers/WindowShade.html&amp;flexlib/containers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;WindowShade</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
@@ -60,14 +60,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#headerLocation">headerLocation</a> : String<div class="summaryTableDescription">
-   Specifies where the header button is placed relative tot he content of this WindowShade.</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#closedHeight">closedHeight</a> : Number = 0<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">WindowShade</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#headerRenderer">headerRenderer</a> : IFactory<div class="summaryTableDescription">
-        To control the header used on the WindowShade component you can either set the <code>headerClass</code> or the
-        <code>headerRenderer</code>.</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#headerLocation">headerLocation</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WindowShade</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#headerRenderer">headerRenderer</a> : IFactory<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">WindowShade</td>
 </tr>
 <tr class="">
@@ -271,18 +272,23 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
-<a name="headerLocation"></a>
+<a name="closedHeight"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">headerLocation</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">closedHeight</td><td class="detailHeaderType">property</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>headerLocation:String</code>&nbsp;&nbsp;[read-write]<p>
-   Specifies where the header button is placed relative tot he content of this WindowShade. Possible
-   values are <code>top</code> and <code>bottom</code>.
-   </p><p>This property can be used as the source for data binding.</p>
-<span class="label">Implementation</span>
+<code>public var closedHeight:Number = 0</code>
+</div>
+<a name="headerLocation"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">headerLocation</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>headerLocation:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get headerLocation():String</code>
 <br>
@@ -296,12 +302,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>headerRenderer:IFactory</code>&nbsp;&nbsp;[read-write]<p>
-        To control the header used on the WindowShade component you can either set the <code>headerClass</code> or the
-        <code>headerRenderer</code>. The <code>headerRenderer</code> works similar to the itemRenderer of a List control.
-        You can set this using MXML using any Button control. This would let you customize things like button skin. You could
-        even combine this with the CanvasButton component to make complex headers.
-        </p><span class="label">Implementation</span>
+<code>headerRenderer:IFactory</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get headerRenderer():IFactory</code>
 <br>
@@ -331,9 +332,15 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var opened:Boolean</code><p>
+<code>opened:Boolean</code>&nbsp;&nbsp;[read-write]<p>
          Sets or gets the state of this WindowShade, either opened (true) or closed (false).
-         </p></div>
+         </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get opened():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set opened(value:Boolean):void</code>
+<br>
+</div>
 <a name="viewMetrics"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -458,9 +465,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

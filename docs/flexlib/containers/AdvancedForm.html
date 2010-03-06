@@ -4,19 +4,19 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="AdvancedForm,flexlib.containers.AdvancedForm,isValid,isValid,undoHistorySize,modelType,resetForm,childrenCreated" name="keywords">
+<meta content="AdvancedForm,flexlib.containers.AdvancedForm,isValid,modelType,undoHistorySize,childrenCreated,resetForm" name="keywords">
 <title>flexlib.containers.AdvancedForm</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'AdvancedForm - flexlib';
+				asdocTitle = 'AdvancedForm - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/containers/AdvancedForm.html&amp;flexlib/containers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/containers/AdvancedForm.html&amp;flexlib/containers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;AdvancedForm</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
@@ -85,17 +85,11 @@ setMXMLOnly();
 </td><td class="summaryTableOwnerCol">AdvancedForm</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isValid">isValid</a> : Boolean = true<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#modelType">modelType</a> : String<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">AdvancedForm</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#modelType">modelType</a> : String<div class="summaryTableDescription">
-   The modelStack handles the data.</div>
-</td><td class="summaryTableOwnerCol">AdvancedForm</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#undoHistorySize">undoHistorySize</a> : int<div class="summaryTableDescription">
-   The undoHistorySize defaults the number of undos.</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#undoHistorySize">undoHistorySize</a> : int<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">AdvancedForm</td>
 </tr>
 </table>
@@ -156,15 +150,6 @@ showHideInherited();
    Default to true, if any Validators are present then it will be set to false
   </p><p>This property can be used as the source for data binding.</p>
 </div>
-<a name="isValid"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">isValid</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var isValid:Boolean = true</code>
-</div>
 <a name="modelType"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -172,10 +157,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>modelType:String</code>&nbsp;&nbsp;[read-write]<p>
-   The modelStack handles the data.
-     </p><p>The default value is <code>true</code>.</p>
-<span class="label">Implementation</span>
+<code>modelType:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get modelType():String</code>
 <br>
@@ -189,10 +171,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>undoHistorySize:int</code>&nbsp;&nbsp;[read-write]<p>
-   The undoHistorySize defaults the number of undos.
-     </p><p>The default value is <code>true</code>.</p>
-<span class="label">Implementation</span>
+<code>undoHistorySize:int</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get undoHistorySize():int</code>
 <br>
@@ -226,9 +205,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

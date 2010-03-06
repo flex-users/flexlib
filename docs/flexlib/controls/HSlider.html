@@ -10,13 +10,13 @@
 <body>
 <script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'HSlider - flexlib';
+				asdocTitle = 'HSlider - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/HSlider.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/HSlider.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;HSlider</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
@@ -215,6 +215,11 @@ setMXMLOnly();
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="sliderClasses/ExtendedSlider.html#highlightHitArea">highlightHitArea</a> : UIComponent<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="sliderClasses/ExtendedSlider.html">ExtendedSlider</a></td>
 </tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/SliderBase.html#thumbStyleFilters">thumbStyleFilters</a> : Object<div class="summaryTableDescription">
+      Set of styles to pass from the Slider to the thumbs.</div>
+</td><td class="summaryTableOwnerCol"><a href="../baseClasses/SliderBase.html">SliderBase</a></td>
+</tr>
 </table>
 </div>
 <a name="methodSummary"></a>
@@ -243,7 +248,8 @@ setMXMLOnly();
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="../baseClasses/SliderBase.html#getThumbAt()">getThumbAt</a>(index:int):SliderThumb</div>
+<a class="signatureLink" href="../baseClasses/SliderBase.html#getThumbAt()">getThumbAt</a>(index:int):<a href="sliderClasses/SliderThumb.html">SliderThumb</a>
+</div>
 <div class="summaryTableDescription">
       Returns the thumb object at the given index.</div>
 </td><td class="summaryTableOwnerCol"><a href="../baseClasses/SliderBase.html">SliderBase</a></td>
@@ -420,14 +426,6 @@ setMXMLOnly();
 <tr class="hideInheritedStyle">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="../baseClasses/SliderBase.html#style:fillColors">fillColors</a>
-</div>
-</td><td class="summaryTableDescription"><span class="label">Type: </span>Array &nbsp; <span class="label">Format: </span>Color &nbsp; <span class="label">CSS Inheritance: </span>no<br>
-  Colors used to tint the slider thumb.</td><td class="summaryTableOwnerCol"><a href="../baseClasses/SliderBase.html">SliderBase</a></td>
-</tr>
-<tr class="hideInheritedStyle">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
 <a class="signatureLink" href="../baseClasses/SliderBase.html#style:invertThumbDirection">invertThumbDirection</a>
 </div>
 </td><td class="summaryTableDescription"><span class="label">Type: </span>Boolean &nbsp; <span class="label">CSS Inheritance: </span>no<br>
@@ -511,6 +509,14 @@ setMXMLOnly();
 </div>
 </td><td class="summaryTableDescription"><span class="label">Type: </span>Class &nbsp; <span class="label">CSS Inheritance: </span>no<br>
   The skin for the slider thumb over state.</td><td class="summaryTableOwnerCol"><a href="../baseClasses/SliderBase.html">SliderBase</a></td>
+</tr>
+<tr class="hideInheritedStyle">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../baseClasses/SliderBase.html#style:thumbSkin">thumbSkin</a>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>Class &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  The default skin for the slider thumb.</td><td class="summaryTableOwnerCol"><a href="../baseClasses/SliderBase.html">SliderBase</a></td>
 </tr>
 <tr class="hideInheritedStyle">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -610,9 +616,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

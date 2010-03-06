@@ -4,22 +4,22 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="ScrollablePopUpMenuButton,flexlib.controls.ScrollablePopUpMenuButton,verticalScrollPolicy,arrowScrollPolicy,maxHeight" name="keywords">
+<meta content="ScrollablePopUpMenuButton,flexlib.controls.ScrollablePopUpMenuButton,explicitRowCountSet,hideOnActivity,arrowScrollPolicy,rowCount,verticalScrollPolicy,dataProvider,maxHeight,close" name="keywords">
 <title>flexlib.controls.ScrollablePopUpMenuButton</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'ScrollablePopUpMenuButton - flexlib';
+				asdocTitle = 'ScrollablePopUpMenuButton - FlexLib 2.5-SNAPSHOT asdoc';
 				var baseRef = '../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/ScrollablePopUpMenuButton.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexLib 2.5-SNAPSHOT API documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?flexlib/controls/ScrollablePopUpMenuButton.html&amp;flexlib/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;ScrollablePopUpMenuButton</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;ScrollablePopUpMenuButton</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#styleSummary">Styles</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class ScrollablePopUpMenuButton"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class ScrollablePopUpMenuButton"); titleBar_setSubNav(false,true,true,false,true,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -106,9 +106,23 @@ setMXMLOnly();
       The data descriptor accesses and manipulates data in the data provider.</div>
 </td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#dataProvider">dataProvider</a> : Object<div class="summaryTableDescription">[write-only]</div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#hideOnActivity">hideOnActivity</a> : Boolean = true<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
 <tr class="hideInheritedProperty">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#dataProvider">dataProvider</a> : Object<div class="summaryTableDescription">
-      DataProvider for popUpMenu.</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#iconField">iconField</a> : String<div class="summaryTableDescription">
+      Name of the field in the <code>dataProvider</code> Array that contains the icon to
+      show for each menu item.</div>
+</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#iconFunction">iconFunction</a> : Function<div class="summaryTableDescription">
+      A function that determines the icon to display for each menu item.</div>
 </td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
 </tr>
 <tr class="hideInheritedProperty">
@@ -132,6 +146,11 @@ setMXMLOnly();
       A reference to the pop-up Menu object.</div>
 </td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rowCount">rowCount</a> : int<div class="summaryTableDescription">
+    Maximum number of rows visible in the Menu.</div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#showRoot">showRoot</a> : Boolean<div class="summaryTableDescription">
       Specifies whether to display the top-level node or nodes of the data provider.</div>
@@ -140,6 +159,20 @@ setMXMLOnly();
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#verticalScrollPolicy">verticalScrollPolicy</a> : String<div class="summaryTableDescription">
      Controls the vertical scrolling of the ScrollablePopUpMenuButton.</div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#explicitRowCountSet">explicitRowCountSet</a> : Boolean = false<div class="summaryTableDescription">
+   Indicates if the row count property was explicitely set.</div>
 </td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
 </tr>
 </table>
@@ -158,6 +191,13 @@ setMXMLOnly();
 <div class="summaryTableDescription">
    Constructor
    </div>
+</td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#close()">close</a>():void</div>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">ScrollablePopUpMenuButton</td>
 </tr>
 </table>
@@ -184,6 +224,31 @@ setMXMLOnly();
 </div>
 </td><td class="summaryTableDescription summaryTableCol">
   Dispatched when a user selects an item from the pop-up menu.</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
+</tr>
+</table>
+</div>
+<a name="styleSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Styles</div>
+<div class="showHideLinks">
+<div class="hideInheritedStyle" id="hideInheritedStyle">
+<a onclick="javascript:setInheritedVisible(false,'Style');" href="#styleSummary" class="showHideLink"><img src="../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Styles</a>
+</div>
+<div class="showInheritedStyle" id="showInheritedStyle">
+<a onclick="javascript:setInheritedVisible(true,'Style');" href="#styleSummary" class="showHideLink"><img src="../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Styles</a>
+</div>
+</div>
+<table id="summaryTableStyle" class="summaryTable hideInheritedStyle" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Style</th><th>Description</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedStyle">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../baseClasses/PopUpMenuButtonBase.html#style:popUpStyleName">popUpStyleName</a>
+</div>
+</td><td class="summaryTableDescription"><span class="label">Type: </span>String &nbsp; <span class="label">CSS Inheritance: </span>no<br>
+  The name of a CSS style declaration used by the dropdown menu.</td><td class="summaryTableOwnerCol"><a href="../baseClasses/PopUpMenuButtonBase.html">PopUpMenuButtonBase</a></td>
 </tr>
 </table>
 </div>
@@ -220,6 +285,37 @@ showHideInherited();
 <a href="../controls/ScrollableMenu.html" target="">flexlib.controls.ScrollableMenu</a>
 </div>
 </div>
+<a name="dataProvider"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">dataProvider</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>dataProvider:Object</code>&nbsp;&nbsp;[write-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set dataProvider(value:Object):void</code>
+<br>
+</div>
+<a name="explicitRowCountSet"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">explicitRowCountSet</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var explicitRowCountSet:Boolean = false</code><p>
+   Indicates if the row count property was explicitely set.
+   </p></div>
+<a name="hideOnActivity"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hideOnActivity</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var hideOnActivity:Boolean = true</code>
+</div>
 <a name="maxHeight"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -235,6 +331,38 @@ showHideInherited();
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set maxHeight(value:Number):void</code>
 <br>
+</div>
+<a name="rowCount"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rowCount</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>rowCount:int</code>&nbsp;&nbsp;[read-write]<p>
+    Maximum number of rows visible in the Menu.
+    This property works in conjunction with the maxHeight property. If this property is never set,
+    the height of the menu is solely controlled using maxHeight. If this property is set,
+    the menu will exactly have <code>rowCount</code> rows except if the number of rows times a
+    row's height exceed maxHeight. In this case, the menu will have as many rows as possible without
+    exceeding maxHeight.
+   
+    If this property has been set and it needs to revert to having the menu height solely controlled by
+    maxHeight, set this property to -1.
+   
+    </p><p>The default value is <code>-1</code>.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get rowCount():int</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set rowCount(value:int):void</code>
+<br>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../controls/ScrollablePopUpMenuButton.html#maxHeight()" target="">maxHeight()</a>
+</div>
 </div>
 <a name="verticalScrollPolicy"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -264,14 +392,24 @@ showHideInherited();
 <code>public function ScrollablePopUpMenuButton()</code><p>
    Constructor
    </p></div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="close()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">close</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function close():void</code>
+</div>
 <br>
 <br>
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">FlexLib - http://code.google.com/p/flexlib</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--FlexLib - http://code.google.com/p/flexlib-->

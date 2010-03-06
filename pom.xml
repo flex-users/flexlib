@@ -45,9 +45,166 @@
     </license>
   </licenses>
 
-  <!-- Team: TODO -->
-  <developers />
-  <contributors />
+  <!-- Team -->
+  <developers>
+    <developer>
+      <id>darron.schall</id>
+      <name>darron.schall</name>
+      <roles><role>Owner</role></roles>
+    </developer>
+    <developer>
+      <id>dmccune</id>
+      <name>dmccune</name>
+      <roles><role>Owner</role></roles>
+    </developer>
+    <developer>
+      <id>mikechambers</id>
+      <name>mikechambers</name>
+      <roles><role>Owner</role></roles>
+    </developer>
+    <developer>
+      <id>adobeted</id>
+      <name>adobeted</name>
+      <roles><role>Owner</role></roles>
+    </developer>
+    <developer>
+      <id>olarivain</id>
+      <name>olarivain</name>
+      <roles><role>Owner</role></roles>
+    </developer>
+    <developer>
+      <id>Julien.Nicoulaud</id>
+      <name>Julien Nicoulaud</name>
+      <roles><role>Owner</role></roles>
+      <timezone>1</timezone>
+      <url>http://www.ju-n.net</url>
+    </developer>
+    <developer>
+      <id>renaun</id>
+      <name>renaun</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>egreenfield</id>
+      <name>egreenfield</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>prokium</id>
+      <name>prokium</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>ajit.gosavi</id>
+      <name>ajit.gosavi</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>benstucki</id>
+      <name>benstucki</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>stacy.tyler.young</id>
+      <name>stacy.tyler.young</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>dwabyick</id>
+      <name>dwabyick</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>TomLeeStudio</id>
+      <name>TomLeeStudio</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>adobeauhlmann</id>
+      <name>adobeauhlmann</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>amcleodatadobe</id>
+      <name>amcleodatadobe</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>tobiaspatton</id>
+      <name>tobiaspatton</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>xslfodh</id>
+      <name>xslfodh</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>slangeberg</id>
+      <name>slangeberg</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>brian.joseph31</id>
+      <name>brian.joseph31</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>bmeutzner</id>
+      <name>bmeutzner</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>ben.clinkinbeard</id>
+      <name>ben.clinkinbeard</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>cfortier1960</id>
+      <name>cfortier1960</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>daniel.mcweeney</id>
+      <name>daniel.mcweeney</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>adamflater</id>
+      <name>adamflater</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>twgonzalez</id>
+      <name>twgonzalez</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>frozenandcold</id>
+      <name>frozenandcold</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>www.rphelan.com</id>
+      <name>www.rphelan.com</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>sefi.ninio</id>
+      <name>sefi.ninio</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>rjowen</id>
+      <name>rjowen</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+    <developer>
+      <id>jgiampolo</id>
+      <name>jgiampolo</name>
+      <roles><role>Committer</role></roles>
+    </developer>
+  </developers>
 
   <!-- Mailing-list -->
   <mailingLists>
@@ -60,11 +217,11 @@
     </mailingList>
   </mailingLists>
 
-  <!-- Versioning -->
+  <!-- Version control system -->
   <scm>
-    <connection>scm:svn:http://flexlib.googlecode.com/svn</connection>
-    <developerConnection>scm:svn:https://flexlib.googlecode.com/svn</developerConnection>
-    <url>http://flexlib.googlecode.com/svn</url>
+    <connection>scm:svn:http://flexlib.googlecode.com/svn/trunk</connection>
+    <developerConnection>scm:svn:https://flexlib.googlecode.com/svn/trunk</developerConnection>
+    <url>http://flexlib.googlecode.com/svn/trunk</url>
   </scm>
 
   <!-- Issues management -->
@@ -83,7 +240,6 @@
     <!-- Plugins versions -->
     <plugin.flex-mojos.version>3.5.0</plugin.flex-mojos.version>
     <plugin.maven-resources-plugin.version>2.4.2</plugin.maven-resources-plugin.version>
-    <plugin.wagon-webdav-jackrabbit.version>1.0-beta-6</plugin.wagon-webdav-jackrabbit.version>
     <plugin.flex-pmd-maven-plugin.version>1.0.RC5</plugin.flex-pmd-maven-plugin.version>
 
     <!-- Miscellaneous settings -->
@@ -97,8 +253,21 @@
     <maven>2.2.1</maven>
   </prerequisites>
 
-  <!-- Distribution management :TODO -->
-  <distributionManagement />
+  <!-- Dependencies -->
+  <dependencies>
+      <dependency>
+        <groupId>com.adobe.flex.framework</groupId>
+        <artifactId>flex-framework</artifactId>
+        <version>${dependency.flex-sdk.version}</version>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>com.adobe.flexunit</groupId>
+        <artifactId>flexunit</artifactId>
+        <version>${dependency.flexunit.version}</version>
+        <type>swc</type>
+      </dependency>
+  </dependencies>
 
   <!-- Modules -->
   <modules>
@@ -109,6 +278,8 @@
   <!-- Default build -->
   <build>
     <plugins>
+
+      <!-- Clean the temporary directory after each artifact build -->
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <inherited>true</inherited>
@@ -125,7 +296,10 @@
     </plugins>
   </build>
 
-  <!-- Repositories -->
+  <!-- Distribution management (TODO) -->
+  <distributionManagement />
+
+  <!-- Repositories (TODO: remove it and let users put the repositories in their settings.xml) -->
   <repositories>
     <repository>
       <id>flex-mojos-repository</id>
