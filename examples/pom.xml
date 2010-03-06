@@ -98,14 +98,6 @@
           <artifactId>flexmojos-maven-plugin</artifactId>
           <version>${plugin.flex-mojos.version}</version>
           <extensions>true</extensions>
-          <dependencies>
-            <dependency>
-              <groupId>com.adobe.flex</groupId>
-              <artifactId>compiler</artifactId>
-              <version>${dependency.flex-sdk.version}</version>
-              <type>pom</type>
-            </dependency>
-          </dependencies>
           <configuration>
             <output>${basedir}/${project.artifactId}_Sample.${project.packaging}</output>
           </configuration>

@@ -1,0 +1,5 @@
+TODO list for the Maven build
+* Create an assembly
+* Fix broken examples
+* Add a "initEclipse" profile that generates configs files for Eclipse/Flex/Flash builder
+* Attach asdoc to the library artifact

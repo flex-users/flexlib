@@ -59,14 +59,14 @@
         <artifactId>flexmojos-maven-plugin</artifactId>
         <version>${plugin.flex-mojos.version}</version>
         <extensions>true</extensions>
-        <dependencies>
-          <dependency>
-            <groupId>com.adobe.flex</groupId>
-            <artifactId>compiler</artifactId>
-            <version>${dependency.flex-sdk.version}</version>
-            <type>pom</type>
-          </dependency>
-        </dependencies>
+        <executions>
+          <execution>
+            <id>generate-flex-config</id>
+            <goals>
+              <goal>generate-config-swc</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <addMavenDescriptor>false</addMavenDescriptor>
           <namespaces>
@@ -79,6 +79,13 @@
             <namespace>${flexlib.library.namespace}</namespace>
           </includeNamespaces>
           <optimize>true</optimize>
+          <keepAs3Metadatas>
+            <keepAs3Metadata>Bindable</keepAs3Metadata>
+            <keepAs3Metadata>Managed</keepAs3Metadata>
+            <keepAs3Metadata>ChangeEvent</keepAs3Metadata>
+            <keepAs3Metadata>NonCommittingChangeEvent</keepAs3Metadata>
+            <keepAs3Metadata>Transient</keepAs3Metadata>
+          </keepAs3Metadatas>
         </configuration>
       </plugin>
 
@@ -121,19 +128,39 @@
       </activation>
       <build>
         <plugins>
+
+          <!-- Generate a config file for the asdoc tool -->
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>generate-asdoc-config-file</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${basedir}/../setup/config</directory>
+                      <filtering>true</filtering>
+                      <includes>
+                        <include>asdoc-config.template.xml</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Generate the asdoc -->
           <plugin>
             <groupId>org.sonatype.flexmojos</groupId>
             <artifactId>flexmojos-maven-plugin</artifactId>
             <version>${plugin.flex-mojos.version}</version>
             <extensions>true</extensions>
-            <dependencies>
-              <dependency>
-                <groupId>com.adobe.flex</groupId>
-                <artifactId>compiler</artifactId>
-                <version>${dependency.flex-sdk.version}</version>
-                <type>pom</type>
-              </dependency>
-            </dependencies>
             <executions>
               <execution>
                 <id>generate-asdoc</id>
@@ -141,8 +168,6 @@
                   <goal>asdoc</goal>
                 </goals>
                 <phase>package</phase>
-              </execution>
-            </executions>
             <configuration>
               <outputDirectory>${basedir}/../docs</outputDirectory>
               <windowTitle>${flexlib.asdoc.windowTitle}</windowTitle>
@@ -161,7 +186,10 @@
                   <manifest>${basedir}/manifest.xml</manifest>
                 </namespace>
               </docNamespaces>
+              <configFile>${project.build.directory}/asdoc-config.template.xml</configFile>
             </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

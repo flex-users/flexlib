@@ -288,8 +288,38 @@
     <module>examples</module>
   </modules>
 
-  <!-- Default build -->
+  <!-- Build -->
   <build>
+
+    <!-- Plugins management -->
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonatype.flexmojos</groupId>
+          <artifactId>flexmojos-maven-plugin</artifactId>
+          <version>${plugin.flex-mojos.version}</version>
+          <extensions>true</extensions>
+          <dependencies>
+            <dependency>
+              <groupId>com.adobe.flex</groupId>
+              <artifactId>compiler</artifactId>
+              <version>${dependency.flex-sdk.version}</version>
+              <type>pom</type>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <definesDeclaration>
+              <property>
+                <name>SDK::version</name>
+                <value>"${dependency.flex-sdk.version}"</value>
+              </property>
+            </definesDeclaration>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <!-- Default build -->
     <plugins>
 
       <!-- Clean the temporary directory after each artifact build -->
@@ -306,6 +336,7 @@
           </execution>
         </executions>
       </plugin>
+
     </plugins>
   </build>
 
