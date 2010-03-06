@@ -241,6 +241,7 @@
     <plugin.flex-mojos.version>3.5.0</plugin.flex-mojos.version>
     <plugin.maven-resources-plugin.version>2.4.2</plugin.maven-resources-plugin.version>
     <plugin.flex-pmd-maven-plugin.version>1.0.RC5</plugin.flex-pmd-maven-plugin.version>
+    <plugin.maven-gpg-plugin.version>1.0-alpha-4</plugin.maven-gpg-plugin.version>
 
     <!-- Miscellaneous settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -296,64 +297,52 @@
     </plugins>
   </build>
 
-  <!-- Distribution management (TODO) -->
-  <distributionManagement />
+  <!-- Profiles -->
+  <profiles>
 
-  <!-- Repositories (TODO: remove it and let users put the repositories in their settings.xml) -->
-  <repositories>
+    <!-- Profile to sign artifacts with GPG on releases -->
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>${plugin.maven-gpg-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <!-- Distribution management -->
+  <distributionManagement>
     <repository>
-      <id>flex-mojos-repository</id>
-      <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
+      <id>sonatype-nexus-staging</id>
+      <name>Nexus Release Repository</name>
+      <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
-    <repository>
-      <id>flex-mojos-internal-repository</id>
-      <url>http://repository.sonatype.org/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>flex-mojos-plugin-repository</id>
-      <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>flex-mojos-internal-plugins-repository</id>
-      <url>http://repository.sonatype.org/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>flexpmd-opensource-adobe</id>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <name>FlexPMD repository on opensource.adobe.com</name>
-      <url>http://opensource.adobe.com/svn/opensource/flexpmd/maven-repository/release/</url>
-    </pluginRepository>
-  </pluginRepositories>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <name>sonatype-nexus-snapshots</name>
+      <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
 
 </project>
