@@ -59,15 +59,15 @@
     <module>ConvertibleTreeList</module>
     <module>DragCanvas</module>
     <module>DraggableSlider</module>
-    <module>EnhancedButton</module>                 <!-- FIXME: This example is broken. -->
+    <module>EnhancedButton</module>              <!-- FIXME: This example is broken (SDK 3.4 & 3.5). -->
     <module>Fire</module>
     <module>FlowBox</module>
     <module>FlowContainer</module>
     <module>HAccordion</module>
-<!--    <module>Highlighter</module>-->             <!-- FIXME: This example is broken. -->
-    <module>IconLoader</module>                     <!-- FIXME: Resources must be added to the FlashPlayer trust zone. -->
+<!--    <module>Highlighter</module>-->          <!-- FIXME: This example is broken. -->
+    <module>IconLoader</module>                  <!-- FIXME: Resources must be added to the FlashPlayer trust zone (SDK 3.5 only). -->
     <module>ImageMap</module>
-    <module>MDI</module>                            <!-- FIXME: Exception when changing styles. -->
+    <module>MDI</module>                         <!-- FIXME: Exception when changing styles (SDK 3.4 & 3.5). -->
     <module>MultipleDockingToolBars</module>
     <module>PromptingTextInput</module>
     <module>ScheduleViewer1</module>
@@ -75,7 +75,7 @@
     <module>ScheduleViewer3</module>
     <module>ScheduleViewer4</module>
     <module>ScheduleViewer5</module>
-    <module>ScrollableMenu</module>                 <!-- FIXME: crashes the Flash player. -->
+    <module>ScrollableMenu</module>              <!-- FIXME: OK with SDK 3.4, crashes the Flash player with SDK 3.5 -->
     <module>SimpleDockingToolBar</module>
     <module>SuperTabNavigator</module>
     <module>TreeGrid</module>

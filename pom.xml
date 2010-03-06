@@ -234,7 +234,13 @@
   <properties>
 
     <!-- Dependencies versions -->
-    <dependency.flex-sdk.version>3.5.0.12683</dependency.flex-sdk.version>
+    <dependency.flex-sdk-3.0.version>3.0.0.477</dependency.flex-sdk-3.0.version>
+    <dependency.flex-sdk-3.1.version>3.1.0.2710</dependency.flex-sdk-3.1.version>
+    <dependency.flex-sdk-3.2.version>3.2.0.3958</dependency.flex-sdk-3.2.version>
+    <dependency.flex-sdk-3.3.version>3.3.0.4852</dependency.flex-sdk-3.3.version>
+    <dependency.flex-sdk-3.4.version>3.4.0.9271</dependency.flex-sdk-3.4.version>
+    <dependency.flex-sdk-3.5.version>3.5.0.12683</dependency.flex-sdk-3.5.version>
+    <dependency.flex-sdk-4.version>4.0.0.13875</dependency.flex-sdk-4.version>
     <dependency.flexunit.version>4.0-rc-1</dependency.flexunit.version>
 
     <!-- Plugins versions -->
@@ -245,7 +251,13 @@
 
     <!-- Miscellaneous settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <library.namespace>http://code.google.com/p/flexlib/</library.namespace>
+
+    <!-- Flexlib settings -->
+    <flexlib.library.namespace>http://code.google.com/p/flexlib/</flexlib.library.namespace>
+    <flexlib.asdoc.windowTitle>FlexLib ${project.version} asdoc</flexlib.asdoc.windowTitle>
+    <flexlib.asdoc.mainTitle>FlexLib ${project.version} API documentation</flexlib.asdoc.mainTitle>
+    <flexlib.asdoc.footer>FlexLib - http://code.google.com/p/flexlib</flexlib.asdoc.footer>
+    <flexlib.asdoc.leftFramesetWidth>280</flexlib.asdoc.leftFramesetWidth>
 
   </properties>
 
@@ -300,9 +312,28 @@
   <!-- Profiles -->
   <profiles>
 
+    <!-- Flex SDK 3 profile -->
+    <profile>
+      <id>flex3</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <dependency.flex-sdk.version>${dependency.flex-sdk-3.5.version}</dependency.flex-sdk.version>
+      </properties>
+    </profile>
+
+    <!-- Flex SDK 4 profile -->
+    <profile>
+      <id>flex4</id>
+      <properties>
+        <dependency.flex-sdk.version>${dependency.flex-sdk-4.version}</dependency.flex-sdk.version>
+      </properties>
+    </profile>
+
     <!-- Profile to sign artifacts with GPG on releases -->
     <profile>
-      <id>release-sign-artifacts</id>
+      <id>gpg-sign</id>
       <activation>
         <property>
           <name>performRelease</name>
@@ -332,6 +363,7 @@
 
   <!-- Distribution management -->
   <distributionManagement>
+    <downloadUrl>http://oss.sonatype.org/content/groups/staging</downloadUrl>
     <repository>
       <id>sonatype-nexus-staging</id>
       <name>Nexus Release Repository</name>
