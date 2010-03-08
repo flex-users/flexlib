@@ -25,7 +25,6 @@ package flexlib.controls.menuClasses
 {
 	import mx.controls.menuClasses.MenuItemRenderer;
 	import mx.controls.MenuBar;
-	import flexlib.controls.VerticalMenuBar;
 
 	[ExcludeClass]
 
