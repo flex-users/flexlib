@@ -32,14 +32,19 @@ POSSIBILITY OF SUCH DAMAGE.
 {
 	public class DateUtil
 	{
-		public static const MINUTE_IN_MILLISECONDS : Number = 60 * 1000;
-		public static const HOUR_IN_MILLISECONDS : Number = 60 * 60 * 1000;
-		public static const DAY_IN_MILLISECONDS : Number = 24 * 60 * 60 * 1000;
-		public static const WEEK_IN_MILLISECONDS : Number = 7 * 24 * 60 * 60 * 1000;
-		public static const MONTH_IN_MILLISECONDS : Number = 30 * 24 * 60 * 60 * 1000;
-		public static const YEAR_IN_MILLISECONDS : Number = 12 * 30 * 24 * 60 * 60 * 1000;
-		public static const CENTURY_IN_MILLISECONDS : Number = 100 * 12 * 30 * 24 * 60 * 60 * 1000;
-		public static const MILLENIUM_IN_MILLISECONDS : Number = 1000 * 100 * 12 * 30 * 24 * 60 * 60 * 1000;
+		public static const SECOND_IN_MILLISECONDS : Number =   1000;
+		public static const MINUTE_IN_MILLISECONDS : Number =   60 * SECOND_IN_MILLISECONDS;
+		public static const HOUR_IN_MILLISECONDS : Number =     60 * MINUTE_IN_MILLISECONDS;
+		public static const DAY_IN_MILLISECONDS : Number =      24 * HOUR_IN_MILLISECONDS;
+		public static const WEEK_IN_MILLISECONDS : Number =     7 * DAY_IN_MILLISECONDS;
+		public static const MONTH_IN_MILLISECONDS : Number =    30 * DAY_IN_MILLISECONDS;
+		public static const YEAR_IN_MILLISECONDS : Number =     12 * MONTH_IN_MILLISECONDS;
+		public static const CENTURY_IN_MILLISECONDS : Number =  100 * YEAR_IN_MILLISECONDS;
+		
+		//--> HMM?? Millenium is 1000 years, right? Had been set as 1000 * CENT				
+		public static const MILLENIUM_IN_MILLISECONDS : Number = 1000 * YEAR_IN_MILLISECONDS;
+		
+		///
 		
 		public static function clearTime( date : Date ) : Date 
 		{	
