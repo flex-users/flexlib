@@ -1,5 +1,4 @@
 /*
-
    Copyright (c) 2006. Adobe Systems Incorporated.
    All rights reserved.
 
@@ -26,47 +25,28 @@
    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.
-
-   @ignore
  */
-package flexlib.scheduling.scheduleClasses.lineRenderer
+package flexlib.scheduling.timelineClasses
 {
-  import flash.display.Graphics;
-  FLEX_TARGET_VERSION::flex4
+  import mx.controls.Label;
+  import mx.formatters.DateFormatter;
+
+  public class SimpleTimelineEntryRenderer extends Label implements ITimelineEntryRenderer
   {
-    import flash.display.GraphicsStroke;
-  }
-  import flash.display.LineScaleMode;
-  import flash.geom.Rectangle;
-
-  import flexlib.scheduling.scheduleClasses.utils.GraphicUtils;
-
-  /**
-   * @private
-   */
-  public class DottedVerticalLineRenderer extends Line implements ILineRenderer
-  {
-    public function moveTo(g:Graphics, x:Number, y:Number):void
+    public function SimpleTimelineEntryRenderer()
     {
-      g.moveTo(x, y);
+      super();
+      setStyle("textAlign", "center");
     }
 
-    public function drawTo(g:Graphics, x:Number, y:Number):void
+    override public function set data(value:Object):void
     {
-      GraphicUtils.drawDottedVerticalLineTo(g, x, 0, y);
-    }
+      var entry:ITimeDescriptor = ITimeDescriptor(value);
 
-    public function get scaleMode():String
-    {
-      return LineScaleMode.NORMAL;
-    }
+      var formatter:DateFormatter = new DateFormatter();
+      formatter.formatString = String(entry.description);
 
-    FLEX_TARGET_VERSION::flex4
-    {
-      public function createGraphicsStroke(rect:Rectangle):GraphicsStroke
-      {
-        return new GraphicsStroke();
-      }
+      text = formatter.format(entry.date);
     }
   }
 }

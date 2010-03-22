@@ -1,5 +1,4 @@
 /*
-
    Copyright (c) 2006. Adobe Systems Incorporated.
    All rights reserved.
 
@@ -27,46 +26,16 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.
 
-   @ignore
  */
-package flexlib.scheduling.scheduleClasses.lineRenderer
+package flexlib.scheduling.scheduleClasses.renderers
 {
-  import flash.display.Graphics;
-  FLEX_TARGET_VERSION::flex4
+  import mx.containers.Box;
+
+  public class BackgroundLayoutItemRenderer extends Box
   {
-    import flash.display.GraphicsStroke;
-  }
-  import flash.display.LineScaleMode;
-  import flash.geom.Rectangle;
-
-  import flexlib.scheduling.scheduleClasses.utils.GraphicUtils;
-
-  /**
-   * @private
-   */
-  public class DottedVerticalLineRenderer extends Line implements ILineRenderer
-  {
-    public function moveTo(g:Graphics, x:Number, y:Number):void
+    public function BackgroundLayoutItemRenderer()
     {
-      g.moveTo(x, y);
-    }
-
-    public function drawTo(g:Graphics, x:Number, y:Number):void
-    {
-      GraphicUtils.drawDottedVerticalLineTo(g, x, 0, y);
-    }
-
-    public function get scaleMode():String
-    {
-      return LineScaleMode.NORMAL;
-    }
-
-    FLEX_TARGET_VERSION::flex4
-    {
-      public function createGraphicsStroke(rect:Rectangle):GraphicsStroke
-      {
-        return new GraphicsStroke();
-      }
+      super();
     }
   }
 }

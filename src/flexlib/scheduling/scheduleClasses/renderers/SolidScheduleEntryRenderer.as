@@ -1,5 +1,4 @@
 /*
-
    Copyright (c) 2006. Adobe Systems Incorporated.
    All rights reserved.
 
@@ -27,46 +26,28 @@
    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.
 
-   @ignore
  */
-package flexlib.scheduling.scheduleClasses.lineRenderer
+package flexlib.scheduling.scheduleClasses.renderers
 {
-  import flash.display.Graphics;
-  FLEX_TARGET_VERSION::flex4
+  import flexlib.scheduling.scheduleClasses.IScheduleEntry;
+  import flexlib.scheduling.scheduleClasses.SimpleScheduleEntry;
+
+
+  public class SolidScheduleEntryRenderer extends AbstractSolidScheduleEntryRenderer
   {
-    import flash.display.GraphicsStroke;
-  }
-  import flash.display.LineScaleMode;
-  import flash.geom.Rectangle;
-
-  import flexlib.scheduling.scheduleClasses.utils.GraphicUtils;
-
-  /**
-   * @private
-   */
-  public class DottedVerticalLineRenderer extends Line implements ILineRenderer
-  {
-    public function moveTo(g:Graphics, x:Number, y:Number):void
+    public function SolidScheduleEntryRenderer()
     {
-      g.moveTo(x, y);
+            super();
     }
 
-    public function drawTo(g:Graphics, x:Number, y:Number):void
+    override public function set data(value:Object):void
     {
-      GraphicUtils.drawDottedVerticalLineTo(g, x, 0, y);
-    }
+      super.data = value;
 
-    public function get scaleMode():String
-    {
-      return LineScaleMode.NORMAL;
-    }
+      entry = value as IScheduleEntry;
+      var content:SimpleScheduleEntry = SimpleScheduleEntry(entry);
 
-    FLEX_TARGET_VERSION::flex4
-    {
-      public function createGraphicsStroke(rect:Rectangle):GraphicsStroke
-      {
-        return new GraphicsStroke();
-      }
+      setTextContent(content);
     }
   }
 }
