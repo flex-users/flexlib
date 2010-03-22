@@ -12,10 +12,32 @@
             <path-element>@FLEX_SDK@/frameworks/libs</path-element>
             <path-element>@FLEX_SDK@/frameworks/locale/{locale}</path-element>
         </library-path>
+
+        <!-- Specify a URI to associate with a manifest of components for use as MXML -->
+        <!-- elements.                                                                -->
+        <namespaces>
+            <namespace>
+                <uri>http://code.google.com/p/flexlib/</uri>
+                <manifest>../../src/manifest.xml</manifest>
+            </namespace>
+        </namespaces>
+
+        <define>
+            <name>FLEX_TARGET_VERSION::flex3</name>
+            <value>@FLEX_VERSION_3@</value>
+        </define>
+        <define>
+            <name>FLEX_TARGET_VERSION::flex4</name>
+            <value>@FLEX_VERSION_4@</value>
+        </define>
     </compiler>
+    <include-namespaces>
+        <uri>http://code.google.com/p/flexlib/</uri>
+    </include-namespaces>
     <output>../../bin/</output>
     <compiler.debug>true</compiler.debug>
     <compiler.optimize>false</compiler.optimize>
+
 
     <compiler.keep-as3-metadata>
         <name>Bindable</name>

@@ -111,11 +111,12 @@
               overwrite="true" />
         <replace file="${build.config}/flexlib-config.xml">
             <replacefilter token="@FLEX_SDK@" value="${flexsdk.dir}" />
+            <replacefilter token="@FLEX_VERSION_3@" value="${flex.version3}" />
+            <replacefilter token="@FLEX_VERSION_4@" value="${flex.version4}" />
+
         </replace>
         <exec executable="${compc.exe}" dir="${basedir}">
             <arg line="-o ${dist}/${library.name}.swc" />
-            <arg line="-namespace http://code.google.com/p/flexlib/ ${src.dir}/manifest.xml" />
-            <arg line="-include-namespaces http://code.google.com/p/flexlib/" />
             <arg line="-load-config ${build.config}/flexlib-config.xml" />
         </exec>
     </target>
@@ -156,7 +157,7 @@
                      the line above, and uncomment the line below and modify
                      as appropriate.
                 -->
-                <!--<include name="**/HorizontalAxisDataSelector_Sample.mxml" />-->
+                <!-- include name="**/*_Sample.mxml" / -->
             </fileset>
 
             <sequential>
