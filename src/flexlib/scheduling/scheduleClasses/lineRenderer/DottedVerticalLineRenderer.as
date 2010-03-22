@@ -34,12 +34,15 @@ package flexlib.scheduling.scheduleClasses.lineRenderer
   import flash.display.Graphics;
   FLEX_TARGET_VERSION::flex4
   {
+	import flash.geom.Point;
     import flash.display.GraphicsStroke;
   }
   import flash.display.LineScaleMode;
   import flash.geom.Rectangle;
 
   import flexlib.scheduling.scheduleClasses.utils.GraphicUtils;
+  import flash.display.JointStyle;
+  
 
   /**
    * @private
@@ -63,10 +66,20 @@ package flexlib.scheduling.scheduleClasses.lineRenderer
 
     FLEX_TARGET_VERSION::flex4
     {
-      public function createGraphicsStroke(rect:Rectangle):GraphicsStroke
+      public function createGraphicsStroke(rect:Rectangle, targetOrigin:Point):GraphicsStroke
       {
         return new GraphicsStroke();
       }
+	  
+	  public function get miterLimit():Number
+	  {
+		  return 3;
+	  }
+	  
+	  public function get joints():String
+	  {
+		  return JointStyle.ROUND;
+	  }
     }
   }
 }

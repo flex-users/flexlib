@@ -1452,7 +1452,14 @@ package flexlib.baseClasses
       if (!overlayChild)
         return;
 
-      overlayColor = color;
+	  FLEX_TARGET_VERSION::flex4
+	  {
+	    effectOverlayColor = color;
+	  }
+	  FLEX_TARGET_VERSION::flex3
+	  {
+		overlayColor = color;
+	  }
       overlayTargetArea = targetArea;
 
       if (selectedChild && selectedChild.numChildrenCreated == -1) // No children have been created
@@ -1475,7 +1482,14 @@ package flexlib.baseClasses
      */
     private function initializeHandler(event:FlexEvent):void
     {
-      UIComponent(overlayChild).addOverlay(overlayColor, overlayTargetArea);
+      FLEX_TARGET_VERSION::flex4
+      {
+		UIComponent(overlayChild).addOverlay(effectOverlayColor, overlayTargetArea);
+      }
+      FLEX_TARGET_VERSION::flex3
+      {
+        UIComponent(overlayChild).addOverlay(overlayColor, overlayTargetArea);
+      }
     }
 
     /**

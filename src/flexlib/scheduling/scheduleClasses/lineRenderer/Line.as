@@ -1,6 +1,7 @@
 package flexlib.scheduling.scheduleClasses.lineRenderer
 {
   import flash.display.Graphics;
+  import flash.geom.Point;
   import flash.geom.Rectangle;
 
   public class Line
@@ -41,7 +42,7 @@ package flexlib.scheduling.scheduleClasses.lineRenderer
 
     FLEX_TARGET_VERSION::flex4
     {
-      public function apply(g:Graphics, bounds:Rectangle=null):void
+      public function apply(g:Graphics, bounds:Rectangle, targetPoint:Point):void
       {
         g.lineStyle(weight, color, alpha);
       }
