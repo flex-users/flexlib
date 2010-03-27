@@ -238,7 +238,7 @@ package flexlib.containers
 		 * <p>Indicates how the Button to the right of the tabs should
 		 * be shown. AUTO means the button will be shown if there is more than
 		 * one tab. ON means it will always be shown, and OFF means it will never
-		 * be shown.
+		 * be shown.</p>
 		 */
 		public function get popUpButtonPolicy():String {
 			return _popUpButtonPolicy;	

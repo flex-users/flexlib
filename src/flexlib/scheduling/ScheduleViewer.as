@@ -95,8 +95,8 @@ package flexlib.scheduling
   /**
    * ScheduleViewer is the main scheduling component. It allows you to render and manipulate
    * schedule entries in an efficient and very customizable way.
-   * <p>
    * <p><strong>ScheduleViewerSample1 - Introduction</strong></p>
+   * <p>
    * The ScheduleViewerSample1.mxml in the example section shows how to setup
    * a ScheduleViewer with default values and 3 entries.
    * </p>
@@ -105,14 +105,16 @@ package flexlib.scheduling
    * flexlib.scheduling.scheduleClasses.IScheduleEntry objects.
    * ScheduleViewerSample1 uses flexlib.scheduling.scheduleClasses.SimpleScheduleEntry,
    * an implementation of IScheduleEntry.
-   * <p/>
+   * </p>
+   * <p>
    * The dataProvider item gets passed into the entryRenderer, which by default
    * is flexlib.scheduling.scheduleClasses.renderers.GradientScheduleEntryRenderer.mxml.
    * You can customize various styles of the entry renderer via the entryStyleName style of ScheduleViewer.
    * In ScheduleViewerSample1, we use the default styles but there is an example CSS inlcuded.
    * Try to assign the included myEntryStyle class selector to the entryStyleName style property
    * of the ScheduleViewer instance.
-   * <p/>
+   * </p>
+   * <p>
    * In addition, for maximum flexibility, you can provide a fully customized entry renderer
    * via the entryRenderer property. The entryRenderer has to implement
    * flexlib.scheduling.scheduleClasses.renderers.IScheduleEntryRenderer.
@@ -122,13 +124,14 @@ package flexlib.scheduling
    * specify the layout manager with the entryLayout property. Furthermore,
    * the layout manager can handle any changes that occur to the data provider as any updates,
    * additions, deletions etc to the entries.
-   * <p/>
+   * </p>
+   * <p>
    * By default, the flexlib.scheduling.scheduleClasses.layout.BestFitLayout
    * is used, which assigns entries to the top most rows without causing any overlaps
    * between entries.
    * </p>
-   * <p>
    * <p><strong>ScheduleViewerSample2 - Layout Manager: SimpleLayout</strong></p>
+   * <p>
    * Another supplied layout manager is the
    * flexlib.scheduling.scheduleClasses.layout.SimpleLayout which places entries exactly as
    * defined in the dataProvider. This means, that when using SimpleLayout, each item
@@ -136,38 +139,46 @@ package flexlib.scheduling
    * Each row IList collection is expected to contain IScheduleEntry objects.
    * You can write your own layout manager, check the BestFitLayout and SimpleLayout and their
    * base classes and implemented interfaces for how to do that.
-   * <p/>
+   * </p>
+   * <p>
    * The ScheduleViewerSample2.mxml shows how to setup
    * a ScheduleViewer with the supplied SimpleLayout manager. Notice the different structure of
    * the dataProvider, which now exactly determines how entries are being laid out.
    * Furthermore, SimpleLayout does not check entries for overlapping. Therefore,
    * in the second row of ScheduleViewerSample2 you can see one entry overlapping.
    * </p>
+   * <p>
    * Notice that we use a different entry renderer in ScheduleViewerSample2.
    * Instead the default gradient renderer we now use
    * flexlib.scheduling.scheduleClasses.renderers.SolidScheduleEntryRenderer
    * </p>
    * <p><strong>ScheduleViewerSample3 - Adding Navigation and Zooming</strong></p>
+   * <p>
    * The ScheduleViewerSample3 sample shows how to add a navigation and a zooming tool.
    * In order to achieve maximum flexibility both features are meant to be
-   * driven by external components that talk to an API of ScheduleViewer.
+   * driven by external components that talk to an API of ScheduleViewer.</p>
    * <p><em>Zooming</em></p>
+   * <p>
    * The ScheduleViewer's zoom property can be manipulated in order to achieve zooming.
    * You could use i.e. a mx:HSlider component that manipulates zoom on each change event
    * as the ScheduleViewerSample3 example shows. A zoom value of 100 always shows the complete
-   * dataProvider on the currently visible canvas (no scrollbars have to appear).
+   * dataProvider on the currently visible canvas (no scrollbars have to appear).</p>
    * <p><em>Navigation</em></p>
+   * <p>
    * The ScheduleViewer's xPosition and yPosition properties can be manipulated in order
    * to navigate along ScheduleViewer's content.
    * You could use the scroll events of the Timeline component and the pixelScroll events
    * of ScheduleViewer to connect both components and achieve navigation via Timeline.
-   * <p/>
+   * </p>
+   * <p>
    * ScheduleViewer offers APIs to navigate (and animate) to specific entries or times.
    * See the gotoNow and gotoSelectedEntry methods of ScheduleViewerSample3.
-   * <p/>
+   * </p>
+   * <p>
    * You can select single or multiple entries via the selectedItem and selectedItems property.
    * To switch to the multiple selection mode, set the allowMultipleSelection to true.
-   * <p/>
+   * </p>
+   * <p>
    * Furthermore, in this example, the background color of each schedule entry shall be
    * data provider driven. To make this possible, we've specified another supplied entry renderer;
    * flexlib.scheduling.scheduleClasses.renderers.ColoredGradientScheduleEntryRenderer.
@@ -175,37 +186,43 @@ package flexlib.scheduling
    * We've extracted the creation of schedule entries (of type ColoredScheduleEntry)
    * into a separate class. Check out flexlib.scheduling.samples.ScheduleData in the example
    * section below.
+   * </p>
    * <p><strong>ScheduleViewerSample4 - Adding Background areas</strong></p>
+   * <p>
    * You can add customized background areas to ScheduleViewer using the backgroundItems property.
    * backgroundItems expects an Array of BackgroundItem objects. You can specify a time range,
    * a color and a description. The latter will be used as a tool tip when the user mouses over
    * area.
-   * <p/>
+   * </p>
+   * <p>
    * For further customizations of the background area in ScheduleViewer, you could
    * create your customized version of the background layout manager via the backgroundLayout property.
    * Take a look into the default layout manager
    * flexlib.scheduling.scheduleClasses.layout.BackgroundLayout for more information.
    * i.e. you could add a colored current time area, which moves by the current time.
-   * <p/>
+   * </p>
+   * <p>
    * You can also customize the background grid via the supplied styles. See style section.
    * To customize further, you could define custom layout managers via the
    * horizontalLinesLayout and verticalLinesLayout properties. See default implementation is
    * flexlib.scheduling.scheduleClasses.layout.HorizontalLinesLayout and
    * flexlib.scheduling.scheduleClasses.layout.VerticalLinesLayout. i.e. you could
-   * add thicker horizontal lines, after certain items.
+   * add thicker horizontal lines, after certain items.</p>
    * <p><strong>ScheduleViewerSample5 - Row based schedulers</strong></p>
+   * <p>
    * ScheduleViewerSample5 shows how you can synchronize a List control
    * with ScheduleViewer. The pixelScrollEnabled flag lets ScheduleViewer
    * scroll on rows instead of pixels. Animations are still supported for pixels. The itemScroll
    * and pixelScroll events allow to connect external components to ScheduleViewer such as the List
-   * shown in this example.
+   * shown in this example.</p>
    * <p><strong>ScheduleViewerSample6 - Customization of background lines</strong></p>
+   * <p>
    * ScheduleViewerSample6 shows how you can customize vertical and
    * horizontal background lines with the exposed horizontalLinesViewer and
    * verticalLinesViewer properties of ScheduleViewer. The custom viewers used in this
    * example are
    * flexlib.scheduling.samples.AlternatingHorizontalLinesViewer and
-   * flexlib.scheduling.samples.SolidVerticalLinesViewer
+   * flexlib.scheduling.samples.SolidVerticalLinesViewer</p>
    *
    * @see flexlib.scheduling.scheduleClasses.IScheduleEntry
    * @see flexlib.scheduling.scheduleClasses.SimpleScheduleEntry

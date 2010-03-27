@@ -83,6 +83,7 @@
         <exec executable="${mxmlc.exe}" dir="${basedir}">
             <arg line="'${tests.dir}/${testRunner.dir}/${testRunner.name}.mxml'" />
             <arg line="-o ${dist}/${testRunner.name}.swf" />
+            <arg line="-load-config '${flexsdk.dir}/frameworks/flex-config.xml'" />
             <arg line="-load-config ${build.config}/tests-config.xml" />
         </exec>
     </target>
@@ -117,6 +118,7 @@
         </replace>
         <exec executable="${compc.exe}" dir="${basedir}">
             <arg line="-o ${dist}/${library.name}.swc" />
+            <arg line="-load-config '${flexsdk.dir}/frameworks/flex-config.xml'" />
             <arg line="-load-config ${build.config}/flexlib-config.xml" />
         </exec>
     </target>
@@ -175,6 +177,7 @@
                 <exec executable="${mxmlc.exe}" dir="${basedir}">
                     <arg line="'@{file}'" />
                     <arg line="-o ${dist}/examples/${exampleApplicationName}_Sample.swf" />
+                    <arg line="-load-config '${flexsdk.dir}/frameworks/flex-config.xml'" />
                     <arg line="-load-config ${build.config}/examples-config.xml" />
                 </exec>
             </sequential>
@@ -213,6 +216,7 @@
                 <exec executable="${mxmlc.exe}" dir="${basedir}">
                     <arg line="'@{file}'" />
                     <arg line="-o ${dist}/examples/${exampleApplicationName}_Sample.swf" />
+                    <arg line="-load-config '${flexsdk.dir}/frameworks/flex-config.xml'" />
                     <arg line="-load-config ${build.config}/examples-config.xml" />
                 </exec>
             </sequential>
@@ -230,6 +234,7 @@
         </delete>
 
         <exec executable="${asdoc.exe}" spawn="no">
+        	<arg line="-define+=FLEX_TARGET_VERSION::flex4,${flex.version4} -define+=FLEX_TARGET_VERSION::flex3,${flex.version3}" />
             <!-- Place the documentation in the "docs" directory -->
             <arg line="-o '${dist.docs}'" />
 

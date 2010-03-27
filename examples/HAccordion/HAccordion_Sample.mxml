@@ -33,7 +33,7 @@ SOFTWARE.
 			 * labels that are rotated will be invisible. In AccordionDefaults.css
 			 * we reference the bolded font named 'accordionHeader' so that needs 
 			 * to match here. */
-		     [Embed(systemFont='Arial', fontWeight="bold", fontName='accordionHeader', mimeType='application/x-font', flashType='true')] 
+		     [Embed(systemFont='Arial', fontWeight="bold", fontName='accordionHeader', mimeType='application/x-font', advancedAntiAliasing='true')] 
 		     private var font1:Class;
 		]]>
 	</mx:Script>

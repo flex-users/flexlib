@@ -19,7 +19,6 @@
         <library-path>
             <path-element>../../lib/flexunit.swc</path-element>
             <path-element>@FLEX_LIBS_HOME@/libs</path-element>
-            <path-element>@FLEX_LIBS_HOME@/libs/player/{targetPlayerMajorVersion}</path-element>
             <path-element>@FLEX_LIBS_HOME@/locale/{locale}</path-element>
         </library-path>
 

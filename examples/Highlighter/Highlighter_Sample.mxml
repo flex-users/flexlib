@@ -7,7 +7,7 @@
         @font-face{
             src:local("Monaco");
             fontFamily:myMonospaced;
-            flashType:true;
+            advancedAntiAliasing:true;
             fontWeight:normal;
             fontStyle:normal;
         }
@@ -15,7 +15,7 @@
         @font-face{
             src:local("Times New Roman");
             fontFamily:myFont;
-            flashType:true;
+            advancedAntiAliasing:true;
             fontWeight:normal;
             fontStyle:normal;
         }
@@ -23,7 +23,7 @@
         @font-face{
             src:local("Times New Roman");
             fontFamily:myFont;
-            flashType:true;
+            advancedAntiAliasing:true;
             fontWeight:bold;
             fontStyle:normal;
         }
@@ -31,7 +31,7 @@
         @font-face{
             src:local("Times New Roman");
             fontFamily:myFont;
-            flashType:true;
+            advancedAntiAliasing:true;
             fontWeight:normal;
             fontStyle:italic;
         }

@@ -51,7 +51,7 @@ import mx.controls.sliderClasses.SliderDirection;
  * 
  *  <p>To use this control an enable the draggable regions between the thumbs you
  *  need to set the <code>thumbCount</code> to something greater than 1, otherwise
- *  this control will work exactly like the original VSlider.
+ *  this control will work exactly like the original VSlider.</p>
  *   
  *  @mxml
  *  

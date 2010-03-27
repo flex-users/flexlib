@@ -15,16 +15,9 @@
             <path-element>../../dist/flexlib.swc</path-element>
             <path-element>@FLEX_LIBS_HOME@/libs</path-element>
             <path-element>@FLEX_LIBS_HOME@/libs/player</path-element>
-            <path-element>@FLEX_LIBS_HOME@/libs/player/{targetPlayerMajorVersion}</path-element>
             <path-element>@FLEX_LIBS_HOME@/locale/{locale}</path-element>
+
         </library-path>
-        <!--
-             List of SWC files or directories to compile against
-             but to omit from linking.
-        -->
-        <external-library-path>
-            <path-element>@FLEX_LIBS_HOME@/libs/player/10/playerglobal.swc</path-element>
-        </external-library-path>
 
 
 

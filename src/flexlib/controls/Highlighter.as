@@ -80,7 +80,7 @@ package flexlib.controls
         private var finder:Finder;
         
         /**
-        * Finds & highlights strings in a text field.
+        * Finds &amp; highlights strings in a text field.
         * 
         * @param textField The TextField containing the text to highlight
         * @param color The color to make the highlight (RGBA).  Default is 0xffff0000 (solid red).
