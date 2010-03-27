@@ -461,7 +461,15 @@ package flexlib.controls
       fill.angle = _angle;
       fill.focalPointRatio = .6;
 
-      fill.begin(g, new Rectangle(0, 0, w, h), new Point(0, 0));
+      FLEX_TARGET_VERSION::flex4
+      {
+        fill.begin(g, new Rectangle(0, 0, w, h), new Point(0, 0));
+      }
+      FLEX_TARGET_VERSION::flex3
+      {
+        fill.begin(g, new Rectangle(0, 0, w, h));
+      }
+
       g.drawRect(0, 0, w, h);
       fill.end(g);
     }
@@ -498,9 +506,12 @@ package flexlib.controls
        * didn't invent it, and in fact I have very little understanding of how to really control
        * these two functions. They're beasts.
        */
-      noiseBitmap.perlinNoise(input.width / wFactor, input.height / hFactor, _octaves, Math.random(), true, false, 7, true, a);
+      noiseBitmap.perlinNoise(input.width / wFactor, input.height / hFactor, _octaves, Math.random(),
+                              true, false, 7, true, a);
 
-      var d:DisplacementMapFilter = new DisplacementMapFilter(noiseBitmap, new Point(0, 0), 1, 2, displacementScaleX, displacementScaleY, DisplacementMapFilterMode.IGNORE);
+      var d:DisplacementMapFilter = new DisplacementMapFilter(noiseBitmap, new Point(0, 0), 1, 2, displacementScaleX,
+                                                              displacementScaleY, DisplacementMapFilterMode.
+                                                              IGNORE);
 
       /* OK, so we've got our DisplacementMapFilter created, now we just draw the input
        * BitmapData and apply the DisplacementMapFilter.

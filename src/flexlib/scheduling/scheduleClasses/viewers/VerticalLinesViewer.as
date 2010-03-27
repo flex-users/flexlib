@@ -143,7 +143,14 @@ package flexlib.scheduling.scheduleClasses.viewers
     {
       var x:Number = item.x - layout.xPosition;
       lineRenderer.moveTo(graphics, x, 0);
-      lineRenderer.apply(graphics, new Rectangle(0, 0, width, height), new Point(0, 0));
+      FLEX_TARGET_VERSION::flex4
+      {
+        lineRenderer.apply(graphics, new Rectangle(0, 0, width, height), new Point(0, 0));
+      }
+      FLEX_TARGET_VERSION::flex3
+      {
+        lineRenderer.apply(graphics);
+      }
       lineRenderer.drawTo(graphics, x, item.height);
     }
   }
