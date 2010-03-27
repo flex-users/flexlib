@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<mx:Application 
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	>
+	
+	<mx:Style>
+	    .linkButtonWindowShade {
+	      	headerClass:ClassReference('mx.controls.LinkButton');
+	      	header-style-name: linkButtonStyle;
+	     
+	     	drop-shadow-enabled:true;
+	     	
+	      	corner-radius:10;
+	      	border-style:solid;
+	    	
+	    	background-color:#efefef;
+	    	background-alpha:.7;
+	    }         
+	    
+	    .linkButtonStyle {
+	    	corner-radius:10;	
+	    	fill-alphas:1,1;
+	    	padding-left:10;
+	    }
+	    
+	    Form {
+	    	padding-top:0;
+	    	padding-bottom:5;	
+	    }
+	</mx:Style>
+  
+	<mx:VBox>
+      <flexlib:WindowShade id="ws1" tabChildren="{ws1.opened}" styleName="linkButtonWindowShade" 
+      	label="Personal Information" width="100%">
+          <mx:Form>
+            <mx:FormItem label="First name" horizontalAlign="left">
+                <mx:TextInput width="200"/>
+            </mx:FormItem>
+            <mx:FormItem label="Last name">
+                <mx:TextInput width="200"/>
+            </mx:FormItem>
+            <mx:FormItem label="Date of birth (mm/dd/yyyy)">
+                <mx:TextInput width="200"/>
+            </mx:FormItem>
+            <mx:FormItem label="SSN">
+                <mx:TextInput width="200"/>
+            </mx:FormItem>
+          </mx:Form>
+      </flexlib:WindowShade>
+      
+      <flexlib:WindowShade id="ws2" tabChildren="{ws2.opened}" styleName="linkButtonWindowShade" 
+      	label="Shipping Address" opened="false" width="100%">
+          <mx:Form>
+            <mx:FormItem label="Address" width="100%">
+              <mx:TextInput width="100%"/>
+            </mx:FormItem>
+            <mx:FormItem label="Suite / Apt." width="100%">
+              <mx:TextInput width="100%"/>
+            </mx:FormItem>
+            <mx:HBox>
+              <mx:FormItem label="City">
+                <mx:TextInput width="100"/>
+              </mx:FormItem>
+              <mx:FormItem label="State">
+                <mx:TextInput width="30"/>
+              </mx:FormItem>
+              <mx:FormItem label="Zip Code">
+                <mx:TextInput width="60"/>
+              </mx:FormItem>
+            </mx:HBox>
+          </mx:Form>
+      </flexlib:WindowShade>
+      
+      <flexlib:WindowShade id="ws3" tabChildren="{ws3.opened}" styleName="linkButtonWindowShade"
+      	label="Billing Address" opened="false" width="100%">
+          <mx:Form>
+            <mx:FormItem label="Address" width="100%">
+              <mx:TextInput width="100%"/>
+            </mx:FormItem>
+            <mx:FormItem label="Suite / Apt." width="100%">
+              <mx:TextInput width="100%"/>
+            </mx:FormItem>
+            <mx:HBox>
+              <mx:FormItem label="City">
+                <mx:TextInput width="100"/>
+              </mx:FormItem>
+              <mx:FormItem label="State">
+                <mx:TextInput width="30"/>
+              </mx:FormItem>
+              <mx:FormItem label="Zip Code">
+                <mx:TextInput width="60"/>
+              </mx:FormItem>
+            </mx:HBox>
+          </mx:Form>
+      </flexlib:WindowShade>
+      
+      <flexlib:WindowShade id="ws4" tabChildren="{ws4.opened}" styleName="linkButtonWindowShade"
+      	label="Contact Information" opened="false" width="100%">
+          <mx:Form>
+            <mx:FormItem label="E-mail address">
+                <mx:TextInput width="200"/>
+            </mx:FormItem>
+            <mx:FormItem label="Home Phone">
+                <mx:TextInput width="200"/>
+            </mx:FormItem>
+            <mx:FormItem label="Work Phone">
+                <mx:TextInput width="200"/>
+            </mx:FormItem>
+        </mx:Form>
+     </flexlib:WindowShade>
+    </mx:VBox>
+    
+</mx:Application>

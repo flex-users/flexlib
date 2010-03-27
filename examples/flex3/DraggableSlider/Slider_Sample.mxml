@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flexlib="http://code.google.com/p/flexlib/" >
+	
+	
+	<mx:VBox height="538">
+	
+			<mx:Panel title="Vertical" layout="absolute"  height="290" width="263">
+		
+				<mx:HBox width="100%">
+					<mx:VBox width="100%" horizontalAlign="center">
+						<mx:Label text="Skin 1:" />
+						
+						<flexlib:VSlider
+							trackHighlightSkin="flexlib.skins.SliderHighlightSkin"
+							allowTrackClick="true" allowThumbOverlap="true" 
+							liveDragging="true" 
+							showDataTip="true"  dataTipPlacement="right" dataTipOffset="0"  
+							showTrackHighlight="true"
+							thumbCount="2"  height="200" 
+							values="[-2000, 4000]"
+							minimum="-9000" maximum="9000" snapInterval="1"
+						/>
+						
+						
+					</mx:VBox>
+					<mx:VBox width="100%" horizontalAlign="center">
+						<mx:Label text="Skin 2:" />
+			
+						<flexlib:VSlider 
+							trackHighlightSkin="flexlib.skins.SliderThumbHighlightSkin"
+							allowTrackClick="true" allowThumbOverlap="true" 
+							liveDragging="true" 
+							showDataTip="true"  dataTipPlacement="right"  dataTipOffset="0"
+							showTrackHighlight="true"
+							thumbCount="2"  height="200" 
+							values="[-2000, 4000]"
+							minimum="-9000" maximum="9000" snapInterval="1"
+						/>
+						
+					</mx:VBox>
+					
+					<mx:VBox width="100%" horizontalAlign="center">
+						<mx:Label text="3 thumbs:" />
+			
+			
+						<flexlib:VSlider  
+							trackHighlightSkin="flexlib.skins.SliderThumbNoGripHighlightSkin"
+							allowTrackClick="true" allowThumbOverlap="true" 
+							liveDragging="false" 
+							showDataTip="true"  dataTipPlacement="right" dataTipOffset="0" 
+							showTrackHighlight="true"
+							thumbCount="3"  height="200" 
+							values="[-2000, 1000, 4000]"
+							minimum="-9000" maximum="9000" snapInterval="1"
+							
+						/>
+					</mx:VBox>
+					
+					
+					
+				</mx:HBox>
+					
+			</mx:Panel>
+			
+			
+			<mx:Panel title="Horizontal" layout="absolute" height="220" width="263">
+			
+				<mx:VBox>
+					<mx:VBox>
+						<mx:Label text="Skin 1:" />
+						<flexlib:HSlider  
+							trackHighlightSkin="flexlib.skins.SliderHighlightSkin"
+							allowTrackClick="true" allowThumbOverlap="true" 
+							liveDragging="true" 
+							showDataTip="true"  dataTipPlacement="top"  dataTipOffset="3" 
+							showTrackHighlight="true"
+							thumbCount="2"  width="200" 
+							values="[-2000, 4000]"
+							minimum="-9000" maximum="9000" snapInterval="1"
+						/>
+					</mx:VBox>
+					<mx:VBox>
+						<mx:Label text="Skin 2:" />
+			
+			
+						<flexlib:HSlider  
+							trackHighlightSkin="flexlib.skins.SliderThumbHighlightSkin"
+							allowTrackClick="true" allowThumbOverlap="true" 
+							liveDragging="true" 
+							showDataTip="true"  dataTipPlacement="bottom"   dataTipOffset="3"
+							showTrackHighlight="true"
+							thumbCount="2"  width="200" 
+							values="[-2000, 4000]"
+							minimum="-9000" maximum="9000" snapInterval="1"
+						/>
+					</mx:VBox>
+					
+					<mx:VBox>
+						<mx:Label text="3 thumbs:" />
+			
+			
+						<flexlib:HSlider  
+							trackHighlightSkin="flexlib.skins.SliderThumbNoGripHighlightSkin"
+							allowTrackClick="true" allowThumbOverlap="true" 
+							liveDragging="true" 
+							showDataTip="true"  dataTipPlacement="bottom"   dataTipOffset="3"
+							showTrackHighlight="true"
+							thumbCount="3"  width="200" 
+							values="[-2000, 1000, 4000]"
+							minimum="-9000" maximum="9000" snapInterval="1"
+						/>
+					</mx:VBox>
+				</mx:VBox>
+					
+			</mx:Panel>
+			
+	</mx:VBox>
+	
+	
+	
+</mx:Application>

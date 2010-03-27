@@ -1,0 +1,106 @@
+/* CSS file */
+ Application 
+{
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 10;
+}
+     
+Button {
+    upSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
+	overSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
+	downSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
+	disabledSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
+	selectedUpSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
+	selectedOverSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
+	selectedDownSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
+	selectedDisabledSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
+}
+
+Form
+{
+    vertical-gap: 10;
+}
+
+HSlider
+{
+    show-track-highlight: true;
+    theme-color: #FFFFFF;
+    label-offset: -2;
+}
+
+.areaPanel {
+   border-thickness-left: 10;
+   border-thickness-top: 0;
+   border-thickness-bottom: 10;
+   border-thickness-right: 10;
+   background-color: #777777;
+   shadow-distance: 3;
+   shadow-direction: right;
+   title-style-name: "areaPanelTitle";
+   rounded-bottom-corners: true;
+}
+
+.areaPanelTitle 
+{
+   /*letter-spacing: 4;*/
+   /*color: #ffffff;*/
+   font-weight: bold;
+}
+
+.labelBox
+{
+   border-color: #FFFFFF;
+   border-style: solid;
+   corner-radius: 4;
+   /*color: #FFFFFF;*/
+}
+
+
+.subFormContainer
+{
+   border-color: #FFFFFF;
+   border-style: solid;
+   corner-radius: 10;
+   padding-left: 5;
+   padding-right: 5;
+   padding-top: 5;
+   padding-bottom: 5;
+  /* color: #FFFFFF;*/
+}
+
+
+
+.funkyButton
+{
+    corner-radii: 12, 0, 0, 12;
+    fill-colors: #557AB7, #91A8D0, #3A66AC, #7F9AC8;
+    fill-color-ratios: 0, 40, 80, 255;
+    
+    over-fill-colors:  #FF0000, #00FF00, #0000FF, #333333;
+    over-fill-color-ratios: 0, 80, 160, 255;
+    
+}
+
+.niceButton
+{
+    corner-radius: 12;
+	fill-colors: #557AB7, #91A8D0, #3A66AC, #7F9AC8;
+	over-fill-colors: #557AB7, #91A8D0, #3A66AC, #7F9AC8;
+	selected-fill-colors: #2025AD, #1D1B88, #3260A9, #383395;
+	fill-color-ratios: 0, 40, 80, 255;
+	fill-alphas: 1, 1, 1, 1;
+	color: #FFFFFF;
+	text-roll-over-color: #FFFFFF;
+	text-selected-color: #FFFFFF;
+	border-color: #190C81;
+	border-thickness: 2;
+	font-size: 16;
+	background-alpha: 1;
+	highlight-alphas: 0, 0;
+	text-align: left;
+	padding-left: 10;
+}
+
+
+

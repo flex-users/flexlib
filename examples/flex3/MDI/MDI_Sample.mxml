@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	creationComplete="onCreationComplete()" xmlns:ns="sample_content.*" viewSourceURL="srcview/index.html">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.EffectEvent;
+			import flexlib.mdi.events.MDIEffectEvent;
+			import flexlib.mdi.events.MDIWindowEvent;
+			import flexlib.mdi.effects.MDIEffectsDescriptorBase;
+			import flexlib.mdi.effects.effectsLib.MDILinearEffects;
+			import flexlib.mdi.effects.effectsLib.MDIVistaEffects;
+			import flexlib.mdi.events.MDIManagerEvent;
+
+			import mx.controls.Alert;
+			import mx.controls.TextArea;
+			import mx.events.CloseEvent;
+			import mx.events.ListEvent;
+
+			private var eventMonitor:TextArea;
+			private var queuedEvent:MDIManagerEvent;
+			private var effectsList:Array;
+			private var stylesList:Array;
+			private var cssURL:String;
+
+			private function onCreationComplete():void
+			{
+				// create textfield
+				eventMonitor = new TextArea();
+				eventMonitor.percentWidth = 100;
+				eventMonitor.height = 150;
+
+				effectsList = new Array();
+				effectsList.push({data: flexlib.mdi.effects.MDIEffectsDescriptorBase, label: "No effects"});
+				effectsList.push({data: flexlib.mdi.effects.effectsLib.MDIVistaEffects, label: "Vista"});
+				effectsList.push({data: flexlib.mdi.effects.effectsLib.MDILinearEffects, label: "Linear"});
+				effectsListCb.dataProvider = effectsList;
+
+				// these need refining, removing from explorer until then
+				stylesList = new Array();
+				stylesList.push({label: "Default"});
+				stylesList.push({label: "Windows XP"});
+				stylesList.push({label: "Mac OS9"});
+				/*
+				stylesList.push({label: "Noir"});
+				stylesList.push({label: "Style 1"});
+				stylesList.push({label: "Style 2"});
+				stylesList.push({label: "Style 3"});
+				/**/
+				stylesListCb.dataProvider = stylesList;
+
+				// listen for window close
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_CLOSE, confirmWindowClose);
+
+				//listen for all window events
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_ADD, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_MINIMIZE, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_RESTORE, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_MAXIMIZE, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_CLOSE, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_FOCUS_START, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_FOCUS_END, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_DRAG_START, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_DRAG, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_DRAG_END, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_RESIZE_START, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_RESIZE, windowEventHandler);
+				mdiCanvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_RESIZE_END, windowEventHandler);
+
+				mdiCanvas.windowManager.addEventListener(EffectEvent.EFFECT_START, effectHandler);
+				mdiCanvas.windowManager.addEventListener(EffectEvent.EFFECT_END, effectHandler);
+			}
+
+			private function effectHandler(event:MDIEffectEvent):void
+			{
+				var names:String = "";
+				for each(var win:MDIWindow in event.windows)
+				{
+					names += (names.length == 0) ? win.title : ", " + win.title;
+				}
+				eventMonitor.text += names + ": " + event.mdiEventType + " " + event.type + "\n";
+				eventMonitor.verticalScrollPosition = eventMonitor.maxVerticalScrollPosition;
+				eventMonitor.validateNow();
+			}
+
+			// default event handler
+			private function windowEventHandler(event:Event):void
+			{
+				if(event is MDIManagerEvent)
+				{
+					var mgrEvent:MDIManagerEvent = event as MDIManagerEvent;
+					if(eventMonitor.parent != null)
+					{
+						eventMonitor.text += mgrEvent.window.title + ": " + event.type + "\n";
+						eventMonitor.verticalScrollPosition = eventMonitor.maxVerticalScrollPosition;
+						eventMonitor.validateNow();
+					}
+				}
+			}
+
+			// the flex framework dispatches all kinds of events
+			// in order to avoid catching one of those and throwing a coercion error
+			// have your listener accept Event and check the type inside the function
+			// this is good practice for all Flex development, not specific to flexlib.mdi
+			private function confirmWindowClose(event:Event):void
+			{
+				if(event is MDIManagerEvent && confirmCloseCb.selected)
+				{
+					// store a copy of the event in case we want to resume later (user confirms their intention)
+					queuedEvent = event.clone() as MDIManagerEvent;
+
+					// this is the line that prevents the default behavior from executing as usual
+					// because the default handler checks event.isDefaultPrevented()
+					event.preventDefault();
+
+					Alert.show("Seriously? Close it?", null, 3, null, handleAlertResponse);
+				}
+			}
+
+			// called when the Alert window is closed
+			// if the user said yes, we execute the default behavior of playing an effect
+			// and then removing the window by sending the stored event to
+			// the appropriately named executeDefaultBehavior() method
+			private function handleAlertResponse(event:CloseEvent):void
+			{
+				if(event.detail == mx.controls.Alert.YES)
+				{
+					mdiCanvas.windowManager.executeDefaultBehavior(queuedEvent);
+				}
+			}
+
+			private function addWindow():void
+			{
+				var win:MDIWindow = new MDIWindow();
+				win.width = 350;
+				win.title = "Window " + String(mdiCanvas.windowManager.windowList.length + 1);
+				mdiCanvas.windowManager.add(win);
+			}
+
+			private function toggleEventMonitor():void
+			{
+				if(eventMonitorCb.selected)
+				{
+					vbox.addChildAt(eventMonitor, 1);
+				}
+				else
+				{
+					vbox.removeChild(eventMonitor);
+				}
+			}
+
+			private function changeEffects():void
+			{
+				mdiCanvas.effectsLib = effectsListCb.selectedItem.data as Class;
+			}
+
+			// currently not used
+			private function changeStyle(event:ListEvent):void
+			{
+				switch(ComboBox(event.target).selectedLabel)
+				{
+					case 'Default' :
+						StyleManager.unloadStyleDeclarations(cssURL, true);
+						return;
+						break;
+					case 'Windows XP' :
+						cssURL = "WindowsXP_default.swf";
+						break;
+					case 'Mac OS9' :
+						cssURL = "MacOS9.swf";
+						break;
+					default:
+						break;
+				}
+
+				StyleManager.loadStyleDeclarations(cssURL);
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox id="vbox" width="100%" height="100%">
+
+		<mx:ApplicationControlBar dock="true" width="100%" height="50" verticalAlign="middle">
+			<mx:Button label="Add Window" click="addWindow()" />
+
+			<mx:VRule height="35" />
+
+			<mx:Button label="Cascade" click="mdiCanvas.windowManager.cascade()" />
+			<mx:Button label="Tile" click="mdiCanvas.windowManager.tile(false, Number(tilePadding.text))" />
+			<mx:Button label="Tile + Fill Space" click="mdiCanvas.windowManager.tile(true, Number(tilePadding.text))" />
+			<mx:Label text="Tile Padding" />
+			<mx:TextInput id="tilePadding" text="10" width="30" textAlign="center" maxChars="2" />
+
+			<mx:VRule height="35" />
+
+			<mx:Label text="Snap Distance"/>
+			<mx:TextInput id="snapDistance" text="16" width="30" textAlign="center" maxChars="2"/>
+
+			<mx:VRule height="35" />
+
+			<mx:CheckBox id="eventMonitorCb" label="Show Event Monitor" click="toggleEventMonitor()" />
+			<mx:CheckBox id="confirmCloseCb" label="Confirm window close" />
+
+			<mx:VRule height="35" />
+
+			<mx:ComboBox id="effectsListCb" prompt="- Effects -" change="changeEffects()" />
+
+			<mx:ComboBox id="stylesListCb" prompt="- Styles -" change="changeStyle(event)" />
+		</mx:ApplicationControlBar>
+
+
+		<flexlib:MDICanvas id="mdiCanvas" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+			width="100%" height="100%" backgroundColor="#FFFFFF" backgroundAlpha="0"
+			snapDistance="{Number(snapDistance.text)}" tilePadding="{Number(tilePadding.text)}">
+			<flexlib:MDIWindow id="win1"
+				title="Window 1 has a really really long title to show support for truncation"
+				x="30" y="30" width="400" height="200" />
+			<flexlib:MDIWindow id="win2"
+				title="Window 2"
+				x="450" y="30" width="250" height="300" />
+		</flexlib:MDICanvas>
+	</mx:VBox>
+</mx:Application>

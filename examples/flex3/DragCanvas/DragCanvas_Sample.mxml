@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2007 FlexLib Contributors.  See:
+    http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flexlib="http://code.google.com/p/flexlib/" >
+	
+	
+	
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.core.ScrollPolicy;
+		]]>
+	</mx:Script>
+	<mx:VBox verticalGap="20" width="100%" horizontalAlign="center">
+		
+	
+		<flexlib:DragScrollingCanvas x="50" y="50" 
+			borderStyle="inset"  id="dragCanvas"
+			width="400" height="250" 
+			childrenDoDrag="true" backgroundColor="#feefd3" backgroundAlpha=".65" cornerRadius="0">
+			
+			<mx:Button x="95" y="186" label="Button"/>
+			<mx:CheckBox x="496" y="257" label="Checkbox"/>
+			<mx:NumericStepper x="296" y="92"/>
+			
+			<mx:DataGrid x="107" y="216" width="371" height="272">
+				<mx:columns>
+					<mx:DataGridColumn headerText="Column 1" dataField="col1"/>
+					<mx:DataGridColumn headerText="Column 2" dataField="col2"/>
+					<mx:DataGridColumn headerText="Column 3" dataField="col3"/>
+				</mx:columns>
+			</mx:DataGrid>
+			<mx:Label x="45" y="32" text="Click to Drag this container."/>
+			<mx:CheckBox x="45" y="75" selected="true" label="Show normal scrollbars" click="event.currentTarget.selected?dragCanvas.verticalScrollPolicy = dragCanvas.horizontalScrollPolicy = ScrollPolicy.AUTO : dragCanvas.verticalScrollPolicy = dragCanvas.horizontalScrollPolicy = ScrollPolicy.OFF;"/>
+		</flexlib:DragScrollingCanvas>
+	
+		<flexlib:ButtonScrollingCanvas x="50" y="50" 
+			startScrollingEvent="{MouseEvent.MOUSE_OVER}"
+			stopScrollingEvent="{MouseEvent.MOUSE_OUT}"
+			borderStyle="inset" 
+			width="400" height="250" 
+			backgroundColor="#feefd3" backgroundAlpha="0.65">
+			
+			<mx:Button x="95" y="186" label="Button"/>
+			<mx:CheckBox x="496" y="257" label="Checkbox"/>
+			<mx:NumericStepper x="296" y="92"/>
+			
+			<mx:DataGrid x="98" y="329" width="371" height="272">
+				<mx:columns>
+					<mx:DataGridColumn headerText="Column 1" dataField="col1"/>
+					<mx:DataGridColumn headerText="Column 2" dataField="col2"/>
+					<mx:DataGridColumn headerText="Column 3" dataField="col3"/>
+				</mx:columns>
+			</mx:DataGrid>
+			<mx:Label x="41" y="66" text="Rollover the side, top and botom areas to scroll this one"/>
+		</flexlib:ButtonScrollingCanvas>
+	</mx:VBox>
+</mx:Application>
