@@ -580,7 +580,7 @@ package flexlib.controls
         horizontalScrollPosition = hScrollPos;
 
 
-        for each (var item:*in openItems)
+        for each (var item:* in openItems)
         {
           // only expand an item iff it's a direct child from the root.  openItemAt is recursive so don't worry about those here.
           /*
@@ -652,7 +652,10 @@ package flexlib.controls
         collection.dispatchEvent(event);
       }
 
-      super.selectedItems = savedSelection;
+      if (savedSelection != null)
+      {
+        super.selectedItems = savedSelection;
+      }
 
       super.commitProperties();
     }
@@ -858,7 +861,7 @@ package flexlib.controls
     public function get openItems():Object
     {
       var openItemsArray:Array = [];
-      for each (var item:*in _openItems)
+      for each (var item:* in _openItems)
       {
         openItemsArray.push(item);
       }
@@ -872,7 +875,7 @@ package flexlib.controls
     {
       if (value != null)
       {
-        for each (var item:*in value)
+        for each (var item:* in value)
         {
           _openItems[itemToUID(item)] = item;
         }
