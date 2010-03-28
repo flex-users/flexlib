@@ -50,7 +50,6 @@
       {
         //currentValues = defaultValues.slice( 0, _numColors - 1 );
         currentValues = defaultValues;
-        recreateComponents();
       }
 
       [Bindable]
@@ -102,7 +101,7 @@
         }
       }
 
-      private function onSliderChanged(evt:Event=null):void
+      private function onSliderChanged(evt:Event = null):void
       {
         var newVals:Array = [];
 

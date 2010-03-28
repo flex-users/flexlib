@@ -1,125 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-Copyright (c) 2007 FlexLib Contributors.  See:
-    http://code.google.com/p/flexlib/wiki/ProjectContributors
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
 -->
-<mx:VBox 
-	xmlns:mx="http://www.adobe.com/2006/mxml" 
-	horizontalGap="10" creationComplete="onCreationComplete()" paddingBottom="5"
-	>
-    <mx:Script>
-        <![CDATA[
-            import mx.events.SliderEvent;
-            import mx.controls.HSlider;
-            import mx.events.ColorPickerEvent;
-            import events.SetStyleEvent;
-            import mx.controls.Alert;
-            import mx.controls.ColorPicker;
-            
-            private var defaultValues : Array = [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ];
-            
-            [Bindable]
-            public var configStyleName : String = "";
-           
-           
-            
-            [Bindable]
-            private var currentValues : Array = [];
-            private var _numColors : Number = 2;
-            
-            private function onCreationComplete() : void
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+         horizontalGap="10"
+         creationComplete="onCreationComplete()"
+         paddingBottom="5">
+  <mx:Script>
+    <![CDATA[
+      import events.SetStyleEvent;
+
+      import mx.controls.Alert;
+      import mx.controls.ColorPicker;
+      import mx.controls.HSlider;
+      import mx.events.ColorPickerEvent;
+      import mx.events.SliderEvent;
+
+      private var defaultValues:Array = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5];
+
+      [Bindable]
+      public var configStyleName:String = "";
+
+
+
+      [Bindable]
+      private var currentValues:Array = [];
+      private var _numColors:Number = 2;
+
+      private function onCreationComplete():void
+      {
+        //currentValues = defaultValues.slice( 0, _numColors - 1 );
+        currentValues = defaultValues;
+      }
+
+      [Bindable]
+      public function get numColors():Number
+      {
+        return _numColors;
+      }
+
+      public function set numColors(items:Number):void
+      {
+        if (items != _numColors)
+        {
+          _numColors = items;
+
+          var newVals:Array = [];
+          for (var i:int = 0; i < items; i++)
+          {
+            if (currentValues[i] >= 0)
             {
-                //currentValues = defaultValues.slice( 0, _numColors - 1 );
-                currentValues = defaultValues;
-                recreateComponents();
+              newVals.push(currentValues[i]);
             }
-            
-            [Bindable]
-            public function get numColors() : Number
+            else
             {
-                return _numColors;
+              newVals.push(defaultValues[i]);
             }
-            
-            public function set numColors( items:Number ) : void
-            {
-                _numColors = items;
-                
-                var newVals : Array = [];
-                for ( var i:int = 0; i<items; i++ )
-                {
-                    if ( currentValues[i] >= 0  )
-                    {
-                        newVals.push( currentValues[i] );
-                    } 
-                    else
-                    {
-                        newVals.push( defaultValues[i] );
-                    }
-           
-                }
-                currentValues = newVals;
-                
-                recreateComponents();
-                
-                onSliderChanged();
-            }
-            
-            public function recreateComponents() : void
-            {
-                tile.removeAllChildren();
-                for ( var i:int = 0; i < numColors; i++ )
-                {
-                    var slider : HSlider = new HSlider();
-                    slider.name = "slider" + i;
-                    slider.value = currentValues[i];
-                    slider.minimum = 0;
-                    slider.maximum = 1;
-                    slider.snapInterval = 0.05;
-                    slider.labels = [ "0", "1" ];
-                    slider.addEventListener( SliderEvent.CHANGE, onSliderChanged );
-                    slider.width = 70;
-                    slider.height = 20;
-                    tile.addChild( slider );
-                }
-            }
-            
-            private function onSliderChanged( evt:Event = null ) : void
-            {
-               var newVals : Array = [];
-             
-               for ( var i:int = 0; i < numColors; i++ )
-               {
-                   var slider : HSlider = tile.getChildByName( "slider" + i ) as HSlider;
-                   newVals.push( slider.value );
-               }
-               
-               currentValues = newVals;
-              
-               if ( configStyleName != null )
-               {
-                    dispatchEvent( new SetStyleEvent( configStyleName, currentValues ) );
-               }
-            }
-            
-        ]]>
-    </mx:Script>
-    <mx:Tile id="tile" width="160" direction="horizontal"   />
+
+          }
+          currentValues = newVals;
+
+          recreateComponents();
+
+          onSliderChanged();
+        }
+      }
+
+      public function recreateComponents():void
+      {
+        tile.removeAllChildren();
+        for (var i:int = 0; i < numColors; i++)
+        {
+          var slider:HSlider = new HSlider();
+          slider.name = "slider" + i;
+          slider.value = currentValues[i];
+          slider.minimum = 0;
+          slider.maximum = 1;
+          slider.snapInterval = 0.05;
+          slider.labels = ["0", "1"];
+          slider.addEventListener(SliderEvent.CHANGE, onSliderChanged);
+          slider.width = 70;
+          slider.height = 20;
+          slider.thumbCount = 2;
+          tile.addChild(slider);
+        }
+      }
+
+      private function onSliderChanged(evt:Event = null):void
+      {
+        var newVals:Array = [];
+
+        for (var i:int = 0; i < numColors; i++)
+        {
+          var slider:HSlider = tile.getChildAt(i) as HSlider;
+          newVals.push(slider.value);
+        }
+
+        currentValues = newVals;
+
+        if (configStyleName != null)
+        {
+          dispatchEvent(new SetStyleEvent(configStyleName, currentValues));
+        }
+      }
+    ]]>
+  </mx:Script>
+  <mx:Tile id="tile"
+           width="160"
+           direction="horizontal" />
 </mx:VBox>
