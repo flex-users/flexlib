@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:flexlib="http://code.google.com/p/flexlib/">
+  <fx:Script>
+    <![CDATA[
+      import mx.collections.ArrayCollection;
+
+      [Bindable]
+      private var expenses:ArrayCollection = new ArrayCollection([
+                                                                 {date: new Date(2007, 0, 1), profit: 2000,
+                                                                   expenses: 1500, amount: 450},
+                                                                 {date: new Date(2007, 1, 1), profit: 1000,
+                                                                   expenses: 200, amount: 600},
+                                                                 {date: new Date(2007, 2, 1), profit: 1500,
+                                                                   expenses: 500, amount: 300},
+                                                                 {date: new Date(2007, 3, 1), profit: 1800,
+                                                                   expenses: 1200, amount: 900},
+                                                                 {date: new Date(2007, 4, 1), profit: 2400,
+                                                                   expenses: 575, amount: 400},
+                                                                 {date: new Date(2007, 5, 1), profit: 2200,
+                                                                   expenses: 700, amount: 750},
+                                                                 {date: new Date(2007, 6, 1), profit: 1000,
+                                                                   expenses: 600, amount: 100},
+                                                                 {date: new Date(2007, 7, 1), profit: 1200,
+                                                                   expenses: 900, amount: 500},
+                                                                 {date: new Date(2007, 8, 1), profit: 1500,
+                                                                   expenses: 300, amount: 800},
+                                                                 {date: new Date(2007, 9, 1), profit: 400,
+                                                                   expenses: 875, amount: 300},
+                                                                 {date: new Date(2007, 10, 1), profit: 600,
+                                                                   expenses: 1200, amount: 550},
+                                                                 {date: new Date(2007, 11, 1), profit: 1300,
+                                                                   expenses: 600, amount: 600},
+                                                                 ]);
+
+      /**
+       * Event handler; invoked when horizontal data selector changes its selected
+       * data value.
+       */
+      private function updateDetails():void
+      {
+        var dataValues:Array = dataSelector.dataValues;
+
+        // The first value returned is the x axis value
+        month.text = dateFormatter.format(dataValues[0]);
+
+        // Update the display name to incorporate the currently selected data value
+        // in order for the legend to have the correct detail information.
+        lineChart.series[0].displayName = "Profit\n" + dataValues[1];
+        lineChart.series[1].displayName = "Expenses\n" + dataValues[2];
+        lineChart.series[2].displayName = "Amount\n" + dataValues[3];
+      }
+    ]]>
+  </fx:Script>
+  <fx:Declarations>
+    <mx:DateFormatter id="dateFormatter" formatString="MMM YYYY" />
+  </fx:Declarations>
+
+  <s:layout>
+    <s:VerticalLayout />
+  </s:layout>
+
+
+
+  <s:Panel title="LineChart Example with Horizontal Axis Data Selector"
+           width="100%"
+           height="100%">
+    <s:VGroup width="100%" height="100%">
+      <mx:LineChart id="lineChart"
+                    height="100%"
+                    width="100%"
+                    dataProvider="{ expenses }"
+                    showDataTips="true">
+
+        <mx:horizontalAxis>
+          <mx:DateTimeAxis dataUnits="months" labelUnits="months" />
+        </mx:horizontalAxis>
+
+        <mx:annotationElements>
+          <flexlib:HorizontalAxisDataSelector id="dataSelector"
+                                              change="updateDetails();"
+                                              selectorColor="0x000000" />
+        </mx:annotationElements>
+
+        <mx:series>
+          <mx:LineSeries xField="date"
+                         yField="profit"
+                         form="curve"
+                         displayName="Profit" />
+          <mx:LineSeries xField="date"
+                         yField="expenses"
+                         form="curve"
+                         displayName="Expenses" />
+          <mx:LineSeries xField="date"
+                         yField="amount"
+                         form="curve"
+                         displayName="Amonut" />
+        </mx:series>
+
+      </mx:LineChart>
+
+      <s:HGroup width="100%" verticalAlign="middle">
+
+        <mx:Label fontWeight="bold" id="month" />
+
+        <mx:Legend dataProvider="{ lineChart }"
+                   direction="horizontal"
+                   horizontalGap="8"
+                   paddingRight="0"
+                   minWidth="500"
+                   markerHeight="30"
+                   markerWidth="20"
+                   labelPlacement="right" />
+
+      </s:HGroup>
+    </s:VGroup>
+  </s:Panel>
+
+
+</s:Application>

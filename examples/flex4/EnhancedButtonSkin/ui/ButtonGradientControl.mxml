@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
+<mx:Form xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
+         xmlns:ui="ui.*"
+         creationComplete="onCreationComplete()"
+         styleName="subFormContainer">
+
+  <fx:Script>
+    <![CDATA[
+      private var _baseStyleName:String;
+
+      [Bindable]
+      public var defaultNumColors:Number = 4;
+
+      public function onCreationComplete():void
+      {
+        var s:String = _baseStyleName;
+        baseStyleName = null
+        baseStyleName = s;
+        numColorStepper.value = defaultNumColors;
+      }
+
+      [Bindable]
+      public function get baseStyleName():String
+      {
+        return _baseStyleName;
+      }
+
+      public function set baseStyleName(name:String):void
+      {
+        _baseStyleName = name;
+
+        if (initialized)
+        {
+          if (name == "up")
+          {
+            grc.configStyleName = "fillColorRatios";
+            gcp.configStyleName = "fillColors";
+            gap.configStyleName = "fillAlphas";
+          }
+          else if (name != null)
+          {
+            grc.configStyleName = name + "FillColorRatios";
+            gcp.configStyleName = name + "FillColors";
+            gap.configStyleName = name + "FillAlphas";
+
+          }
+        }
+      }
+    ]]>
+  </fx:Script>
+
+
+  <mx:FormItem label="Num. Colors">
+    <s:NumericStepper id="numColorStepper"
+                      minimum="1"
+                      maximum="6"
+                      color="#000000" />
+  </mx:FormItem>
+
+  <mx:FormItem label="Colors">
+    <ui:GradientColorPicker id="gcp"
+                            numColors="{ numColorStepper.value }"
+                            width="100%" />
+  </mx:FormItem>
+
+  <mx:FormItem label="Ratios">
+    <ui:GradientRatioSlider id="grc"
+                            thumbCount="{ numColorStepper.value }"
+                            width="100%" />
+  </mx:FormItem>
+
+  <mx:FormItem label="Alphas">
+    <ui:GradientAlphaPicker id="gap"
+                            numColors="{ numColorStepper.value }"
+                            width="100%" />
+  </mx:FormItem>
+</mx:Form>

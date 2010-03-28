@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:FormItem xmlns:fx="http://ns.adobe.com/mxml/2009"
+             xmlns:s="library://ns.adobe.com/flex/spark"
+             xmlns:mx="library://ns.adobe.com/flex/mx"
+             label="{pickerLabel}"
+             width="100%"
+             creationComplete="setDefault()">
+  <s:HGroup>
+    <mx:ColorPicker height="20"
+                    width="55"
+                    selectedColor="{selectedColor}"
+                    id="cp"
+                    close="{this.selectedColor = event.target.value; dispatchMyEvent(); }" />
+    <mx:Image source="{colorWheel}"
+              buttonMode="true"
+              id="colorWheelImg"
+              useHandCursor="true"
+              visible="true"
+              mouseDown="doColorPicker(cp.selectedColor)" />
+
+  </s:HGroup>
+
+  <fx:Script>
+    <![CDATA[
+      import mx.core.Application;
+      import mx.events.FlexEvent;
+      import mx.managers.PopUpManager;
+
+      [Bindable]
+      [Embed(source="../assets/colorWheel.png")]
+      public var colorWheel:Class;
+
+      [Bindable]
+      public var pickerLabel:String;
+
+      [Bindable]
+      public var selectedColor:Number;
+
+
+      private function dispatchMyEvent():void
+      {
+        this.dispatchEvent(new Event("dataChange"));
+      }
+
+      private function doColorPicker(whatColor:Number):void
+      {
+        //stage.frameRate = 120;
+        var pop1:* = new advancedColorPicker();
+        PopUpManager.addPopUp(pop1, this.parentApplication as Application, false);
+
+        //PopUpManager.createPopUp(this.parentApplication, advancedColorPicker, false);
+
+        pop1.setColorRGB(whatColor);
+        pop1.lastColor = whatColor;
+        pop1.addEventListener(MouseEvent.CLICK, setColor);
+
+        PopUpManager.centerPopUp(pop1);
+
+        function setColor():void
+        {
+          cp.selectedColor = pop1.getColorRGB();
+          selectedColor = pop1.getColorRGB();
+          dispatchMyEvent();
+        }
+
+      }
+
+      [Bindable]
+      public var defaultValue:Number;
+
+      public function setDefault():void
+      {
+        defaultValue = selectedColor;
+      }
+
+      public function restoreDefault():void
+      {
+        selectedColor = defaultValue;
+      }
+    ]]>
+  </fx:Script>
+
+  <fx:Metadata>
+        [Event("dataChange")]
+  </fx:Metadata>
+
+</mx:FormItem>

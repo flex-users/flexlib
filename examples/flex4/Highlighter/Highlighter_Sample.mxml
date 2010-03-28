@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute" creationComplete="initApp()">
+    <mx:Style>
+        @font-face{
+            src:local("Monaco");
+            fontFamily:myMonospaced;
+            advancedAntiAliasing:true;
+            fontWeight:normal;
+            fontStyle:normal;
+        }
+        
+        @font-face{
+            src:local("Times New Roman");
+            fontFamily:myFont;
+            advancedAntiAliasing:true;
+            fontWeight:normal;
+            fontStyle:normal;
+        }
+        
+        @font-face{
+            src:local("Times New Roman");
+            fontFamily:myFont;
+            advancedAntiAliasing:true;
+            fontWeight:bold;
+            fontStyle:normal;
+        }
+        
+        @font-face{
+            src:local("Times New Roman");
+            fontFamily:myFont;
+            advancedAntiAliasing:true;
+            fontWeight:normal;
+            fontStyle:italic;
+        }
+        
+        
+        .Document{
+            fontFamily:myFont;
+            fontSize:14pt;
+            paddingLeft:50px;
+            paddingRight:50px;
+            paddingTop:50px;
+            paddingBottom:50px;
+        }
+    </mx:Style>
+    <mx:Script>
+        <![CDATA[
+            import flexlib.controls.Highlighter;
+            import flash.display.BlendMode;
+            
+            public var highlighter1:Highlighter;
+            public var highlighter2:Highlighter;
+            
+            public var thisTextField:TextField;
+            
+            public var styles:StyleSheet;
+            
+            
+            public function initApp():void{
+                
+                this.DataRequest.send();
+                
+                this.thisTextField = this.getTextField(this.SampleText);
+                
+                //Sometimes, caching the TextField as a bitmap can improve performance
+                //this.thisTextField.cacheAsBitmap = true;
+                
+                this.highlighter1 = new Highlighter(thisTextField,0xffff0000,50,50);
+                this.highlighter2 = new Highlighter(thisTextField,0xff00ff00,50,50);
+                
+                // Could add filters like this, but it's too processor-intensive right now
+                //var myGlow:GlowFilter = new GlowFilter(0xff00ff00,1,10,10,2,1,false,true);
+                //this.highlighter2.bitmap.filters = new Array(myGlow);
+            }
+            
+            /*     
+                Find the TextField object in the component.
+                
+                Since textField is protected, we resort to this rather than extend
+                every component that has a textField we'd like to highlight. Argh.
+            */
+            public function getTextField(component:TextArea):TextField{
+                var len:int = component.numChildren;
+                var r:TextField;
+                for(var i:int=0; i<len; i++){
+                    var thisChild:DisplayObject = component.getChildAt(i);
+                    if(thisChild is TextField){
+                        r = thisChild as TextField;
+                    }
+                }
+                return r;
+            }
+            
+            public function getStyles():StyleSheet{
+                styles = new StyleSheet();
+                
+                styles.setStyle("pre",{
+                    fontFamily:"myMonospaced",
+                    fontSize:8
+                });
+                
+                styles.setStyle("h1",{
+                    fontFamily:"myFont",
+                    fontSize:18,
+                    fontWeight:"bold",
+                    textAlign:"center"
+                });
+                
+                styles.setStyle("h2",{
+                    fontFamily:"myFont",
+                    fontSize:16,
+                    fontWeight:"bold"
+                });
+                
+                styles.setStyle("h3",{
+                    fontFamily:"myFont",
+                    fontSize:14,
+                    fontWeight:"bold"
+                });
+                
+                styles.setStyle("p",{
+                    fontFamily:"myFont",
+                    fontSize:12,
+                    textIndent:30
+                });
+                
+                return styles;
+            }
+            
+            public function onLoad(evt:Event):void{
+                var txt:String = this.DataRequest.lastResult.toString();
+                if(this.thisTextField.condenseWhite == false){
+                    txt = this.preProcessHtml(txt);
+                }
+                this.SampleText.styleSheet = this.getStyles();
+                this.SampleText.htmlText = txt;
+                //this.SampleText.text = "Hello World";
+            }
+            
+            public function preProcessHtml(html:String):String{
+                html = html.split(String.fromCharCode(13)).join("");
+                html = html.split(String.fromCharCode(13)).join("");
+                return html;
+            }
+            
+            
+            public function globalHighlight():void{
+                this.highlighter1.reset();
+                this.highlighter1.highlightWordInstances(this.TextToHighlight.text, false);
+            }
+            
+            public function highlightNext():void{
+                this.highlighter2.highlightNext(this.TextToFind.text, false);
+            }
+            
+            public function highlightPrevious():void{
+                this.highlighter2.highlightPrevious(this.TextToFind.text, false);
+            }
+        ]]>
+    </mx:Script>
+    <mx:HTTPService result="onLoad(event)" id="DataRequest" url="sampletext.html" resultFormat="text" showBusyCursor="true"></mx:HTTPService>
+    
+    <flexlib:PromptingTextInput id="TextToHighlight" x="10" y="28" prompt="Enter text to highlight"/>
+    <mx:Button id="HighlightButton" click="globalHighlight()" x="178" y="27" label="Highlight!"/>
+    <mx:TextArea styleName="Document" condenseWhite="false" id="SampleText" left="10" right="10" bottom="10" top="54"/>
+    <flexlib:PromptingTextInput id="TextToFind" x="297" y="28"  prompt="Enter text to find" />
+   	<mx:Button id="FindPrevious" click="highlightPrevious()" x="465" y="27" label="Prev" width="55"/>
+    <mx:Button id="FindNext" click="highlightNext()" x="528" y="27" label="Next" width="55"/>
+    <mx:Label x="9" y="10" text="Highlight all instances of word"/>
+    <mx:Label x="295" y="10" text="Find and highlight next/previous"/>
+</mx:Application>

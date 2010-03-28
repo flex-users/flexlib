@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
+
+<s:Application width="100%"
+               measuredWidth="950"
+               height="100%"
+               xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:flexlib="http://code.google.com/p/flexlib/">
+  <fx:Script>
+    <![CDATA[
+      [Embed("assets/image1.jpg")]
+      private static const image1:Class;
+      [Embed("assets/image2.jpg")]
+      private static const image2:Class;
+      [Embed("assets/image3.jpg")]
+      private static const image3:Class;
+      [Embed("assets/image4.jpg")]
+      private static const image4:Class;
+      [Embed("assets/image5.jpg")]
+      private static const image5:Class;
+      [Embed("assets/image6.jpg")]
+      private static const image6:Class;
+      [Embed("assets/image7.jpg")]
+      private static const image7:Class;
+      [Embed("assets/image8.jpg")]
+      private static const image8:Class;
+      [Embed("assets/image9.jpg")]
+      private static const image9:Class;
+      [Embed("assets/image10.jpg")]
+      private static const image10:Class;
+      [Embed("assets/image11.jpg")]
+      private static const image11:Class;
+      [Embed("assets/image12.jpg")]
+      private static const image12:Class;
+      [Embed("assets/image13.jpg")]
+      private static const image13:Class;
+      [Embed("assets/image14.jpg")]
+      private static const image14:Class;
+      [Embed("assets/image15.jpg")]
+      private static const image15:Class;
+      [Embed("assets/image16.jpg")]
+      private static const image16:Class;
+    ]]>
+  </fx:Script>
+  <s:Panel height="100%"
+           width="100%"
+           title="Demostration of FlowContainer vs Tile">
+    <s:layout>
+      <s:VerticalLayout gap="20" />
+    </s:layout>
+    <s:HGroup width="100%" height="80%">
+      <s:VGroup width="50%"
+                height="100%"
+                gap="10">
+        <s:Label text="Flow Container" fontWeight="bold" />
+        <flexlib:FlowContainer minHeight="80"
+                               minWidth="0"
+                               width="100%"
+                               height="90%"
+                               borderStyle="solid"
+                               borderColor="#333333">
+          <mx:Image source="{image1}" />
+          <mx:Image source="{image2}" />
+          <mx:Image source="{image3}" />
+          <mx:Image source="{image4}" />
+          <mx:Image source="{image5}" />
+          <mx:Image source="{image6}" />
+          <mx:Image source="{image7}" />
+          <mx:Image source="{image8}" />
+          <mx:Image source="{image9}" />
+          <mx:Image source="{image10}" />
+          <mx:Image source="{image11}" />
+          <mx:Image source="{image12}" />
+          <mx:Image source="{image13}" />
+          <mx:Image source="{image14}" />
+          <mx:Image source="{image15}" />
+          <mx:Image source="{image16}" />
+
+        </flexlib:FlowContainer>
+      </s:VGroup>
+      <s:VGroup width="50%" height="100%">
+        <s:Label text="Tile Container" fontWeight="bold" />
+        <s:BorderContainer borderVisible="true"
+                           dropShadowVisible="false"
+                           minHeight="80"
+                           width="100%"
+                           height="90%">
+          <s:TileGroup minHeight="80"
+                       width="100%"
+                       height="100%">
+            <mx:Image source="{image1}" />
+            <mx:Image source="{image2}" />
+            <mx:Image source="{image3}" />
+            <mx:Image source="{image4}" />
+            <mx:Image source="{image5}" />
+            <mx:Image source="{image6}" />
+            <mx:Image source="{image7}" />
+            <mx:Image source="{image8}" />
+            <mx:Image source="{image9}" />
+            <mx:Image source="{image10}" />
+            <mx:Image source="{image11}" />
+            <mx:Image source="{image12}" />
+            <mx:Image source="{image13}" />
+            <mx:Image source="{image14}" />
+            <mx:Image source="{image15}" />
+            <mx:Image source="{image16}" />
+          </s:TileGroup>
+        </s:BorderContainer>
+      </s:VGroup>
+    </s:HGroup>
+    <s:Label width="100%" text="This sample illustrates advantages of using the FlowContainer. The flow container uses lesser space and does a better fit than TileContainer as demonstrated in this example." />
+    <s:Label width="100%" text="Usage:Resize browser/application window to see images in FlowContainer flow" />
+  </s:Panel>
+</s:Application>

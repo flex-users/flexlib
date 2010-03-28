@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:flexlib="http://code.google.com/p/flexlib/">
+  <fx:Style source="css/docker.css" />
+
+  <fx:Declarations>
+    <s:Move duration="250" id="DockerMove" />
+    <s:Fade duration="250" id="DockerFade" />
+  </fx:Declarations>
+  <fx:Script>
+    <![CDATA[
+      import Iconassets.*;
+
+      import mx.collections.ArrayCollection;
+      import mx.controls.Alert;
+      import mx.controls.Menu;
+      import mx.events.MenuEvent;
+      import mx.formatters.SwitchSymbolFormatter;
+
+      [Bindable]
+      private var alignButtonsArray:ArrayCollection = new ArrayCollection([
+                                                                          {icon: IconAlignLeft, action: "left",
+                                                                            tooltip: "Align Left"},
+                                                                          {icon: IconAlignCenter, action: "center",
+                                                                            tooltip: "Center"},
+                                                                          {icon: IconAlignRight, action: "right",
+                                                                            tooltip: "Align Right"},
+                                                                          {icon: IconAlignJustify, action: "justify",
+                                                                            tooltip: "Justify"}
+                                                                          ]);
+      [Bindable]
+      private var fontFamilyArray:ArrayCollection = new ArrayCollection(["_sans", "_serif", "_typewriter",
+                                                                         "Arial"
+                                                                         , "Courier", "Courier New",
+                                                                         "Geneva", "Georgia", "Helvetica",
+                                                                         "Times",
+                                                                         "Verdana"]);
+      [Bindable]
+      private var fontSizeArray:ArrayCollection = new ArrayCollection([8, 9, 10, 11, 12, 14, 16, 18,
+                                                                       20, 22, 24, 26, 28, 36, 48, 72]);
+
+      //MenuBar
+      [Bindable]
+      private var myMenuBarXML:XMLList =
+        <>
+          <menuitem label="File">
+            <menuitem label="Open"/>
+            <menuitem label="New File"/>
+          </menuitem>
+          <menuitem label="Edit">
+            <menuitem label="Copy"/>
+            <menuitem label="Paste"/>
+            <menuitem label="Send"/>
+          </menuitem>
+          <menuitem label="View">
+            <menuitem label="ToolBars">
+              <menuitem label="Formatting" type="Check" toggled="true"/>
+            </menuitem>
+            <menuitem label="PageLayout"/>
+            <menuitem label="FullScreen"/>
+          </menuitem>
+          <menuitem label="Window">
+            <menuitem label="Tile"/>
+          </menuitem>
+        </>
+        ;
+
+      //Add remove buttons
+      [Bindable]
+      private var formatingtoolBarXML:XMLList =
+        <>
+          <toolBarItem label="Font" type="Check" toggled="true"/>
+          <toolBarItem label="Font Size" type="Check" toggled="true"/>
+          <toolBarItem label="Bold" type="Check" toggled="true"/>
+          <toolBarItem label="Italic" type="Check" toggled="true"/>
+          <toolBarItem label="Underline" type="Check" toggled="true"/>
+          <toolBarItem label="Color" type="Check" toggled="true"/>
+          <toolBarItem label="AlignButtons" type="Check" toggled="true"/>
+          <toolBarItem label="Bullets" type="Check" toggled="true"/>
+        </>
+        ;
+
+      private function ToggleToolbars(event:MenuEvent):void
+      {
+        switch (event.label)
+        {
+          case "Formatting":
+            if (event.item.@toggled == true)
+            {
+              formating.parent.visible = true;
+              formating.visible = true;
+              formating.includeInLayout = true;
+              formating.invalidateDisplayList();
+              formating.invalidateSize();
+            }
+            else
+            {
+              formating.parent.visible = false;
+              formating.visible = false;
+              formating.includeInLayout = false;
+              formating.invalidateDisplayList();
+              formating.invalidateSize();
+            }
+            break;
+          default:
+            break;
+        }
+      }
+
+      private function ToggleButtonsinToolBar(event:MenuEvent):void
+      {
+        switch (event.label)
+        {
+          case "Font":
+            if (event.item.@toggled == true)
+            {
+              fontFamilyCombo.visible = true;
+              fontFamilyCombo.includeInLayout = true;
+            }
+            else
+            {
+              fontFamilyCombo.visible = false;
+              fontFamilyCombo.includeInLayout = false;
+            }
+            break;
+          case "Font Size":
+            if (event.item.@toggled == true)
+            {
+              fontSizeCombo.visible = true;
+              fontSizeCombo.includeInLayout = true;
+            }
+            else
+            {
+              fontSizeCombo.visible = false;
+              fontSizeCombo.includeInLayout = false;
+            }
+            break;
+          case "Bold":
+            if (event.item.@toggled == true)
+            {
+              boldButton.visible = true;
+              boldButton.includeInLayout = true;
+            }
+            else
+            {
+              boldButton.visible = false;
+              boldButton.includeInLayout = false;
+            }
+            break;
+          case "Italic":
+            if (event.item.@toggled == true)
+            {
+              italicButton.visible = true;
+              italicButton.includeInLayout = true;
+            }
+            else
+            {
+              italicButton.visible = false;
+              italicButton.includeInLayout = false;
+            }
+            break;
+          case "Underline":
+            if (event.item.@toggled == true)
+            {
+              underlineButton.visible = true;
+              underlineButton.includeInLayout = true;
+            }
+            else
+            {
+              underlineButton.visible = false;
+              underlineButton.includeInLayout = false;
+            }
+            break;
+          case "Color":
+            if (event.item.@toggled == true)
+            {
+              colorPicker.visible = true;
+              colorPicker.includeInLayout = true;
+            }
+            else
+            {
+              colorPicker.visible = false;
+              colorPicker.includeInLayout = false;
+            }
+            break;
+          case "AlignButtons":
+            if (event.item.@toggled == true)
+            {
+              alignButtons.visible = true;
+              alignButtons.includeInLayout = true;
+            }
+            else
+            {
+              alignButtons.visible = false;
+              alignButtons.includeInLayout = false;
+            }
+            break;
+          case "Bullets":
+            if (event.item.@toggled == true)
+            {
+              bulletsButton.visible = true;
+              bulletsButton.includeInLayout = true;
+            }
+            else
+            {
+              bulletsButton.visible = false;
+              bulletsButton.includeInLayout = false;
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    ]]>
+  </fx:Script>
+  <mx:MenuBar id="menubar"
+              width="100%"
+              dataProvider="{myMenuBarXML}"
+              itemClick="ToggleToolbars(event);"
+              showRoot="false"
+              labelField="@label" />
+
+  <flexlib:Docker height="100%"
+                  width="100%"
+                  minWidth="400">
+    <flexlib:DockableToolBar label="MyToolBar"
+                             id="formating"
+                             width="100%"
+                             minWidth="0"
+                             draggable="true">
+      <s:ComboBox id="fontFamilyCombo"
+                  dataProvider="{fontFamilyArray}"
+                  toolTip="Font" />
+      <s:ComboBox id="fontSizeCombo"
+                  width="50"
+                  dataProvider="{fontSizeArray}"
+                  toolTip="Font Size" />
+      <mx:Button id="boldButton"
+                 width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_bold.png')"
+                 toolTip="Bold" />
+      <mx:Button id="italicButton"
+                 width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_italic.png')"
+                 toolTip="Italic" />
+      <mx:Button id="underlineButton"
+                 width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_underline.png')"
+                 toolTip="Underline" />
+      <mx:ColorPicker id="colorPicker"
+                      width="22"
+                      height="22"
+                      toolTip="Font Color" />
+      <mx:Image source="@Embed('assets/divider_vertical.png')" height="{alignButtons.height}" />
+      <s:ButtonBar id="alignButtons"
+                   dataProvider="{alignButtonsArray}"
+                   labelField="tooltip" />
+      <mx:Button id="bulletsButton"
+                 width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_bullet.png')"
+                 toolTip="Bullets" />
+      <mx:PopUpMenuButton toolTip="Add or Remove Tools"
+                          id="addremovebutton"
+                          label=""
+                          dataProvider="{formatingtoolBarXML}"
+                          labelField="@label"
+                          itemClick="ToggleButtonsinToolBar(event)"
+                          width="20"
+                          arrowButtonWidth="{addremovebutton.width}" />
+    </flexlib:DockableToolBar>
+    <mx:Spacer height="40" width="100%" />
+    <mx:TextArea x="17"
+                 y="69"
+                 width="100%"
+                 height="100%">
+      <mx:htmlText>
+        <![CDATA[The sample shows how some/all tools from toolbar can be removed and added back. It also provides functionality to add/remove toolbar itself. Besides this tools in toolbar are separated by custom divider. <br><br><b>Usage:</b></br></br> Use 'Add or Remove Tools' button to add/remove tools in toolbar. Use menu 'view->toolbars' to hide/show toolbar. Use drag strip to drag toolbar within application area]]>
+      </mx:htmlText>
+    </mx:TextArea>
+  </flexlib:Docker>
+</s:Application>
