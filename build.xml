@@ -130,7 +130,13 @@
     <!--
          Generate the example applications using the library
     -->
-    <target name="examples_modified" depends="lib">
+    <target name="examples_modified">
+        <condition property="examplesFolder"
+                   value="flex3"
+                   else="flex4">
+            <equals arg1="${flex.version3}" arg2="true" />
+        </condition>
+        <echo>Building ${examplesFolder} modified examples</echo>
         <copy tofile="${build.config}/examples-config.xml"
               file="${setup.config}/examples-config.template.xml"
               overwrite="true" />
@@ -189,7 +195,13 @@
          regardless of whether they've been modified since last run. This is almost line-for-line
          the same as the examples_modified target, so all comments have been removed for brevity.
     -->
-    <target name="examples_all" depends="lib">
+    <target name="examples_all">
+        <condition property="examplesFolder"
+                   value="flex3"
+                   else="flex4">
+            <equals arg1="${flex.version3}" arg2="true" />
+        </condition>
+        <echo>Building all ${examplesFolder} examples</echo>
         <copy tofile="${build.config}/examples-config.xml"
               file="${setup.config}/examples-config.template.xml"
               overwrite="true" />
@@ -199,7 +211,7 @@
         </replace>
         <for param="file">
             <fileset dir="${basedir}/examples">
-                <include name="**/*_Sample.mxml" />
+                <include name="**/${examplesFolder}/**/*_Sample.mxml" />
             </fileset>
 
             <sequential>
@@ -234,7 +246,7 @@
         </delete>
 
         <exec executable="${asdoc.exe}" spawn="no">
-        	<arg line="-define+=FLEX_TARGET_VERSION::flex4,${flex.version4} -define+=FLEX_TARGET_VERSION::flex3,${flex.version3}" />
+            <arg line="-define+=FLEX_TARGET_VERSION::flex4,${flex.version4} -define+=FLEX_TARGET_VERSION::flex3,${flex.version3}" />
             <!-- Place the documentation in the "docs" directory -->
             <arg line="-o '${dist.docs}'" />
 
