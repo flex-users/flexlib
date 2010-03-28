@@ -25,13 +25,6 @@
              Specify a URI to associate with a manifest of
              components for use as MXML elements.
         -->
-        <namespaces>
-
-            <namespace>
-                <uri>http://www.adobe.com/2006/mxml</uri>
-                <manifest>@FLEX_LIBS_HOME@/mxml-manifest.xml</manifest>
-            </namespace>
-        </namespaces>
 
         <!-- Keep the following AS3 metadata in the bytecodes.
              Warning: For the data binding feature in the Flex framework to work properly,

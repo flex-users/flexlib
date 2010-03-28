@@ -28,7 +28,7 @@ SOFTWARE.
 	<mx:CheckBox id="chk" label="Show outlines"/>
 	
 	<ImageMap xmlns="http://code.google.com/p/flexlib/"  scaleContent="true"
-		source="usa.jpg"  
+		source="@Embed('usa.jpg')"  
 		outlineAlpha="{chk.selected ? 1 : 0}" outlineColor="0x00ff00" 
 		fillAlpha="{chk.selected ? .5 : 0}" fillColor="0xff0000" 
 		showToolTips="true" width="100%" maxWidth="554"

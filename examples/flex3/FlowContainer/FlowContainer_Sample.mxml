@@ -27,9 +27,38 @@ SOFTWARE.
 	>
 	<mx:Script>
 	    <![CDATA[
-	    
-	        [Bindable]
-	        private var dp:Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];    
+        [Embed("assets/image1.jpg")]
+        private static const image1:Class;
+        [Embed("assets/image2.jpg")]
+        private static const image2:Class;
+        [Embed("assets/image3.jpg")]
+        private static const image3:Class;
+        [Embed("assets/image4.jpg")]
+        private static const image4:Class;
+        [Embed("assets/image5.jpg")]
+        private static const image5:Class;
+        [Embed("assets/image6.jpg")]
+        private static const image6:Class;
+        [Embed("assets/image7.jpg")]
+        private static const image7:Class;
+        [Embed("assets/image8.jpg")]
+        private static const image8:Class;
+        [Embed("assets/image9.jpg")]
+        private static const image9:Class;
+        [Embed("assets/image10.jpg")]
+        private static const image10:Class;
+        [Embed("assets/image11.jpg")]
+        private static const image11:Class;
+        [Embed("assets/image12.jpg")]
+        private static const image12:Class;
+        [Embed("assets/image13.jpg")]
+        private static const image13:Class;
+        [Embed("assets/image14.jpg")]
+        private static const image14:Class;
+        [Embed("assets/image15.jpg")]
+        private static const image15:Class;
+        [Embed("assets/image16.jpg")]
+        private static const image16:Class;
 	        
 	    ]]>
 	</mx:Script>
@@ -40,17 +69,43 @@ SOFTWARE.
 				<mx:Label text="Flow Container" fontWeight="bold"/>
 				<flexlib:FlowContainer minHeight="80" paddingTop="6" paddingBottom="4" paddingLeft="4" paddingRight="4" minWidth="0" 
 					width="100%" height="90%" borderStyle="solid" borderColor="#333333" borderThickness="1">
-					<mx:Repeater id="rp" dataProvider="{dp}">
-		                <mx:Image source="{'assets/image'+String(rp.currentItem)+'.jpg'}"/>
-            				</mx:Repeater> 
+          <mx:Image source="{image1}" />
+          <mx:Image source="{image2}" />
+          <mx:Image source="{image3}" />
+          <mx:Image source="{image4}" />
+          <mx:Image source="{image5}" />
+          <mx:Image source="{image6}" />
+          <mx:Image source="{image7}" />
+          <mx:Image source="{image8}" />
+          <mx:Image source="{image9}" />
+          <mx:Image source="{image10}" />
+          <mx:Image source="{image11}" />
+          <mx:Image source="{image12}" />
+          <mx:Image source="{image13}" />
+          <mx:Image source="{image14}" />
+          <mx:Image source="{image15}" />
+          <mx:Image source="{image16}" />
 				</flexlib:FlowContainer>
 			</mx:VBox>
 			<mx:VBox width="50%" height="100%">
 				<mx:Label text="Tile Container" fontWeight="bold"/>
 				<mx:Tile  minHeight="80" paddingTop="6" paddingBottom="4" paddingLeft="4" paddingRight="4" width="100%" height="90%" borderStyle="solid" borderColor="#333333" borderThickness="1">
-					<mx:Repeater id="rp2" dataProvider="{dp}">
-		                <mx:Image source="{'assets/image'+String(rp2.currentItem)+'.jpg'}"/>
-            		</mx:Repeater> 
+          <mx:Image source="{image1}" />
+          <mx:Image source="{image2}" />
+          <mx:Image source="{image3}" />
+          <mx:Image source="{image4}" />
+          <mx:Image source="{image5}" />
+          <mx:Image source="{image6}" />
+          <mx:Image source="{image7}" />
+          <mx:Image source="{image8}" />
+          <mx:Image source="{image9}" />
+          <mx:Image source="{image10}" />
+          <mx:Image source="{image11}" />
+          <mx:Image source="{image12}" />
+          <mx:Image source="{image13}" />
+          <mx:Image source="{image14}" />
+          <mx:Image source="{image15}" />
+          <mx:Image source="{image16}" />
 				</mx:Tile>
 			</mx:VBox>
 		</mx:HBox>
