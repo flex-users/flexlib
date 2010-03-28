@@ -1452,14 +1452,14 @@ package flexlib.baseClasses
       if (!overlayChild)
         return;
 
-	  FLEX_TARGET_VERSION::flex4
-	  {
-	    effectOverlayColor = color;
-	  }
-	  FLEX_TARGET_VERSION::flex3
-	  {
-		overlayColor = color;
-	  }
+      FLEX_TARGET_VERSION::flex4
+      {
+        effectOverlayColor = color;
+      }
+      FLEX_TARGET_VERSION::flex3
+      {
+        overlayColor = color;
+      }
       overlayTargetArea = targetArea;
 
       if (selectedChild && selectedChild.numChildrenCreated == -1) // No children have been created
@@ -1484,7 +1484,7 @@ package flexlib.baseClasses
     {
       FLEX_TARGET_VERSION::flex4
       {
-		UIComponent(overlayChild).addOverlay(effectOverlayColor, overlayTargetArea);
+        UIComponent(overlayChild).addOverlay(effectOverlayColor, overlayTargetArea);
       }
       FLEX_TARGET_VERSION::flex3
       {
@@ -2257,8 +2257,10 @@ package flexlib.baseClasses
         drawHeaderFocus(_focusedIndex, showFocusIndicator);
       }
 
-      if (child as IAutomationObject);
-      IAutomationObject(child).showInAutomationHierarchy = true;
+      if (child as IAutomationObject)
+      {
+        IAutomationObject(child).showInAutomationHierarchy = true;
+      }
     }
 
     /**
