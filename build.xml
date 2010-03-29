@@ -327,15 +327,25 @@
          the source code, the documentation, the examples, and the binary .swc file.
     -->
     <target name="release" depends="clean, init, lib, examples_all, docs">
+        <condition property="examplesFolder"
+                   value="flex3"
+                   else="flex4">
+            <equals arg1="${flex.version3}" arg2="true" />
+        </condition>
         <!-- Creates the .zip file in the bin directory -->
         <zip destfile="${dist}/${library.name}.zip">
             <fileset dir="${basedir}">
-                <include name="bin/${library.name}.swc" />
                 <include name="src/**" />
-                <include name="docs/**" />
-                <include name="examples/**" />
                 <exclude name="**/*_Sample.swf" />
             </fileset>
+            <fileset dir="${dist}">
+                <include name="${library.name}.swc" />
+                <include name="docs/**" />
+            </fileset>
+            <zipfileset dir="${basedir}/examples/${examplesFolder}"
+                        excludes="**/*.swf"
+                        prefix="examples/src" />
+            <zipfileset dir="${dist.examples}" prefix="examples/" />
         </zip>
     </target>
 
