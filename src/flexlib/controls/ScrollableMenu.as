@@ -443,7 +443,7 @@ package flexlib.controls
         measuredHeight = measuredMinHeight = stageHeightAvailable;
       }
 
-      commitProperties();
+      //      invalidateProperties();
     }
 
     /**
