@@ -159,7 +159,7 @@
                      only the updated example will get recompiled.
                 -->
                 <modified />
-                <include name="**/*_Sample.mxml" />
+                <include name="**/${examplesFolder}/**/*_Sample.mxml" />
                 <!--
                      For only building specific examples, comment out
                      the line above, and uncomment the line below and modify
