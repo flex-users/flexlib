@@ -1,310 +1,343 @@
 <?xml version="1.0"?>
 <!--
-Copyright (c) 2007 FlexLib Contributors.  See:
-    http://code.google.com/p/flexlib/wiki/ProjectContributors
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
 -->
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
-	xmlns:flexlib="http://code.google.com/p/flexlib/" 
-	creationComplete="initCollections(); "  
-	>
-
-	
-    <mx:Script>
-        <![CDATA[
-        	import mx.core.ScrollPolicy;
-        	import flexlib.controls.ScrollableArrowMenu;
-        	import flexlib.controls.ScrollableMenu;
-
-            import mx.events.MenuEvent;
-            import mx.controls.Alert;
-            import mx.collections.*;
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:flexlib="http://code.google.com/p/flexlib/"
+               creationComplete="initCollections(); ">
 
 
-			[Bindable]
-			public var arrowScrollPolicy:String = ScrollPolicy.AUTO;
-			
-			[Bindable]
-			public var vertScrollPolicy:String = ScrollPolicy.OFF;
-			
-			
-            [Bindable]
-            public var menuBarCollection:XMLListCollection;
-            
-            private var menubarXML:XMLList =
-                <>
-                    <menuitem label="Short Menu" data="top">
-                        <menuitem label="MenuItem A" data="1A"/>
-                        <menuitem label="MenuItem B" data="1B"/>
-                    </menuitem>
-                    <menuitem label="Long Menu" data="top">
-                        <menuitem label="Long Submenu" >
-                            <menuitem label="MenuItem A" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem B" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem C" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem D" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem E" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem F" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem G" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem H" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem I" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem J" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem K" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem L" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem M" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem N" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem O" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem P" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem Q" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem R" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem S" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem T" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem U" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem V" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem W" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem X" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem Y" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem Z" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem A" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem B" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem C" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem D" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem E" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem F" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem G" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem H" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem I" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem J" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem K" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem L" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem M" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem N" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem O" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem P" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem Q" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem R" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem S" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem T" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem U" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem V" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem W" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem X" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem Y" type="check"  data="2A"/>
-	                        <menuitem label="MenuItem Z" type="check"  data="2A"/>
-	                     </menuitem>
-                    </menuitem>
-                </>;
+  <fx:Script>
+    <![CDATA[
+      import mx.core.ScrollPolicy;
+      import flexlib.controls.ScrollableArrowMenu;
+      import flexlib.controls.ScrollableMenu;
 
-            // Event handler to initialize the MenuBar control.
-            private function initCollections():void {
-                menuBarCollection = new XMLListCollection(menubarXML);
-                
-                
-            }
-
-            // Event handler for the MenuBar control's itemClick event.
-            private function menuHandler(event:MenuEvent):void  {
-                // Don't open the Alert for a menu bar item that 
-                // opens a popup submenu.
-                if (event.item.@data != "top") {
-                    Alert.show("Label: " + event.item.@label + "\n" + 
-                        "Data: " + event.item.@data, "Clicked menu item");
-                }        
-            }
-            
-            
-            private function addStraightMenu():void {
-            	
-            	var menu:ScrollableArrowMenu = ScrollableArrowMenu.createMenu(null, menubarXML, false);
-                menu.labelField="@label";
-                menu.iconField = "@icon";
-                
-                if(specify.selected) {
-                	menu.maxHeight = step.value;
-                }
-                
-                menu.verticalScrollPolicy = vertScrollPolicy;
-                menu.arrowScrollPolicy = arrowScrollPolicy;
-                
-                var pt:Point = new Point(25, 65);
-                pt = straightPanel.localToGlobal(pt);
-                
-                menu.show(pt.x, pt.y);
-
-            }
-            
-            private function setVerticalPolicy(event:Event):void {
-            	var combo:ComboBox = event.currentTarget as ComboBox;
-            	switch(combo.selectedIndex) {
-            		case 0:
-            			this.vertScrollPolicy = ScrollPolicy.AUTO;
-            			break;
-            		case 1:
-            			this.vertScrollPolicy = ScrollPolicy.ON;
-            			break;
-            		case 2:
-            			this.vertScrollPolicy = ScrollPolicy.OFF;
-            			break;	
-            	}
-            }
-            
-            private function setArrowPolicy(event:Event):void {
-            	var combo:ComboBox = event.currentTarget as ComboBox;
-            	switch(combo.selectedIndex) {
-            		case 0:
-            			this.arrowScrollPolicy = ScrollPolicy.AUTO;
-            			break;
-            		case 1:
-            			this.arrowScrollPolicy = ScrollPolicy.ON;
-            			break;
-            		case 2:
-            			this.arrowScrollPolicy = ScrollPolicy.OFF;
-            			break;	
-            	}
-            }
-         ]]>
-    </mx:Script>
-    
-    <mx:XMLList id="treeDP2">
-        <node label="Inbox" icon="../assets/home.png" />
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-        <node label="Inbox"/>
-        <node label="Calendar"/>
-        <node label="Deleted Items"/>
-    </mx:XMLList>
+      import mx.events.MenuEvent;
+      import mx.controls.Alert;
+      import mx.collections.*;
 
 
-	<mx:VBox width="100%" horizontalAlign="left">
-		<mx:Panel title="Options" paddingTop="10" paddingLeft="10" paddingBottom="10" paddingRight="10" >
-		
-			<mx:HBox>
-				<mx:CheckBox id="specify" label="Specify Max Menu Height:" />
-		
-				<mx:NumericStepper enabled="{specify.selected}"  id="step" stepSize="10" minimum="60" maximum="500" value="100" />
-			</mx:HBox>
-			
-			<mx:HBox>
-				<mx:Label text="VerticalScrollPolicy:" />
-			
-				<mx:ComboBox change="setVerticalPolicy(event)" selectedIndex="2">
-					<mx:dataProvider>
-						<mx:String>AUTO</mx:String>
-						<mx:String>ON</mx:String>
-						<mx:String>OFF</mx:String>
-					</mx:dataProvider>
-				</mx:ComboBox>
-			</mx:HBox>
-			<mx:HBox>
-				<mx:Label text="ArrowScrollPolicy:"  width="110"/>
-			
-				<mx:ComboBox change="setArrowPolicy(event)" selectedIndex="0">
-					<mx:dataProvider>
-						<mx:String>AUTO</mx:String>
-						<mx:String>ON</mx:String>
-						<mx:String>OFF</mx:String>
-					</mx:dataProvider>
-				</mx:ComboBox>
-			</mx:HBox>
-			
-		</mx:Panel>
-		
-		<mx:HBox width="450" height="150">
+      [Bindable]
+      public var arrowScrollPolicy:String = ScrollPolicy.AUTO;
 
-	        <mx:Panel title="Scrollable MenuBar" 
-	        	height="100%" width="100%">
-	
-		        
-		        <flexlib:ScrollableMenuBar id="bar" maxHeight="{specify.selected ? step.value : undefined}"  width="100%"   labelField="@label" itemClick="menuHandler(event);" 
-		           verticalScrollPolicy="{vertScrollPolicy}" arrowScrollPolicy="{arrowScrollPolicy}"  dataProvider="{menuBarCollection}" />
-		            
-		    </mx:Panel>
-		    
-		    <mx:Panel title="Scrollable PopUpMenuButton" 
-	        	paddingTop="10" paddingLeft="10" height="100%" width="100%">
-				
-				<flexlib:ScrollablePopUpMenuButton id="popup" maxHeight="{specify.selected ? step.value : undefined}"
-		            dataProvider="{treeDP2}"  verticalScrollPolicy="{vertScrollPolicy}" arrowScrollPolicy="{arrowScrollPolicy}" 
-		            labelField="@label" 
-		            />
-		            
-	        </mx:Panel> 
-		</mx:HBox>
-		
-		<mx:HBox width="448" height="150">
-			<mx:Panel title="Scrollable Menu"   id="straightPanel"
-	        	paddingTop="10" paddingLeft="10" height="100%" width="50%">
-				
-				<mx:Button label="Show Menu" click="this.addStraightMenu()" />
-				
-			</mx:Panel>
-	    </mx:HBox>
-	        	
-	   </mx:VBox>
-</mx:Application>
+      [Bindable]
+      public var vertScrollPolicy:String = ScrollPolicy.OFF;
 
+
+      [Bindable]
+      public var menuBarCollection:XMLListCollection;
+
+      private var menubarXML:XMLList =
+        <>
+          <menuitem label="Short Menu" data="top">
+            <menuitem label="MenuItem A" data="1A"/>
+            <menuitem label="MenuItem B" data="1B"/>
+          </menuitem>
+          <menuitem label="Long Menu" data="top">
+            <menuitem label="Long Submenu">
+              <menuitem label="MenuItem A" type="check" data="2A"/>
+              <menuitem label="MenuItem B" type="check" data="2A"/>
+              <menuitem label="MenuItem C" type="check" data="2A"/>
+              <menuitem label="MenuItem D" type="check" data="2A"/>
+              <menuitem label="MenuItem E" type="check" data="2A"/>
+              <menuitem label="MenuItem F" type="check" data="2A"/>
+              <menuitem label="MenuItem G" type="check" data="2A"/>
+              <menuitem label="MenuItem H" type="check" data="2A"/>
+              <menuitem label="MenuItem I" type="check" data="2A"/>
+              <menuitem label="MenuItem J" type="check" data="2A"/>
+              <menuitem label="MenuItem K" type="check" data="2A"/>
+              <menuitem label="MenuItem L" type="check" data="2A"/>
+              <menuitem label="MenuItem M" type="check" data="2A"/>
+              <menuitem label="MenuItem N" type="check" data="2A"/>
+              <menuitem label="MenuItem O" type="check" data="2A"/>
+              <menuitem label="MenuItem P" type="check" data="2A"/>
+              <menuitem label="MenuItem Q" type="check" data="2A"/>
+              <menuitem label="MenuItem R" type="check" data="2A"/>
+              <menuitem label="MenuItem S" type="check" data="2A"/>
+              <menuitem label="MenuItem T" type="check" data="2A"/>
+              <menuitem label="MenuItem U" type="check" data="2A"/>
+              <menuitem label="MenuItem V" type="check" data="2A"/>
+              <menuitem label="MenuItem W" type="check" data="2A"/>
+              <menuitem label="MenuItem X" type="check" data="2A"/>
+              <menuitem label="MenuItem Y" type="check" data="2A"/>
+              <menuitem label="MenuItem Z" type="check" data="2A"/>
+              <menuitem label="MenuItem A" type="check" data="2A"/>
+              <menuitem label="MenuItem B" type="check" data="2A"/>
+              <menuitem label="MenuItem C" type="check" data="2A"/>
+              <menuitem label="MenuItem D" type="check" data="2A"/>
+              <menuitem label="MenuItem E" type="check" data="2A"/>
+              <menuitem label="MenuItem F" type="check" data="2A"/>
+              <menuitem label="MenuItem G" type="check" data="2A"/>
+              <menuitem label="MenuItem H" type="check" data="2A"/>
+              <menuitem label="MenuItem I" type="check" data="2A"/>
+              <menuitem label="MenuItem J" type="check" data="2A"/>
+              <menuitem label="MenuItem K" type="check" data="2A"/>
+              <menuitem label="MenuItem L" type="check" data="2A"/>
+              <menuitem label="MenuItem M" type="check" data="2A"/>
+              <menuitem label="MenuItem N" type="check" data="2A"/>
+              <menuitem label="MenuItem O" type="check" data="2A"/>
+              <menuitem label="MenuItem P" type="check" data="2A"/>
+              <menuitem label="MenuItem Q" type="check" data="2A"/>
+              <menuitem label="MenuItem R" type="check" data="2A"/>
+              <menuitem label="MenuItem S" type="check" data="2A"/>
+              <menuitem label="MenuItem T" type="check" data="2A"/>
+              <menuitem label="MenuItem U" type="check" data="2A"/>
+              <menuitem label="MenuItem V" type="check" data="2A"/>
+              <menuitem label="MenuItem W" type="check" data="2A"/>
+              <menuitem label="MenuItem X" type="check" data="2A"/>
+              <menuitem label="MenuItem Y" type="check" data="2A"/>
+              <menuitem label="MenuItem Z" type="check" data="2A"/>
+            </menuitem>
+          </menuitem>
+        </>
+        ;
+
+      // Event handler to initialize the MenuBar control.
+      private function initCollections():void
+      {
+        menuBarCollection = new XMLListCollection(menubarXML);
+
+
+      }
+
+      // Event handler for the MenuBar control's itemClick event.
+      private function menuHandler(event:MenuEvent):void
+      {
+        // Don't open the Alert for a menu bar item that 
+        // opens a popup submenu.
+        if (event.item.@data != "top")
+        {
+          Alert.show("Label: " + event.item.@label + "\n" +
+                     "Data: " + event.item.@data, "Clicked menu item");
+        }
+      }
+
+
+      private function addStraightMenu():void
+      {
+
+        var menu:ScrollableArrowMenu = ScrollableArrowMenu.createMenu(null, menubarXML, false);
+        menu.labelField = "@label";
+        menu.iconField = "@icon";
+
+        if (specify.selected)
+        {
+          menu.maxHeight = step.value;
+        }
+
+        menu.verticalScrollPolicy = vertScrollPolicy;
+        menu.arrowScrollPolicy = arrowScrollPolicy;
+
+        var pt:Point = new Point(25, 65);
+        pt = straightPanel.localToGlobal(pt);
+
+        menu.show(pt.x, pt.y);
+
+      }
+
+      private function setVerticalPolicy(event:Event):void
+      {
+        var combo:ComboBox = event.currentTarget as ComboBox;
+        switch (combo.selectedIndex)
+        {
+          case 0:
+            this.vertScrollPolicy = ScrollPolicy.AUTO;
+            break;
+          case 1:
+            this.vertScrollPolicy = ScrollPolicy.ON;
+            break;
+          case 2:
+            this.vertScrollPolicy = ScrollPolicy.OFF;
+            break;
+        }
+      }
+
+      private function setArrowPolicy(event:Event):void
+      {
+        var combo:ComboBox = event.currentTarget as ComboBox;
+        switch (combo.selectedIndex)
+        {
+          case 0:
+            this.arrowScrollPolicy = ScrollPolicy.AUTO;
+            break;
+          case 1:
+            this.arrowScrollPolicy = ScrollPolicy.ON;
+            break;
+          case 2:
+            this.arrowScrollPolicy = ScrollPolicy.OFF;
+            break;
+        }
+      }
+    ]]>
+  </fx:Script>
+
+  <fx:Declarations>
+    <fx:XMLList id="treeDP2">
+      <node label="Inbox" icon="../assets/home.png" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+      <node label="Inbox" />
+      <node label="Calendar" />
+      <node label="Deleted Items" />
+    </fx:XMLList>
+  </fx:Declarations>
+
+  <s:VGroup width="100%" horizontalAlign="left">
+    <s:Panel title="Options">
+      <s:layout>
+        <s:VerticalLayout />
+      </s:layout>
+
+      <s:HGroup>
+        <s:CheckBox id="specify" label="Specify Max Menu Height:" />
+
+        <s:NumericStepper enabled="{specify.selected}"
+                          id="step"
+                          stepSize="10"
+                          minimum="60"
+                          maximum="500"
+                          value="100" />
+      </s:HGroup>
+
+      <s:HGroup>
+        <s:Label text="VerticalScrollPolicy:" />
+
+        <s:ComboBox change="setVerticalPolicy(event)" selectedIndex="2">
+          <s:dataProvider>
+            <s:ArrayCollection>
+              <fx:String>AUTO</fx:String>
+              <fx:String>ON</fx:String>
+              <fx:String>OFF</fx:String>
+            </s:ArrayCollection>
+          </s:dataProvider>
+        </s:ComboBox>
+      </s:HGroup>
+      <s:HGroup>
+        <s:Label text="ArrowScrollPolicy:" width="110" />
+
+        <s:ComboBox change="setArrowPolicy(event)" selectedIndex="0">
+          <s:dataProvider>
+            <s:ArrayCollection>
+              <fx:String>AUTO</fx:String>
+              <fx:String>ON</fx:String>
+              <fx:String>OFF</fx:String>
+            </s:ArrayCollection>
+          </s:dataProvider>
+        </s:ComboBox>
+      </s:HGroup>
+
+    </s:Panel>
+
+    <s:HGroup width="450" height="150">
+
+      <s:Panel title="Scrollable MenuBar"
+               height="100%"
+               width="100%">
+
+
+        <flexlib:ScrollableMenuBar id="bar"
+                                   maxHeight="{specify.selected ? step.value : undefined}"
+                                   width="100%"
+                                   labelField="@label"
+                                   itemClick="menuHandler(event);"
+                                   verticalScrollPolicy="{vertScrollPolicy}"
+                                   arrowScrollPolicy="{arrowScrollPolicy}"
+                                   dataProvider="{menuBarCollection}" />
+
+      </s:Panel>
+
+      <s:Panel title="Scrollable PopUpMenuButton"
+               height="100%"
+               width="100%">
+        <flexlib:ScrollablePopUpMenuButton id="popup"
+                                           maxHeight="{specify.selected ? step.value : undefined}"
+                                           dataProvider="{treeDP2}"
+                                           verticalScrollPolicy="{vertScrollPolicy}"
+                                           arrowScrollPolicy="{arrowScrollPolicy}"
+                                           labelField="@label" />
+
+      </s:Panel>
+    </s:HGroup>
+
+    <s:HGroup width="448" height="150">
+      <s:Panel title="Scrollable Menu"
+               id="straightPanel"
+               height="100%"
+               width="50%">
+        <s:Button label="Show Menu" click="this.addStraightMenu()" />
+
+      </s:Panel>
+    </s:HGroup>
+
+  </s:VGroup>
+</s:Application>
