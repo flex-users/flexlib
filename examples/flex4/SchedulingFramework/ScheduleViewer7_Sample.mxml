@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2006. Adobe Systems Incorporated.
+     All rights reserved.
+
+     Redistribution and use in source and binary forms, with or without
+     modification, are permitted provided that the following conditions are met:
+
+     * Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+     * Neither the name of Adobe Systems Incorporated nor the names of its
+     contributors may be used to endorse or promote products derived from this
+     software without specific prior written permission.
+
+     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+     LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     POSSIBILITY OF SUCH DAMAGE.
+
+     @ignore
+-->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+                xmlns:flexlib="http://code.google.com/p/flexlib/"
+                creationComplete="onCreationComplete();"
+                verticalGap="0">
+
+  <mx:Script>
+    <![CDATA[
+      import flexlib.scheduling.scheduleClasses.TimeIndicatorItem;
+      import flexlib.scheduling.samples.ScheduleData;
+      import flexlib.scheduling.scheduleClasses.SimpleScheduleEntry;
+      import flexlib.scheduling.util.DateUtil;
+      import mx.collections.ArrayCollection;
+      import mx.controls.Alert;
+      import mx.events.ScrollEvent;
+      import mx.events.ScrollEventDirection;
+
+      [Bindable]
+      private var dataProvider:ArrayCollection;
+      [Bindable]
+      private var startDate:Date;
+      [Bindable]
+      private var endDate:Date;
+      [Bindable]
+      private var zoom:Number;
+      [Bindable]
+      private var scheduleViewerWidth:Number = 600;
+
+      private function onCreationComplete():void
+      {
+        setTimeframe();
+        initDataProvider();
+        initTimeIndicators();
+      }
+
+      private function setTimeframe():void
+      {
+        startDate = DateUtil.clearTime(new Date());
+        endDate = getEndDate(startDate);
+      }
+
+      private function getEndDate(startDate:Date):Date
+      {
+        var duration:Number = DateUtil.DAY_IN_MILLISECONDS * 1;
+        var endDate:Date = new Date(startDate.getTime() + duration);
+        return endDate;
+      }
+
+      private function initDataProvider():void
+      {
+        dataProvider = new ScheduleData().createRandomColoredScheduleEntries(25);
+      }
+
+      private function initTimeIndicators():void
+      {
+        var result:ArrayCollection = new ArrayCollection();
+
+        result.addItem(createTimeIndicator(9, 0xff0000, 1.0, 0.5));
+        result.addItem(createTimeIndicator(11, 0x00ff00, 3.0, 0.7));
+        result.addItem(createTimeIndicator(13, 0x0000ff, 5.0, 1.0));
+        result.addItem(createTimeIndicator(15, 0xffffff, 7.0, 0.3));
+
+        scheduleViewer.timeIndicators = result;
+      }
+
+      private function createTimeIndicator(hour:Number, color:uint, thickness:Number, alpha:Number):TimeIndicatorItem
+      {
+        var timeIndicatorItem:TimeIndicatorItem = new TimeIndicatorItem();
+        timeIndicatorItem.date = DateUtil.setTime(new Date(), DateUtil.HOUR_IN_MILLISECONDS * hour);
+        timeIndicatorItem.color = color;
+        timeIndicatorItem.thickness = thickness;
+        timeIndicatorItem.alpha = alpha;
+
+        return timeIndicatorItem;
+      }
+
+      private function onZoom(value:Number):void
+      {
+        zoom = value;
+      }
+
+      private function onScrollTimeline(position:Number):void
+      {
+        scheduleViewer.xPosition = position;
+      }
+
+      private function onScrollScheduleViewer(event:ScrollEvent):void
+      {
+        if (event.direction == ScrollEventDirection.HORIZONTAL)
+        {
+          timeline.xPosition = event.position;
+        }
+      }
+
+      private function gotoNow():void
+      {
+        var time:Date = new Date();
+        scheduleViewer.moveToTime(time.getTime() - startDate.getTime());
+      }
+
+      private function gotoSelectedEntry():void
+      {
+        if (scheduleViewer.selectedItem != null)
+        {
+          scheduleViewer.moveToEntry(scheduleViewer.selectedItem);
+        }
+        else
+        {
+          warnAboutNoSelection();
+        }
+      }
+
+      private function warnAboutNoSelection():void
+      {
+        Alert.show("Please select an entry.");
+      }
+    ]]>
+  </mx:Script>
+
+  <flexlib:Timeline id="timeline"
+                    width="{ scheduleViewerWidth }"
+                    startDate="{ startDate }"
+                    endDate="{ endDate }"
+                    zoom="{ zoom }"
+                    scroll="onScrollTimeline( event.position );" />
+
+  <flexlib:ScheduleViewer id="scheduleViewer"
+                          width="{ scheduleViewerWidth }"
+                          height="400"
+                          dataProvider="{ dataProvider }"
+                          startDate="{ startDate }"
+                          endDate="{ endDate }"
+                          zoom="{ zoom }"
+                          horizontalScrollPolicy="off"
+                          entryRenderer="flexlib.scheduling.scheduleClasses.renderers.ColoredGradientScheduleEntryRenderer"
+                          pixelScroll="onScrollScheduleViewer( event );" />
+
+  <mx:HBox width="{ scheduleViewerWidth }" paddingTop="6">
+    <mx:Label text="Goto:" />
+    <mx:Button label="Now" click="gotoNow();" />
+    <mx:Button label="Selected" click="gotoSelectedEntry();" />
+    <mx:Spacer width="100%" />
+    <mx:Label text="Zoom:" />
+    <mx:HSlider id="zoomSlider"
+                minimum="0"
+                maximum="1000"
+                value="100"
+                snapInterval="1"
+                liveDragging="true"
+                change="onZoom( zoomSlider.value );" />
+  </mx:HBox>
+
+</mx:Application>
