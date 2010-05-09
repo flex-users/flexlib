@@ -365,6 +365,10 @@ package flexlib.scheduling
         {
           schedule.verticalLinesViewerImpl[styleProp] = getStyle(styleProp);
         }
+        if (Object(schedule.timeIndicatorViewerImpl).hasOwnProperty(styleProp))
+        {
+          schedule.timeIndicatorViewerImpl[styleProp] = getStyle(styleProp);
+        }
       }
 
       var entryStyleName:String = getStyle("entryStyleName");
@@ -574,6 +578,17 @@ package flexlib.scheduling
       schedule.backgroundLayoutImpl.backgroundItems = value;
     }
 
+    [Bindable]
+    public function get timeIndicators():IList
+    {
+      return schedule.timeIndicatorLayoutImpl.timeIndicators;
+    }
+
+    public function set timeIndicators(value:IList):void
+    {
+      schedule.timeIndicatorLayoutImpl.timeIndicators = value;
+    }
+
     //Core--------------------------
 
     [Bindable]
@@ -651,6 +666,28 @@ package flexlib.scheduling
     public function set verticalLinesViewer(value:IFactory):void
     {
       schedule.verticalLinesViewer = value;
+    }
+
+    [Bindable]
+    public function get timeIndicatorLayout():IFactory
+    {
+      return schedule.timeIndicatorLayout;
+    }
+
+    public function set timeIndicatorLayout(value:IFactory):void
+    {
+      schedule.timeIndicatorLayout = value;
+    }
+
+    [Bindable]
+    public function get timeIndicatorViewer():IFactory
+    {
+      return schedule.timeIndicatorViewer;
+    }
+
+    public function set timeIndicatorViewer(value:IFactory):void
+    {
+      schedule.timeIndicatorViewer = value;
     }
 
     //Navigation--------------------------
