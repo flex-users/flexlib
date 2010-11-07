@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+Copyright (c) 2010 FlexLib Contributors.  See:
+http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<mx:Application
+    xmlns:flexlib="http://code.google.com/p/flexlib/"
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    backgroundColor="white"
+    backgroundGradientColors="[0xFFFFFF,0xFFFFFF]">
+
+    <mx:Script>
+        <![CDATA[
+            import mx.controls.Alert;
+            
+            protected function topPieChanged(event:Event):void
+            {
+                bottomPie.percentRadius = ourBudget.value * 80 + 20;
+            }
+            
+            protected function bottomPieChanged(event:Event):void
+            {
+                var s:String = "";
+                for each(var series:Object in bottomPie.dataProvider)
+                {
+                    s += series.name + ": " + series.value + "\n";
+                }
+                Alert.show(s);
+            }
+        ]]>
+    </mx:Script>
+
+    
+    <flexlib:DraggablePie width="100%" height="25%" numDecimals="0"
+        labelField="name" dataField="value"
+        change="topPieChanged(event)">
+        <flexlib:dataProvider>
+            <mx:ArrayCollection>
+                <mx:Object id="ourBudget" name="Our Budget" color="0xFF0000" value=".5"/>
+                <mx:Object id="theirBudget" name="Their Budget" color="0x00FF00" value=".5"/>
+            </mx:ArrayCollection>
+        </flexlib:dataProvider>
+    </flexlib:DraggablePie>
+    
+    <flexlib:DraggablePie id="bottomPie" 
+        width="100%" height="75%" liveDragging="false" 
+        numDecimals="0" percentRadius="50"
+        labelField="name" dataField="value"
+        change="bottomPieChanged(event)">
+        <flexlib:dataProvider>
+            <mx:ArrayCollection>
+                <mx:Object name="Salaries" color="0xFF0000" value="1"/>
+                <mx:Object name="Pensions" color="0x00FF00" value="1"/>
+                <mx:Object name="Capital" color="0x0000FF" value="1"/>
+                <mx:Object name="New Construction" color="0xFF00FF" value="1"/>
+            </mx:ArrayCollection>
+        </flexlib:dataProvider>
+    </flexlib:DraggablePie>
+    
+</mx:Application>
