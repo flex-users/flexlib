@@ -51,6 +51,9 @@
 
     <!-- Tom Lee -->
     <component id="Highlighter" class="flexlib.controls.Highlighter" />
+    
+    <!-- Billy Schoenberg -->
+    <component id="DraggablePie" class="flexlib.charts.DraggablePie" />
 
     <!-- Scheduling Framework -->
     <component id="ScheduleViewer" class="flexlib.scheduling.ScheduleViewer" />
