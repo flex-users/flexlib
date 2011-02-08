@@ -283,7 +283,7 @@
     </compiler>
     <!-- static-link-runtime-shared-libraries: statically link the libraries specified by the -runtime-shared-libraries-path option.-->
     <static-link-runtime-shared-libraries>
-    false
+    true
   </static-link-runtime-shared-libraries>
 
     <!--

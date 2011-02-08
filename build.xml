@@ -262,7 +262,47 @@
             <arg line="-templates-path '${flexsdk.templates.dir}' " />
         </exec>
     </target>
+	
+	<!-- For SWF Mime types 
+		application/x-shockwave-flash
+	-->
+	<target name="swfMimeType">
+	<!-- Loop over the files in the doc directory -->
+        <for param="file">
+            <!-- Find the sample applications -->
+            <fileset dir="${basedir}/examples">
+                <include name="**/*.swf" />
+            </fileset>
 
+            <sequential>
+                <!---
+                     Determine the mime-type from the file extension.
+                -->
+                <property name="mime.type.swf" value="application/x-shockwave-flash" />
+
+                <!-- Extract the extension from the file name -->
+                <propertyregex property="fileExtension"
+                               override="yes"
+                               input="@{file}"
+                               regexp=".*${file.separator}([^\\]+)\.([a-zA-Z0-9]+)"
+                               replace="\2" />
+
+                <!-- Set the mime.type property based on the extension -->
+                <propertycopy name="mime.type"
+                              from="mime.type.${fileExtension}"
+                              override="yes" />
+
+                <!-- Sanity check...
+                     <echo>@{file} is ${fileExtension} with mime type ${mime.type}</echo>
+                -->
+
+                <!-- Configure the mime type for the file -->
+                <exec executable="${svn.exe}" spawn="no">
+                    <arg line="propset svn:mime-type '${mime.type}' '@{file}'" />
+                </exec>
+            </sequential>
+        </for>
+	</target>
     <!--
          When the ASDoc files are generated and imported into the SVN
          repository, the files need to have mime types set correctly so that
