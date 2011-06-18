@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.google.code.flexlib</groupId>
+    <artifactId>flexlib-parent</artifactId>
+    <version>2.6-SNAPSHOT</version>
+  </parent>
+  <groupId>com.google.code.flexlib</groupId>
+  <artifactId>flexlib</artifactId>
+  <version>2.6-SNAPSHOT</version>
+  <packaging>swc</packaging>
+
+  <name>flexlib :: library</name>
+  <description>TODO</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.adobe.flexunit</groupId>
+      <artifactId>flexunit</artifactId>
+      <type>swc</type>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src-test</testSourceDirectory>
+    <directory>${project.basedir}/bin</directory>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>attach-asdoc</id>
+            <goals>
+              <goal>asdoc</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <namespaces>
+            <namespace>
+              <uri>${flexlib.library.namespace}</uri>
+              <manifest>${project.build.sourceDirectory}/manifest.xml</manifest>
+            </namespace>
+          </namespaces>
+          <includeNamespaces>
+            <namespace>${flexlib.library.namespace}</namespace>
+          </includeNamespaces>
+          <docNamespaces>
+            <namespace>${flexlib.library.namespace}</namespace>
+          </docNamespaces>
+          <optimize>true</optimize>
+          <keepAs3Metadatas>
+            <keepAs3Metadata>Bindable</keepAs3Metadata>
+            <keepAs3Metadata>Managed</keepAs3Metadata>
+            <keepAs3Metadata>ChangeEvent</keepAs3Metadata>
+            <keepAs3Metadata>NonCommittingChangeEvent</keepAs3Metadata>
+            <keepAs3Metadata>Transient</keepAs3Metadata>
+          </keepAs3Metadatas>
+          <storepass/>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <outputDirectory>${project.build.directory}/assemblies</outputDirectory>
+          <descriptors>
+            <descriptor>${project.basedir}/library-assembly-sources.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
