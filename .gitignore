@@ -1,0 +1,25 @@
+# Project build and release directories
+target/
+bin/
+bin-debug/
+bin-release/
+
+# Intellij IDEA project files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse/Flex/Flash Builder project files
+.actionScriptProperties
+.flexProperties
+.settings/
+.project
+.classpath
+
+# Maven release plugin files
+pom.xml.releaseBackup
+release.properties
+
+# mvn site:stage bug
+home/
