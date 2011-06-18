@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.google.code.flexlib</groupId>
+  <artifactId>flexlib-parent</artifactId>
+  <version>2.6-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>flexlib</name>
+  <inceptionYear>2007</inceptionYear>
+  <description>TODO</description>
+  <url>https://github.com/flex-users/flexlib</url>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>Julien.Nicoulaud</id>
+      <name>Julien Nicoulaud</name>
+      <roles>
+        <role>Owner</role>
+      </roles>
+      <timezone>1</timezone>
+      <url>http://www.twitter.com/nicoulaj</url>
+    </developer>
+  </developers>
+
+  <mailingLists>
+    <mailingList>
+      <name>Project Google group</name>
+      <post>flexlib@googlegroups.com</post>
+      <subscribe>flexlib@googlegroups.com</subscribe>
+      <unsubscribe>flexlib@googlegroups.com</unsubscribe>
+      <archive>http://groups.google.com/group/flexlib</archive>
+    </mailingList>
+  </mailingLists>
+
+  <scm>
+    <connection>scm:git:git@github.com:flex-users/flexlib.git</connection>
+    <developerConnection>scm:git:git@github.com:flex-users/flexlib.git</developerConnection>
+    <url>https://github.com/flex-users/flexlib</url>
+  </scm>
+
+  <issueManagement>
+    <system>Github</system>
+    <url>https://github.com/flex-users/flexlib/issues</url>
+  </issueManagement>
+
+  <properties>
+
+    <!-- Flex SDK versions -->
+    <flex-sdk-4.0.version>4.0.0.14159</flex-sdk-4.0.version>
+    <flex-sdk-4.1.version>4.1.0.16248</flex-sdk-4.1.version>
+    <flex-sdk-4.5.version>4.5.0.19786</flex-sdk-4.5.version>
+    <flex-sdk.version>${flex-sdk-4.5.version}</flex-sdk.version>
+
+    <!-- Dependencies versions -->
+    <flexunit.version>4.0-beta-2</flexunit.version>
+
+    <!-- Library settings -->
+    <flexlib.library.namespace>http://code.google.com/p/flexlib/</flexlib.library.namespace>
+    <flexlib.asdoc.windowTitle>flexlib ${project.version} asdoc</flexlib.asdoc.windowTitle>
+    <flexlib.asdoc.mainTitle>flexlib ${project.version} API documentation</flexlib.asdoc.mainTitle>
+    <flexlib.asdoc.footer>flexlib - ${project.url}</flexlib.asdoc.footer>
+    <flexlib.asdoc.leftFramesetWidth>280</flexlib.asdoc.leftFramesetWidth>
+
+    <!-- Miscellaneous settings -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+  </properties>
+
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
+
+  <modules>
+    <module>library</module>
+    <!--<module>examples</module>-->
+    <!--<module>assemblies</module>-->
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>flex-framework</artifactId>
+      <type>pom</type>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.adobe.flex.framework</groupId>
+        <artifactId>flex-framework</artifactId>
+        <version>${flex-sdk.version}</version>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.flexlib</groupId>
+        <artifactId>flexlib</artifactId>
+        <version>${project.version}</version>
+        <type>swc</type>
+      </dependency>
+      <dependency>
+        <groupId>com.adobe.flexunit</groupId>
+        <artifactId>flexunit</artifactId>
+        <version>${flexunit.version}</version>
+        <type>swc</type>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonatype.flexmojos</groupId>
+          <artifactId>flexmojos-maven-plugin</artifactId>
+          <version>4.0-beta-7</version>
+          <extensions>true</extensions>
+          <dependencies>
+            <dependency>
+              <groupId>com.adobe.flex</groupId>
+              <artifactId>compiler</artifactId>
+              <version>${flex-sdk.version}</version>
+              <type>pom</type>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <storepass/>
+            <configurationReport>true</configurationReport>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.1</version>
+          <configuration>
+            <mavenExecutorId>forked-path</mavenExecutorId>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.2.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.8</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.2</version>
+          <configuration>
+            <useAgent>true</useAgent>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.3.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <distributionManagement>
+    <downloadUrl>http://oss.sonatype.org/content/groups/staging</downloadUrl>
+    <repository>
+      <id>sonatype-oss-staging</id>
+      <name>Nexus Release Repository</name>
+      <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>sonatype-oss-snapshots</id>
+      <name>sonatype-nexus-snapshots</name>
+      <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>flexmojos-repository</id>
+      <url>https://repository.sonatype.org/content/groups/flexgroup/</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>flexmojos-plugin-repository</id>
+      <url>https://repository.sonatype.org/content/groups/flexgroup/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+</project>
