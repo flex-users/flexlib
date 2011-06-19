@@ -8,13 +8,12 @@
     <artifactId>flexlib-parent</artifactId>
     <version>2.6-SNAPSHOT</version>
   </parent>
-  <groupId>com.google.code.flexlib</groupId>
   <artifactId>flexlib</artifactId>
   <version>2.6-SNAPSHOT</version>
   <packaging>swc</packaging>
 
   <name>flexlib :: library</name>
-  <description>TODO</description>
+  <description>Open Source Flex components library.</description>
 
   <dependencies>
     <dependency>
