@@ -43,6 +43,7 @@
           </execution>
         </executions>
         <configuration>
+          <attach>true</attach>
           <namespaces>
             <namespace>
               <uri>${flexlib.library.namespace}</uri>
@@ -55,14 +56,6 @@
           <docNamespaces>
             <namespace>${flexlib.library.namespace}</namespace>
           </docNamespaces>
-          <optimize>true</optimize>
-          <keepAs3Metadatas>
-            <keepAs3Metadata>Bindable</keepAs3Metadata>
-            <keepAs3Metadata>Managed</keepAs3Metadata>
-            <keepAs3Metadata>ChangeEvent</keepAs3Metadata>
-            <keepAs3Metadata>NonCommittingChangeEvent</keepAs3Metadata>
-            <keepAs3Metadata>Transient</keepAs3Metadata>
-          </keepAs3Metadatas>
           <storepass/>
         </configuration>
       </plugin>
