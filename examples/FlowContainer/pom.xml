@@ -26,10 +26,10 @@
   <parent>
     <groupId>com.google.code.flexlib</groupId>
     <artifactId>flexlib-examples</artifactId>
-    <version>2.6-M1</version>
+    <version>2.6-M2-SNAPSHOT</version>
   </parent>
   <artifactId>flexlib-example-flowcontainer</artifactId>
-  <version>2.6-M1</version>
+  <version>2.6-M2-SNAPSHOT</version>
   <packaging>swf</packaging>
   <name>flexlib :: examples :: FlowContainer</name>
 
