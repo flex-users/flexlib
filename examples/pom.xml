@@ -15,6 +15,10 @@
   <name>flexlib :: examples</name>
   <description>Examples of use for the flexlib library components.</description>
 
+  <properties>
+    <maven.test.skip>true</maven.test.skip>
+  </properties>
+
   <modules>
     <module>AdvancedForm</module>
     <module>Base64IMage</module>
