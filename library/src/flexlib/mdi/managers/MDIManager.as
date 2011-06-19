@@ -44,7 +44,6 @@ package flexlib.mdi.managers
 	import flexlib.mdi.events.MDIWindowEvent;
 
 	import mx.collections.ArrayCollection;
-	import mx.core.Application;
 	import mx.core.EventPriority;
     import mx.core.FlexGlobals;
     import mx.core.IFlexDisplayObject;
@@ -309,7 +308,7 @@ package flexlib.mdi.managers
 
 				if(this.isGlobal)
 				{
-					PopUpManager.addPopUp(window,Application.application as DisplayObject);
+					PopUpManager.addPopUp(window,FlexGlobals.topLevelApplication as DisplayObject);
 					this.position(window);
 				}
 				else

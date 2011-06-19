@@ -458,7 +458,7 @@ package flexlib.controls
 
       fill.entries = entries;
 
-      fill.angle = _angle;
+      fill.rotation = _angle;
       fill.focalPointRatio = .6;
 
       fill.begin(g, new Rectangle(0, 0, w, h), new Point(0, 0));
