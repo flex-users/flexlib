@@ -8,7 +8,7 @@
     <artifactId>flexlib-examples</artifactId>
     <version>2.6-SNAPSHOT</version>
   </parent>
-  <artifactId>flexlib-example-HAccordion</artifactId>
+  <artifactId>flexlib-example-haccordion</artifactId>
   <version>2.6-SNAPSHOT</version>
   <packaging>swf</packaging>
   <name>flexlib :: examples :: HAccordion</name>
