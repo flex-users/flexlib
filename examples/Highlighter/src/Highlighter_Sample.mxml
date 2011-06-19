@@ -4,13 +4,6 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="absolute" creationComplete="initApp()">
     <mx:Style>
-        @font-face{
-            src:local("Monaco");
-            fontFamily:myMonospaced;
-            advancedAntiAliasing:true;
-            fontWeight:normal;
-            fontStyle:normal;
-        }
         
         @font-face{
             src:local("Times New Roman");

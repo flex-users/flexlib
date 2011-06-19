@@ -34,7 +34,7 @@
     <module>FlowBox</module>
     <module>FlowContainer</module>
     <module>HAccordion</module>
-    <!--<module>Highlighter</module>-->
+    <module>Highlighter</module>
     <module>HorizontalAxisDataSelector</module>
     <module>IconLoader</module>
     <module>ImageMap</module>
