@@ -1,0 +1,128 @@
+Application
+{
+	fontFamily: Arial;
+    paddingTop:10;
+    paddingRight:10;
+    paddingBottom:10;
+    paddingLeft:10;
+}
+
+.mdiWindowFocus
+{
+	borderColor: #0053E1;
+	borderAlpha: 1;
+	borderThicknessLeft: 2;
+	borderThicknessTop: 0;
+	borderThicknessBottom: 2;
+	borderThicknessRight: 2;
+	roundedBottomCorners: false;
+	cornerRadius: 5;
+	dropShadowEnabled: false;
+	headerHeight: 29;
+	backgroundAlpha: 1; 
+	backgroundColor: #FFFFFF;
+	titleStyleName: "mdiWindowTitleStyle";
+	titleBackgroundSkin: Embed(source="/assets/swf/MSWindows.swf", symbol="headerBgDefault");
+	
+	controlButtonWidth: 21;
+	controlButtonHeight: 21;
+	controlButtonGap: 4;
+}
+
+.mdiWindowNoFocus
+{
+	borderColor: #7B97E0;
+	borderAlpha: 1;
+	borderThicknessLeft: 2;
+	borderThicknessTop: 0;
+	borderThicknessBottom: 2;
+	borderThicknessRight: 2;
+	roundedBottomCorners: false;
+	cornerRadius: 5;
+	dropShadowEnabled: false;
+	headerHeight: 29;
+	backgroundAlpha: 1; 
+	backgroundColor: #FFFFFF;
+	titleStyleName: "mdiWindowTitleStyle";
+	titleBackgroundSkin: Embed(source="/assets/swf/MSWindows.swf", symbol="headerBgDefaultNoFocus");
+	
+	controlButtonWidth: 21;
+	controlButtonHeight: 21;
+	controlButtonGap: 4;
+}
+
+.mdiWindowTitleStyle
+{
+	fontFamily: Arial;
+	fontSize: 12;
+	fontWeight: normal;
+	color: #FFFFFF;
+}
+
+.mdiWindowMinimizeBtn
+{
+	upSkin:        Embed(source="/assets/swf/MSWindows.swf", symbol="minimizeBtnDefault_up");
+	overSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="minimizeBtnDefault_over");
+	downSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="minimizeBtnDefault_down");
+	disabledSkin:  Embed(source="/assets/swf/MSWindows.swf", symbol="minimizeBtnDefaultNoFocus");
+}
+
+.mdiWindowMinimizeBtnNoFocus
+{
+	upSkin:        Embed(source="/assets/swf/MSWindows.swf", symbol="minimizeBtnDefaultNoFocus");
+	overSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="minimizeBtnDefaultNoFocus");
+	downSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="minimizeBtnDefaultNoFocus");
+	disabledSkin:  Embed(source="/assets/swf/MSWindows.swf", symbol="minimizeBtnDefaultNoFocus");
+}
+/**/
+
+.mdiWindowMaximizeBtn
+{
+	upSkin:        Embed(source="/assets/swf/MSWindows.swf", symbol="maximizeBtnDefault_up");
+	overSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="maximizeBtnDefault_over");
+	downSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="maximizeBtnDefault_down");
+	disabledSkin:  Embed(source="/assets/swf/MSWindows.swf", symbol="maximizeBtnDefaultNoFocus");
+}
+
+.mdiWindowMaximizeBtnNoFocus
+{
+	upSkin:        Embed(source="/assets/swf/MSWindows.swf", symbol="maximizeBtnDefaultNoFocus");
+	overSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="maximizeBtnDefaultNoFocus");
+	downSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="maximizeBtnDefaultNoFocus");
+	disabledSkin:  Embed(source="/assets/swf/MSWindows.swf", symbol="maximizeBtnDefaultNoFocus");
+}
+/**/
+
+.mdiWindowRestoreBtn
+{
+	upSkin:        Embed(source="/assets/swf/MSWindows.swf", symbol="restoreBtnDefault_up");
+	overSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="restoreBtnDefault_over");
+	downSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="restoreBtnDefault_down");
+	disabledSkin:  Embed(source="/assets/swf/MSWindows.swf", symbol="restoreBtnDefaultNoFocus");
+}
+
+.mdiWindowRestoreBtnNoFocus
+{
+	upSkin:        Embed(source="/assets/swf/MSWindows.swf", symbol="restoreBtnDefaultNoFocus");
+	overSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="restoreBtnDefaultNoFocus");
+	downSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="restoreBtnDefaultNoFocus");
+	disabledSkin:  Embed(source="/assets/swf/MSWindows.swf", symbol="restoreBtnDefaultNoFocus");
+}
+/**/
+
+.mdiWindowCloseBtn
+{
+	upSkin:        Embed(source="/assets/swf/MSWindows.swf", symbol="closeBtnDefault_up");
+	overSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="closeBtnDefault_over");
+	downSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="closeBtnDefault_down");
+	disabledSkin:  Embed(source="/assets/swf/MSWindows.swf", symbol="closeBtnDefaultNoFocus");
+}
+
+.mdiWindowCloseBtnNoFocus
+{
+	upSkin:        Embed(source="/assets/swf/MSWindows.swf", symbol="closeBtnDefaultNoFocus");
+	overSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="closeBtnDefaultNoFocus");
+	downSkin:      Embed(source="/assets/swf/MSWindows.swf", symbol="closeBtnDefaultNoFocus");
+	disabledSkin:  Embed(source="/assets/swf/MSWindows.swf", symbol="closeBtnDefaultNoFocus");
+}
+/**/

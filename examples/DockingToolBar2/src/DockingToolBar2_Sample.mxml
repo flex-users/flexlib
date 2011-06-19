@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:flexlib="http://code.google.com/p/flexlib/"
+               width="100%"
+               height="100%">
+
+  <fx:Style source="css/docker.css" />
+
+  <fx:Script>
+    <![CDATA[
+      import mx.effects.Move;
+      import mx.controls.Menu;
+      import mx.events.MenuEvent;
+
+      //MenuBar
+      [Bindable]
+      public var myMenuBarData:Object =
+        {label: "top", children:
+          [
+          {label: "File", children:
+            [
+            {label: "Open"},
+            {label: "New File"}
+            ]},
+          {label: "Edit", children:
+            [
+            {label: "Copy"},
+            {label: "Paste"},
+            {label: "Send"}
+            ]},
+          {label: "Window", children:
+            [
+            {label: "Tile"}
+            ]}
+          ]
+        }
+    ]]>
+  </fx:Script>
+  <fx:Declarations>
+
+    <s:ArrayCollection id="fontFamilyArray">
+      <fx:String>Arial</fx:String>
+      <fx:String>Courier</fx:String>
+      <fx:String>Helvetica</fx:String>
+    </s:ArrayCollection>
+
+    <s:ArrayCollection id="fontSizeArray">
+      <fx:String>8</fx:String>
+      <fx:String>12</fx:String>
+      <fx:String>16</fx:String>
+      <fx:String>24</fx:String>
+    </s:ArrayCollection>
+
+    <s:Move duration="250" id="DockerMove" />
+    <s:Fade duration="250" id="DockerFade" />
+  </fx:Declarations>
+  <flexlib:Docker horizontalScrollPolicy="off"
+                  width="100%"
+                  height="100%">
+
+    <flexlib:DockableToolBar id="toolbar3" label="Menu">
+      <mx:MenuBar id="menubar"
+                  dataProvider="{myMenuBarData}"
+                  showRoot="false"
+                  labelField="label" />
+    </flexlib:DockableToolBar>
+
+    <flexlib:DockableToolBar label="ToolBar 1" minWidth="0">
+      <mx:Button width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_bold.png')" />
+      <mx:Button width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_italic.png')" />
+      <mx:Button width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_underline.png')" />
+      <mx:ColorPicker width="22" height="22" />
+      <mx:Spacer height="{alignButtons.height}" width="4" />
+      <s:ButtonBar>
+        <s:dataProvider>
+          <s:ArrayCollection>
+            <fx:Object icon="@Embed('assets/icon_align_left.png')"
+                       label="Align Left"
+                       action="left" />
+            <fx:Object icon="@Embed('assets/icon_align_center.png')"
+                       label="Center"
+                       action="center" />
+            <fx:Object icon="@Embed('assets/icon_align_right.png')"
+                       label="Align Right"
+                       action="right" />
+            <fx:Object icon="@Embed('assets/icon_align_justify.png')"
+                       label="Justify"
+                       action="justify" />
+          </s:ArrayCollection>
+        </s:dataProvider>
+      </s:ButtonBar>
+    </flexlib:DockableToolBar>
+
+    <flexlib:DockableToolBar label="ToolBar 2" minWidth="0">
+      <s:ComboBox id="fontFamilyCombo" dataProvider="{fontFamilyArray}" />
+      <s:ComboBox id="fontSizeCombo"
+                  width="50"
+                  dataProvider="{fontSizeArray}" />
+      <mx:Button id="boldButton"
+                 width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_bold.png')" />
+      <mx:Button id="italicButton"
+                 width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_italic.png')" />
+      <mx:Button id="underlineButton"
+                 width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_style_underline.png')" />
+      <mx:ColorPicker id="colorPicker"
+                      width="22"
+                      height="22" />
+    </flexlib:DockableToolBar>
+
+    <flexlib:DockableToolBar initialPosition="bottom"
+                             label="ToolBar 3"
+                             minWidth="0">
+      <mx:Button id="bulletButton"
+                 width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_bullet.png')" />
+      <mx:Spacer height="{linkTextInput.height}" width="4" />
+      <s:TextInput id="linkTextInput" width="80" />
+    </flexlib:DockableToolBar>
+
+    <flexlib:DockableToolBar label="ToolBar 4" minWidth="0">
+      <s:ButtonBar id="alignButtons">
+        <s:dataProvider>
+          <s:ArrayCollection>
+            <fx:Object icon="@Embed('assets/icon_align_left.png')"
+                       label="Align Left"
+                       action="left" />
+            <fx:Object icon="@Embed('assets/icon_align_center.png')"
+                       label="Center"
+                       action="center" />
+            <fx:Object icon="@Embed('assets/icon_align_right.png')"
+                       label="Align Right"
+                       action="right" />
+            <fx:Object icon="@Embed('assets/icon_align_justify.png')"
+                       label="Justify"
+                       action="justify" />
+          </s:ArrayCollection>
+        </s:dataProvider>
+      </s:ButtonBar>
+    </flexlib:DockableToolBar>
+
+    <flexlib:DockableToolBar label="ToolBar 5"
+                             initialPosition="bottom"
+                             minWidth="0">
+      <mx:Button width="20"
+                 toggle="true"
+                 icon="@Embed('assets/icon_bullet.png')" />
+      <mx:Spacer height="{linkTextInput.height}" width="4" />
+      <s:TextInput width="80" />
+      <s:ComboBox width="100" dataProvider="{fontFamilyArray}" />
+      <s:ComboBox width="50" dataProvider="{fontSizeArray}" />
+    </flexlib:DockableToolBar>
+
+    <s:RichEditableText width="100%"
+                        height="100%"
+                        whiteSpaceCollapse="collapse">
+      <s:text>This is just a demonstation of multiple toolbars. 
+The toolbars do not perform any function in this sample.
+      
+Usage:
+Resize application upto minWidth defined by Docker to see toolbars flow in second row, resizing below minWidth will show horizontal scrollbar.
+Drag toolbar using dragstrip on left of each toolbar to see toolbar in floating state. You can dock the floating toolbar again at top or bottom.
+      </s:text>
+    </s:RichEditableText>
+
+  </flexlib:Docker>
+</s:Application>

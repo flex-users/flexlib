@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
+<s:Application xmlns:flexlib="http://code.google.com/p/flexlib/"
+               xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               defaultButton="{addButton}"
+               creationComplete="initTabs()">
+
+
+  <fx:Script>
+    <![CDATA[
+      import flexlib.controls.SuperTabBar;
+      import flexlib.events.TabReorderEvent;
+
+      import mx.controls.Label;
+      import mx.containers.VBox;
+      import mx.containers.Canvas;
+
+      import flexlib.controls.tabBarClasses.SuperTab;
+
+      import mx.containers.Panel;
+
+      [Embed(source="document.png")]
+      private var document_icon:Class;
+
+      [Embed(source="home.png")]
+      private var home_icon:Class;
+
+      private function initTabs():void
+      {
+          addTab( "Home", nav, "This tab can't be closed", home_icon );
+
+          for ( var i:int = 0; i < 3; i++ )
+          {
+              addTab( "Tab " + (i + 1), nav );
+          }
+
+          for ( i = 3; i < 6; i++ )
+          {
+              addTab( "Tab " + (i + 1), nav2 );
+          }
+
+          callLater( initNonClosableTab );
+      }
+
+      private function initNonClosableTab():void
+      {
+          nav.setClosePolicyForTab( 0, SuperTab.CLOSE_NEVER );
+      }
+
+      private function addTab( lbl:String, navigator:SuperTabNavigator, contentString:String = null,
+                               icon:Class = null ):void
+      {
+          if ( lbl == "" )
+              lbl = "(Untitled)";
+
+          var curNum:Number = nav.numChildren + 1;
+
+          var child:VBox = new VBox();
+
+          child.setStyle( "closable", true );
+
+          child.label = lbl;
+
+          if ( icon )
+          {
+              child.icon = icon;
+          }
+          else
+          {
+              child.icon = document_icon;
+          }
+          var label:Label = new Label();
+          label.text = contentString == null ? "Content for: " + lbl : contentString;
+
+          child.addChild( label );
+
+          navigator.addChild( child );
+      }
+
+      /* The following two functions are a bit of a hack to try to get the
+       * tab navigator to refresh the display and resize all the tabs. When
+       * you change stuff like tabWidth (which is a style) then the tab
+       * navigator has a hard time re-laying out the tabs. Adding and
+       * removing a child can sometimes trigger it to re-layout the tabs.
+       * I don't know, but just don't change tabWdith or horizontalGap or whatever
+       * else at runtime, OK? Pick some values and stick with them.
+       */
+      private function invalidateLater():void
+      {
+          var child:Canvas = new Canvas();
+          nav.addChild( child );
+          nav.removeChild( child );
+          callLater( invalidateNav );
+
+          nav2.addChild( child );
+          nav2.removeChild( child );
+          callLater( invalidateNav );
+      }
+
+      private function invalidateNav():void
+      {
+          nav.invalidateDisplayList();
+          nav2.invalidateDisplayList();
+      }
+
+      private function tabsReordered( event:TabReorderEvent ):void
+      {
+          var tabBar:SuperTabBar = event.currentTarget as SuperTabBar;
+          tabBar.setChildIndex( tabBar.getChildAt( event.oldIndex ), event.newIndex );
+      }
+      ]]>
+  </fx:Script>
+  <s:VGroup width="100%"
+            height="100%"
+            horizontalAlign="center">
+
+    <s:HGroup>
+
+      <mx:Panel title="Tab Control">
+        <s:HGroup>
+          <mx:TextInput width="100" id="tabLabel" />
+          <mx:Button id="addButton"
+                     label="Add Tab"
+                     click="addTab(tabLabel.text, nav); nav.selectedIndex = nav.numChildren - 1" />
+        </s:HGroup>
+
+        <mx:Button label="Remove All" click="nav.removeAllChildren()" />
+      </mx:Panel>
+
+      <mx:Panel title="Options">
+        <s:HGroup>
+          <mx:CheckBox id="tabWidthCheck"
+                       label="Speciy tabWidth:"
+                       change="if(tabWidthCheck.selected) { nav.setStyle('tabWidth', tabWidthInput.value); nav2.setStyle('tabWidth', tabWidthInput.value) } else { nav.setStyle('tabWidth', undefined); nav2.setStyle('tabWidth', undefined); } invalidateLater();" />
+          <mx:NumericStepper id="tabWidthInput"
+                             enabled="{tabWidthCheck.selected}"
+                             value="80"
+                             minimum="30"
+                             maximum="400"
+                             stepSize="10"
+                             change="nav.setStyle('tabWidth', tabWidthInput.value); nav2.setStyle('tabWidth', tabWidthInput.value); invalidateLater();" />
+        </s:HGroup>
+        <s:HGroup>
+          <mx:Label text="Horizontal Gap:" />
+          <mx:NumericStepper id="hGap"
+                             value="0"
+                             minimum="0"
+                             maximum="30"
+                             stepSize="1"
+                             change="nav.setStyle('horizontalGap', hGap.value); nav2.setStyle('horizontalGap', hGap.value); invalidateLater(); " />
+        </s:HGroup>
+        <s:HGroup>
+          <mx:Label text="Minimum tab width:" />
+          <mx:NumericStepper id="minTab"
+                             value="60"
+                             minimum="0"
+                             maximum="400"
+                             stepSize="10"
+                             change="nav.minTabWidth = minTab.value; " />
+        </s:HGroup>
+      </mx:Panel>
+    </s:HGroup>
+
+    <mx:Spacer height="20" />
+
+    <!-- These guys are SO super -->
+    <flexlib:SuperTabNavigator id="nav"
+                               scrollSpeed="25"
+                               stopScrollingEvent="{MouseEvent.MOUSE_UP}"
+                               startScrollingEvent="{MouseEvent.MOUSE_DOWN}"
+                               width="90%"
+                               height="90%"
+                               horizontalGap="0"
+                               closePolicy="{SuperTab.CLOSE_ROLLOVER}" />
+
+    <!-- I was going to call it SuperDuperTabNavigator, but I thought
+         that might be just a tad too much -->
+    <flexlib:SuperTabNavigator id="nav2"
+                               scrollSpeed="25"
+                               stopScrollingEvent="{MouseEvent.MOUSE_OUT}"
+                               startScrollingEvent="{MouseEvent.MOUSE_OVER}"
+                               width="90%"
+                               height="90%"
+                               horizontalGap="0"
+                               closePolicy="{SuperTab.CLOSE_ALWAYS}" />
+
+    <mx:Spacer height="20" />
+
+    <mx:Text text="And here's an example using just the SuperTabBar without the entire TabNavigator component."
+             width="310"
+             textAlign="center" />
+    <flexlib:ButtonScrollingCanvas verticalScrollPolicy="off"
+                                   leftButtonStyleName="leftButton"
+                                   buttonWidth="20"
+                                   rightButtonStyleName="rightButton"
+                                   width="400"
+                                   height="20"
+                                   horizontalScrollPolicy="auto">
+
+      <flexlib:SuperTabBar dragEnabled="true"
+                           dropEnabled="true"
+                           tabStyleName="firefoxLikeTabs"
+                           tabsReordered="tabsReordered(event);"
+                           textAlign="left"
+                           tabWidth="80">
+
+        <flexlib:dataProvider>
+          <fx:String>Alabama</fx:String>
+          <fx:String>Alaska</fx:String>
+          <fx:String>Arkansas</fx:String>
+          <fx:String>Alabama</fx:String>
+          <fx:String>Alaska</fx:String>
+          <fx:String>Arkansas</fx:String>
+          <fx:String>Alabama</fx:String>
+          <fx:String>Alaska</fx:String>
+          <fx:String>Arkansas</fx:String>
+          <fx:String>Alabama</fx:String>
+          <fx:String>Alaska</fx:String>
+          <fx:String>Arkansas</fx:String>
+          <fx:String>Alabama</fx:String>
+          <fx:String>Alaska</fx:String>
+          <fx:String>Arkansas</fx:String>
+          <fx:String>Alabama</fx:String>
+          <fx:String>Alaska</fx:String>
+          <fx:String>Arkansas</fx:String>
+          <fx:String>Alabama</fx:String>
+          <fx:String>Alaska</fx:String>
+          <fx:String>Arkansas</fx:String>
+          <fx:String>Alabama</fx:String>
+          <fx:String>Alaska</fx:String>
+          <fx:String>Arkansas</fx:String>
+
+        </flexlib:dataProvider>
+      </flexlib:SuperTabBar>
+    </flexlib:ButtonScrollingCanvas>
+  </s:VGroup>
+
+</s:Application>

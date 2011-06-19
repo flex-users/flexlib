@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+
+  <!-- Assembly id -->
+  <id>binaries</id>
+
+  <!-- Archive formats -->
+  <formats>
+    <format>zip</format>
+  </formats>
+
+  <!-- Archive base directory -->
+  <baseDirectory>${project.artifactId}-binaries-${project.version}</baseDirectory>
+
+  <!-- Assembly description -->
+  <fileSets>
+    <fileSet>
+      <directory>${project.build.directory}</directory>
+      <excludes>
+        <exclude>template.zip</exclude>
+        <exclude>**/assemblies/</exclude>
+        <exclude>**/classes/</exclude>
+        <exclude>**/build/</exclude>
+        <exclude>**/archive-tmp/</exclude>
+        <exclude>**/html-wrapper-template/</exclude>
+        <exclude>**/surefire-reports/</exclude>
+        <exclude>${project.artifactId}-size-report.xml</exclude>
+        <exclude>${project.artifactId}-link-report.xml</exclude>
+        <exclude>${project.artifactId}-config-report.xml</exclude>
+        <exclude>${project.artifactId}-configs.xml</exclude>
+      </excludes>
+    </fileSet>
+  </fileSets>
+
+</assembly>

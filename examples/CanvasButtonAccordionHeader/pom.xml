@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.google.code.flexlib</groupId>
+    <artifactId>flexlib-examples</artifactId>
+    <version>2.6-SNAPSHOT</version>
+  </parent>
+  <artifactId>flexlib-example-canvasbuttonaccordionhader</artifactId>
+  <version>2.6-SNAPSHOT</version>
+  <packaging>swf</packaging>
+  <name>flexlib :: examples :: CanvasButtonAccordionHeader</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib</artifactId>
+      <type>swc</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <sourceFile>${project.build.sourceDirectory}/CanvasButtonAccordionHeader_Sample.mxml</sourceFile>
+          <storepass/>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

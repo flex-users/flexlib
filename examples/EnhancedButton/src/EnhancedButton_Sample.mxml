@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:ui="ui.*"
+               xmlns:flexlib="http://code.google.com/p/flexlib/"
+               creationComplete="onCreationComplete()">
+  <s:layout>
+    <s:HorizontalLayout />
+  </s:layout>
+
+  <!--
+       - This demo provides a playground environment to test the functionality of
+       - EnhancedButtonDemo, a  button skin providing discrete control over gradient states
+       - and corner-radii.
+       -
+       - @author Daniel Wabyick
+  -->
+  <fx:Style source="application.css" />
+
+  <fx:Style>
+  
+       /**
+        * This style explicitely has all of the defaults set for the UI. 
+        *
+        * Note the skin itself has a fairly robust handling of default values,
+        * so you don't really need to specify this up front.
+        */  
+       .customButtonStyle
+       {
+			cornerRadii: 16, 0, 16, 0;
+			borderColors: #006699, #006699;
+			overBorderColors: #003399, #003399;
+			selectedBorderColors: #003399, #003399;
+			borderThickness: 3;
+			fillColors: #FCFFF4, #006699, #0066CC, #00CCFF;
+			fillAlphas: 0.5, 0.5, 0.5, 0.5;
+			fillColorRatios: 0, 85, 170, 255;
+			 
+			   
+			overFillColors: #FCFFF4, #006699, #0066CC, #00CCFF;
+			overFillAlphas: 0.5, 0.5, 0.5, 0.5;
+			fillColorRatios: 0, 85, 170, 255;
+			   
+			selectedFillColors: #FCFFF4, #006699;
+			selectedFillAlphas: 0.5, 0.5;
+			selectedFillColorRatios: 0, 255;
+			   
+			color: #FFFFFF;
+			textRollOverColor: #FFFFFF;
+       }
+       
+       /** Define a default style for comparison. **/
+       .customButtonStyleDefault
+       {
+       }
+    </fx:Style>
+
+
+
+  <fx:Script>
+    <![CDATA[
+      import events.SetStyleEvent;
+
+      import mx.core.FlexGlobals;
+
+      import util.CSSPrintUtil;
+
+      private var outputStyles:Array = ["cornerRadii", "borderColors", "overBorderColors", "selectedBorderColors",
+                                        "borderThickness", "borderAlpha",
+                                        "fillColors", "fillAlphas", "fillColorRatios",
+                                        "overFillColors", "overFillAlphas", "overFillColorRatios",
+                                        "downFillColors", "downFillAlphas", "downFillColorRatios",
+                                        "selectedFillColors", "selectedFillAlphas", "selectedFillColorRatios",
+                                        "highlightAlphas", "color", "textRollOverColor", "fontSize"];
+
+
+      private var origStyle:CSSStyleDeclaration;
+      private var newStyle:CSSStyleDeclaration;
+
+      private function onCreationComplete():void
+      {
+        this.addEventListener(SetStyleEvent.TYPE, onSetStyle);
+
+        origStyle = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(".customButtonStyleDefault");
+        newStyle = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(".customButtonStyle");
+
+
+        dumpCSS();
+      }
+
+      private function onSetStyle(evt:SetStyleEvent):void
+      {
+        //trace("evt: " + evt.styleProp + " : " + evt.styleVal);   
+        newStyle.setStyle(evt.styleProp, evt.styleVal);
+
+        dumpCSS();
+      }
+
+      private function dumpCSS():void
+      {
+        outputTF.text = CSSPrintUtil.outputStyles(origStyle, newStyle, outputStyles, "customButtonStyle");
+      }
+    ]]>
+  </fx:Script>
+
+
+
+  <s:Panel id="stylePanel"
+           title="STYLE CONTROLS"
+           styleName="areaPanel"
+           width="100%"
+           height="100%">
+    <s:layout>
+      <s:VerticalLayout />
+    </s:layout>
+
+    <mx:Form width="100%" height="100%">
+      <mx:FormItem label="border" width="100%">
+        <ui:BorderStyleControl width="100%" />
+      </mx:FormItem>
+
+      <mx:FormItem label="up gradient" width="100%">
+        <ui:ButtonGradientControl id="upControl"
+                                  baseStyleName="up"
+                                  width="100%" />
+      </mx:FormItem>
+
+      <mx:FormItem label="over gradient" width="100%">
+        <ui:ButtonGradientControl baseStyleName="over" width="100%" />
+      </mx:FormItem>
+
+      <mx:FormItem label="selected gradient" width="100%">
+        <ui:ButtonGradientControl id="selectedControl"
+                                  baseStyleName="selected"
+                                  width="100%"
+                                  defaultNumColors="2" />
+      </mx:FormItem>
+
+      <mx:FormItem label="misc" width="100%">
+        <ui:MiscStyleControl width="100%" />
+      </mx:FormItem>
+    </mx:Form>
+
+
+  </s:Panel>
+
+  <s:Panel title="COMPONENT"
+           styleName="areaPanel"
+           height="100%">
+    <s:layout>
+      <s:VerticalLayout horizontalAlign="center" verticalAlign="middle" />
+    </s:layout>
+    <s:HGroup paddingBottom="10"
+              paddingLeft="10"
+              paddingRight="10"
+              paddingTop="10">
+      <s:ToggleButton id="button"
+                      label="The Button"
+                      width="140"
+                      height="100"
+                      styleName="customButtonStyle" />
+    </s:HGroup>
+
+
+  </s:Panel>
+
+  <s:Panel title="CSS"
+           styleName="areaPanel"
+           height="100%"
+           minWidth="340">
+    <s:RichText width="100%"
+                height="100%"
+                backgroundAlpha="0"
+                id="outputTF" />
+  </s:Panel>
+</s:Application>

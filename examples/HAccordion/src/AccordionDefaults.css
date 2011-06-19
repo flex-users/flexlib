@@ -1,0 +1,72 @@
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace flexlib "http://code.google.com/p/flexlib/";
+
+flexlib|HAccordion
+		{
+			backgroundColor: #FFFFFF;
+			borderStyle: "solid";
+			
+			paddingBottom: -1;
+			paddingLeft: -1;
+			paddingRight: -1;
+			paddingTop: -1;
+			verticalGap: -1;
+			horizontalGap: -1;
+			textAlign: "right";
+		}
+		
+flexlib|VAccordion
+		{
+			backgroundColor: #FFFFFF;
+			borderStyle: "solid";
+			
+			paddingBottom: -1;
+			paddingLeft: -1;
+			paddingRight: -1;
+			paddingTop: -1;
+			verticalGap: -1;
+			horizontalGap: -1;
+			textAlign: "left";
+		}
+		
+		/*
+		//------------------------------
+		//  AccordionHeader
+		//------------------------------
+		*/
+		
+flexlib|AccordionHeader
+		{
+		/*	selectedFillColors: #FFFFFF, #FFFFFF; */ /* overrides the calculated fillcolors */
+			
+		/*	disabledIcon: null; */
+			disabledSkin: ClassReference("mx.skins.halo.AccordionHeaderSkin");
+		/*	downIcon: null; */
+			downSkin: ClassReference("mx.skins.halo.AccordionHeaderSkin");
+			horizontalGap: 5;
+		/*	overIcon: null; */
+			overSkin: ClassReference("mx.skins.halo.AccordionHeaderSkin");
+			paddingTop: 5;
+			paddingBottom: 5;
+		/*	selectedDisabledIcon: null; */
+			selectedDisabledSkin: ClassReference("mx.skins.halo.AccordionHeaderSkin");
+		/*	selectedDownIcon: null; */
+			selectedDownSkin: ClassReference("mx.skins.halo.AccordionHeaderSkin");
+		/*	selectedOverIcon: null; */
+			selectedOverSkin: ClassReference("mx.skins.halo.AccordionHeaderSkin");
+		/*	selectedUpIcon: null; */
+			selectedUpSkin: ClassReference("mx.skins.halo.AccordionHeaderSkin");
+			
+		/*	upIcon: null; */
+			upSkin: ClassReference("mx.skins.halo.AccordionHeaderSkin");
+			
+			fontFamily: accordionHeader; 
+			fontWeight:bold;
+			fontSize:11;
+			fontSharpness:-200;
+			fontThickness:-100;
+			fontGridFitType: none;
+			
+			
+		}

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.google.code.flexlib</groupId>
+    <artifactId>flexlib-parent</artifactId>
+    <version>2.6-SNAPSHOT</version>
+  </parent>
+  <artifactId>flexlib-examples</artifactId>
+  <version>2.6-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>flexlib :: examples</name>
+  <description>Examples of use for the flexlib library components.</description>
+
+  <modules>
+    <module>AdvancedForm</module>
+    <module>Base64IMage</module>
+    <module>CanvasButton</module>
+    <module>CanvasButtonAccordionHeader</module>
+    <module>ConvertibleTreeList</module>
+    <module>DockingToolBar1</module>
+    <module>DockingToolBar2</module>
+    <module>DragCanvas</module>
+    <module>DraggableSlider</module>
+    <module>EnhancedButton</module>
+    <module>Fire</module>
+    <module>FlowBox</module>
+    <module>FlowContainer</module>
+    <module>HAccordion</module>
+    <!--<module>Highlighter</module>-->
+    <module>HorizontalAxisDataSelector</module>
+    <module>IconLoader</module>
+    <module>ImageMap</module>
+    <module>MDI</module>
+    <module>PromptingTextInput</module>
+    <module>ScheduleViewer1</module>
+    <module>ScheduleViewer2</module>
+    <module>ScheduleViewer3</module>
+    <module>ScheduleViewer4</module>
+    <module>ScheduleViewer5</module>
+    <module>ScheduleViewer6</module>
+    <module>ScrollableMenu</module>
+    <module>SuperTabNavigator</module>
+    <module>TreeGrid</module>
+    <module>VerticalMenuBar</module>
+    <module>WindowShade</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.code.flexlib</groupId>
+        <artifactId>flexlib</artifactId>
+        <version>${project.version}</version>
+        <type>swc</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+
+    <finalName>${project.artifactId}</finalName>
+
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src-test</testSourceDirectory>
+    <directory>${project.basedir}/bin-debug</directory>
+    <outputDirectory>${project.basedir}/bin-debug/build</outputDirectory>
+
+    <resources>
+      <resource>
+        <directory>${project.build.sourceDirectory}</directory>
+        <targetPath>${project.build.directory}</targetPath>
+        <excludes>
+          <exclude>**/*.as</exclude>
+          <exclude>**/*.mxml</exclude>
+        </excludes>
+      </resource>
+    </resources>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonatype.flexmojos</groupId>
+          <artifactId>flexmojos-maven-plugin</artifactId>
+          <extensions>true</extensions>
+          <executions>
+            <execution>
+              <id>generate-html-wrapper</id>
+              <phase>generate-resources</phase>
+              <goals>
+                <goal>wrapper</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>add-output-directory-to-flashplayer-trust-file</id>
+              <goals>
+                <goal>trust</goal>
+              </goals>
+              <configuration>
+                <filesToTrust>
+                  <fileToTrust>${project.build.directory}</fileToTrust>
+                </filesToTrust>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Configuration for the assembly packager plugin -->
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>attach-example-source-and-binary-assemblies</id>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <outputDirectory>${project.build.directory}/assemblies</outputDirectory>
+            <descriptors>
+              <descriptor>${project.basedir}/../example-assembly-sources.xml</descriptor>
+              <descriptor>${project.basedir}/../example-assembly-binaries.xml</descriptor>
+            </descriptors>
+          </configuration>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+  </build>
+
+</project>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2007 FlexLib Contributors.  See:
+     http://code.google.com/p/flexlib/wiki/ProjectContributors
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy of
+     this software and associated documentation files (the "Software"), to deal in
+     the Software without restriction, including without limitation the rights to
+     use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+     of the Software, and to permit persons to whom the Software is furnished to do
+     so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+          xmlns:s="library://ns.adobe.com/flex/spark"
+          xmlns:mx="library://ns.adobe.com/flex/mx">
+
+  <fx:Script>
+    <![CDATA[
+      import events.SetStyleEvent;
+
+
+      private var radii:Array = new Array(4);
+
+      private function updateRadii():void
+      {
+        radii[0] = tlSlider.value;
+        radii[1] = trSlider.value;
+        radii[2] = brSlider.value;
+        radii[3] = blSlider.value;
+        dispatchEvent(new SetStyleEvent("cornerRadii", radii));
+
+      }
+
+      [Bindable(event="setStyle")]
+      public function get tl():int
+      {
+        return radii[0];
+
+      }
+
+      [Bindable(event="setStyle")]
+      public function get tr():int
+      {
+        return radii[1];
+
+      }
+
+      [Bindable(event="setStyle")]
+      public function get br():int
+      {
+        return radii[2];
+      }
+
+      [Bindable(event="setStyle")]
+      public function get bl():int
+      {
+        return radii[3];
+      }
+    ]]>
+  </fx:Script>
+  <s:HGroup width="50%">
+    <s:Label text="TL" />
+    <s:HSlider id="tlSlider"
+               width="50"
+               minimum="0"
+               maximum="40"
+               snapInterval="1"
+               value="16"
+               change="updateRadii()" />
+    <mx:Spacer width="30" />
+    <s:Label text="TR" />
+    <s:HSlider id="trSlider"
+               width="50"
+               minimum="0"
+               maximum="40"
+               snapInterval="1"
+               change="updateRadii()" />
+  </s:HGroup>
+  <s:HGroup width="50%">
+    <s:Label text="BL" />
+    <s:HSlider id="blSlider"
+               width="50"
+               minimum="0"
+               maximum="40"
+               snapInterval="1"
+               change="updateRadii()" />
+    <mx:Spacer width="30" />
+    <s:Label text="BR" />
+    <s:HSlider id="brSlider"
+               width="50"
+               minimum="0"
+               maximum="40"
+               snapInterval="1"
+               value="16"
+               change="updateRadii()" />
+  </s:HGroup>
+</s:VGroup>
