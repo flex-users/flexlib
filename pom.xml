@@ -10,7 +10,7 @@
 
   <name>flexlib</name>
   <inceptionYear>2007</inceptionYear>
-  <description>TODO</description>
+  <description>Open Source Flex components library.</description>
   <url>https://github.com/flex-users/flexlib</url>
 
   <licenses>
@@ -22,6 +22,41 @@
 
   <developers>
     <developer>
+      <id>darron.schall</id>
+      <name>darron.schall</name>
+      <roles>
+        <role>Owner</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>dmccune</id>
+      <name>dmccune</name>
+      <roles>
+        <role>Owner</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>mikechambers</id>
+      <name>mikechambers</name>
+      <roles>
+        <role>Owner</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>adobeted</id>
+      <name>adobeted</name>
+      <roles>
+        <role>Owner</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>olarivain</id>
+      <name>olarivain</name>
+      <roles>
+        <role>Owner</role>
+      </roles>
+    </developer>
+    <developer>
       <id>Julien.Nicoulaud</id>
       <name>Julien Nicoulaud</name>
       <roles>
@@ -29,6 +64,181 @@
       </roles>
       <timezone>1</timezone>
       <url>http://www.twitter.com/nicoulaj</url>
+    </developer>
+    <developer>
+      <id>renaun</id>
+      <name>renaun</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>egreenfield</id>
+      <name>egreenfield</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>prokium</id>
+      <name>prokium</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>ajit.gosavi</id>
+      <name>ajit.gosavi</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>benstucki</id>
+      <name>benstucki</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>stacy.tyler.young</id>
+      <name>stacy.tyler.young</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>dwabyick</id>
+      <name>dwabyick</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>TomLeeStudio</id>
+      <name>TomLeeStudio</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>adobeauhlmann</id>
+      <name>adobeauhlmann</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>amcleodatadobe</id>
+      <name>amcleodatadobe</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>tobiaspatton</id>
+      <name>tobiaspatton</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>xslfodh</id>
+      <name>xslfodh</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>slangeberg</id>
+      <name>slangeberg</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>brian.joseph31</id>
+      <name>brian.joseph31</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>bmeutzner</id>
+      <name>bmeutzner</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>ben.clinkinbeard</id>
+      <name>ben.clinkinbeard</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>cfortier1960</id>
+      <name>cfortier1960</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>daniel.mcweeney</id>
+      <name>daniel.mcweeney</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>adamflater</id>
+      <name>adamflater</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>twgonzalez</id>
+      <name>twgonzalez</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>frozenandcold</id>
+      <name>frozenandcold</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>www.rphelan.com</id>
+      <name>www.rphelan.com</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>sefi.ninio</id>
+      <name>sefi.ninio</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>rjowen</id>
+      <name>rjowen</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>jgiampolo</id>
+      <name>jgiampolo</name>
+      <roles>
+        <role>Committer</role>
+      </roles>
     </developer>
   </developers>
 
@@ -56,13 +266,13 @@
   <properties>
 
     <!-- Flex SDK versions -->
-    <flex-sdk-4.0.version>4.0.0.14159</flex-sdk-4.0.version>
-    <flex-sdk-4.1.version>4.1.0.16248</flex-sdk-4.1.version>
-    <flex-sdk-4.5.version>4.5.0.19786</flex-sdk-4.5.version>
-    <flex-sdk.version>${flex-sdk-4.5.version}</flex-sdk.version>
+    <flex-4.0.version>4.0.0.14159</flex-4.0.version>
+    <flex-4.1.version>4.1.0.16248</flex-4.1.version>
+    <flex-4.5.version>4.5.0.20967</flex-4.5.version>
+    <flex.version>${flex-4.1.version}</flex.version>
 
     <!-- Dependencies versions -->
-    <flexunit.version>4.0-beta-2</flexunit.version>
+    <flexunit.version>4.0-rc-1</flexunit.version>
 
     <!-- Library settings -->
     <flexlib.library.namespace>http://code.google.com/p/flexlib/</flexlib.library.namespace>
@@ -82,8 +292,8 @@
 
   <modules>
     <module>library</module>
-    <!--<module>examples</module>-->
-    <!--<module>assemblies</module>-->
+    <module>examples</module>
+    <module>assemblies</module>
   </modules>
 
   <dependencies>
@@ -99,14 +309,8 @@
       <dependency>
         <groupId>com.adobe.flex.framework</groupId>
         <artifactId>flex-framework</artifactId>
-        <version>${flex-sdk.version}</version>
+        <version>${flex.version}</version>
         <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>com.google.code.flexlib</groupId>
-        <artifactId>flexlib</artifactId>
-        <version>${project.version}</version>
-        <type>swc</type>
       </dependency>
       <dependency>
         <groupId>com.adobe.flexunit</groupId>
@@ -130,7 +334,7 @@
             <dependency>
               <groupId>com.adobe.flex</groupId>
               <artifactId>compiler</artifactId>
-              <version>${flex-sdk.version}</version>
+              <version>${flex.version}</version>
               <type>pom</type>
             </dependency>
           </dependencies>
@@ -165,11 +369,11 @@
         </plugin>
         <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.5</version>
+          <version>2.6</version>
         </plugin>
         <plugin>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.2</version>
+          <version>1.3</version>
           <configuration>
             <useAgent>true</useAgent>
           </configuration>
