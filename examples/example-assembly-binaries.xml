@@ -50,6 +50,7 @@
         <exclude>${project.artifactId}-link-report.xml</exclude>
         <exclude>${project.artifactId}-config-report.xml</exclude>
         <exclude>${project.artifactId}-configs.xml</exclude>
+        <exclude>*.jar</exclude>
       </excludes>
     </fileSet>
   </fileSets>

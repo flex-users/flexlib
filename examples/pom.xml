@@ -132,7 +132,6 @@
           </executions>
         </plugin>
 
-        <!-- Configuration for the assembly packager plugin -->
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
           <executions>
