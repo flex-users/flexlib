@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.google.code.flexlib</groupId>
+    <artifactId>flexlib-parent</artifactId>
+    <version>2.6-SNAPSHOT</version>
+  </parent>
+  <groupId>com.google.code.flexlib</groupId>
+  <artifactId>flexlib-assemblies</artifactId>
+  <version>2.6-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>flexlib :: assemblies</name>
+  <description>Distribution assemblies for the flexlib library.</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib</artifactId>
+      <version>${project.version}</version>
+      <type>swc</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib</artifactId>
+      <version>${project.version}</version>
+      <classifier>asdoc</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib-example-advancedform</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib-example-advancedform</artifactId>
+      <version>${project.version}</version>
+      <classifier>binaries</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib-example-base64image</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib-example-base64image</artifactId>
+      <version>${project.version}</version>
+      <classifier>binaries</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib-example-canvasbutton</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.flexlib</groupId>
+      <artifactId>flexlib-example-canvasbutton</artifactId>
+      <version>${project.version}</version>
+      <classifier>binaries</classifier>
+      <type>zip</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>flexlib-${project.version}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-assemblies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptors>
+            <descriptor>${project.basedir}/flexlib-assembly.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

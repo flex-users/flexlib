@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+
+  <!-- Assembly id -->
+  <id>assembly</id>
+
+  <!-- Archive formats -->
+  <formats>
+    <format>zip</format>
+  </formats>
+
+  <!-- Archive base directory -->
+  <baseDirectory>flexlib-${project.version}</baseDirectory>
+
+  <!-- Assembly artifacts -->
+  <dependencySets>
+
+    <!-- Library SWC -->
+    <dependencySet>
+      <includes>
+        <include>${project.groupId}:flexlib:swc</include>
+      </includes>
+      <outputDirectory>bin</outputDirectory>
+    </dependencySet>
+
+    <!-- Library sources -->
+    <dependencySet>
+      <includes>
+        <include>${project.groupId}:flexlib:*:sources</include>
+      </includes>
+      <unpack>true</unpack>
+      <outputDirectory>sources/library</outputDirectory>
+    </dependencySet>
+
+    <!-- Library asdoc -->
+    <dependencySet>
+      <includes>
+        <include>${project.groupId}:flexlib:*:asdoc</include>
+      </includes>
+      <unpack>true</unpack>
+      <outputDirectory>asdoc</outputDirectory>
+    </dependencySet>
+
+    <!-- Examples binaries -->
+    <dependencySet>
+      <includes>
+        <include>${project.groupId}:flexlib-example-*:*:binaries</include>
+      </includes>
+      <unpack>true</unpack>
+      <outputDirectory>examples</outputDirectory>
+    </dependencySet>
+
+    <!-- Examples sources -->
+    <dependencySet>
+      <includes>
+        <include>${project.groupId}:flexlib-example-*:*:sources</include>
+      </includes>
+      <unpack>true</unpack>
+      <outputDirectory>sources/examples</outputDirectory>
+    </dependencySet>
+
+  </dependencySets>
+
+  <!-- Additional files -->
+  <fileSets>
+    <fileSet>
+      <directory>${project.basedir}/resources</directory>
+      <outputDirectory>.</outputDirectory>
+    </fileSet>
+  </fileSets>
+
+</assembly>
