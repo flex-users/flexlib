@@ -536,14 +536,18 @@ package flexlib.mdi.managers
 					break;
 				}
 
-				// add this event to collection for lookup in the effect handler
-				mgrEventCollection.addItem(mgrEvent);
+        // Play effect only if it is necessary
+        if(mgrEvent.effect is CompositeEffect || (mgrEvent.effect.targets && mgrEvent.effect.targets.length))
+        {
+          // add this event to collection for lookup in the effect handler
+          mgrEventCollection.addItem(mgrEvent);
 
-				// listen for start and end of effect
-				mgrEvent.effect.addEventListener(EffectEvent.EFFECT_START, onMgrEffectEvent)
-				mgrEvent.effect.addEventListener(EffectEvent.EFFECT_END, onMgrEffectEvent);
+          // listen for start and end of effect
+          mgrEvent.effect.addEventListener(EffectEvent.EFFECT_START, onMgrEffectEvent)
+          mgrEvent.effect.addEventListener(EffectEvent.EFFECT_END, onMgrEffectEvent);
 
-				mgrEvent.effect.play();
+          mgrEvent.effect.play();
+        }
 			}
 		}
 
