@@ -415,7 +415,7 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>2.2</version>
           <configuration>
-            <tagNameFormat>@{project.version}</tagNameFormat>
+            <tagNameFormat>{1}</tagNameFormat>
             <mavenExecutorId>forked-path</mavenExecutorId>
             <autoVersionSubmodules>true</autoVersionSubmodules>
             <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
