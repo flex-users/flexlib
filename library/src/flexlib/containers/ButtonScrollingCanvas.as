@@ -358,10 +358,10 @@ package flexlib.containers
 			var buttonHeight:Number = _explicitButtonHeight ? _explicitButtonHeight : unscaledHeight; 
 			
 			
-			leftButton.move(0, 0);
+			leftButton.move(0, (unscaledHeight - buttonHeight) / 2);
 			leftButton.setActualSize(buttonWidth, buttonHeight);
 			
-			rightButton.move(unscaledWidth - buttonWidth, 0);
+			rightButton.move(unscaledWidth - buttonWidth, (unscaledHeight - buttonHeight) / 2);
 			rightButton.setActualSize(buttonWidth, buttonHeight);
 			
 			upButton.move(buttonWidth, 0);
