@@ -13,6 +13,7 @@ bin-release/
 # Eclipse/Flex/Flash Builder project files
 .actionScriptProperties
 .flexProperties
+.flexLibProperties
 .settings/
 .project
 .classpath
@@ -23,3 +24,6 @@ release.properties
 
 # mvn site:stage bug
 home/
+
+# Mac OS
+*.DS_Store
