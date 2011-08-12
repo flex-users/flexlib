@@ -76,29 +76,29 @@ package flexlib.containers
     //--------------------------------------------------------------------------
 
     /**
-     *  @private
+     *
      */
-    private var noSnapshotFlag:Boolean = false;
+    protected var noSnapshotFlag:Boolean = false;
 
     /**
-     *  @private Key for reset snapshot
+     * Key for reset snapshot
      */
-    private var resetSnapshotKey:String = "reset";
+    protected var resetSnapshotKey:String = "reset";
 
     /**
-     *  @private
+     *
      */
-    private var undoCounter:int = 0;
+    protected var undoCounter:int = 0;
 
     /**
-     *  @private
+     *
      */
-    private var undoCurrentIndex:int = -1;
+    protected var undoCurrentIndex:int = -1;
 
     /**
-     *  @private
+     *
      */
-    private var modelStack:Object;
+    protected var modelStack:Object;
 
     //--------------------------------------------------------------------------
     //
@@ -111,18 +111,18 @@ package flexlib.containers
     //----------------------------------
 
     /**
-     *  @private LookupTable of isValid flags
+     * LookupTable of isValid flags
      */
-    private var validators:Object;
+    protected var validators:Object;
 
     //----------------------------------
     //  undoHistorySize
     //----------------------------------
 
     /**
-     *  @private
+     *
      */
-    private var _undoHistorySize:int = 5;
+    protected var _undoHistorySize:int = 5;
 
     /**
      *  The undoHistorySize defaults the number of undos.
@@ -144,9 +144,9 @@ package flexlib.containers
     //----------------------------------
 
     /**
-     *  @private
+     *
      */
-    private var _modelType:String = "shared";
+    protected var _modelType:String = "shared";
 
     [Inspectable(category="General", enumeration="shared,memory", defaultValue="shared")]
     /**
@@ -203,9 +203,9 @@ package flexlib.containers
     }
 
     /**
-     * @private
+     * @protected
      */
-    private function myKeyDownHandler(event:KeyboardEvent):void
+    protected function myKeyDownHandler(event:KeyboardEvent):void
     {
 
       if (event.ctrlKey && event.keyCode == 90 && !(event.target is NumericStepper))
@@ -240,7 +240,7 @@ package flexlib.containers
     /**
      * 	Loop through all Validtors at the same level as the Form and set a Event listener for Valid and Invalid
      */
-    private function setValidatorListenerEvents(event:Event):void
+    protected function setValidatorListenerEvents(event:Event):void
     {
       // Take First Snapshot After All Children have been created
       snapshotValues(this.getChildren(), resetSnapshotKey);
@@ -295,7 +295,7 @@ package flexlib.containers
     /**
      * 	Handles all valid and invalid events on the validators
      */
-    private function setValidFlag(event:ValidationResultEvent):void
+    protected function setValidFlag(event:ValidationResultEvent):void
     {
       var tmpFlag:Boolean = true;
       for (var i:int = 0; i < validators.length; i++)
@@ -313,7 +313,7 @@ package flexlib.containers
     /**
      *
      */
-    private function snapshotValues(obj:Object, snapshotKey:String):void
+    protected function snapshotValues(obj:Object, snapshotKey:String):void
     {
       try
       {
@@ -364,9 +364,9 @@ package flexlib.containers
     }
 
     /**
-     * 	@private
+     * 	@protected
      */
-    private function textInputChange(event:FocusEvent):void
+    protected function textInputChange(event:FocusEvent):void
     {
       var snapshotModel:Object = getLastestSnapshot();
       var tmpKey:String = event.target.parent.toString();
@@ -381,9 +381,9 @@ package flexlib.containers
     }
 
     /**
-     * 	@private
+     * 	@protected
      */
-    private function controlChange(event:Event):void
+    protected function controlChange(event:Event):void
     {
       if (event.target is RadioButton && !event.target.selected)
         takeSnapshot();
@@ -393,9 +393,9 @@ package flexlib.containers
     }
 
     /**
-     * 	@private
+     * 	@protected
      */
-    private function doUndo():void
+    protected function doUndo():void
     {
       //debug += "\ndoUndo: undoCurrentIndex: " + undoCurrentIndex + " undoCounter: " + undoCounter;
       noSnapshotFlag = true;
@@ -411,9 +411,9 @@ package flexlib.containers
     }
 
     /**
-     * 	@private
+     * 	@protected
      */
-    private function doRedo():void
+    protected function doRedo():void
     {
       //debug += "\ndoRedo: undoCurrentIndex: " + undoCurrentIndex + " undoCounter: " + undoCounter;
       noSnapshotFlag = true;
@@ -427,9 +427,9 @@ package flexlib.containers
     }
 
     /**
-     * 	@private
+     * 	@protected
      */
-    private function takeSnapshot():void
+    protected function takeSnapshot():void
     {
       if (!noSnapshotFlag)
       {
@@ -443,9 +443,9 @@ package flexlib.containers
     }
 
     /**
-     * 	@private
+     * 	@protected
      */
-    private function getLastestSnapshot():Object
+    protected function getLastestSnapshot():Object
     {
       if (undoCurrentIndex > -1)
         return modelStack[undoCurrentIndex + ""];
@@ -454,9 +454,9 @@ package flexlib.containers
     }
 
     /**
-     * 	@private
+     * 	@protected
      */
-    private function getSnapshotKey(coutner:int):String
+    protected function getSnapshotKey(coutner:int):String
     {
       if (coutner >= 0)
         return coutner + "";
@@ -467,7 +467,7 @@ package flexlib.containers
     /**
      *
      */
-    private function resetValues(obj:Object, snapshotKey:String):void
+    protected function resetValues(obj:Object, snapshotKey:String):void
     {
       if (modelStack[snapshotKey] == undefined)
         throw new Error("Invalid snapshot");
@@ -539,7 +539,7 @@ package flexlib.containers
     /**
      * 	Gather references and defaults of all the children
      */
-    private function strChildren(obj:Object):String
+    protected function strChildren(obj:Object):String
     {
       var str:String = "";
       for (var a:String in obj)
