@@ -32,9 +32,9 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.layout
 {
 	import flexlib.scheduling.scheduleClasses.IScheduleEntry;
-	
+
 	import flash.events.IEventDispatcher;
-	
+
 	import mx.collections.IList;
 	import mx.events.CollectionEvent;
 
@@ -45,8 +45,8 @@ package flexlib.scheduling.scheduleClasses.layout
 		function get rowHeight() : Number;
 		function set rowHeight( value : Number ) : void;
 		function findLayoutItem( entry : IScheduleEntry ) : EntryLayoutItem;
-		
-		function createLayout() : void;				
+
+		function createLayout() : void;
 		function addItem( event : CollectionEvent ) : void;
 		function removeItem( event : CollectionEvent ) : void;
 		function replaceItem( event : CollectionEvent ) : void;

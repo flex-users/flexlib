@@ -24,17 +24,17 @@ SOFTWARE.
 package flexlib.mdi.containers
 {
 	import flash.display.DisplayObject;
-	
+
 	import mx.controls.Button;
 	import mx.core.ContainerLayout;
 	import mx.core.LayoutContainer;
 	import mx.core.UITextField;
-	
+
 	/**
 	 * Class that holds window control buttons and handles general titleBar layout.
 	 * Provides minimize, maximize/restore and close buttons by default.
 	 * Subclass this class to create custom layouts that rearrange, add to, or reduce
-	 * the default controls. Set layout property to switch between horizontal, vertical 
+	 * the default controls. Set layout property to switch between horizontal, vertical
 	 * and absolute layouts.
 	 */
 	public class MDIWindowControlsContainer extends LayoutContainer
@@ -43,7 +43,7 @@ package flexlib.mdi.containers
 		public var minimizeBtn:Button;
 		public var maximizeRestoreBtn:Button;
 		public var closeBtn:Button;
-		
+
 		/**
 		 * Base class to hold window controls. Since it inherits from LayoutContainer, literally any layout
 		 * can be accomplished by manipulating or subclassing this class.
@@ -52,25 +52,25 @@ package flexlib.mdi.containers
 		{
 			layout = ContainerLayout.HORIZONTAL;
 		}
-		
+
 		override protected function createChildren():void
 		{
 			super.createChildren();
-			
+
 			if(!minimizeBtn)
 			{
 				minimizeBtn = new Button();
 				minimizeBtn.buttonMode = true;
 				addChild(minimizeBtn);
 			}
-			
+
 			if(!maximizeRestoreBtn)
 			{
 				maximizeRestoreBtn = new Button();
 				maximizeRestoreBtn.buttonMode = true;
 				addChild(maximizeRestoreBtn);
 			}
-			
+
 			if(!closeBtn)
 			{
 				closeBtn = new Button();
@@ -78,22 +78,22 @@ package flexlib.mdi.containers
 				addChild(closeBtn);
 			}
 		}
-		
+
 		/**
-		 * Traditional override of built-in lifecycle function used to control visual 
+		 * Traditional override of built-in lifecycle function used to control visual
 		 * layout of the class. Minor difference is that size is set here as well because
-		 * automatic measurement and sizing is not handled by framework since we go into 
+		 * automatic measurement and sizing is not handled by framework since we go into
 		 * rawChildren (of MDIWindow).
 		 */
 		override protected function updateDisplayList(w:Number, h:Number):void
 		{
 			super.updateDisplayList(w, h);
-			
+
 			if(window.showControls)
 			{
 				// respect window's showCloseButton property
 				closeBtn.visible = closeBtn.includeInLayout = window.showCloseButton;
-				
+
 				// since we're in rawChildren we don't get measured and laid out by our parent
 				// this routine finds the bounds of our children and sets our size accordingly
 				var minX:Number = 9999;
@@ -111,26 +111,26 @@ package flexlib.mdi.containers
 					}
 				}
 				this.setActualSize(maxX - minX, maxY - minY);
-				
+
 				// now that we're sized we set our position
 				// right aligned, respecting border width
 				this.x = window.width - this.width - Number(window.getStyle("borderThicknessRight"));
 				// vertically centered
 				this.y = (window.titleBarOverlay.height - this.height) / 2;
 			}
-			
+
 			// lay out the title field and icon (if present)
 			var tf:UITextField = window.getTitleTextField();
 			var icon:DisplayObject = window.getTitleIconObject();
-			
+
 			tf.x = Number(window.getStyle("borderThicknessLeft"));
-			
+
 			if(icon)
 			{
 				icon.x = tf.x;
 				tf.x = icon.x + icon.width + 4;
 			}
-			
+
 			// ghetto truncation
 			if(!window.minimized)
 			{

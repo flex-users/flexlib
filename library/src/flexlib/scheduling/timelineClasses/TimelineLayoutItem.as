@@ -32,13 +32,13 @@ POSSIBILITY OF SUCH DAMAGE.
 {
 	/**
 	 * @private
-	 */	
+	 */
 	public class TimelineLayoutItem
 	{
 		public var data : ITimeDescriptor;
 		public var width : Number;
 		public var height : Number;
 		public var x : Number;
-		public var y : Number;		
+		public var y : Number;
 	}
 }

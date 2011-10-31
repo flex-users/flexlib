@@ -32,13 +32,13 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.layout
 {
 	import flash.events.IEventDispatcher;
-	
+
 	import mx.collections.IList;
-	
+
 	public interface ILayout extends IEventDispatcher
 	{
 		function get entryLayout() : IEntryLayout;
-		function set entryLayout( value : IEntryLayout ) : void;		
+		function set entryLayout( value : IEntryLayout ) : void;
 		function get items() : IList;
 		function get contentWidth() : Number;
 		function set contentWidth( value : Number ) : void;
@@ -52,7 +52,7 @@ package flexlib.scheduling.scheduleClasses.layout
 		function set startDate( value : Date ) : void;
 		function get endDate() : Date;
 		function set endDate( value : Date ) : void;
-		function get totalMilliseconds() : Number;	
+		function get totalMilliseconds() : Number;
 		function get xPosition() : Number;
 		function set xPosition( value : Number ) : void;
 		function get yPosition() : Number;

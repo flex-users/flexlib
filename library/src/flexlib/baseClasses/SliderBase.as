@@ -11,9 +11,9 @@
 
 package flexlib.baseClasses
 {
-  
+
   import flexlib.controls.sliderClasses.SliderThumb;
-  
+
   import flash.display.DisplayObject;
   import flash.display.Graphics;
   import flash.display.Sprite;
@@ -23,11 +23,11 @@ package flexlib.baseClasses
   import flash.events.MouseEvent;
   import flash.geom.Point;
   import flash.utils.getTimer;
-  
+
   import mx.controls.sliderClasses.SliderDataTip;
   import mx.controls.sliderClasses.SliderDirection;
   import mx.controls.sliderClasses.SliderLabel;
-  
+
   import mx.core.FlexVersion;
   import mx.core.IFlexDisplayObject;
   import mx.core.mx_internal;
@@ -41,13 +41,13 @@ package flexlib.baseClasses
   import mx.managers.SystemManager;
   import mx.styles.ISimpleStyleClient;
   import mx.styles.StyleProxy;
-  
+
   use namespace mx_internal;
-  
+
   //--------------------------------------
   //  Events
   //--------------------------------------
-  
+
   /**
    *  Dispatched when the slider changes value due to mouse or keyboard interaction.
    *
@@ -59,14 +59,14 @@ package flexlib.baseClasses
    *  @eventType mx.events.SliderEvent.CHANGE
    */
   [Event(name="change", type="mx.events.SliderEvent")]
-  
+
   /**
    *  Dispatched when the slider's thumb is pressed and then moved by the mouse.
    *  This event is always preceded by a <code>thumbPress</code> event.
    *  @eventType mx.events.SliderEvent.THUMB_DRAG
    */
   [Event(name="thumbDrag", type="mx.events.SliderEvent")]
-  
+
   /**
    *  Dispatched when the slider's thumb is pressed, meaning
    *  the user presses the mouse button over the thumb.
@@ -74,7 +74,7 @@ package flexlib.baseClasses
    *  @eventType mx.events.SliderEvent.THUMB_PRESS
    */
   [Event(name="thumbPress", type="mx.events.SliderEvent")]
-  
+
   /**
    *  Dispatched when the slider's thumb is released,
    *  meaning the user releases the mouse button after
@@ -83,20 +83,20 @@ package flexlib.baseClasses
    *  @eventType mx.events.SliderEvent.THUMB_RELEASE
    */
   [Event(name="thumbRelease", type="mx.events.SliderEvent")]
-  
+
   //--------------------------------------
   //  Styles
   //--------------------------------------
-  
+
   //include "../../styles/metadata/FillStyles.as";
-  
+
   /**
    *  The color of the black section of the border.
    *
    *  @default 0x919999
    */
   [Style(name="borderColor", type="uint", format="Color", inherit="no")]
-  
+
   /**
    *  Invert the direction of the thumbs.
    *  If <code>true</code>, the thumbs will be flipped.
@@ -104,7 +104,7 @@ package flexlib.baseClasses
    *  @default false
    */
   [Style(name="invertThumbDirection", type="Boolean", inherit="no")]
-  
+
   /**
    *  The y-position offset (if direction is horizontal)
    *  or x-position offset (if direction is vertical)
@@ -113,14 +113,14 @@ package flexlib.baseClasses
    *  @default -10
    */
   [Style(name="labelOffset", type="Number", format="Length", inherit="no")]
-  
+
   /**
    *  The name of the style to use for the slider label.
    *
    *  @default undefined
    */
   [Style(name="labelStyleName", type="String", inherit="no")]
-  
+
   /**
    *  Duration in milliseconds for the sliding animation
    *  when you click on the track to move a thumb.
@@ -128,7 +128,7 @@ package flexlib.baseClasses
    *  @default 300
    */
   [Style(name="slideDuration", type="Number", format="Time", inherit="no")]
-  
+
   /**
    *  Tweening function used by the sliding animation
    *  when you click on the track to move a thumb.
@@ -136,7 +136,7 @@ package flexlib.baseClasses
    *  @default undefined
    */
   [Style(name="slideEasingFunction", type="Function", inherit="no")]
-  
+
   /**
    *  The y-position offset (if direction is horizontal)
    *  or x-position offset (if direction is vertical)
@@ -145,7 +145,7 @@ package flexlib.baseClasses
    *  @default 0
    */
   [Style(name="thumbOffset", type="Number", format="Length", inherit="no")]
-  
+
   /**
    *  The color of the tick marks.
    *  Can be a hex color value or the string name of a known color.
@@ -153,7 +153,7 @@ package flexlib.baseClasses
    *  @default 0x6F7777.
    */
   [Style(name="tickColor", type="uint", format="Color", inherit="no")]
-  
+
   /**
    *  The length in pixels of the tick marks.
    *  If <code>direction</code> is <code>Direction.HORIZONTAL</code>,
@@ -164,7 +164,7 @@ package flexlib.baseClasses
    *  @default 3
    */
   [Style(name="tickLength", type="Number", format="Length", inherit="no")]
-  
+
   /**
    *  The y-position offset (if direction is horizontal)
    *  or x-position offset (if direction is vertical)
@@ -173,7 +173,7 @@ package flexlib.baseClasses
    *  @default -6
    */
   [Style(name="tickOffset", type="Number", format="Length", inherit="no")]
-  
+
   /**
    *  The thickness in pixels of the tick marks.
    *  If direction is horizontal,
@@ -184,7 +184,7 @@ package flexlib.baseClasses
    *  @default 1
    */
   [Style(name="tickThickness", type="Number", format="Length", inherit="no")]
-  
+
   /**
    *  The colors of the track, as an array of two colors.
    *  You can use the same color twice for a solid track color.
@@ -196,7 +196,7 @@ package flexlib.baseClasses
    *  @default [ 0xE7E7E7, 0xE7E7E7 ]
    */
   [Style(name="trackColors", type="Array", arrayType="uint", format="Color", inherit="no")]
-  
+
   /**
    *  Specifies whether to enable track highlighting between thumbs
    *  (or a single thumb and the beginning of the track).
@@ -204,7 +204,7 @@ package flexlib.baseClasses
    *  @default false
    */
   [Style(name="showTrackHighlight", type="Boolean", inherit="no")]
-  
+
   /**
    *  The size of the track margins, in pixels.
    *  If <code>undefined</code>, then the track margins will be determined
@@ -214,14 +214,14 @@ package flexlib.baseClasses
    *  @default undefined
    */
   [Style(name="trackMargin", type="Number", format="Length", inherit="no")]
-  
+
   /**
    *  The name of the style declaration to use for the data tip.
    *
    *  @default undefined
    */
   [Style(name="dataTipStyleName", type="String", inherit="no")]
-  
+
   /**
    *  The offset, in pixels, of the data tip relative to the thumb.
    *  Used in combination with the <code>dataTipPlacement</code>
@@ -230,7 +230,7 @@ package flexlib.baseClasses
    *  @default 16
    */
   [Style(name="dataTipOffset", type="Number", format="Length", inherit="no")]
-  
+
   /**
    *  Number of decimal places to use for the data tip text.
    *  A value of 0 means to round all values to an integer.
@@ -238,60 +238,60 @@ package flexlib.baseClasses
    *  @default 2
    */
   [Style(name="dataTipPrecision", type="int", inherit="no")]
-  
+
   /**
    *  The default skin for the slider thumb.
    *
    *  @default SliderThumbSkin
    */
   [Style(name="thumbSkin", type="Class", inherit="no", states="up, over, down, disabled")]
-  
+
   /**
    *  The skin for the slider thumb up state.
    *
    *  @default SliderThumbSkin
    */
   [Style(name="thumbUpSkin", type="Class", inherit="no")]
-  
+
   /**
    *  The skin for the slider thumb over state.
    *
    *  @default SliderThumbSkin
    */
   [Style(name="thumbOverSkin", type="Class", inherit="no")]
-  
+
   /**
    *  The skin for the slider thumb down state.
    *
    *  @default SliderThumbSkin
    */
   [Style(name="thumbDownSkin", type="Class", inherit="no")]
-  
+
   /**
    *  The skin for the slider thumb disabled state.
    *
    *  @default SliderThumbSkin
    */
   [Style(name="thumbDisabledSkin", type="Class", inherit="no")]
-  
+
   /**
    *  The skin for the slider track when it is selected.
    */
   [Style(name="trackHighlightSkin", type="Class", inherit="no")]
-  
+
   /**
    *  The skin for the slider track.
    */
   [Style(name="trackSkin", type="Class", inherit="no")]
-  
+
   //--------------------------------------
   //  Other metadata
   //--------------------------------------
-  
+
   [AccessibilityClass(implementation="mx.accessibility.SliderAccImpl")]
-  
+
   [ResourceBundle("SharedResources")]
-  
+
   /**
    *  SliderBase is a copy/paste version of the original Slider class in the Flex framework.
    *
@@ -372,132 +372,132 @@ package flexlib.baseClasses
   public class SliderBase extends UIComponent
   {
     //include "../../core/Version.as";
-    
+
     //--------------------------------------------------------------------------
     //
     //  Class mixins
     //
     //--------------------------------------------------------------------------
-    
+
     /**
      *  @private
      *  Placeholder for mixin by SliderAccImpl.
      */
     mx_internal static var createAccessibilityImplementation:Function;
-    
+
     //--------------------------------------------------------------------------
     //
     //  Constructor
     //
     //--------------------------------------------------------------------------
-    
+
     /**
      *  Constructor.
      */
     public function SliderBase()
     {
       super();
-      
+
       tabChildren = true;
     }
-    
+
     //--------------------------------------------------------------------------
     //
     //  Variables
     //
     //--------------------------------------------------------------------------
-    
+
     /**
      *  @private
      */
     protected var track:IFlexDisplayObject;
-    
+
     /**
      *  @private
      */
     protected var thumbs:UIComponent;
-    
+
     /**
      *  @private
      */
     private var thumbsChanged:Boolean = true;
-    
+
     /**
      *  @private
      */
     private var ticks:UIComponent;
-    
+
     /**
      *  @private
      */
     private var ticksChanged:Boolean = false;
-    
+
     /**
      *  @private
      */
     private var labelObjects:UIComponent;
-    
+
     /**
      *  @private
      */
     protected var highlightTrack:IFlexDisplayObject;
-    
+
     /**
      *  @private
      */
     mx_internal var innerSlider:UIComponent;
-    
+
     /**
      *  @private
      */
     private var trackHitArea:UIComponent;
-    
+
     /**
      *  @private
      */
     mx_internal var dataTip:SliderDataTip;
-    
+
     /**
      *  @private
      */
     private var trackHighlightChanged:Boolean = true;
-    
+
     /**
      *  @private
      */
     private var initValues:Boolean = true; // Always initValues at startup
-    
+
     /**
      *  @private
      */
     protected var dataFormatter:NumberFormatter;
-    
+
     /**
      *  @private
      */
     protected var interactionClickTarget:String;
-    
+
     /**
      *  @private
      */
     private var labelStyleChanged:Boolean = false;
-    
+
     /**
      *  @private
      *  is the last interaction from the keyboard?
      */
     mx_internal var keyInteraction:Boolean = false;
-    
+
     //--------------------------------------------------------------------------
     //
     //  Overridden properties
     //
     //--------------------------------------------------------------------------
-    
+
     //----------------------------------
     //  baselinePosition
     //----------------------------------
-    
+
     /**
      *  @private
      */
@@ -505,29 +505,29 @@ package flexlib.baseClasses
     {
       if (FlexVersion.compatibilityVersion < FlexVersion.VERSION_3_0)
         return super.baselinePosition;
-      
+
       if (!validateBaselinePosition())
         return NaN;
-      
+
       return int(0.75 * height);
     }
-    
+
     //----------------------------------
     //  enabled
     //----------------------------------
-    
+
     /**
      *  @private
      */
     private var _enabled:Boolean;
-    
+
     /**
      *  @private
      */
     private var enabledChanged:Boolean = false;
-    
+
     [Inspectable(category="General", enumeration="true,false", defaultValue="true")]
-    
+
     /**
      *  @private
      */
@@ -535,7 +535,7 @@ package flexlib.baseClasses
     {
       return _enabled;
     }
-    
+
     /**
      *  @private
      */
@@ -543,20 +543,20 @@ package flexlib.baseClasses
     {
       _enabled = value;
       enabledChanged = true;
-      
+
       invalidateProperties();
     }
-    
+
     /**
      *  @private
      */
     private var _tabIndex:Number;
-    
+
     /**
      *  @private
      */
     private var tabIndexChanged:Boolean;
-    
+
     /**
      *  @private
      */
@@ -564,23 +564,23 @@ package flexlib.baseClasses
     {
       super.tabIndex = value;
       _tabIndex = value;
-      
+
       tabIndexChanged = true;
       invalidateProperties();
     }
-    
+
     //--------------------------------------------------------------------------
     //
     //  Properties
     //
     //--------------------------------------------------------------------------
-    
+
     //----------------------------------
     //  allowThumbOverlap
     //----------------------------------
-    
+
     [Inspectable(defaultValue="false")]
-    
+
     /**
      *  If set to <code>false</code>, then each thumb can only be moved to the edge of
      *  the adjacent thumb.
@@ -589,29 +589,29 @@ package flexlib.baseClasses
      *  @default false
      */
     public var allowThumbOverlap:Boolean = false;
-    
+
     //----------------------------------
     //  allowTrackClick
     //----------------------------------
-    
+
     [Inspectable(defaultValue="true")]
-    
+
     /**
      *  Specifies whether clicking on the track will move the slider thumb.
      *
      *  @default true
      */
     public var allowTrackClick:Boolean = true;
-    
+
     //----------------------------------
     //  dataTipFormatFunction
     //----------------------------------
-    
+
     /**
      *  @private
      */
     protected var _dataTipFormatFunction:Function;
-    
+
     /**
      *  Callback function that formats the data tip text.
      *  The function takes a single Number as an argument
@@ -640,7 +640,7 @@ package flexlib.baseClasses
     {
       return _dataTipFormatFunction;
     }
-    
+
     /**
      *  @private
      */
@@ -648,23 +648,23 @@ package flexlib.baseClasses
     {
       _dataTipFormatFunction = value;
     }
-    
+
     //----------------------------------
     //  direction
     //----------------------------------
-    
+
     /**
      *  @private
      */
     protected var _direction:String = SliderDirection.HORIZONTAL;
-    
+
     /**
      *  @private
      */
     private var directionChanged:Boolean = false;
-    
+
     [Inspectable(defaultValue="horizontal")]
-    
+
     /**
      *  The orientation of the slider control.
      *  Valid values in MXML are <code>"horizontal"</code> or <code>"vertical"</code>.
@@ -684,7 +684,7 @@ package flexlib.baseClasses
     {
       return _direction;
     }
-    
+
     /**
      *  @private
      */
@@ -692,28 +692,28 @@ package flexlib.baseClasses
     {
       _direction = value;
       directionChanged = true;
-      
+
       invalidateProperties();
       invalidateSize();
       invalidateDisplayList();
     }
-    
+
     //----------------------------------
     //  labels
     //----------------------------------
-    
+
     /**
      *  @private
      */
     private var _labels:Array = [];
-    
+
     /**
      *  @private
      */
     private var labelsChanged:Boolean = false;
-    
+
     [Inspectable(category="General", arrayType="String", defaultValue="undefined")]
-    
+
     /**
      *  An array of strings used for the slider labels.
      *  Flex positions the labels at the beginning of the track,
@@ -738,7 +738,7 @@ package flexlib.baseClasses
     {
       return _labels;
     }
-    
+
     /**
      *  @private
      */
@@ -746,18 +746,18 @@ package flexlib.baseClasses
     {
       _labels = value;
       labelsChanged = true;
-      
+
       invalidateProperties();
       invalidateSize();
       invalidateDisplayList();
     }
-    
+
     //----------------------------------
     //  liveDragging
     //----------------------------------
-    
+
     [Inspectable(category="General", defaultValue="false")]
-    
+
     /**
      *  Specifies whether live dragging is enabled for the slider.
      *  If <code>false</code>, Flex sets the <code>value</code> and
@@ -770,19 +770,19 @@ package flexlib.baseClasses
      *  @default false
      */
     public var liveDragging:Boolean = false;
-    
+
     //----------------------------------
     //  maximum
     //----------------------------------
-    
+
     /**
      *  @private
      *  Storage for the maximum property.
      */
     private var _maximum:Number = 10;
-    
+
     [Inspectable(category="General", defaultValue="10")]
-    
+
     /**
      *  The maximum allowed value on the slider.
      *
@@ -792,7 +792,7 @@ package flexlib.baseClasses
     {
       return _maximum;
     }
-    
+
     /**
      *  @private
      */
@@ -802,28 +802,28 @@ package flexlib.baseClasses
       ticksChanged = true;
       if (!initValues)
         valuesChanged = true;
-      
+
       invalidateProperties();
       invalidateDisplayList();
     }
-    
+
     //----------------------------------
     //  minimum
     //----------------------------------
-    
+
     /**
      *  @private
      *  Storage for the minimum property.
      */
     private var _minimum:Number = 0;
-    
+
     /**
      *  @private
      */
     private var minimumSet:Boolean = false;
-    
+
     [Inspectable(category="General", defaultValue="0")]
-    
+
     /**
      *  The minimum allowed value on the slider control.
      *
@@ -833,7 +833,7 @@ package flexlib.baseClasses
     {
       return _minimum;
     }
-    
+
     /**
      *  @private
      */
@@ -841,20 +841,20 @@ package flexlib.baseClasses
     {
       _minimum = value;
       ticksChanged = true;
-      
+
       if (!initValues)
         valuesChanged = true;
-      
+
       invalidateProperties();
       invalidateDisplayList();
     }
-    
+
     //----------------------------------
     //  showDataTip
     //----------------------------------
-    
+
     [Inspectable(category="General", defaultValue="true")]
-    
+
     /**
      *  If set to <code>true</code>, show a data tip during user interaction
      *  containing the current value of the slider.
@@ -862,16 +862,16 @@ package flexlib.baseClasses
      *  @default true
      */
     public var showDataTip:Boolean = true;
-    
+
     //----------------------------------
     //  sliderThumbClass
     //----------------------------------
-    
+
     /**
      *  @private
      */
     private var _thumbClass:Class = SliderThumb;
-    
+
     /**
      *  A reference to the class to use for each thumb.
      *
@@ -881,7 +881,7 @@ package flexlib.baseClasses
     {
       return _thumbClass;
     }
-    
+
     /**
      *  @private
      */
@@ -889,20 +889,20 @@ package flexlib.baseClasses
     {
       _thumbClass = value;
       thumbsChanged = true;
-      
+
       invalidateProperties();
       invalidateDisplayList();
     }
-    
+
     //----------------------------------
     //  sliderDataTipClass
     //----------------------------------
-    
+
     /**
      *  @private
      */
     private var _sliderDataTipClass:Class = SliderDataTip;
-    
+
     /**
      *  A reference to the class to use for the data tip.
      *
@@ -912,38 +912,38 @@ package flexlib.baseClasses
     {
       return _sliderDataTipClass;
     }
-    
+
     /**
      *  @private
      */
     public function set sliderDataTipClass(value:Class):void
     {
       _sliderDataTipClass = value;
-      
+
       invalidateProperties();
     }
-    
+
     //----------------------------------
     //  snapInterval
     //----------------------------------
-    
+
     /**
      *  @private
      */
     private var _snapInterval:Number = 0;
-    
+
     /**
      *  @private
      */
     private var snapIntervalPrecision:int = -1;
-    
+
     /**
      *  @private
      */
     private var snapIntervalChanged:Boolean = false;
-    
+
     [Inspectable(category="General", defaultValue="0")]
-    
+
     /**
      *  Specifies the increment value of the slider thumb
      *  as the user moves the thumb.
@@ -961,41 +961,41 @@ package flexlib.baseClasses
     {
       return _snapInterval;
     }
-    
+
     /**
      *  @private
      */
     public function set snapInterval(value:Number):void
     {
       _snapInterval = value;
-      
+
       var parts:Array = (new String(1 + value)).split(".");
       if (parts.length == 2)
         snapIntervalPrecision = parts[1].length;
       else
         snapIntervalPrecision = -1;
-      
+
       if (!isNaN(value) && value != 0)
       {
         snapIntervalChanged = true;
-        
+
         invalidateProperties();
         invalidateDisplayList();
       }
     }
-    
+
     //----------------------------------
     //  thumbCount
     //----------------------------------
-    
+
     /**
      *  @private
      *  Storage for the thumbCount property.
      */
     private var _thumbCount:int = 1;
-    
+
     [Inspectable(category="General", defaultValue="1")]
-    
+
     /**
      *  The number of thumbs allowed on the slider.
      *  Possible values are 1 or 2.
@@ -1010,7 +1010,7 @@ package flexlib.baseClasses
     {
       return _thumbCount;
     }
-    
+
     /**
      *  @private
      */
@@ -1018,23 +1018,23 @@ package flexlib.baseClasses
     {
       var numThumbs:int = (value > 2) ? 2 : value;
       numThumbs = value < 1 ? 1 : value;
-      
+
       if (numThumbs != _thumbCount)
       {
         _thumbCount = numThumbs;
         thumbsChanged = true;
-        
+
         initValues = true;
-        
+
         invalidateProperties();
         invalidateDisplayList();
       }
     }
-    
+
     //----------------------------------
     //  thumbStyleFilters
     //----------------------------------
-    
+
     /**
      *  Set of styles to pass from the Slider to the thumbs.
      *  @see mx.styles.StyleProxy
@@ -1046,14 +1046,14 @@ package flexlib.baseClasses
     //----------------------------------
     //  tickInterval
     //----------------------------------
-    
+
     /**
      *  @private
      */
     private var _tickInterval:Number = 0;
-    
+
     [Inspectable(category="General", defaultValue="0")]
-    
+
     /**
      *  The spacing of the tick marks relative to the <code>maximum</code> value
      *  of the control.
@@ -1072,7 +1072,7 @@ package flexlib.baseClasses
     {
       return _tickInterval;
     }
-    
+
     /**
      *  @private
      */
@@ -1080,23 +1080,23 @@ package flexlib.baseClasses
     {
       _tickInterval = value;
       ticksChanged = true;
-      
+
       invalidateProperties();
       invalidateDisplayList();
     }
-    
-    
+
+
     //----------------------------------
     //  tickValues
     //----------------------------------
-    
+
     /**
      *  @private
      */
     private var _tickValues:Array = [];
-    
+
     [Inspectable(category="General", defaultValue="undefined", arrayType="Number")]
-    
+
     /**
      *  The positions of the tick marks on the slider. The positions correspond
      *  to the values on the slider and should be between
@@ -1116,7 +1116,7 @@ package flexlib.baseClasses
     {
       return _tickValues;
     }
-    
+
     /**
      *  @private
      */
@@ -1124,19 +1124,19 @@ package flexlib.baseClasses
     {
       _tickValues = value;
       ticksChanged = true;
-      
+
       invalidateProperties();
       invalidateDisplayList();
     }
-    
+
     //----------------------------------
     //  value
     //----------------------------------
-    
+
     [Bindable("change")]
     [Bindable("valueCommit")]
     [Inspectable(category="General", defaultValue="undefined")]
-    
+
     /**
      *  Contains the position of the thumb, and is a number between the
      *  <code>minimum</code> and <code>maximum</code> properties.
@@ -1149,7 +1149,7 @@ package flexlib.baseClasses
     {
       return _values[0];
     }
-    
+
     /**
      *  @private
      */
@@ -1158,30 +1158,30 @@ package flexlib.baseClasses
       setValueAt(val, 0, true);
       valuesChanged = true;
       minimumSet = true;
-      
+
       invalidateProperties();
       invalidateDisplayList();
-      
+
       dispatchEvent(new FlexEvent(FlexEvent.VALUE_COMMIT));
     }
-    
+
     //----------------------------------
     //  values
     //----------------------------------
-    
+
     /**
      *  @private
      */
     private var _values:Array = [0, 0];
-    
+
     /**
      *  @private
      */
     private var valuesChanged:Boolean = false;
-    
+
     [Bindable("change")]
     [Inspectable(category="General", arrayType="Number")]
-    
+
     /**
      *  An array of values for each thumb when <code>thumbCount</code>
      *  is greater than 1.
@@ -1190,7 +1190,7 @@ package flexlib.baseClasses
     {
       return _values;
     }
-    
+
     /**
      *  @private
      */
@@ -1199,17 +1199,17 @@ package flexlib.baseClasses
       _values = value;
       valuesChanged = true;
       minimumSet = true;
-      
+
       invalidateProperties();
       invalidateDisplayList();
     }
-    
+
     //--------------------------------------------------------------------------
     //
     //  Overridden methods
     //
     //--------------------------------------------------------------------------
-    
+
     /**
      *  @private
      */
@@ -1218,50 +1218,50 @@ package flexlib.baseClasses
       if (SliderBase.createAccessibilityImplementation != null)
         SliderBase.createAccessibilityImplementation(this);
     }
-    
+
     /**
      *  @private
      */
     override protected function createChildren():void
     {
       super.createChildren();
-      
+
       if (!innerSlider)
       {
         innerSlider = new UIComponent();
         UIComponent(innerSlider).tabChildren = true;
         addChild(innerSlider);
       }
-      
+
       createBackgroundTrack();
-      
+
       if (!trackHitArea)
       {
         trackHitArea = new UIComponent();
         innerSlider.addChild(trackHitArea); // trackHitArea should always be on top
-        
+
         trackHitArea.addEventListener(MouseEvent.MOUSE_DOWN,
           track_mouseDownHandler);
       }
-      
+
       invalidateProperties(); // Force commitProperties to be called on instantiation
     }
-    
+
     /**
      *  @private
      */
     override public function styleChanged(styleProp:String):void
     {
       var anyStyle:Boolean = styleProp == null || styleProp == "styleName";
-      
+
       super.styleChanged(styleProp);
-      
+
       if (styleProp == "showTrackHighlight" || anyStyle)
       {
         trackHighlightChanged = true;
         invalidateProperties();
       }
-      
+
       if (styleProp == "trackHighlightSkin" || anyStyle)
       {
         if (innerSlider && highlightTrack)
@@ -1272,18 +1272,18 @@ package flexlib.baseClasses
         trackHighlightChanged = true;
         invalidateProperties();
       }
-      
+
       if (styleProp == "labelStyleName" || anyStyle)
       {
         labelStyleChanged = true;
         invalidateProperties();
       }
-      
+
       if (styleProp == "trackMargin" || anyStyle)
       {
         invalidateSize();
       }
-      
+
       if (styleProp == "trackSkin" || anyStyle)
       {
         if (track)
@@ -1293,24 +1293,24 @@ package flexlib.baseClasses
           createBackgroundTrack();
         }
       }
-      
+
       invalidateDisplayList();
     }
-    
+
     /**
      *  @private
      */
     override protected function commitProperties():void
     {
       super.commitProperties();
-      
+
       var n:int;
       var i:int;
-      
+
       if (trackHighlightChanged)
       {
         trackHighlightChanged = false;
-        
+
         if (getStyle("showTrackHighlight"))
         {
           createHighlightTrack();
@@ -1321,12 +1321,12 @@ package flexlib.baseClasses
           highlightTrack = null;
         }
       }
-      
+
       if (directionChanged)
       {
         directionChanged = false;
         var isHorizontal:Boolean = _direction == SliderDirection.HORIZONTAL;
-        
+
         if (isHorizontal)
         {
           DisplayObject(innerSlider).rotation = 0;
@@ -1336,7 +1336,7 @@ package flexlib.baseClasses
           DisplayObject(innerSlider).rotation = -90;
           innerSlider.y = unscaledHeight;
         }
-        
+
         if (labelObjects)
         {
           for (var labelIndex:int = labelObjects.numChildren - 1; labelIndex >= 0; labelIndex--)
@@ -1347,11 +1347,11 @@ package flexlib.baseClasses
           }
         }
       }
-      
+
       if (labelStyleChanged && !labelsChanged)
       {
         labelStyleChanged = false;
-        
+
         if (labelObjects)
         {
           var labelStyleName:String = getStyle("labelStyleName");
@@ -1362,37 +1362,37 @@ package flexlib.baseClasses
           }
         }
       }
-      
+
       if (ticksChanged)
       {
         ticksChanged = false;
-        
+
         createTicks();
       }
-      
+
       if (labelsChanged)
       {
         labelsChanged = false;
-        
+
         createLabels();
       }
-      
+
       if (thumbsChanged)
       {
         thumbsChanged = false;
-        
+
         createThumbs();
       }
-      
-      
+
+
       if (initValues)
       {
         initValues = false;
-        
+
         if (!valuesChanged)
         {
           var val:Number = minimum;
-          
+
           n = _thumbCount;
           for (i = 0; i < n; i++)
           {
@@ -1403,15 +1403,15 @@ package flexlib.baseClasses
             else
               val++;
           }
-          
+
           snapIntervalChanged = false;
         }
       }
-      
+
       if (snapIntervalChanged)
       {
         snapIntervalChanged = false;
-        
+
         if (!valuesChanged)
         {
           n = thumbs.numChildren;
@@ -1421,41 +1421,41 @@ package flexlib.baseClasses
           }
         }
       }
-      
-      
-      
+
+
+
       if (valuesChanged)
       {
         valuesChanged = false;
-        
+
         n = _thumbCount;
         for (i = 0; i < n; i++)
         {
           setValueAt(getValueFromX(getXFromValue(Math.min(Math.max(values[i], minimum), maximum))), i);
         }
       }
-      
+
       if (enabledChanged)
       {
         enabledChanged = false;
-        
+
         n = thumbs.numChildren;
         for (i = 0; i < n; i++)
         {
           SliderThumb(thumbs.getChildAt(i)).enabled = _enabled;
         }
-        
+
         n = labelObjects ? labelObjects.numChildren : 0;
         for (i = 0; i < n; i++)
         {
           SliderLabel(labelObjects.getChildAt(i)).enabled = _enabled;
         }
       }
-      
+
       if (tabIndexChanged)
       {
         tabIndexChanged = false;
-        
+
         n = thumbs.numChildren;
         for (i = 0; i < n; i++)
         {
@@ -1463,7 +1463,7 @@ package flexlib.baseClasses
         }
       }
     }
-    
+
     /**
      *  Calculates the amount of space that the component takes up.
      *  A horizontal slider control calculates its height by examining
@@ -1479,12 +1479,12 @@ package flexlib.baseClasses
     override protected function measure():void
     {
       super.measure();
-      
+
       var isHorizontal:Boolean = (direction == SliderDirection.HORIZONTAL);
       var numLabels:int = labelObjects ? labelObjects.numChildren : 0;
       var trackMargin:Number = getStyle("trackMargin");
       var length:Number = DEFAULT_MEASURED_WIDTH;
-      
+
       if (!isNaN(trackMargin))
       {
         if (numLabels > 0)
@@ -1501,14 +1501,14 @@ package flexlib.baseClasses
         }
         //length += track.width;
       }
-      
+
       var bounds:Object = getComponentBounds();
       var thickness:Number = bounds.lower - bounds.upper;
-      
+
       measuredMinWidth = measuredWidth = isHorizontal ? length : thickness;
       measuredMinHeight = measuredHeight = isHorizontal ? thickness : length;
     }
-    
+
     /**
      *  Positions the elements of the control.
      *  The track, thumbs, labels, and tick marks are all positioned
@@ -1551,42 +1551,42 @@ package flexlib.baseClasses
                                                   unscaledHeight:Number):void
     {
       super.updateDisplayList(unscaledWidth, unscaledHeight);
-      
+
       //      graphics.beginFill(0xEEEEEE);
       //      graphics.drawRect(0, 0, unscaledWidth, unscaledHeight);
       //      graphics.endFill();
-      
+
       var isHorizontal:Boolean = (_direction == SliderDirection.HORIZONTAL);
       var numLabels:int = labelObjects ? labelObjects.numChildren : 0;
       var numThumbs:int = thumbs ? thumbs.numChildren : 0;
       var trackMargin:Number = getStyle("trackMargin");
       var widestThumb:Number = 6;
-      
+
       if (thumbs == null)
       {
         return;
       }
-      
+
       var firstThumb:SliderThumb = SliderThumb(thumbs.getChildAt(0));
       if (thumbs && firstThumb)
         widestThumb = firstThumb.getExplicitOrMeasuredWidth();
-      
+
       var trackLeftOffset:Number = widestThumb / 2; // Enough space for the thumb to rest at the edges
       var trackRightOffset:Number = trackLeftOffset;
-      
+
       var availSpace:Number;
-      
+
       var firstLabelSize:Number = 0;
       if (numLabels > 0)
       {
         var firstLabel:SliderLabel =
           SliderLabel(labelObjects.getChildAt(0));
-        
+
         firstLabelSize = isHorizontal ?
           firstLabel.getExplicitOrMeasuredWidth() :
           firstLabel.getExplicitOrMeasuredHeight();
       }
-      
+
       var lastLabelSize:Number = 0;
       if (numLabels > 1)
       {
@@ -1596,12 +1596,12 @@ package flexlib.baseClasses
           lastLabel.getExplicitOrMeasuredWidth() :
           lastLabel.getExplicitOrMeasuredHeight();
       }
-      
+
       if (!isNaN(trackMargin))
         availSpace = trackMargin;
       else
         availSpace = (firstLabelSize + lastLabelSize) / 2;
-      
+
       if (numLabels > 0)
       {
         if (!isNaN(trackMargin))
@@ -1616,26 +1616,26 @@ package flexlib.baseClasses
       }
       else
       {
-        
+
         trackLeftOffset = Math.max(trackLeftOffset, availSpace / 2);
       }
-      
+
       var bounds:Object = getComponentBounds();
-      
+
       //track.x = Math.round(trackLeftOffset);
-      
+
       var trackY:Number = (((isHorizontal ? unscaledHeight : unscaledWidth) -
         (Number(bounds.lower) - Number(bounds.upper))) / 2) - Number(bounds.upper);
-      
+
       track.move(Math.round(trackLeftOffset), Math.round(trackY));
       track.setActualSize((isHorizontal ? unscaledWidth : unscaledHeight) - (trackLeftOffset * 2), track.
         height);
-      
+
       // Layout the thumbs' y positions.
       var tY:Number = track.y +
         (track.height - firstThumb.getExplicitOrMeasuredHeight()) / 2 +
         getStyle("thumbOffset");
-      
+
       var n:int = _thumbCount;
       for (var i:int = 0; i < n; i++)
       {
@@ -1645,9 +1645,9 @@ package flexlib.baseClasses
         currentThumb.setActualSize(currentThumb.getExplicitOrMeasuredWidth(),
           currentThumb.getExplicitOrMeasuredHeight());
       }
-      
+
       var g:Graphics = trackHitArea.graphics;
-      
+
       var tLength:Number = 0
       if (_tickInterval > 0 || (_tickValues && _tickValues.length > 0))
         tLength = getStyle("tickLength");
@@ -1660,25 +1660,25 @@ package flexlib.baseClasses
         track.width,
         track.height + fullThumbHeight + tLength);
       g.endFill();
-      
+
       if (_direction != SliderDirection.HORIZONTAL)
         innerSlider.y = unscaledHeight;
-      
+
       layoutTicks();
-      
+
       layoutLabels();
-      
+
       setPosFromValue(); // use the value to position the thumb's x
-      
+
       drawTrackHighlight();
     }
-    
+
     //--------------------------------------------------------------------------
     //
     //  Methods
     //
     //--------------------------------------------------------------------------
-    
+
     /**
      *  @private
      */
@@ -1690,15 +1690,15 @@ package flexlib.baseClasses
         if (trackSkinClass)
         {
           track = new trackSkinClass();
-          
+
           if (track is ISimpleStyleClient)
             ISimpleStyleClient(track).styleName = this;
-          
+
           innerSlider.addChildAt(DisplayObject(track), 0);
         }
       }
     }
-    
+
     /**
      *  @private
      */
@@ -1710,15 +1710,15 @@ package flexlib.baseClasses
         var trackHighlightClass:Class =
           getStyle("trackHighlightSkin");
         highlightTrack = new trackHighlightClass();
-        
+
         if (highlightTrack is ISimpleStyleClient)
           ISimpleStyleClient(highlightTrack).styleName = this;
-        
+
         innerSlider.addChildAt(DisplayObject(highlightTrack),
           innerSlider.getChildIndex(DisplayObject(track)) + 1);
       }
     }
-    
+
     /**
      *  @private
      */
@@ -1726,7 +1726,7 @@ package flexlib.baseClasses
     {
       var n:int;
       var i:int;
-      
+
       // Delete all thumb children
       if (thumbs)
       {
@@ -1745,42 +1745,42 @@ package flexlib.baseClasses
         thumbs.tabEnabled = false;
         innerSlider.addChild(thumbs);
       }
-      
+
       var thumb:SliderThumb; // We want to force the thumb to be a subclass of SliderThumb
-      
+
       n = _thumbCount;
       for (i = 0; i < n; i++)
       {
         thumb = SliderThumb(new _thumbClass());
-        
+
         thumb.owner = this;
         thumb.styleName = new StyleProxy(this, thumbStyleFilters);
         thumb.thumbIndex = i;
         thumb.visible = true;
         thumb.enabled = enabled;
-        
+
         thumb.upSkinName = "thumbUpSkin";
         thumb.downSkinName = "thumbDownSkin";
         thumb.disabledSkinName = "thumbDisabledSkin";
         thumb.overSkinName = "thumbOverSkin";
         thumb.skinName = "thumbSkin";
-        
+
         thumbs.addChild(thumb);
-        
+
         thumb.addEventListener(FocusEvent.FOCUS_IN,
           thumb_focusInHandler);
         thumb.addEventListener(FocusEvent.FOCUS_OUT,
           thumb_focusOutHandler);
       }
     }
-    
+
     /**
      *  @private
      */
     private function createLabels():void
     {
       var labelObj:SliderLabel;
-      
+
       if (labelObjects)
       {
         for (var i:int = labelObjects.numChildren - 1; i >= 0; i--)
@@ -1793,31 +1793,31 @@ package flexlib.baseClasses
         labelObjects = new UIComponent();
         innerSlider.addChildAt(labelObjects, innerSlider.getChildIndex(trackHitArea));
       }
-      
+
       if (_labels)
       {
         var numLabels:int = _labels.length;
-        
+
         for (var j:int = 0; j < numLabels; j++)
         {
           labelObj = new SliderLabel();
-          
+
           labelObj.text = _labels[j] is String ?
             _labels[j] :
             _labels[j].toString();
-          
+
           if (_direction != SliderDirection.HORIZONTAL)
             labelObj.rotation = 90;
-          
+
           var labelStyleName:String = getStyle("labelStyleName");
           if (labelStyleName)
             labelObj.styleName = labelStyleName;
-          
+
           labelObjects.addChild(labelObj);
         }
       }
     }
-    
+
     /**
      *  @private
      */
@@ -1826,11 +1826,11 @@ package flexlib.baseClasses
       if (!ticks)
       {
         ticks = new UIComponent();
-        
+
         innerSlider.addChild(ticks);
       }
     }
-    
+
     /**
      *  @private
      */
@@ -1843,12 +1843,12 @@ package flexlib.baseClasses
       var thumbY:Number;
       var upperBound:Number = 0;
       var lowerBound:Number = track.height;
-      
+
       if (numLabels > 0)
       {
         var sliderLabel:SliderLabel =
           SliderLabel(labelObjects.getChildAt(0));
-        
+
         if (isHorizontal)
         {
           labelSize = sliderLabel.getExplicitOrMeasuredHeight();
@@ -1862,35 +1862,35 @@ package flexlib.baseClasses
               sliderLabel.getExplicitOrMeasuredWidth());
           }
         }
-        
+
         var labOffset:Number = getStyle("labelOffset");
         labelY = labOffset - (labOffset > 0 ? 0 : labelSize);
-        
+
         upperBound = Math.min(upperBound, labelY);
         lowerBound = Math.max(lowerBound, labOffset + (labOffset > 0 ? labelSize : 0));
       }
-      
+
       if (ticks)
       {
         var tLen:Number = getStyle("tickLength");
         var tOff:Number = getStyle("tickOffset");
-        
+
         upperBound = Math.min(upperBound, tOff - tLen);
         lowerBound = Math.max(lowerBound, tOff);
       }
-      
+
       if (thumbs.numChildren > 0)
       {
         thumbY = (track.height - SliderThumb(thumbs.getChildAt(0)).getExplicitOrMeasuredHeight()) / 2 +
           getStyle("thumbOffset");
-        
+
         upperBound = Math.min(upperBound, thumbY);
         lowerBound = Math.max(lowerBound, thumbY + SliderThumb(thumbs.getChildAt(0)).getExplicitOrMeasuredHeight());
       }
-      
+
       return {lower: lowerBound, upper: upperBound};
     }
-    
+
     /**
      *  @private
      */
@@ -1905,17 +1905,17 @@ package flexlib.baseClasses
         var xOffset:Number = tickWidth / 2;
         var xPos:Number;
         var tColor:Number = getStyle("tickColor");
-        
+
         var usePositions:Boolean = _tickValues && _tickValues.length > 0 ? true : false;
         var positionIndex:int = 0;
         var val:Number = usePositions ? _tickValues[positionIndex++] : minimum;
-        
+
         g.clear();
-        
+
         if (_tickInterval > 0 || usePositions)
         {
           g.lineStyle(tickWidth, tColor, 100);
-          
+
           do
           {
             xPos = Math.round(getXFromValue(val) - xOffset);
@@ -1924,7 +1924,7 @@ package flexlib.baseClasses
             val = usePositions ? (positionIndex < _tickValues.length ? _tickValues[positionIndex++] :
               NaN) : _tickInterval + val;
           } while (val < maximum || (usePositions && positionIndex < _tickValues.length))
-          
+
           // draw the last tick
           if (!usePositions || val == maximum)
           {
@@ -1932,12 +1932,12 @@ package flexlib.baseClasses
             g.moveTo(xPos, tLength);
             g.lineTo(xPos, 0);
           }
-          
+
           ticks.y = Math.round(track.y + tOffset - tLength);
         }
       }
     }
-    
+
     /**
      *  @private
      */
@@ -1945,7 +1945,7 @@ package flexlib.baseClasses
     {
       var numLabels:Number = labelObjects ? labelObjects.numChildren : 0;
       var availSpace:Number;
-      
+
       if (numLabels > 0)
       {
         var labelInterval:Number = track.width / (numLabels - 1);
@@ -1954,41 +1954,41 @@ package flexlib.baseClasses
           unscaledWidth :
           unscaledHeight) - track.width,
           SliderThumb(thumbs.getChildAt(0)).getExplicitOrMeasuredWidth());
-        
+
         var labelPos:Number;
         var left:Number = track.x;
         var curLabel:Object;
-        
+
         for (var i:int = 0; i < numLabels; i++)
         {
           curLabel = labelObjects.getChildAt(i);
           curLabel.setActualSize(curLabel.getExplicitOrMeasuredWidth(), curLabel.getExplicitOrMeasuredHeight());
-          
+
           var yPos:Number = track.y - curLabel.height + getStyle("labelOffset");
-          
+
           if (_direction == SliderDirection.HORIZONTAL)
           {
             labelPos = curLabel.getExplicitOrMeasuredWidth() / 2;
-            
+
             if (i == 0)
               labelPos = Math.min(labelPos, availSpace / (numLabels > Number(1) ? Number(2) : Number(1)));
             else if (i == (numLabels - 1))
               labelPos = Math.max(labelPos, curLabel.getExplicitOrMeasuredWidth() - availSpace / 2);
-            
+
             curLabel.move(left - labelPos, yPos);
           }
           else
           {
             var labelOff:Number = getStyle("labelOffset");
-            
+
             labelPos = curLabel.getExplicitOrMeasuredHeight() / 2;
-            
+
             if (i == 0)
               labelPos = Math.max(labelPos, curLabel.getExplicitOrMeasuredHeight() - availSpace / (numLabels >
                 Number(1) ? Number(2) : Number(1)));
             else if (i == (numLabels - 1))
               labelPos = Math.min(labelPos, availSpace / 2);
-            
+
             curLabel.move(left + labelPos, track.y + labelOff +
               (labelOff > 0 ? 0 : -curLabel.getExplicitOrMeasuredWidth()));
           }
@@ -1996,7 +1996,7 @@ package flexlib.baseClasses
         }
       }
     }
-    
+
     /**
      *  @private
      */
@@ -2006,9 +2006,9 @@ package flexlib.baseClasses
       {
         var xPos:Number;
         var tWidth:Number;
-        
+
         var firstThumb:SliderThumb = SliderThumb(thumbs.getChildAt(0));
-        
+
         if (_thumbCount > 1)
         {
           xPos = firstThumb.xPosition;
@@ -2020,13 +2020,13 @@ package flexlib.baseClasses
           xPos = track.x;
           tWidth = firstThumb.xPosition - xPos;
         }
-        
-        
+
+
         highlightTrack.move(xPos, track.y + 1);
         highlightTrack.setActualSize(tWidth > 0 ? tWidth : 0, highlightTrack.height);
       }
     }
-    
+
     /**
      *  @private
      *  Helper function that starts the dataTip and dispatches the press event.
@@ -2038,19 +2038,19 @@ package flexlib.baseClasses
         // Setup number formatter
         dataFormatter = new NumberFormatter();
         dataFormatter.precision = getStyle("dataTipPrecision");
-        
+
         if (!dataTip)
         {
           dataTip = SliderDataTip(new sliderDataTipClass());
           systemManager.toolTipChildren.addChild(dataTip);
-          
+
           var dataTipStyleName:String = getStyle("dataTipStyleName");
           if (dataTipStyleName)
           {
             dataTip.styleName = dataTipStyleName;
           }
         }
-        
+
         var formattedVal:String;
         if (_dataTipFormatFunction != null)
         {
@@ -2061,9 +2061,9 @@ package flexlib.baseClasses
         {
           formattedVal = dataFormatter.format(getValueFromX(thumb.xPosition));
         }
-        
+
         dataTip.text = formattedVal;
-        
+
         // Tool tip has been freshly created and new text assigned to it.
         // Hence force a validation so that we can set the
         // size required to show the text completely.
@@ -2072,63 +2072,63 @@ package flexlib.baseClasses
         positionDataTip(thumb);
       }
       keyInteraction = false;
-      
+
       var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_PRESS);
       event.value = getValueFromX(thumb.xPosition);;
       event.thumbIndex = thumb.thumbIndex;
       dispatchEvent(event);
     }
-    
+
     /**
      *  @private
      */
     mx_internal function onThumbRelease(thumb:Object):void
     {
       interactionClickTarget = SliderEventClickTarget.THUMB;
-      
+
       destroyDataTip();
-      
+
       setValueFromPos(thumb.thumbIndex);
-      
+
       dataFormatter = null;
-      
+
       var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_RELEASE);
       event.value = getValueFromX(thumb.xPosition);;
       event.thumbIndex = thumb.thumbIndex;
       dispatchEvent(event);
     }
-    
+
     /**
      *  @private
      */
     mx_internal function onThumbMove(thumb:Object):void
     {
       var value:Number = getValueFromX(thumb.xPosition);
-      
+
       if (showDataTip)
       {
         dataTip.text = _dataTipFormatFunction != null ?
           _dataTipFormatFunction(value) :
           dataFormatter.format(value);
-        
+
         dataTip.setActualSize(dataTip.getExplicitOrMeasuredWidth(),
           dataTip.getExplicitOrMeasuredHeight());
-        
+
         positionDataTip(thumb);
       }
-      
+
       if (liveDragging)
       {
         interactionClickTarget = SliderEventClickTarget.THUMB;
         setValueAt(value, thumb.thumbIndex);
       }
-      
+
       var event:SliderEvent = new SliderEvent(SliderEvent.THUMB_DRAG);
       event.value = value;
       event.thumbIndex = thumb.thumbIndex;
       dispatchEvent(event);
     }
-    
+
     /**
      *  @private
      */
@@ -2136,20 +2136,20 @@ package flexlib.baseClasses
     {
       var relX:Number;
       var relY:Number;
-      
+
       var tX:Number = thumb.x;
       var tY:Number = thumb.y;
-      
+
       var tPlacement:String = getStyle("dataTipPlacement");
       var tOffset:Number = getStyle("dataTipOffset");
-      
+
       // Need to special case tooltip position because the tooltip movieclip
       // resides in the root movie clip, instead of the Slider movieclip
       if (_direction == SliderDirection.HORIZONTAL)
       {
         relX = tX;
         relY = tY;
-        
+
         if (tPlacement == "left")
         {
           relX -= tOffset + dataTip.width;
@@ -2175,7 +2175,7 @@ package flexlib.baseClasses
       {
         relX = tY;
         relY = unscaledHeight - tX - (dataTip.height + thumb.width) / 2;
-        
+
         if (tPlacement == "left")
         {
           relX -= tOffset + dataTip.width;
@@ -2195,15 +2195,15 @@ package flexlib.baseClasses
           relX -= (dataTip.width - thumb.height) / 2;
         }
       }
-      
+
       var o:Point = new Point(relX, relY);
       var r:Point = localToGlobal(o);
       r = dataTip.parent.globalToLocal(r);
-      
+
       dataTip.x = r.x < 0 ? 0 : r.x;
       dataTip.y = r.y < 0 ? 0 : r.y;
     }
-    
+
     /**
      *  @private
      */
@@ -2215,7 +2215,7 @@ package flexlib.baseClasses
         dataTip = null;
       }
     }
-    
+
     /**
      *  @private
      *  Utility for finding the x position which corresponds
@@ -2224,17 +2224,17 @@ package flexlib.baseClasses
     mx_internal function getXFromValue(v:Number):Number
     {
       var val:Number;
-      
+
       if (v == minimum)
         val = track.x;
       else if (v == maximum)
         val = track.x + track.width;
       else
         val = track.x + (v - minimum) * (track.width) / (maximum - minimum);
-      
+
       return val;
     }
-    
+
     /**
      *  @private
      */
@@ -2246,39 +2246,39 @@ package flexlib.baseClasses
       {
         return {max: maxX, min: minX};
       }
-      
+
       var minBound:Number = NaN;
       var maxBound:Number = NaN;
-      
+
       var prevThumb:SliderThumb =
         selectedThumbIndex > 0 ?
         SliderThumb(thumbs.getChildAt(selectedThumbIndex - 1)) :
         null;
-      
+
       var nextThumb:SliderThumb =
         selectedThumbIndex + 1 < thumbs.numChildren ?
         SliderThumb(thumbs.getChildAt(selectedThumbIndex + 1)) :
         null;
-      
+
       if (prevThumb)
         minBound = prevThumb.xPosition + prevThumb.width / 2;
-      
+
       if (nextThumb)
         maxBound = nextThumb.xPosition - nextThumb.width / 2;
-      
+
       if (isNaN(minBound))
         minBound = minX;
       else
         minBound = Math.min(Math.max(minX, minBound), maxX);
-      
+
       if (isNaN(maxBound))
         maxBound = maxX;
       else
         maxBound = Math.max(Math.min(maxX, maxBound), minX);
-      
+
       return {max: maxBound, min: minBound};
     }
-    
+
     /**
      *  @private
      *  Utility for positioning the thumb(s) from the current value.
@@ -2292,7 +2292,7 @@ package flexlib.baseClasses
         thumb.xPosition = getXFromValue(values[i]);
       }
     }
-    
+
     /**
      *  @private
      *  Utility for getting a value corresponding to a given x.
@@ -2302,7 +2302,7 @@ package flexlib.baseClasses
       var v:Number = (xPos - track.x) *
         (maximum - minimum) /
         (track.width) + minimum;
-      
+
       // kill rounding error at the edges.
       if (v - minimum <= 0.002)
       {
@@ -2317,10 +2317,10 @@ package flexlib.baseClasses
         v = Math.round((v - minimum) / _snapInterval) *
           _snapInterval + minimum;
       }
-      
+
       return v;
     }
-    
+
     /**
      *  @private
      *  Utility for committing a value of a given thumb.
@@ -2330,7 +2330,7 @@ package flexlib.baseClasses
       var thumb:SliderThumb = SliderThumb(thumbs.getChildAt(thumbIndex));
       setValueAt(getValueFromX(thumb.xPosition), thumbIndex);
     }
-    
+
     /**
      *  @private
      */
@@ -2339,24 +2339,24 @@ package flexlib.baseClasses
       if (!isNaN(_snapInterval) && _snapInterval != 0)
       {
         var val:Number = getValueFromX(value);
-        
+
         if (thumb && (thumbs.numChildren > 1) && !allowThumbOverlap)
         {
           var check_bounds:Boolean = true;
           var bounds:Object
-          
+
           bounds = getXBounds(thumb.thumbIndex);
-          
+
           var prevThumb:SliderThumb =
             thumb.thumbIndex > 0 ?
             SliderThumb(thumbs.getChildAt(thumb.thumbIndex - 1)) :
             null;
-          
+
           var nextThumb:SliderThumb =
             thumb.thumbIndex + 1 < thumbs.numChildren ?
             SliderThumb(thumbs.getChildAt(thumb.thumbIndex + 1)) :
             null;
-          
+
           if (prevThumb)
           {
             bounds.min -= (prevThumb.width / 2);
@@ -2370,7 +2370,7 @@ package flexlib.baseClasses
             if (val == minimum)
               check_bounds = false;
           }
-          
+
           if (nextThumb)
           {
             bounds.max += (nextThumb.width / 2);
@@ -2387,14 +2387,14 @@ package flexlib.baseClasses
           if (check_bounds)
             val = Math.min(Math.max(val, getValueFromX(Math.round(bounds.min)) + _snapInterval),
               getValueFromX(Math.round(bounds.max)) - _snapInterval);
-          
+
         }
         return getXFromValue(val);
       }
-      
+
       return value;
     }
-    
+
     /**
      *  @private Accessed by the Thumb to find out the snap interval
      */
@@ -2402,7 +2402,7 @@ package flexlib.baseClasses
     {
       return _snapInterval * track.width / (maximum - minimum);
     }
-    
+
     /**
      *  @private
      */
@@ -2410,7 +2410,7 @@ package flexlib.baseClasses
     {
       setValueFromPos(thumbIndex);
     }
-    
+
     /**
      *  Returns the thumb object at the given index. Use this method to
      *  style and customize individual thumbs in a slider control.
@@ -2425,7 +2425,7 @@ package flexlib.baseClasses
         SliderThumb(thumbs.getChildAt(index)) :
         null;
     }
-    
+
     /**
      *  This method sets the value of a slider thumb, and updates the display.
      *
@@ -2438,11 +2438,11 @@ package flexlib.baseClasses
     {
       setValueAt(value, index, true);
       valuesChanged = true;
-      
+
       invalidateProperties();
       invalidateDisplayList();
     }
-    
+
     /**
      *  @private
      */
@@ -2450,7 +2450,7 @@ package flexlib.baseClasses
                                   isProgrammatic:Boolean=false):void
     {
       var oldValue:Number = _values[index];
-      
+
       // we need to do the round of (to remove the floating point error)
       // if the stepSize had a fractional value
       if (snapIntervalPrecision != -1)
@@ -2458,9 +2458,9 @@ package flexlib.baseClasses
         var scale:Number = Math.pow(10, snapIntervalPrecision);
         value = Math.round(value * scale) / scale;
       }
-      
+
       _values[index] = value;
-      
+
       if (!isProgrammatic)
       {
         var event:SliderEvent = new SliderEvent(SliderEvent.CHANGE);
@@ -2479,10 +2479,10 @@ package flexlib.baseClasses
         if (!isNaN(oldValue) && Math.abs(oldValue - value) > 0.002)
           dispatchEvent(event);
       }
-      
+
       invalidateDisplayList();
     }
-    
+
     /**
      *  @private
      */
@@ -2490,7 +2490,7 @@ package flexlib.baseClasses
     {
       innerSlider.addEventListener(MouseEvent.MOUSE_MOVE, listener);
     }
-    
+
     /**
      *  @private
      */
@@ -2498,13 +2498,13 @@ package flexlib.baseClasses
     {
       innerSlider.removeEventListener(MouseEvent.MOUSE_MOVE, listener);
     }
-    
+
     //--------------------------------------------------------------------------
     //
     //  Event handlers
     //
     //--------------------------------------------------------------------------
-    
+
     /**
      *  @private
      *  Move the thumb when pressed.
@@ -2522,7 +2522,7 @@ package flexlib.baseClasses
         var xM:Number = pt.x;
         var minIndex:Number = 0;
         var minDistance:Number = 10000000;
-        
+
         // find the nearest thumb
         var n:int = _thumbCount;
         for (var i:int = 0; i < n; i++)
@@ -2537,18 +2537,18 @@ package flexlib.baseClasses
         var thumb:SliderThumb = SliderThumb(thumbs.getChildAt(minIndex));
         if (!isNaN(_snapInterval) && _snapInterval != 0)
           xM = getXFromValue(getValueFromX(xM));
-        
+
         var duration:Number = getStyle("slideDuration");
         var t:Tween = new Tween(thumb, thumb.xPosition, xM, duration);
-        
+
         var easingFunction:Function = getStyle("slideEasingFunction") as Function;
         if (easingFunction != null)
           t.easingFunction = easingFunction;
-        
+
         drawTrackHighlight();
       }
     }
-    
+
     /**
      *  @private
      */
@@ -2556,7 +2556,7 @@ package flexlib.baseClasses
     {
       dispatchEvent(event);
     }
-    
+
     /**
      *  @private
      */
@@ -2564,7 +2564,7 @@ package flexlib.baseClasses
     {
       dispatchEvent(event);
     }
-    
+
     /**
      *  @private
      */
@@ -2572,7 +2572,7 @@ package flexlib.baseClasses
     {
       return trackHitArea;
     }
-    
+
   }
-  
+
 }

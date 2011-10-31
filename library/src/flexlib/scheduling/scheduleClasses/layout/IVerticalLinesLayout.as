@@ -32,7 +32,7 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.layout
 {
 	import flash.events.IEventDispatcher;
-	
+
 	import mx.collections.IList;
 
 	public interface IVerticalLinesLayout extends ILayoutClient

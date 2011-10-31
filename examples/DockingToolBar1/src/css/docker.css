@@ -56,14 +56,14 @@ flexlib|DockableToolBar
 	paddingRight: 8;
 	paddingTop: 0;
 	backgroundColor: #9199A4;
-}	
+}
 
 .dockingArea
 {
 	horizontalScrollPolicy: "off";
 	verticalGap: 0;
 	borderStyle: "applicationControlBar";
-	dropShadowEnabled: true;	
+	dropShadowEnabled: true;
 }
 
 .dockingRow

@@ -25,12 +25,12 @@ package flexlib.events
 {
 	import flash.display.DisplayObject;
 	import flash.events.Event;
-	
+
 	import mx.events.IndexChangedEvent;
-	
+
 	/**
 	 *  This is basically an IndexChangedEvent. But different.
-	 * 
+	 *
 	 *  @see mx.core.Container
 	 */
 	public class TabReorderEvent extends IndexChangedEvent
@@ -44,7 +44,7 @@ package flexlib.events
 		{
 			super(type, bubbles, cancelable, relatedObject, oldIndex, newIndex, triggerEvent);
 		}
-		
+
 		override public function clone():Event {
 			return new TabReorderEvent(type, bubbles, cancelable, relatedObject, oldIndex, newIndex, triggerEvent);
 		}

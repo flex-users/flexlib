@@ -32,7 +32,7 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.layout
 {
 	import flash.events.EventDispatcher;
-	
+
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
 
@@ -40,35 +40,35 @@ package flexlib.scheduling.scheduleClasses.layout
 	{
 		protected var _items : IList;
 		protected var _startDate : Number;
-		protected var _endDate : Number;	
-		private var _entryLayout : IEntryLayout;	
+		protected var _endDate : Number;
+		private var _entryLayout : IEntryLayout;
 		private var _contentWidth : Number;
 		private var _contentHeight : Number;
 		private var _viewportWidth : Number;
 		private var _viewportHeight : Number;
 		private var _xPosition : Number = 0;
-		private var _yPosition : Number = 0;		
-		
+		private var _yPosition : Number = 0;
+
 		public function get entryLayout() : IEntryLayout
 		{
 		    return _entryLayout;
 		}
-		
+
 		public function set entryLayout( value : IEntryLayout ) : void
 		{
 			_entryLayout = value;
 		}
-		
+
 		public function get items() : IList
 		{
 		    return _items;
 		}
-				
+
 		public function get contentWidth() : Number
 		{
 		    return _contentWidth;
 		}
-		
+
 		public function set contentWidth( value : Number ) : void
 		{
 			_contentWidth = value;
@@ -78,77 +78,77 @@ package flexlib.scheduling.scheduleClasses.layout
 		{
 		    return _contentHeight;
 		}
-		
+
 		public function set contentHeight( value : Number ) : void
 		{
 			_contentHeight = value;
-		}		
-			
+		}
+
 		public function get viewportWidth() : Number
 		{
 		    return _viewportWidth;
 		}
-		
+
 		public function set viewportWidth( value : Number ) : void
 		{
 			_viewportWidth = value;
 		}
-		
+
 		public function get viewportHeight() : Number
 		{
 		    return _viewportHeight;
 		}
-		
+
 		public function set viewportHeight( value : Number ) : void
 		{
 			_viewportHeight = value;
 		}
-				
+
 		public function get startDate() : Date
 		{
 			return new Date( _startDate );
 		}
-		
+
 		public function set startDate( value : Date ) : void
 		{
 			_startDate = value.getTime();
 		}
-		
+
 		public function get endDate() : Date
 		{
 			return new Date( _endDate );
 		}
-		
+
 		public function set endDate( value : Date ) : void
 		{
 			_endDate = value.getTime();
 		}
-		
+
 		public function get totalMilliseconds() : Number
 		{
 			return _endDate - _startDate;
-		}		
-		
+		}
+
 		[Bindable]
 		public function get xPosition() : Number
 		{
 			return _xPosition;
 		}
-		
+
 		public function set xPosition( value : Number ) : void
 		{
 			if( isNaN( value )) return;
 			_xPosition = value;
 		}
-		
+
 		public function get yPosition() : Number
 		{
 			return _yPosition;
 		}
-		
+
 		public function set yPosition( value : Number ) : void
 		{
 			_yPosition = value;
-		}		
+		}
 	}
 }

@@ -29,19 +29,19 @@ POSSIBILITY OF SUCH DAMAGE.
 
 @ignore
 */package flexlib.scheduling.timelineClasses
-{	
+{
 	import flexlib.scheduling.scheduleClasses.layout.ILayoutProvider;
 	import flexlib.scheduling.scheduleClasses.layout.Layout;
 	import flexlib.scheduling.util.DateUtil;
-	
+
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	
+
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
-	
+
 	[Event ("update")]
-	
+
 	/**
 	 * @private
 	 */
@@ -51,20 +51,20 @@ POSSIBILITY OF SUCH DAMAGE.
 		public var minimumTimeRangeWidth : Number = 80;
 		[Bindable]
 		public var currentDate : Date;
-		
+
 		private var _contentWidth : Number;
-		
-		public function TimelineLayout() 
+
+		public function TimelineLayout()
 		{
 			timeRanges = TimeRangeDescriptorUtil.getDefaultTimeRangeDescriptor();
 		}
-		
+
 		[Bindable]
-		override public function get contentWidth() : Number 
+		override public function get contentWidth() : Number
 		{
 			return _contentWidth;
 		}
-		
+
 		override public function set contentWidth( value : Number ) : void
 		{
 			xPosition *= ( value / _contentWidth );
@@ -73,43 +73,43 @@ POSSIBILITY OF SUCH DAMAGE.
 
 		public function update() : void
 		{
-			calculateItems(); 
+			calculateItems();
 			dispatchEvent( new Event("update") );
 		}
-		
+
 		private function calculateItems() : void
 		{
 			var totalMilliseconds : Number = _endDate - _startDate;
-			var entry : ITimeDescriptor = getTimeDescriptor( contentWidth, totalMilliseconds );	
+			var entry : ITimeDescriptor = getTimeDescriptor( contentWidth, totalMilliseconds );
 			var millisecondsPerColumn : Number = entry.date.getTime();
 			//var numberOfItems : Number = Math.floor( totalMilliseconds / millisecondsPerColumn ) + 1;
 			var numberOfItems : Number = totalMilliseconds / millisecondsPerColumn;
-			var columnWidth : Number = contentWidth / numberOfItems;			
+			var columnWidth : Number = contentWidth / numberOfItems;
 			if( columnWidth < minimumTimeRangeWidth ) columnWidth = minimumTimeRangeWidth;
-			
+
 			_items = new ArrayCollection();
 			var firstIndex : Number = Math.floor( xPosition / columnWidth );
 			var lastIndex : Number = Math.ceil( ( xPosition + viewportWidth ) / columnWidth );
 			for( var i : Number = firstIndex; i <= lastIndex; i++ )
 			{
 				var item : TimelineLayoutItem = new TimelineLayoutItem();
-				
+
 				item.width = columnWidth;
 				item.height = viewportHeight;
 				item.x = i * columnWidth;
             item.y = 0;
-            
+
 				currentDate = new Date( i * millisecondsPerColumn + _startDate );
-				
+
 				var data : ITimeDescriptor = new SimpleTimeDescriptor();
 				data.description = entry.description;
-				data.date = currentDate;				
+				data.date = currentDate;
 				item.data = data;
-				
+
 				_items.addItem( item );
 			}
 		}
-		
+
 		/**
 		 * try to find the smallest unit, which is wider than the minimumTimeRangeWidth
 		 */

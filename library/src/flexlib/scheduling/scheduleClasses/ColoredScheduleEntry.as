@@ -37,7 +37,7 @@ POSSIBILITY OF SUCH DAMAGE.
 	public class ColoredScheduleEntry extends SimpleScheduleEntry implements IScheduleEntry
 	{
 		public var backgroundColor : int = 0xcccccc;
-		
+
 		override public function toString() : String
 		{
 			return "[object ColoredScheduleEntry startDate:" + startDate + " endDate:" + endDate + "]";

@@ -395,7 +395,7 @@ package flexlib.controls
 
       if (explicitRowCount < 1)
       {
-        // Number of rows was not explicitly set so limit menu height to max height and 
+        // Number of rows was not explicitly set so limit menu height to max height and
         if (measuredHeight > this.maxHeight)
         {
           measuredHeight = this.maxHeight;

@@ -61,7 +61,7 @@ use namespace mx_internal;
 
 /**
  *  The FlowContainer is a flow layout based container.
- *  
+ *
  */
 
 public class FlowContainer extends Container
@@ -108,7 +108,7 @@ public class FlowContainer extends Container
 		layoutObject.explicitHeightSet = true;
 		super.height = newHeight;
 	}
-	
+
 	/**
 	 *  @private
 	 */
@@ -127,7 +127,7 @@ public class FlowContainer extends Container
 		super.updateDisplayList(unscaledWidth, unscaledHeight);
 		layoutObject.updateDisplayList(unscaledWidth, unscaledHeight);
     }
-    
+
 }
 
 }

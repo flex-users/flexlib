@@ -32,9 +32,9 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.viewers
 {
 	import flexlib.scheduling.scheduleClasses.layout.LayoutUpdateEvent;
-	
+
 	import mx.core.IUIComponent;
-	
+
 	public interface IVerticalLinesViewer extends IUIComponent
 	{
 		function get dottedGridLines() : Boolean;
@@ -45,7 +45,7 @@ package flexlib.scheduling.scheduleClasses.viewers
 		function set verticalGridLineColor( value : uint ) : void;
 		function get verticalGridLineAlpha() : Number;
 		function set verticalGridLineAlpha( value : Number ) : void;
-		
+
 		function update( event : LayoutUpdateEvent ) : void;
 	}
 }

@@ -40,36 +40,36 @@ POSSIBILITY OF SUCH DAMAGE.
 		public static const YEAR_IN_MILLISECONDS : Number = 12 * 30 * 24 * 60 * 60 * 1000;
 		public static const CENTURY_IN_MILLISECONDS : Number = 100 * 12 * 30 * 24 * 60 * 60 * 1000;
 		public static const MILLENIUM_IN_MILLISECONDS : Number = 1000 * 100 * 12 * 30 * 24 * 60 * 60 * 1000;
-		
-		public static function clearTime( date : Date ) : Date 
-		{	
+
+		public static function clearTime( date : Date ) : Date
+		{
 			date.hours = 0;
 			date.minutes = 0;
 			date.seconds = 0;
 			date.milliseconds = 0;
-			
+
 			return date;
 		}
-		
-		public static function copyDate( date : Date ) : Date 
+
+		public static function copyDate( date : Date ) : Date
 		{
 			return new Date( date.getTime() );
 		}
-		
+
 		public static function setTime( date : Date, time : Number ) : Date
 		{
 			date.hours = Math.floor(( time / (1000 * 60 * 60)) % 24);
 			date.minutes = Math.floor(( time / (1000 * 60)) % 60);
 			date.seconds = Math.floor(( time / 1000) % 60);
-			date.milliseconds = Math.floor( time % 1000); 
-			
+			date.milliseconds = Math.floor( time % 1000);
+
 			return date;
 		}
-		
-		public static function addTime( date : Date, time : Number ) : Date 
+
+		public static function addTime( date : Date, time : Number ) : Date
 		{
 			date.milliseconds += time;
-			
+
 			return date;
 		}
 	}

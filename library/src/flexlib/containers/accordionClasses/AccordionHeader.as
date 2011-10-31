@@ -11,7 +11,7 @@
 
 package flexlib.containers.accordionClasses
 {
-	
+
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -24,13 +24,13 @@ package flexlib.containers.accordionClasses
 	import mx.core.mx_internal;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.ISimpleStyleClient;
-	
+
 	use namespace mx_internal;
-	
+
 	[AccessibilityClass(implementation="mx.accessibility.AccordionHeaderAccImpl")]
-	
+
 	[Style(name="keepIconVertical", type="Boolean")]
-	
+
 	/**
 	 *  The AccordionHeader class defines the appearance of the navigation buttons
 	 *  of an Accordion.
@@ -42,32 +42,32 @@ package flexlib.containers.accordionClasses
 	public class AccordionHeader extends Button implements IDataRenderer
 	{
 		//include "../../core/Version.as";
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Class mixins
 		//
 		//--------------------------------------------------------------------------
-		
+
 		/**
 		 *  @private
 		 *  Placeholder for mixin by AccordionHeaderAccImpl.
 		 */
 		mx_internal static var createAccessibilityImplementation:Function;
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		
+
 		/**
 		 *  Constructor.
 		 */
 		public function AccordionHeader()
 		{
 			super();
-			
+
 			// Since we play games with allowing selected to be set without
 			// toggle being set, we need to clear the default toggleChanged
 			// flag here otherwise the initially selected header isn't
@@ -76,39 +76,39 @@ package flexlib.containers.accordionClasses
 			mouseFocusEnabled = false;
 			tabEnabled = false;
 		}
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+
 		/**
 		 *  @private
 		 */
 		private var focusObj:DisplayObject;
-		
+
 		/**
 		 *  @private
 		 */
 		private var focusSkin:IFlexDisplayObject;
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Overridden properties
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//----------------------------------
 		//  data
 		//----------------------------------
-		
+
 		/**
 		 *  @private
 		 *  Storage for the _data property.
 		 */
 		private var _data:Object;
-		
+
 		/**
 		 *  Stores a reference to the content associated with the header.
 		 */
@@ -116,7 +116,7 @@ package flexlib.containers.accordionClasses
 		{
 			return _data;
 		}
-		
+
 		/**
 		 *  @private
 		 */
@@ -124,43 +124,43 @@ package flexlib.containers.accordionClasses
 		{
 			_data = value;
 		}
-		
+
 		//----------------------------------
 		//  selected
 		//----------------------------------
-		
+
 		/**
 		 *  @private
 		 */
 		override public function set selected(value:Boolean):void
 		{
 			_selected = value;
-			
+
 			invalidateDisplayList();
 		}
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Overridden methods: UIComponent
 		//
 		//--------------------------------------------------------------------------
-		
+
 		/**
 		 *  @private
 		 */
 		override protected function createChildren():void
 		{
 			super.createChildren();
-			
+
 			if (FlexVersion.compatibilityVersion < FlexVersion.VERSION_3_0)
-			{		
+			{
 				// AccordionHeader has a bit of a conflict here. Our styleName points to
 				// our parent Accordion, which has padding values defined. We also have
 				// padding values defined on our type selector, but since class selectors
 				// take precedence over type selectors, the type selector padding values
 				// are ignored. Force them in here.
 				var styleDecl:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(className);
-				
+
 				if (styleDecl)
 				{
 					var value:Number = styleDecl.getStyle("paddingLeft");
@@ -172,7 +172,7 @@ package flexlib.containers.accordionClasses
 				}
 			}
 		}
-		
+
 		/**
 		 *  @private
 		 */
@@ -181,7 +181,7 @@ package flexlib.containers.accordionClasses
 			if (AccordionHeader.createAccessibilityImplementation != null)
 				AccordionHeader.createAccessibilityImplementation(this);
 		}
-		
+
 		/**
 		 *  @private
 		 */
@@ -193,26 +193,26 @@ package flexlib.containers.accordionClasses
 				if (!focusObj)
 				{
 					var focusClass:Class = getStyle("focusSkin");
-					
+
 					focusObj = new focusClass();
-					
+
 					var focusStyleable:ISimpleStyleClient = focusObj as ISimpleStyleClient;
 					if (focusStyleable)
 						focusStyleable.styleName = this;
-					
+
 					addChild(focusObj);
-					
+
 					// Call the draw method if it has one
 					focusSkin = focusObj as IFlexDisplayObject;
 				}
-				
+
 				if (focusSkin)
 				{
 					focusSkin.move(0, 0);
 					focusSkin.setActualSize(unscaledWidth, unscaledHeight);
 				}
 				focusObj.visible = true;
-				
+
 				dispatchEvent(new Event("focusDraw"));
 			}
 			else if (focusObj)
@@ -220,13 +220,13 @@ package flexlib.containers.accordionClasses
 				focusObj.visible = false;
 			}
 		}
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Overridden methods: Button
 		//
 		//--------------------------------------------------------------------------
-		
+
 		/**
 		 *  @private
 		 */
@@ -235,32 +235,32 @@ package flexlib.containers.accordionClasses
 													 offset:Boolean):void
 		{
 			super.layoutContents(unscaledWidth, unscaledHeight, offset);
-			
+
 			// Move the focus object to front.
 			// AccordionHeader needs special treatment because it doesn't
 			// show focus by having the standard focus ring display outside.
 			if (focusObj)
 				setChildIndex(focusObj, numChildren - 1);
-			
+
 			if(currentIcon && getStyle('keepIconVertical') == true) {
 				DisplayObject(currentIcon).rotation = 90;
 				currentIcon.x += currentIcon.width;
 			}
 		}
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Overridden event handlers: Button
 		//
 		//--------------------------------------------------------------------------
-		
+
 		/**
 		 *  @private
 		 */
 		override protected function rollOverHandler(event:MouseEvent):void
 		{
 			super.rollOverHandler(event);
-			
+
 			// The halo design specifies that accordion headers overlap
 			// by a pixel when layed out. In order for the border to be
 			// completely drawn on rollover, we need to set our index
@@ -273,5 +273,5 @@ package flexlib.containers.accordionClasses
 			}
 		}
 	}
-	
+
 }

@@ -32,7 +32,7 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.layout
 {
 	import flash.events.IEventDispatcher;
-	
+
 	public interface IHorizontalLinesLayout extends ILayoutClient
 	{
 		function get rowHeight() : Number;

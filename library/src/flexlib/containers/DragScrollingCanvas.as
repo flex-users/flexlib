@@ -26,11 +26,11 @@ package flexlib.containers
 	import flash.events.Event;
 	import flash.events.EventPhase;
 	import flash.events.MouseEvent;
-	
+
 	import mx.containers.Canvas;
 
 	[IconFile("DragScrollingCanvas.png")]
-	
+
 	/**
 	 * <code>DragScrollingCanvas</code> is a Canvas component that allows the user to drag
 	 * the contents instead of or in addition to using the scrollbars. There is only one
@@ -39,42 +39,42 @@ package flexlib.containers
 	 */
 	public class DragScrollingCanvas extends Canvas
 	{
-		
+
 		/**
 	     *  @private
 	     *  Horizontal location where the user pressed the mouse button
 	     *  on the canvas to start dragging.
 	     */
 	    private var regX:Number;
-	    
+
 	    /**
 	     *  @private
 	     *  Vertical location where the user pressed the mouse button
 	     *  on the canvas to start dragging.
 	     */
 	    private var regY:Number;
-	    
+
 	    /**
 	     *  @private
 	     *  Horizontal scroll position when the user pressed the mouse
 	     *  button on the canvas to start dragging.
 	     */
 	    private var regHScrollPosition:Number;
-	    
+
 	    /**
 	     *  @private
 	     *  Vertical scroll position when the user pressed the mouse
 	     *  button on the canvas to start dragging.
 	     */
 	    private var regVScrollPosition:Number;
-	    
+
 	    /**
 	     *  @private
-	     *  Private boolean to indicate whether mouse events on the child 
+	     *  Private boolean to indicate whether mouse events on the child
 	     *  components should trigger dragging.
 	     */
 	    private var _childrenDoDrag:Boolean = true;
-	    
+
 	    /**
 	     *  Boolean to indicate whether the mouse events on the child components
 	     *  should trigger the dragging. If true, any mouse down events will trigger
@@ -87,14 +87,14 @@ package flexlib.containers
 	    public function get childrenDoDrag():Boolean {
 	    	return this._childrenDoDrag;
 	    }
-	    
+
 	    /**
 	     *  @private
 	     */
 	    public function set childrenDoDrag(value:Boolean):void {
 	    	this._childrenDoDrag = value;
 	    }
-	    
+
 		/**
      	*  @private
      	*  Create child objects.
@@ -102,17 +102,17 @@ package flexlib.containers
      	*/
 		override protected function createChildren():void {
 			super.createChildren();
-			
+
 			this.addEventListener(MouseEvent.MOUSE_DOWN, startDragging);
-			
+
 		}
-		
+
 		/**
 	     * @private
 	     * Private Array of children that should NOT trigger dragging
 	     */
 	    private var _undraggableChildren:Array=null;
-	    
+
 	    /**
 	     * Array of child components that will not trigger the dragging. Only applicable if <code>childrenDoDrag</code>
 	     * is true.
@@ -120,19 +120,19 @@ package flexlib.containers
 	    public function get undraggableChildren():Array {
 	    	return _undraggableChildren;
 	    }
-	    
+
 	    /**
 	     * @public
 	     */
 	    public function set undraggableChildren(value:Array):void {
 	    	_undraggableChildren = value;
 	    }
-	    
+
 	    /**
 	     * @private
 	     */
 	    private var _undraggableClasses:Array=null;
-	    
+
 	    /**
 	     * Array of Classes that will not trigger the dragging. Only applicable if <code>childrenDoDrag</code>
 	     * is true.
@@ -140,23 +140,23 @@ package flexlib.containers
 	    public function get undraggableClasses():Array {
 	    	return _undraggableClasses;
 	    }
-	    
+
 	    /**
 	     * @public
 	     */
 	    public function set undraggableClasses(value:Array):void {
 	    	_undraggableClasses = value;
 	    }
-		
+
 		/**
 		 * @private
-		 * Our dragging handler. This is similar to the function found in the Panel 
-		 * component, except we need to store the horizontalScrollPosition and the 
+		 * Our dragging handler. This is similar to the function found in the Panel
+		 * component, except we need to store the horizontalScrollPosition and the
 		 * verticalScrollPosition so we can update them correctly while we're dragging.
 		 */
 		protected function startDragging(event:MouseEvent):void
 	    {
-	    	
+
 	    	// If the mouse event was from one of the scrollbars then we don't want
 	    	// to allow dragging. This means we can allow the use of the scrollbars
 	    	// and still do the dragging stuff.
@@ -164,7 +164,7 @@ package flexlib.containers
 	         	event.target.parent == this.horizontalScrollBar) {
 	         		return;
 	        }
-	        
+
 			if(_undraggableChildren != null)
 			{
 				for each(var child:* in _undraggableChildren)
@@ -173,7 +173,7 @@ package flexlib.containers
 						return;
 				}
 			}
-			
+
 			if(_undraggableClasses != null)
 			{
 				for each(var testClass:Class in _undraggableClasses)
@@ -182,33 +182,33 @@ package flexlib.containers
 						return;
 				}
 			}
-	        
-	        // If childrenDoDrag is set to true then we always do dragging on a mouse 
-	        // down event, we don't care what was clicked on. If childrenDoDrag is false 
+
+	        // If childrenDoDrag is set to true then we always do dragging on a mouse
+	        // down event, we don't care what was clicked on. If childrenDoDrag is false
 	        // then we only want to drag if we have been clicked directly.
 	        if(_childrenDoDrag || event.target == this) {
-	        	
+
 	        	regX = event.stageX;
 		        regY = event.stageY;
-		        
+
 		        regHScrollPosition = this.horizontalScrollPosition;
 		        regVScrollPosition = this.verticalScrollPosition;
-		        
+
 		        systemManager.addEventListener(
 		            MouseEvent.MOUSE_MOVE, systemManager_mouseMoveHandler, true);
-		
+
 		        systemManager.addEventListener(
 		            MouseEvent.MOUSE_UP, systemManager_mouseUpHandler, true);
-		
+
 		        systemManager.stage.addEventListener(
 		            Event.MOUSE_LEAVE, stage_mouseLeaveHandler);
 	        }
 	    }
-	    
-	    
+
+
 	    /**
 	     *  @private
-	     * 
+	     *
 	     *  This function is basically the same as a function in the source code
 	     *  for Panel, except instead of moving the component, we simply update the
 	     *  verticalScrollPosition and horizontalScrollPosition values.
@@ -220,14 +220,14 @@ package flexlib.containers
 	    	// we don't check the target since this is on the systemManager and the target
 	    	// changes a lot -- but this listener only exists during a drag.
 	    	event.stopImmediatePropagation();
-	    	
+
 	    	this.verticalScrollPosition = regVScrollPosition - (event.stageY - regY);
 	    	this.horizontalScrollPosition = regHScrollPosition - (event.stageX - regX);
 	    }
-	
+
 	    /**
 	     *  @private
-	     * 
+	     *
 	     *  This function is taken straight out of the source code for Panel.
 	     */
 	    private function systemManager_mouseUpHandler(event:MouseEvent):void
@@ -235,10 +235,10 @@ package flexlib.containers
 	        if (!isNaN(regX))
 	            stopDragging();
 	    }
-	
+
 	    /**
 	     *  @private
-	     * 
+	     *
 	     *  This function is taken straight out of the source code for Panel.
 	     */
 	    private function stage_mouseLeaveHandler(event:Event):void
@@ -246,23 +246,23 @@ package flexlib.containers
 	        if (!isNaN(regX))
 	            stopDragging();
 	    }
-	    
+
 	    /**
-	     *  @private 
-	     * 
+	     *  @private
+	     *
 	     *  This function is taken straight out of the source code for Panel.
 	     */
 	    protected function stopDragging():void
 	    {
 	        systemManager.removeEventListener(
 	            MouseEvent.MOUSE_MOVE, systemManager_mouseMoveHandler, true);
-	
+
 	        systemManager.removeEventListener(
 	            MouseEvent.MOUSE_UP, systemManager_mouseUpHandler, true);
-	
+
 	        systemManager.stage.removeEventListener(
 	            Event.MOUSE_LEAVE, stage_mouseLeaveHandler);
-	
+
 	        regX = NaN;
 	        regY = NaN;
 	    }

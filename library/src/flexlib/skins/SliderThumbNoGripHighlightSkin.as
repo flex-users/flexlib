@@ -29,7 +29,7 @@ import mx.skins.halo.HaloColors;
 
 
 /**
- * A skin that draws a draggable grip for the draggable region of the Slider. 
+ * A skin that draws a draggable grip for the draggable region of the Slider.
  * Does not include the grip lines. This skin is probably better if you have more than
  * two thumbs.
  */
@@ -68,21 +68,21 @@ public class SliderThumbNoGripHighlightSkin extends Border
 	{
 		var key:String = HaloColors.getCacheKey(themeColor, borderColor,
 												fillColor0, fillColor1);
-		
+
 		if (!cache[key])
 		{
 			var o:Object = cache[key] = {}
-			
+
 			// Cross-component styles.
 			HaloColors.addHaloColors(o, themeColor, fillColor0, fillColor1);
-			
+
 			// ScrollArrowDown-specific styles.
 			o.borderColorDrk1 = ColorUtil.adjustBrightness2(borderColor, -50);
 		}
-		
+
 		return cache[key];
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Constructor
@@ -106,7 +106,7 @@ public class SliderThumbNoGripHighlightSkin extends Border
 	//----------------------------------
 	//  measuredWidth
 	//----------------------------------
-	
+
 	/**
 	 *  @private
 	 */
@@ -114,7 +114,7 @@ public class SliderThumbNoGripHighlightSkin extends Border
 	{
 		return 15;
 	}
-	
+
 	//----------------------------------
 	//  measuredHeight
 	//----------------------------------
@@ -126,13 +126,13 @@ public class SliderThumbNoGripHighlightSkin extends Border
 	{
 		return 11;
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden methods
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
 	 *  @private
 	 */
@@ -147,16 +147,16 @@ public class SliderThumbNoGripHighlightSkin extends Border
 		var fillAlphas:Array = getStyle("fillAlphas");
 		var fillColors:Array = getStyle("fillColors");
 		FlexGlobals.topLevelApplication.styleManager.getColorNames(fillColors);
-		var highlightAlphas:Array = getStyle("highlightAlphas");				
+		var highlightAlphas:Array = getStyle("highlightAlphas");
 		var themeColor:uint = getStyle("themeColor");
-		
+
 		// Placeholder styles stub.
 		var gripColor:uint = 0x6F7777;
-		
+
 		// Derived styles.
 		var derStyles:Object = calcDerivedStyles(themeColor, borderColor,
 												 fillColors[0], fillColors[1]);
-												 
+
 		var radius:Number = Math.max(cornerRadius - 1, 0);
 		var cr:Object = { tl: 0, tr: radius, bl: 0, br: radius };
 		radius = Math.max(radius - 1, 0);
@@ -168,14 +168,14 @@ public class SliderThumbNoGripHighlightSkin extends Border
 
 		if (isNaN(backgroundColor))
 			backgroundColor = 0xFFFFFF;
-		
+
 		graphics.clear();
-		
+
 		// Opaque backing to force the scroll elements
 		// to match other components by default.
 		drawRoundRect(
 			1, 0, w - 3, h, cr,
-			backgroundColor, 1);                            
+			backgroundColor, 1);
 
 		switch (name)
 		{
@@ -183,13 +183,13 @@ public class SliderThumbNoGripHighlightSkin extends Border
 			case "thumbUpSkin":
 			{
    				var upFillColors:Array = [ fillColors[0], fillColors[1] ];
-   				
+
 				var upFillAlphas:Array = [ fillAlphas[0], fillAlphas[1] ];
 
 				// positioning placeholder
 				drawRoundRect(
 					0, 0, w, h, 0,
-					0xFFFFFF, 0); 
+					0xFFFFFF, 0);
 
 				// shadow
 				/*
@@ -200,7 +200,7 @@ public class SliderThumbNoGripHighlightSkin extends Border
 						[ derStyles.borderColorDrk1,
 						  derStyles.borderColorDrk1 ], [ 1, 0 ],
 						horizontalGradientMatrix(2, 0, w, h),
-						GradientType.LINEAR, null, 
+						GradientType.LINEAR, null,
 						{ x: 1, y: 1, w: w - 4, h: h - 2, r: cr1 });
 				}
 				else
@@ -213,9 +213,9 @@ public class SliderThumbNoGripHighlightSkin extends Border
 						horizontal ?
 						horizontalGradientMatrix(0, h - 4, w - 3, 8) :
 						verticalGradientMatrix(0, h - 4, w - 3, 8),
-						GradientType.LINEAR, null, 
+						GradientType.LINEAR, null,
 						{ x: 1, y: h-radius, w: w - 4, h: radius,
-						  r: { tl: 0, tr: 0, bl: 0, br: radius - 1 } }); 
+						  r: { tl: 0, tr: 0, bl: 0, br: radius - 1 } });
 				}
 				*/
 				// border
@@ -225,8 +225,8 @@ public class SliderThumbNoGripHighlightSkin extends Border
 					horizontal ?
 					horizontalGradientMatrix(0, 0, w, h) :
 					verticalGradientMatrix(0, 0, w, h),
-					GradientType.LINEAR, null, 
-					{ x: 1, y: 1, w: w - 4, h: h - 2, r: cr1 });  
+					GradientType.LINEAR, null,
+					{ x: 1, y: 1, w: w - 4, h: h - 2, r: cr1 });
 
 				// fill
 				drawRoundRect(
@@ -234,7 +234,7 @@ public class SliderThumbNoGripHighlightSkin extends Border
 					upFillColors, upFillAlphas,
 					horizontal ?
 					horizontalGradientMatrix(1, 0, w - 2, h - 2) :
-					verticalGradientMatrix(1, 0, w - 2, h - 2)); 
+					verticalGradientMatrix(1, 0, w - 2, h - 2));
 
 				// highlight
 				if (horizontal)
@@ -242,7 +242,7 @@ public class SliderThumbNoGripHighlightSkin extends Border
 					drawRoundRect(
 						1, 0, (w - 4) / 2, h - 2, 0,
 						[ 0xFFFFFF, 0xFFFFFF ], highlightAlphas,
-						horizontalGradientMatrix(1, 1, w - 4, (h - 2) / 2)); 
+						horizontalGradientMatrix(1, 1, w - 4, (h - 2) / 2));
 				}
 				else
 				{
@@ -251,11 +251,11 @@ public class SliderThumbNoGripHighlightSkin extends Border
 						[ 0xFFFFFF, 0xFFFFFF ], highlightAlphas,
 						horizontal ?
 						horizontalGradientMatrix(1, 0, (w - 4) / 2, h - 2) :
-						verticalGradientMatrix(1, 1, w - 4, (h - 2) / 2)); 
+						verticalGradientMatrix(1, 1, w - 4, (h - 2) / 2));
 				}
 				break;
 			}
-			
+
 			case "thumbOverSkin":
 			{
 				var overFillColors:Array;
@@ -273,7 +273,7 @@ public class SliderThumbNoGripHighlightSkin extends Border
 				// positioning placeholder
 				drawRoundRect(
 					0, 0, w, h, 0,
-					0xFFFFFF, 0); 
+					0xFFFFFF, 0);
 
 				// shadow
 				/*
@@ -284,7 +284,7 @@ public class SliderThumbNoGripHighlightSkin extends Border
 						[ derStyles.borderColorDrk1,
 						  derStyles.borderColorDrk1 ], [ 1, 0 ],
 						horizontalGradientMatrix(2, 0, w, h),
-						GradientType.LINEAR, null, 
+						GradientType.LINEAR, null,
 						{ x: 1, y: 1, w: w - 4, h: h - 2, r: cr1 });
 				}
 				else
@@ -297,12 +297,12 @@ public class SliderThumbNoGripHighlightSkin extends Border
 						horizontal ?
 						horizontalGradientMatrix(0, h - 4, w - 3, 8) :
 						verticalGradientMatrix(0, h - 4, w - 3, 8),
-						GradientType.LINEAR, null, 
+						GradientType.LINEAR, null,
 						{ x: 1, y: h-radius, w: w - 4, h: radius,
-						  r: { tl: 0, tr: 0, bl: 0, br: radius - 1 } }); 
+						  r: { tl: 0, tr: 0, bl: 0, br: radius - 1 } });
 				}
 				*/
-								
+
 				// border
 				drawRoundRect(
 					1, 0, w - 3, h, cr,
@@ -310,7 +310,7 @@ public class SliderThumbNoGripHighlightSkin extends Border
 					horizontal ?
 					horizontalGradientMatrix(1, 0, w, h) :
 					verticalGradientMatrix(0, 0, w, h),
-					GradientType.LINEAR, null, 
+					GradientType.LINEAR, null,
                     { x: 1, y: 1, w: w - 4, h: h - 2, r: cr1 });
 
 				// fill
@@ -319,13 +319,13 @@ public class SliderThumbNoGripHighlightSkin extends Border
 					overFillColors, overFillAlphas,
 					horizontal ?
 					horizontalGradientMatrix(1, 0, w, h) :
-					verticalGradientMatrix(1, 0, w, h)); 
-				
+					verticalGradientMatrix(1, 0, w, h));
+
 				break;
 			}
-			
+
 			case "thumbDownSkin":
-			{				
+			{
 				// shadow
 				/*
 				if (horizontal)
@@ -335,8 +335,8 @@ public class SliderThumbNoGripHighlightSkin extends Border
 						[ derStyles.borderColorDrk1,
 						  derStyles.borderColorDrk1 ], [1, 0],
 						horizontalGradientMatrix(2, 0, w, h),
-						GradientType.LINEAR, null, 
-						{ x: 1, y: 1, w: w - 4, h: h - 2, r: cr1 }); 
+						GradientType.LINEAR, null,
+						{ x: 1, y: 1, w: w - 4, h: h - 2, r: cr1 });
 				}
 				else
 				{
@@ -348,9 +348,9 @@ public class SliderThumbNoGripHighlightSkin extends Border
 						horizontal ?
 						horizontalGradientMatrix(0, h - 4, w - 3, 8) :
 						verticalGradientMatrix(0, h - 4, w - 3, 8),
-						GradientType.LINEAR, null, 
+						GradientType.LINEAR, null,
 						{ x: 1, y: h-radius, w: w - 4, h: radius,
-						  r: { tl: 0, tr: 0, bl: 0, br: radius - 1 } }); 
+						  r: { tl: 0, tr: 0, bl: 0, br: radius - 1 } });
 				}
 				*/
 
@@ -361,8 +361,8 @@ public class SliderThumbNoGripHighlightSkin extends Border
 					horizontal ?
 					horizontalGradientMatrix(1, 0, w, h) :
 					verticalGradientMatrix(0, 0, w, h),
-					GradientType.LINEAR, null, 
-                    { x: 1, y: 1, w: w - 4, h: h - 2, r: cr1});  
+					GradientType.LINEAR, null,
+                    { x: 1, y: 1, w: w - 4, h: h - 2, r: cr1});
 
 				// fill
 				drawRoundRect(
@@ -370,37 +370,37 @@ public class SliderThumbNoGripHighlightSkin extends Border
 					[ derStyles.fillColorPress1, derStyles.fillColorPress2 ], 1,
 					horizontal ?
 					horizontalGradientMatrix(1, 0, w, h) :
-					verticalGradientMatrix(1, 0, w, h)); 
-									
+					verticalGradientMatrix(1, 0, w, h));
+
 				break;
 			}
-			
+
 			case "thumbDisabledSkin":
 			{
 				// positioning placeholder
 				drawRoundRect(
 					0, 0, w, h, 0,
-					0xFFFFFF, 0); 
-				
+					0xFFFFFF, 0);
+
 				// border
 				drawRoundRect(
 					1, 0, w - 3, h, cr,
 					0x999999, 0.5);
-				
+
 				// fill
 				drawRoundRect(
 					1, 1, w - 4, h - 2, cr1,
 					0xFFFFFF, 0.5);
-				
+
 				break;
 			}
 		}
-		
-		
-			
-			
-		
-			
+
+
+
+
+
+
 	}
 }
 

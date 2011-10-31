@@ -22,15 +22,15 @@
 /*
 Application
 {
-	
-	backgroundImage: Embed(source="/assets/img/BrushedMetalBack.jpg"); 
+
+	backgroundImage: Embed(source="/assets/img/BrushedMetalBack.jpg");
 	backgroundSize: "100%";
    themeColor: #999999;
     fontFamily: Arial;
     paddingLeft:10; paddingRight:10; paddingTop:10; paddingBottom:10;
 }
 
-.mdiWindowFocus 
+.mdiWindowFocus
 {
 	borderStyle: solid;
    borderColor: #FFFFFF;
@@ -43,31 +43,31 @@ Application
    roundedBottomCorners: true;
    cornerRadius: 5;
    headerHeight: 27;
-   
-   backgroundAlpha: 1; 
+
+   backgroundAlpha: 1;
    backgroundColor: #FFFFFF;
-   
+
 	backgroundImage: Embed(source="assets/swf/BrushedMetal.swf", symbol="Window_Background");
 	backgroundSize: "100%";
-	
+
    dropShadowEnabled: true;
-	
-	
+
+
 	cornerResizeImg: Embed(source="assets/swf/BrushedMetal.swf", symbol="Corner_Resize");
 	cornerResizeWidth: 12;
 	cornerResizeHeight: 12;
 	cornerResizePaddingRight: 2;
 	cornerResizePaddingBottom: 2;
-	
+
 	titleStyleName: "mypanelTitle";
 	titleBackgroundSkin: Embed(source="assets/swf/BrushedMetal.swf", symbol="header");
-	
+
 	controlButtonWidth: 10;
 	controlButtonHeight: 10;
 	controlButtonGap: 8;
 }
 
-.mdiWindowNoFocus 
+.mdiWindowNoFocus
 {
 	borderStyle: solid;
    borderColor: #FFFFFF;
@@ -80,28 +80,28 @@ Application
    roundedBottomCorners: true;
    cornerRadius: 5;
    headerHeight: 27;
-   
 
-	
-   
-   backgroundAlpha: 1; 
+
+
+
+   backgroundAlpha: 1;
    backgroundColor: #FFFFFF;
-   
+
 	backgroundImage: Embed(source="assets/swf/BrushedMetal.swf", symbol="Window_Background");
 	backgroundSize: "100%";
-	
+
    dropShadowEnabled: true;
-	
-	
+
+
 	cornerResizeImg: Embed(source="assets/swf/BrushedMetal.swf", symbol="Corner_Resize");
 	cornerResizeWidth: 12;
 	cornerResizeHeight: 12;
 	cornerResizePaddingRight: 2;
 	cornerResizePaddingBottom: 2;
-	
+
 	titleStyleName: "mypanelTitle";
 	titleBackgroundSkin: Embed(source="assets/swf/BrushedMetal.swf", symbol="header");
-	
+
 	controlButtonWidth: 10;
 	controlButtonHeight: 10;
 	controlButtonGap: 8;

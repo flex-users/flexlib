@@ -52,7 +52,7 @@ package flexlib.scheduling.scheduleClasses.viewers
   {
     private var layout:ITimeIndicatorLayout;
 
-    //---------------------------------------------		
+    //---------------------------------------------
 
     public function update(event:LayoutUpdateEvent):void
     {

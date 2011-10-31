@@ -25,8 +25,8 @@ import mx.controls.Menu;
 import mx.events.MenuEvent;
 import mx.controls.Alert;
 import Iconassets.*;
-[Bindable]	
-	private var alignButtonsArray:Array = [ 
+[Bindable]
+	private var alignButtonsArray:Array = [
 		{icon:IconAlignLeft, action:"left", tooltip:"Align Left"},
 		{icon:IconAlignCenter, action:"center", tooltip:"Center"},
 		{icon:IconAlignRight, action:"right", tooltip:"Align Right"},
@@ -37,10 +37,10 @@ import Iconassets.*;
 	,"Courier","Courier New","Geneva","Georgia","Helvetica","Times","Verdana" ];
 	[Bindable]
 	private var fontSizeArray:Array = [8,9,10,11,12,14,16,18,20,22,24,26,28,36,48,72];
-	
+
 	//MenuBar
    [Bindable]
-   private var myMenuBarXML:XMLList = 
+   private var myMenuBarXML:XMLList =
    		<>
    				<menuitem label= "File">
    					<menuitem label= "Open"/>
@@ -51,21 +51,21 @@ import Iconassets.*;
 					<menuitem label= "Paste"/>
 					<menuitem label= "Send"/>
 				</menuitem>
-				<menuitem label= "View"> 
+				<menuitem label= "View">
 					<menuitem label= "ToolBars">
 						<menuitem label="Formatting" type="Check" toggled="true"/>
 					</menuitem>
 					<menuitem label= "PageLayout"/>
 					<menuitem label= "FullScreen"/>
 				</menuitem>
-				<menuitem label= "Window"> 
+				<menuitem label= "Window">
 					<menuitem label= "Tile"/>
 				</menuitem>
 			</>;
-			
+
 	//Add remove buttons
 	[Bindable]
-	private var formatingtoolBarXML:XMLList = 
+	private var formatingtoolBarXML:XMLList =
 		 	<>
    					<toolBarItem label= "Font" type="Check" toggled="true" />
 					<toolBarItem label= "Font Size" type="Check" toggled="true" />
@@ -76,7 +76,7 @@ import Iconassets.*;
 					<toolBarItem label= "AlignButtons" type="Check" toggled="true"/>
 					<toolBarItem label= "Bullets" type="Check" toggled="true"/>
 			</>;
-			
+
 	private function ToggleToolbars(event:MenuEvent):void
 	{
 		switch (event.label)
@@ -101,7 +101,7 @@ import Iconassets.*;
 			break;
 		default:
 			break;
-		}	
+		}
 	}
 	private function ToggleButtonsinToolBar(event:MenuEvent):void
 	{

@@ -33,58 +33,58 @@ POSSIBILITY OF SUCH DAMAGE.
 	import flexlib.scheduling.scheduleClasses.layout.BackgroundLayout;
 	import flexlib.scheduling.scheduleClasses.layout.BackgroundLayoutItem;
 	import flexlib.scheduling.scheduleClasses.renderers.BackgroundLayoutItemRenderer;
-	
+
 	import flash.display.DisplayObject;
 	import flash.events.Event;
-	
+
 	import mx.collections.ArrayCollection;
 	import mx.core.UIComponent;
-	import mx.events.ScrollEvent;	
-	
+	import mx.events.ScrollEvent;
+
 	/**
 	 * @private
 	 */
-	public class BackgroundViewer extends UIComponent  
-	{		
+	public class BackgroundViewer extends UIComponent
+	{
 		private var freeRenderers : Array;
 		private var visibleRenderers : Array;
 		private var layout : BackgroundLayout;
-				
+
 		public function BackgroundViewer()
 		{
 			freeRenderers = new Array();
-			visibleRenderers = new Array();		
+			visibleRenderers = new Array();
 		}
-		
+
 		public function update( event : Event ) : void
 		{
 			layout = event.target as BackgroundLayout;
 			invalidateDisplayList();
 		}
-		
+
 		protected override function measure() : void
 		{
 			super.measure();
 			if( layout )
-			{ 
+			{
 				measuredWidth = layout.contentWidth;
-				measuredHeight = 100;	
-			} 
+				measuredHeight = 100;
+			}
 		}
-		
+
 		protected override function updateDisplayList( unscaledWidth : Number, unscaledHeight : Number ) : void
 		{
 			super.updateDisplayList( unscaledWidth , unscaledHeight );
-			render( layout );	
+			render( layout );
 		}
-		
-		private function render( layout : BackgroundLayout ) : void 
+
+		private function render( layout : BackgroundLayout ) : void
 		{
 			if( layout == null ) return;
-			
+
 			var oldRenderers : Array = visibleRenderers;
 			visibleRenderers = new Array();
-			
+
 			for each( var item : BackgroundLayoutItem in layout.items )
 			{
 				var renderer : BackgroundLayoutItemRenderer = oldRenderers.pop();
@@ -95,33 +95,33 @@ POSSIBILITY OF SUCH DAMAGE.
 					renderer.height = item.height;
 					renderer.setStyle( "backgroundColor", item.backgroundColor );
 					renderer.toolTip = item.toolTip;
-				} 
-				else 
+				}
+				else
 				{
 					renderer = getRenderer();
-					
+
 					renderer.x = item.x - layout.xPosition;
 					renderer.width = item.width;
 					renderer.height = item.height;
 					renderer.setStyle( "backgroundColor", item.backgroundColor );
 					renderer.toolTip = item.toolTip;
-					
+
 					addChild( renderer );
 				}
 				visibleRenderers.push( renderer );
 			}
-			
-			removeUnusedRenderers( oldRenderers );			
+
+			removeUnusedRenderers( oldRenderers );
 		}
-		
-		
+
+
 		private function removeUnusedRenderers( oldRenderers : Array ) : void
 		{
 			for each( var freeRenderer : DisplayObject in oldRenderers ){
 				freeRenderers.push( removeChild( freeRenderer ));
 			}
 		}
-		
+
 		private function getRenderer() : BackgroundLayoutItemRenderer
 		{
 			if( freeRenderers.length > 0 )
@@ -129,6 +129,6 @@ POSSIBILITY OF SUCH DAMAGE.
 				return freeRenderers.pop();
 			}
 			return new BackgroundLayoutItemRenderer();
-		}		
+		}
 	}
 }

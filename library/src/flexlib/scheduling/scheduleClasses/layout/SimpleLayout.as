@@ -32,19 +32,19 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.layout
 {
 	import flexlib.scheduling.scheduleClasses.IScheduleEntry;
-	
+
 	import mx.collections.IList;
 	import mx.events.CollectionEvent;
-	
+
 	public class SimpleLayout extends AbstractEntryLayout implements IEntryLayout
-	{		
+	{
 		override public function createLayout() : void
 		{
 			super.createLayout();
 			if( dataProvider == null ) return;
 			createLayoutFor( 0, dataProvider.length );
 		}
-		
+
 		private function createLayoutFor( startIndex : Number, endIndex : Number ) : void
 		{
 			var len : Number = endIndex;
@@ -54,8 +54,8 @@ package flexlib.scheduling.scheduleClasses.layout
 				addRowItemsToRow( rowItems, i );
 			}
 			updateLayouterProperties();
-		}		
-		
+		}
+
 		private function addRowItemsToRow( rowItems : IList, i : Number ) : void
 		{
 			rows[ i ] = new Array();
@@ -63,55 +63,55 @@ package flexlib.scheduling.scheduleClasses.layout
 			for ( var j : Number = 0; j < rowItemsLength; j++ )
 			{
 				var item : IScheduleEntry = IScheduleEntry( rowItems.getItemAt( j ) );
-				
-				var x : Number = item.startDate.getTime() - startDate.getTime();					
+
+				var x : Number = item.startDate.getTime() - startDate.getTime();
 				if( isOffScreenLeftRight( x, totalMilliseconds ) ) continue;
-				
+
 				var width : Number = item.endDate.getTime() - item.startDate.getTime();
 				if( isTooSmall( width ) ) continue;
-				
+
 				var layoutItem : EntryLayoutItem = new EntryLayoutItem();
 				layoutItem.x = x;
-				layoutItem.y = i * rowHeight;	
-				layoutItem.width = width; 
+				layoutItem.y = i * rowHeight;
+				layoutItem.width = width;
 				layoutItem.height = rowHeight;
 				layoutItem.data = item;
-				
+
 				rows[ i ][ j ] = layoutItem;
 				saveItemWithRow( layoutItem, i, j );
 			}
 		}
-		
+
 		override public function addItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-		
+
 		override public function removeItem( event : CollectionEvent ) : void
 		{
 			createLayout();
-		}		
-		
+		}
+
 		override public function replaceItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-		
+
 		override public function updateItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-		
+
 		override public function resetItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-				
+
 		override public function refreshItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-		
+
 		override public function moveItem( event : CollectionEvent ) : void
 		{
 			//do nothing on move. This shouldn't have an influence on the component.

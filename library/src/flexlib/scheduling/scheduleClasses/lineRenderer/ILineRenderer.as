@@ -32,20 +32,20 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.lineRenderer
 {
 	import flash.display.Graphics;
-	
+
 	import mx.graphics.IStroke;
-	
+
 	/**
 	 * @private
-	 */	
+	 */
 	public interface ILineRenderer extends IStroke
 	{
 		function moveTo( g : Graphics, x : Number, y : Number ) : void
 		function drawTo( g : Graphics, x : Number, y : Number ) : void
-		
+
 		function get color() : uint;
 		function set color( value : uint ) : void;
 		function get alpha() : Number;
-		function set alpha( value : Number ) : void;		
+		function set alpha( value : Number ) : void;
 	}
 }

@@ -95,7 +95,7 @@ package flexlib.scheduling.scheduleClasses.viewers
       _verticalGridLineAlpha = value;
     }
 
-    //---------------------------------------------		
+    //---------------------------------------------
 
     public function update(event:LayoutUpdateEvent):void
     {

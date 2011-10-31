@@ -50,8 +50,8 @@ MDIWindow
 	cornerRadius: 5;
 	dropShadowEnabled: false;
 	headerHeight: 29;
-	backgroundAlpha: 1; 
-	backgroundColor: #FFFFFF;	
+	backgroundAlpha: 1;
+	backgroundColor: #FFFFFF;
 	titleBackgroundSkin: Embed(source= "assets/swf/WindowsAssets.swf", symbol="macHeaderFocus");
 }
 
@@ -67,7 +67,7 @@ MDIWindow
 	cornerRadius: 5;
 	dropShadowEnabled: false;
 	headerHeight: 29;
-	backgroundAlpha: 1; 
+	backgroundAlpha: 1;
 	backgroundColor: #FFFFFF;
 	titleBackgroundSkin: Embed(source= "assets/swf/WindowsAssets.swf", symbol="macHeaderNoFocus");
 }

@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 Application
-{  
+{
    backgroundColors: #000000,#3f3f3f;
    backgroundImage: Embed(source= "../img/bk3.jpg");
    backgroundSize: "100%";
@@ -30,14 +30,14 @@ Application
 }
 
 
-MDICanvas 
+MDICanvas
 {
 	backgroundColor: #0094C7;
 	backgroundAlpha: 0;
 }
 
 
-Button 
+Button
 {
    highlightAlphas: 1, 0.33;
    fillAlphas: 1, 0.16, 0.18, 1;
@@ -45,7 +45,7 @@ Button
 }
 
 
-.mdiWindowFocus 
+.mdiWindowFocus
 {
 	headerHeight: 26;
 	roundedBottomCorners: true;
@@ -53,7 +53,7 @@ Button
 	backgroundColor: #FFFFFF;
 	backgroundImage: Embed(source= "../swf/Blue.swf", symbol="Window_Background");
 	backgroundSize: '100%';
-	
+
 	borderStyle: solid;
 	borderColor: #ffffff;
 	borderAlpha: 1;
@@ -65,26 +65,26 @@ Button
 	cornerRadius: 4;
 	dropShadowEnabled: false;
 	titleStyleName: "mypanelTitle";
-	
+
 	cornerResizeImg: Embed(source= "../swf/Blue.swf", symbol="Corner_Resize");
 	cornerResizeWidth: 15;
 	cornerResizeHeight: 15;
 	cornerResizePaddingRight: 2;
 	cornerResizePaddingBottom: 2;
-	
+
 	controlButtonWidth: 10;
 	controlButtonHeight: 10;
 	controlButtonGap: 4;
 }
 
-.mdiWindowNoFocus 
+.mdiWindowNoFocus
 {
 	headerHeight: 26;
 	roundedBottomCorners: true;
 	backgroundAlpha: 0.5;
 	backgroundImage: Embed(source= "../swf/Blue.swf", symbol="Window_Background");
 	backgroundSize: '100%';
-	
+
 	borderStyle: solid;
 	borderColor: #ffffff;
 	borderAlpha: 1;
@@ -96,19 +96,19 @@ Button
 	cornerRadius: 4;
 	dropShadowEnabled: false;
 	titleStyleName: "mypanelTitle";
-	
+
 	cornerResizeImg: Embed(source= "../swf/Blue.swf", symbol="Corner_Resize");
 	cornerResizeWidth: 15;
 	cornerResizeHeight: 15;
 	cornerResizePaddingRight: 2;
 	cornerResizePaddingBottom: 2;
-	
+
 	controlButtonWidth: 10;
 	controlButtonHeight: 10;
 	controlButtonGap: 4;
 }
 
-.mypanelTitle 
+.mypanelTitle
 {
 	fontFamily: Arial;
 	fontSize: 12;
@@ -151,7 +151,7 @@ Button
 }
 
 
-.decreaseBtnFocus 
+.decreaseBtnFocus
 {
 	upSkin:        Embed('/assets/img/3_decreaseButton.png');
 	overSkin:      Embed('/assets/img/3_decreaseButton.png');
@@ -159,7 +159,7 @@ Button
 	disabledSkin:  Embed('/assets/img/3_decreaseButton.png');
 }
 
-.decreaseBtnNoFocus 
+.decreaseBtnNoFocus
 {
 	upSkin:        Embed('/assets/img/3_decreaseButton.png');
 	overSkin:      Embed('/assets/img/3_decreaseButton.png');
@@ -168,7 +168,7 @@ Button
 }
 
 
-.minimizeBtnFocus 
+.minimizeBtnFocus
 {
 	upSkin:        Embed('/assets/img/3_minimizeButton.png');
 	overSkin:      Embed('/assets/img/3_minimizeButton.png');
@@ -176,7 +176,7 @@ Button
 	disabledSkin:  Embed('/assets/img/3_minimizeButton.png');
 }
 
-.minimizeBtnNoFocus 
+.minimizeBtnNoFocus
 {
 	upSkin:        Embed('/assets/img/3_minimizeButton.png');
 	overSkin:      Embed('/assets/img/3_minimizeButton.png');
@@ -185,7 +185,7 @@ Button
 }
 
 
-.resizeHndlr 
+.resizeHndlr
 {
 	upSkin:        Embed('/assets/img/resizeHandler.png');
 	overSkin:      Embed('/assets/img/resizeHandler.png');

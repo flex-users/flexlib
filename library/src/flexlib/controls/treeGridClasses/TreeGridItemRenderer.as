@@ -55,11 +55,11 @@ import mx.styles.IStyleClient;
 [Event(name="dataChange", type="mx.events.FlexEvent")]
 
 /**
- * 
+ *
  */
-public class TreeGridItemRenderer extends UIComponent 
-								  implements IDataRenderer, 
-								  			 IDropInListItemRenderer, 
+public class TreeGridItemRenderer extends UIComponent
+								  implements IDataRenderer,
+								  			 IDropInListItemRenderer,
 											 ILayoutManagerClient,
 							  				 IListItemRenderer
 {
@@ -72,7 +72,7 @@ public class TreeGridItemRenderer extends UIComponent
 	 *  in this renderer.
 	 */
 	protected var disclosureIcon:IFlexDisplayObject;
-	
+
     //----------------------------------
 	//  icon
     //----------------------------------
@@ -81,7 +81,7 @@ public class TreeGridItemRenderer extends UIComponent
 	 *  The internal IFlexDisplayObject that displays the icon in this renderer.
 	 */
 	protected var icon:IFlexDisplayObject;
-	
+
     //----------------------------------
 	//  label
     //----------------------------------
@@ -90,17 +90,17 @@ public class TreeGridItemRenderer extends UIComponent
 	 *  The internal UITextField that displays the text in this renderer.
 	 */
 	protected var label:UITextField;
-	
-	
+
+
 	/**
 	 *  The internal shape that displays the trunks in this renderer.
 	 */
 	protected var trunk:Sprite;
-	
-	
+
+
 	private var listOwner : TreeGrid;
-	
-	
+
+
 	/**
      *  Constructor.
      */
@@ -108,7 +108,7 @@ public class TreeGridItemRenderer extends UIComponent
 	{
 		super();
 	}
-	
+
 	/**
 	 *  @private
 	 */
@@ -122,10 +122,10 @@ public class TreeGridItemRenderer extends UIComponent
 			label.styleName = this;
 			addChild(label);
 		}
-		
+
 		addEventListener(ToolTipEvent.TOOL_TIP_SHOW, toolTipShowHandler);
 	}
-	
+
 	/**
 	 *  @private
 	 */
@@ -141,12 +141,12 @@ public class TreeGridItemRenderer extends UIComponent
 
 		if (disclosureIcon)
 		{
-			disclosureIcon.removeEventListener(MouseEvent.MOUSE_DOWN, 
+			disclosureIcon.removeEventListener(MouseEvent.MOUSE_DOWN,
 			      							   disclosureMouseDownHandler);
 			removeChild(DisplayObject(disclosureIcon));
 			disclosureIcon = null;
 		}
-		
+
 		if(trunk)
 		{
 			trunk.graphics.clear();
@@ -162,8 +162,8 @@ public class TreeGridItemRenderer extends UIComponent
 			{
 				var disclosureIconClass:Class = _listData.disclosureIcon;
 				var disclosureInstance:* = new disclosureIconClass();
-				
-				// If not already an interactive object, then we'll wrap 
+
+				// If not already an interactive object, then we'll wrap
 				// in one so we can dispatch mouse events.
 				if (!(disclosureInstance is InteractiveObject))
 				{
@@ -180,13 +180,13 @@ public class TreeGridItemRenderer extends UIComponent
 				disclosureIcon.addEventListener(MouseEvent.MOUSE_DOWN,
 												disclosureMouseDownHandler);
 			}
-			
+
 			if(_listData.trunk != "none" )
 			{
 				trunk = new Sprite();
 				addChild(trunk);
 			}
-			
+
 			if (_listData.icon)
 			{
 				var iconClass:Class = _listData.icon;
@@ -194,12 +194,12 @@ public class TreeGridItemRenderer extends UIComponent
 
 				addChild(DisplayObject(icon));
 			}
-			
+
 			label.text = _listData.label;
 			label.multiline = listOwner.variableRowHeight;
 			label.wordWrap = listOwner.wordWrap;
-			
-			
+
+
 			if (listOwner.showDataTips)
 			{
 				if (label.textWidth > label.width ||
@@ -225,7 +225,7 @@ public class TreeGridItemRenderer extends UIComponent
 
 		invalidateDisplayList();
 	}
-	
+
 	/**
 	 *  @private
 	 */
@@ -234,7 +234,7 @@ public class TreeGridItemRenderer extends UIComponent
 		super.measure();
 
 		var w:Number = _data ? _listData.indent : 5;
-		
+
 		w = w + 5;
 
 		if (disclosureIcon)
@@ -249,10 +249,10 @@ public class TreeGridItemRenderer extends UIComponent
 			label.width = 4;
 			label.height = 16;
 		}
-		
+
 		if (isNaN(explicitWidth))
 		{
-			w += label.getExplicitOrMeasuredWidth();	
+			w += label.getExplicitOrMeasuredWidth();
 			measuredWidth = w;
 			measuredHeight = label.getExplicitOrMeasuredHeight();
 		}
@@ -272,57 +272,57 @@ public class TreeGridItemRenderer extends UIComponent
 												  unscaledHeight:Number):void
 	{
 		super.updateDisplayList(unscaledWidth, unscaledHeight);
-		
+
 		var startx:Number = _data ? _listData.indent : 0;
-		
+
 		//if( startx == 0 )
 		startx = startx + 5;
-			
+
 		if (disclosureIcon)
 		{
 			disclosureIcon.x = startx;
 
 			startx = disclosureIcon.x + disclosureIcon.width;
-			
+
 			disclosureIcon.setActualSize(disclosureIcon.width,
 										 disclosureIcon.height);
-			
+
 			disclosureIcon.visible = _data ?
 									 _listData.hasChildren :
 									 false;
-									 
-			
-			
+
+
+
 		}
-		
+
 		if(trunk)
 		{
 			trunk.graphics.clear();
-			
+
 			trunk.graphics.lineStyle( 1, _listData.trunkColor, 0.5 );
-			
+
 			for( var i : int = 0; i < _listData.depth - 1; i++ )
 			{
 				var currentx : Number = 5 + i * _listData.indentationGap;
 				trunk.graphics.moveTo(currentx + (disclosureIcon.width / 2), 0 - _listData.trunkOffsetTop );
 				trunk.graphics.lineTo(currentx + (disclosureIcon.width / 2), this.height + _listData.trunkOffsetBottom );
 			}
-			
+
 			if(disclosureIcon && disclosureIcon.visible)
 			{
 				//vertical item line (separated in 2 part, top of the icon and bottom of the icon)
 				trunk.graphics.moveTo(startx - (disclosureIcon.width / 2), 0 - _listData.trunkOffsetTop );
 				trunk.graphics.lineTo(startx - (disclosureIcon.width / 2), disclosureIcon.y );
-				
+
 				if(_listData.hasSibling)
 				{
 					trunk.graphics.moveTo(startx - (disclosureIcon.width / 2), disclosureIcon.y + disclosureIcon.height );
 					trunk.graphics.lineTo(startx - (disclosureIcon.width / 2), this.height + _listData.trunkOffsetBottom );
 				}
-				
+
 				//horizontal item line
 				trunk.graphics.moveTo(startx, disclosureIcon.y + disclosureIcon.height / 2 );
-				trunk.graphics.lineTo(startx + (_listData.indentationGap / 3), disclosureIcon.y + disclosureIcon.height / 2 );				
+				trunk.graphics.lineTo(startx + (_listData.indentationGap / 3), disclosureIcon.y + disclosureIcon.height / 2 );
 				startx = startx + (_listData.indentationGap / 3);
 			}
 			else
@@ -341,10 +341,10 @@ public class TreeGridItemRenderer extends UIComponent
 					}
 					trunk.graphics.moveTo(startx - (disclosureIcon.width / 2), 0 - _listData.trunkOffsetTop );
 					trunk.graphics.lineTo(startx - (disclosureIcon.width / 2), endy );
-					
+
 					//horizontal item line
 					trunk.graphics.moveTo(startx - (disclosureIcon.width / 2) , disclosureIcon.y + disclosureIcon.height / 2 );
-					trunk.graphics.lineTo(startx + (_listData.indentationGap / 3) , disclosureIcon.y + disclosureIcon.height / 2 );					
+					trunk.graphics.lineTo(startx + (_listData.indentationGap / 3) , disclosureIcon.y + disclosureIcon.height / 2 );
 					startx = startx + (_listData.indentationGap / 3);
 				}
 				else
@@ -354,26 +354,26 @@ public class TreeGridItemRenderer extends UIComponent
 				}
 			}
 		}
-		
-		
+
+
 		if (icon)
 		{
 			icon.x = startx;
 			startx = icon.x + icon.measuredWidth;
 			icon.setActualSize(icon.measuredWidth, icon.measuredHeight);
 		}
-		
+
 		label.x = startx;
 		label.setActualSize(unscaledWidth - startx, measuredHeight);
-		
+
 		// using truncateToFit to add the 3 dots to labels if the columns are too small
 		if( label.truncateToFit() )
 		{
 			label.toolTip = _listData.label;
 		}
-		
-		
-		
+
+
+
 		//var verticalAlign:String = getStyle("verticalAlign");
 		/*if (verticalAlign == "top")
 		{
@@ -401,11 +401,11 @@ public class TreeGridItemRenderer extends UIComponent
 			icon.y = (unscaledHeight - icon.height) / 2;
 		if (disclosureIcon)
 			disclosureIcon.y = (unscaledHeight - disclosureIcon.height) / 2;
-				
-				
-				
-				
-				
+
+
+
+
+
 		var labelColor:Number;
 
 		if (data && parent)
@@ -421,11 +421,11 @@ public class TreeGridItemRenderer extends UIComponent
 
 			else
         		labelColor = getStyle("color");
-			
+
 			label.setColor(labelColor);
 		}
 	}
-	
+
 	/**
 	 *  @private
 	 */
@@ -436,10 +436,10 @@ public class TreeGridItemRenderer extends UIComponent
 		// Calculate global position of label.
 		var pt:Point = new Point(0, 0);
 		pt = label.localToGlobal(pt);
-		pt = root.globalToLocal(pt);			
-		
+		pt = root.globalToLocal(pt);
+
 		toolTip.move(pt.x, pt.y + (height - toolTip.height) / 2);
-			
+
 		var screen:Rectangle = systemManager.screen;
 		var screenRight:Number = screen.x + screen.width;
 		if (toolTip.x + toolTip.width > screenRight)
@@ -452,13 +452,13 @@ public class TreeGridItemRenderer extends UIComponent
 	private function disclosureMouseDownHandler(event:Event):void
 	{
 		event.stopPropagation();
-		
+
 		//if (listOwner.isOpening || !listOwner.enabled)
 		//	return;
 
 		var open:Boolean = _listData.open;
 		_listData.open = !open;
-		
+
 		listOwner.dispatchTreeEvent(TreeEvent.ITEM_OPENING,
 		                        _listData, //listData
                                 this,  	//renderer
@@ -466,14 +466,14 @@ public class TreeGridItemRenderer extends UIComponent
                                 !open, 	//opening
     							true)   //dispatch
 	}
-	
-	
-	
+
+
+
 	/**
      *  @private
      */
 	private var invalidatePropertiesFlag:Boolean = false;
-	
+
     /**
      *  @private
      */
@@ -495,9 +495,9 @@ public class TreeGridItemRenderer extends UIComponent
 	override public function set nestLevel(value:int):void
 	{
 		super.nestLevel = value;
-	
+
 	}
-	
+
 	/**
 	 *  @private
 	 */
@@ -508,16 +508,16 @@ public class TreeGridItemRenderer extends UIComponent
 	{
 		return _listData;
 	}
-	
+
 	public function set listData( value : BaseListData ) : void
 	{
 		if( !value )
 			return;
-		
-		_listData = TreeGridListData( value );	
+
+		_listData = TreeGridListData( value );
 	}
-	
-	
+
+
 	/**
      *  @private
      */
@@ -528,12 +528,12 @@ public class TreeGridItemRenderer extends UIComponent
 	{
 		return _data;
 	}
-	
-	
+
+
 	public function set data( value : Object ):void
 	{
 		_data = value;
-	
+
 		invalidateProperties();
 
 		dispatchEvent(new FlexEvent(FlexEvent.DATA_CHANGE));
