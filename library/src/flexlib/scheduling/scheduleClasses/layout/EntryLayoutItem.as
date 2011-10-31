@@ -37,26 +37,26 @@ package flexlib.scheduling.scheduleClasses.layout
 	{
 		//content
 		public var data : IScheduleEntry;
-		
+
 		//layoutData
 		public var x : Number;
 		public var y : Number;
 		public var width : Number;
 		public var height : Number;
-		
+
 		public var row : Number;
 		public var zoom : Number;
-		
+
 		public function toString() : String
 		{
 			return "[object EntryLayoutItem"
-			  + " row:" + row 
-			  + " x:" + x 
-			  + " y:" + y 
-			  + " width:" + width 
-			  + " height:" + height 
+			  + " row:" + row
+			  + " x:" + x
+			  + " y:" + y
+			  + " width:" + width
+			  + " height:" + height
 			  + "]";
 		}
-		
+
 	}
 }

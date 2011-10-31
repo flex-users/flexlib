@@ -37,101 +37,101 @@ POSSIBILITY OF SUCH DAMAGE.
 	import flexlib.scheduling.scheduleClasses.renderers.GradientScheduleEntryRenderer;
 	import flexlib.scheduling.scheduleClasses.renderers.IScheduleEntryRenderer;
 	import flexlib.scheduling.scheduleClasses.utils.Selection;
-	
+
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
-	
+
 	import mx.core.ClassFactory;
 	import mx.core.IFactory;
 	import mx.core.UIComponent;
-	
+
 	/**
 	 *  Name of CSS style declaration that specifies styles for the schedule entries
 	 */
-	[Style(name="entryStyleName", type="String", inherit="yes")]			
+	[Style(name="entryStyleName", type="String", inherit="yes")]
 
 	/**
 	 * @private
 	 */
-	public class EntryViewer extends UIComponent 
+	public class EntryViewer extends UIComponent
 	{
 		public var entryRenderer : IFactory;
 		private var freeRenderers : Array;
 		private var visibleRenderers : Dictionary;
-		private var layout : IEntryLayout;		
+		private var layout : IEntryLayout;
 		private var selection : Selection;
 		private var isShiftKey : Boolean;
 		private var isCtrlKey : Boolean;
-		
+
 		public function EntryViewer()
 		{
 			entryRenderer = new ClassFactory( GradientScheduleEntryRenderer );
-			
+
 			freeRenderers = new Array();
-			visibleRenderers = new Dictionary();	
-			
+			visibleRenderers = new Dictionary();
+
 			selection = new Selection();
-			
+
 			addEventListener( MouseEvent.MOUSE_UP, onClickEntry );
 			addEventListener( Event.ACTIVATE, addKeyListeners );
 			addEventListener( Event.DEACTIVATE, removeKeyListeners );
 		}
-		
+
 		public function get allowMultipleSelection() : Boolean
 		{
 			return selection.allowMultipleSelection;
 		}
-		
+
 		public function set allowMultipleSelection( value : Boolean ) : void
 		{
 			selection.allowMultipleSelection = value;
-		}		
-		
+		}
+
 		public function get selectedItem() : IScheduleEntry
 		{
 			return IScheduleEntry( selection.selectedItem );
 		}
-		
+
 		public function set selectedItem( value : IScheduleEntry ) : void
 		{
 			selection.selectedItem = value;
 			invalidateDisplayList();
 		}
-		
+
 		public function get selectedItems() : Array
 		{
 			return selection.selectedItems
 		}
-		
+
 		public function set selectedItems( value : Array ) : void
 		{
-			selection.selectedItems = value;			
+			selection.selectedItems = value;
 		}
-		
+
 		public function update( event : LayoutUpdateEvent ) : void
 		{
 			layout = IEntryLayout( event.layout );
 			invalidateDisplayList();
 		}
-		
+
 		override protected function measure() : void
 		{
 			super.measure();
 			if( layout == null ) return;
-			
+
 			measuredWidth = layout.contentWidth;
 			measuredHeight = layout.contentHeight;
 		}
-		
+
 		override protected function updateDisplayList( unscaledWidth : Number, unscaledHeight : Number ) : void
 		{
-			super.updateDisplayList( unscaledWidth , unscaledHeight );			
+			super.updateDisplayList( unscaledWidth , unscaledHeight );
 			render( layout );
 		}
-		
+
 		override protected function keyDownHandler( event : KeyboardEvent ) : void
 		{
 			super.keyDownHandler( event );
@@ -140,8 +140,8 @@ POSSIBILITY OF SUCH DAMAGE.
 				isCtrlKey = true;
 			}
 		}
-		
-		override protected function keyUpHandler( event : KeyboardEvent ) : void 
+
+		override protected function keyUpHandler( event : KeyboardEvent ) : void
 		{
 			super.keyUpHandler( event );
 			if( !event.ctrlKey )
@@ -149,46 +149,46 @@ POSSIBILITY OF SUCH DAMAGE.
 				isCtrlKey = false;
 			}
 		}
-		
+
 		private function addKeyListeners( event : Event ) : void
 		{
 			if( stage == null ) return;
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
-			stage.addEventListener( KeyboardEvent.KEY_UP, keyUpHandler );	
+			stage.addEventListener( KeyboardEvent.KEY_UP, keyUpHandler );
 		}
-		
+
 		private function removeKeyListeners( event : Event ) : void
 		{
 			if( stage == null ) return;
 			stage.removeEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
-			stage.removeEventListener( KeyboardEvent.KEY_UP, keyUpHandler );	
-		}		
-		
-		private function onClickEntry( event : MouseEvent ) : void 
+			stage.removeEventListener( KeyboardEvent.KEY_UP, keyUpHandler );
+		}
+
+		private function onClickEntry( event : MouseEvent ) : void
 		{
 			event.stopPropagation();
-			
+
 			var renderer : IScheduleEntryRenderer = findRendererInParentChain( event.target );
 			if( renderer == null ) return;
-			
+
 			var entry : IScheduleEntry = renderer.entry;
 			createSelections( entry );
 		}
-		
+
 		private function createSelections( entry : IScheduleEntry ) : void
 		{
 			if( entry == null ) return;
-			
+
 			if( !allowMultipleSelection )
 			{
 				selectOrDeselect( entry );
 			}
 			else
 			{
-				var hasZeroItems : Boolean = ( selection.selectedItems.length == 0 );					
+				var hasZeroItems : Boolean = ( selection.selectedItems.length == 0 );
 				if( hasZeroItems )
 				{
-					selection.addItem( entry );						
+					selection.addItem( entry );
 				}
 				else
 				{
@@ -198,40 +198,40 @@ POSSIBILITY OF SUCH DAMAGE.
 						selectOrDeselect( entry );
 					}
 					else
-					{						
+					{
 						selectOrDeselect( entry );
-					}	
+					}
 				}
 			}
-			
+
 			updateSelection();
 			dispatchEvent( new Event( "change" ) );
 		}
-		
+
 		private function selectOrDeselect( entry : IScheduleEntry ) : void
 		{
 			if( selection.hasItem( entry ) )
 			{
 				selection.removeItem( entry );
 			}
-			else 
+			else
 			{
 				selection.addItem( entry );
-			}		
+			}
 		}
-		
+
 		/**
-		 * Because we are relying on bubbling we 
-		 * have to make sure, that the event comes from the renderer 
-		 * actually and not from one of its child components. 
-		 * We traverse up the parent chain of the clicked target 
+		 * Because we are relying on bubbling we
+		 * have to make sure, that the event comes from the renderer
+		 * actually and not from one of its child components.
+		 * We traverse up the parent chain of the clicked target
 		 * until we found an entryRenderer or null.
-		 * 
-		 * THINK : Normally i'd say, this is not our business, but 
-		 * we want to keep the renderer as simple as possible to make 
-		 * it easier for users to implement a renderer. Otherwise 
-		 * the renderer would have to catch events from its child 
-		 * components and redispatch them 
+		 *
+		 * THINK : Normally i'd say, this is not our business, but
+		 * we want to keep the renderer as simple as possible to make
+		 * it easier for users to implement a renderer. Otherwise
+		 * the renderer would have to catch events from its child
+		 * components and redispatch them
 		 */
 		private function findRendererInParentChain( target : Object ) : IScheduleEntryRenderer
 		{
@@ -242,7 +242,7 @@ POSSIBILITY OF SUCH DAMAGE.
 			}
 			return null;
 		}
-		
+
 		private function updateSelection() : void
 		{
 			for each( var renderer : IScheduleEntryRenderer in visibleRenderers )
@@ -250,14 +250,14 @@ POSSIBILITY OF SUCH DAMAGE.
 				renderer.selected = selection.hasItem( renderer.data );
 			}
 		}
-		
-		private function render( layout : IEntryLayout ) : void 
+
+		private function render( layout : IEntryLayout ) : void
 		{
 			if( layout == null ) return;
-			
+
 			var oldRenderers : Dictionary = visibleRenderers;
 			visibleRenderers = new Dictionary();
-			
+
 			for each( var item : EntryLayoutItem in layout.items )
 			{
 				var renderer : IScheduleEntryRenderer = oldRenderers[ item ];
@@ -269,7 +269,7 @@ POSSIBILITY OF SUCH DAMAGE.
 					renderer.height = item.height - 4;
 					delete oldRenderers[ item ];
 				}
-				else 
+				else
 				{
 					renderer = getRenderer();
 					var style : Object = getStyle( "entryStyleName" );
@@ -278,17 +278,17 @@ POSSIBILITY OF SUCH DAMAGE.
 					renderer.y = item.y - layout.yPosition + 2;
 					renderer.width = item.width / item.zoom;
 					renderer.height = item.height - 4;
-					
+
 					addChild( DisplayObject( renderer ) );
 					renderer.data = item.data;
 				}
 				visibleRenderers[ item ] = renderer;
 			}
-			
-			removeUnusedRenderers( oldRenderers );			
+
+			removeUnusedRenderers( oldRenderers );
 			updateSelection();
 		}
-		
+
 		private function removeUnusedRenderers( oldRenderers : Dictionary ) : void
 		{
 			for each( var freeRenderer : DisplayObject in oldRenderers )
@@ -296,13 +296,13 @@ POSSIBILITY OF SUCH DAMAGE.
 				freeRenderers.push( removeChild( freeRenderer ));
 			}
 		}
-		
+
 		private function getRenderer() : IScheduleEntryRenderer
 		{
 			if( freeRenderers.length > 0 )
 			{
 				return freeRenderers.pop();
-			}			
+			}
 			return entryRenderer.newInstance();
 		}
 	}

@@ -35,12 +35,12 @@ package flexlib.scheduling.scheduleClasses.layout
 	 * @private
 	 */
 	public class BackgroundLayoutItem
-	{		
+	{
 		public var backgroundColor : uint;
 		public var toolTip : String;
 		public var width : Number;
 		public var height : Number;
 		public var x : Number;
-		public var y : Number;		
+		public var y : Number;
 	}
 }

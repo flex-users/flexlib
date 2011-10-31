@@ -46,14 +46,14 @@ use namespace mx_internal;
 
 /**
  *  Dispatched when the <code>ToolBar</code> is docked.
- * 
+ *
  *  @eventType flash.events.Event
  */
 [Event(name="dock", type="flash.events.Event")]
 
 /**
  *  Dispatched when the <code>ToolBar</code> is poped up into a floating window.
- * 
+ *
  *  @eventType flash.events.Event
  */
 [Event(name="float", type="flash.events.Event")]
@@ -65,9 +65,9 @@ use namespace mx_internal;
 [Style(name="dragStripIcon", type="String", inherit="no")]
 
 /**
- *  The DockableToolBar container is used along with the Docker 
+ *  The DockableToolBar container is used along with the Docker
  *  container to add individual ToolBars within a Docker context.
- *  
+ *
  *  @mxml
  *
  *  <p>The <code>&lt;flexlib:DockableToolBar&gt;</code> tag inherits all the tag attributes
@@ -132,13 +132,13 @@ public class DockableToolBar extends FlowContainer
 	 * The initial location of the ToolBar. This can be either "top" or "bottom".
 	 */
 	public var initialPosition:String = "top";
-	
+
 	/**
 	 * @private
 	 * A reference to the Docker object to which this ToolBar would be Docked.
 	 */
 	mx_internal var docker:Docker;
-	
+
 	/**
 	 * @private
 	 * A reference to the PopUp Window object when the ToolBar is floating.
@@ -147,16 +147,16 @@ public class DockableToolBar extends FlowContainer
 
 	// False means floating Toolbar
 	private var _isDocked:Boolean = true;
-	
+
 	private var estimatedWidth:Number;
-	
+
 	/**
 	 *  @private
 	 *  Horizontal location where the user pressed the mouse button
 	 *  to start dragging
 	 */
 	private var regX:Number;
-	
+
 	/**
 	 *  @private
 	 *  Vertical location where the user pressed the mouse button
@@ -179,20 +179,20 @@ public class DockableToolBar extends FlowContainer
 	{
 		return _isDocked;
 	}
-    
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden methods
 	//
 	//--------------------------------------------------------------------------
-	
+
  	/**
 	 *  @private
 	 */
 	override protected function createChildren():void
 	{
 		super.createChildren();
-		
+
 		if (draggable)
 		{
 			if (!dragStrip)
@@ -203,15 +203,15 @@ public class DockableToolBar extends FlowContainer
 					dragStrip.source = iconStyle
 				else
 					dragStrip.source = dragStripIconClass;
-				
+
 				dragStrip.toolTip = "Drag to move the Toolbar";
 				addChildAt(dragStrip, 0);
 			}
-		
+
 			dragStrip.addEventListener("mouseDown", mouseDownHandler);
 		}
 	}
-    
+
  	/**
 	 *  @private
 	 */
@@ -244,10 +244,10 @@ public class DockableToolBar extends FlowContainer
 	 */
 	protected function mouseDownHandler(event:MouseEvent):void
 	{
-	
+
 		if (!docker)
 			return;
-			
+
 		var pt:Point = (floatingWindow ? floatingWindow : this).globalToLocal(
 						new Point(event.stageX, event.stageY));
 		regX = pt.x;
@@ -257,7 +257,7 @@ public class DockableToolBar extends FlowContainer
 		systemManager.addEventListener("mouseUp", mouseUpHandler);
 		systemManager.stage.addEventListener(
 			Event.MOUSE_LEAVE, stopDragging);
-		
+
 		if (measuredWidth > 200 || !isNaN(percentWidth))
 		{
 			var area:int = measuredHeight * measuredWidth;
@@ -274,14 +274,14 @@ public class DockableToolBar extends FlowContainer
 	 */
 	protected function mouseUpHandler(event:MouseEvent):void
 	{
-		
+
 		var prevDocked:Boolean = _isDocked;
 		_isDocked = docker.dragOver(this, event, true);
-		
+
 		updateFloatingStatus(event);
-		
+
 		UIComponent(parent).invalidateDisplayList();
-		
+
 		if (floatingWindow)
 		{
 			var s:int = (prevDocked && !_isDocked) ? 2 : 1;
@@ -295,7 +295,7 @@ public class DockableToolBar extends FlowContainer
 		}
 		stopDragging(event);
 	}
-	
+
 	/**
 	 *  @private
 	 */
@@ -306,10 +306,10 @@ public class DockableToolBar extends FlowContainer
 		systemManager.removeEventListener("mouseMove", mouseMoveHandler);
 		systemManager.stage.removeEventListener(Event.MOUSE_LEAVE, stopDragging);
 	}
-	
+
 	/**
 	 * @private
-	 * Used to update change the ToolBar state to docked or floating according to 
+	 * Used to update change the ToolBar state to docked or floating according to
 	 * the dragdrop position.
 	 */
 	protected function updateFloatingStatus(event:MouseEvent):void
@@ -335,14 +335,14 @@ public class DockableToolBar extends FlowContainer
 			pt = localToGlobal(new Point(0, 0));
 			floatingWindow.x = pt.x;
 			floatingWindow.y = pt.y;
-						
+
 			floatingWindow.width = estimatedWidth;
 			mx.managers.PopUpManager.addPopUp(floatingWindow, docker);
 
 			if (parent is HBox && parent.numChildren == 1)
 				parent.parent.removeChild(parent);
 			parent.removeChild(this);
-			
+
 			dragStrip.visible = dragStrip.includeInLayout = false;
 			floatingWindow.addChild(this);
 			floatingWindow.validateNow();
@@ -356,14 +356,14 @@ public class DockableToolBar extends FlowContainer
 	protected function mouseMoveHandler(event:MouseEvent):void
 	{
 		var overDockingArea:Boolean = docker.dragOver(this, event);
-		
+
 		var g:Graphics = docker.dragProxy.graphics;
 		g.lineStyle(1, 0x000000, 0.5);
 		g.beginFill(0xFFFFFF, 0.45);
-		var wrapFactor:Number = (_isDocked && !overDockingArea) ? 
+		var wrapFactor:Number = (_isDocked && !overDockingArea) ?
 					measuredWidth / estimatedWidth : 1;
 		var dragObject:UIComponent = UIComponent(_isDocked ? this : parent);
-		g.drawRect(event.stageX - regX / wrapFactor, event.stageY - regY, 
+		g.drawRect(event.stageX - regX / wrapFactor, event.stageY - regY,
 					dragObject.width / wrapFactor, dragObject.height * wrapFactor);
 		g.endFill();
 	}

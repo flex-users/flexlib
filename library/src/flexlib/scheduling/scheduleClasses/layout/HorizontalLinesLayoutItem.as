@@ -34,12 +34,12 @@ package flexlib.scheduling.scheduleClasses.layout
 
 	/**
 	 * @private
-	 */	
+	 */
 	public class HorizontalLinesLayoutItem
-	{		
+	{
 		public var width : Number;
 		public var height : Number;
 		public var x : Number;
-		public var y : Number;		
+		public var y : Number;
 	}
 }

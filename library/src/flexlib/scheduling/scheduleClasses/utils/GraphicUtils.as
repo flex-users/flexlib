@@ -35,14 +35,14 @@ POSSIBILITY OF SUCH DAMAGE.
 	 */
 	public class GraphicUtils
 	{
-		
+
 		import flash.display.Graphics;
-		
-		public static function drawDottedHorizontalLineTo( 
-			g:Graphics, 
-			y : Number, 
-			xStart : Number, 
-			xEnd : Number 
+
+		public static function drawDottedHorizontalLineTo(
+			g:Graphics,
+			y : Number,
+			xStart : Number,
+			xEnd : Number
 			) : void
 		{
 			for( var x : Number = xStart; x < xEnd; x += 3)
@@ -50,19 +50,19 @@ POSSIBILITY OF SUCH DAMAGE.
 				if( x % 2 == 0 )
 				{
 					g.lineTo( x + 3, y );
-				} 
-				else 
+				}
+				else
 				{
 					g.moveTo( x + 3, y );
-				}								
+				}
 			}
-		}		
-		
-		public static function drawDottedVerticalLineTo( 
-			g:Graphics, 
-			x : Number, 
-			yStart : Number, 
-			yEnd : Number 
+		}
+
+		public static function drawDottedVerticalLineTo(
+			g:Graphics,
+			x : Number,
+			yStart : Number,
+			yEnd : Number
 			) : void
 		{
 			for( var y : Number = yStart; y < yEnd; y += 3)
@@ -70,11 +70,11 @@ POSSIBILITY OF SUCH DAMAGE.
 				if( y % 2 == 0 )
 				{
 					g.lineTo( x, y + 3 );
-				} 
-				else 
+				}
+				else
 				{
 					g.moveTo( x, y + 3 );
-				}								
+				}
 			}
 		}
 	}

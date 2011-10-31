@@ -39,7 +39,7 @@ package flexlib.scheduling.scheduleClasses.lineRenderer
 
   import flexlib.scheduling.scheduleClasses.utils.GraphicUtils;
   import flash.display.JointStyle;
-  
+
 
   /**
    * @private

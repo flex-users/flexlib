@@ -29,38 +29,38 @@ POSSIBILITY OF SUCH DAMAGE.
 
 @ignore
 */package flexlib.scheduling.scheduleClasses
-{	
+{
 	import flexlib.scheduling.scheduleClasses.IScheduleEntry;
 
 	/**
-	 */	
+	 */
 	public class SimpleScheduleEntry implements IScheduleEntry
 	{
 		public var label : String;
-		
+
 		private var _startDate : Date;
-		private var _endDate : Date;	
-	
+		private var _endDate : Date;
+
 		public function get startDate() : Date
 		{
 			return _startDate;
 		}
-		
+
 		public function set startDate( value : Date) : void
 		{
 			_startDate = value;
 		}
-		
+
 		public function get endDate() : Date
 		{
 			return _endDate;
 		}
-		
-		public function set endDate( value : Date ) : void 
+
+		public function set endDate( value : Date ) : void
 		{
 			_endDate = value;
 		}
-				
+
 		public function toString() : String
 		{
 			return "[object SimpleScheduleEntry startDate:" + startDate + " endDate:" + endDate + "]";

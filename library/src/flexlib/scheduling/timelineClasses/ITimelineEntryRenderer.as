@@ -32,9 +32,9 @@ POSSIBILITY OF SUCH DAMAGE.
 {
 	import mx.core.IDataRenderer;
 	import mx.core.IFlexDisplayObject;
-	
+
 	public interface ITimelineEntryRenderer extends IFlexDisplayObject, IDataRenderer
 	{
-		
+
 	}
 }

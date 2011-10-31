@@ -27,34 +27,34 @@ package flexlib.events
 	import flexlib.controls.area;
 
 	/**
-	 * An <code>ImageMapEvent</code> is like a generic Event, but we add the <code>href</code>, 
+	 * An <code>ImageMapEvent</code> is like a generic Event, but we add the <code>href</code>,
 	 * <code>alt</code>, and <code>linkTarget</code> properties.
 	 */
 	public class ImageMapEvent extends Event
 	{
 		public static const SHAPE_CLICK:String = "shapeClick";
 		public static const SHAPE_DOUBLECLICK:String = "shapeDoubleClick";
-		
+
 		public static const SHAPE_OVER:String = "shapeOver";
 		public static const SHAPE_OUT:String = "shapeOut";
 		public static const SHAPE_DOWN:String = "shapeDown";
 		public static const SHAPE_UP:String = "shapeUp";
-		
-		
+
+
 		public var href:String;
 		public var item:area;
 		public var linkTarget:String;
-		
+
 		public function ImageMapEvent(type:String, bubbles:Boolean = false,
 									  cancelable:Boolean = false,
-									  href:String=null, item:area=null, target:String=null) 
+									  href:String=null, item:area=null, target:String=null)
 		{
 			super(type, bubbles, cancelable);
-			
+
 			this.href = href;
 			this.item = item;
-			this.linkTarget = target;  
+			this.linkTarget = target;
 		}
-		
+
 	}
 }

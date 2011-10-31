@@ -23,7 +23,7 @@ SOFTWARE.
 package flexlib.containers {
 	import flash.events.MouseEvent;
     import flexlib.events.WindowShadeEvent;
-	
+
 	import mx.controls.Button;
 	import mx.core.EdgeMetrics;
     import mx.core.FlexGlobals;
@@ -37,7 +37,7 @@ package flexlib.containers {
 	import mx.styles.CSSStyleDeclaration;
 
 	import mx.utils.StringUtil;
-	
+
     /**
      * This is the icon displayed on the headerButton when the WindowShade is in the open state.
      */
@@ -49,15 +49,15 @@ package flexlib.containers {
     [Style(name="closeIcon", type="Class", inherit="no")]
 
     /**
-     * The duration of the WindowShade opening transition, in milliseconds. The value 0 specifies no transition. 
-     * 
+     * The duration of the WindowShade opening transition, in milliseconds. The value 0 specifies no transition.
+     *
      * @default 250
      */
     [Style(name="openDuration", type="Number", format="Time", inherit="no")]
 
     /**
-     * The duration of the WindowShade closing transition, in milliseconds. The value 0 specifies no transition. 
-     * 
+     * The duration of the WindowShade closing transition, in milliseconds. The value 0 specifies no transition.
+     *
      * @default 250
      */
     [Style(name="closeDuration", type="Number", format="Time", inherit="no")]
@@ -65,11 +65,11 @@ package flexlib.containers {
     /**
      * The class from which the headerButton will be instantiated. Must be mx.controls.Button
      * or a subclass.
-     * 
+     *
      * @default mx.controls.Button
-     */ 
+     */
     [Style(name="headerClass", type="Class", inherit="no")]
-    
+
     /**
      * Name of CSS style declaration that specifies styles for the headerButton.
      */
@@ -78,15 +78,15 @@ package flexlib.containers {
     /**
      * Alignment of text on the headerButton. The value set for this style is used as
      * the textAlign style on the headerButton. Valid values are "left", "center" and "right".
-     * 
+     *
      * @default "right"
      */
      [Style(name="headerTextAlign", type="String", inherit="no")]
 
      /**
-      * If true, the value of the headerButton's <code>toggle</code> property will be set to true; 
+      * If true, the value of the headerButton's <code>toggle</code> property will be set to true;
       * otherwise the <code>toggle</code> property will be left in its default state.
-      * 
+      *
       * @default false
       */
      [Style(name="toggleHeader", type="Boolean", inherit="no")]
@@ -104,7 +104,7 @@ package flexlib.containers {
 
     /**
      * Dispatched when the WindowShade is about to be opened.
-     * 
+     *
      * <p>In most cases, an event of this type will be followed by an event of type WindowShadeEvent.OPEN_END (<code>openEnd</code>); however,
      * if the user clicks the header button before the closing transition has run to completion, the <code>openEnd</code> event will
      * not be dispatched, since the WindowShade will not be left in the opened state.</p>
@@ -122,7 +122,7 @@ package flexlib.containers {
 
     /**
      * Dispatched when the WindowShade is about to be closed. This event cannot be cancelled.
-     * 
+     *
      * <p>In most cases, an event of this type will be followed by an event of type WindowShadeEvent.CLOSE_END (<code>closeEnd</code>); however,
      * if the user clicks the header button before the closing transition has run to completion, the <code>closeEnd</code> event will
      * not be dispatched, since the WindowShade will not be left in the closed state.</p>
@@ -150,11 +150,11 @@ package flexlib.containers {
 
 		[Embed (source="../assets/assets.swf", symbol="right_arrow")]
 		private static var DEFAULT_CLOSE_ICON:Class;
-		
+
 		[Embed (source="../assets/assets.swf", symbol="down_arrow")]
 		private static var DEFAULT_OPEN_ICON:Class;
-		
-		
+
+
         private static var styleDefaults:Object = {
              openDuration:250
             ,closeDuration:250
@@ -196,19 +196,19 @@ package flexlib.containers {
         }
 
 		/**
-		 * @private 
+		 * @private
 		 * A reference to the Button that will be used for the header. Must always be a Button or subclass of Button.
 		 */
         private var _headerButton:Button = null;
-        
+
         private var headerChanged:Boolean;
-        
+
         /**
         * @private
-        * The header renderer factory that will get used to create the header. 
+        * The header renderer factory that will get used to create the header.
         */
         private var _headerRenderer:IFactory;
-        
+
         /**
         * To control the header used on the WindowShade component you can either set the <code>headerClass</code> or the
         * <code>headerRenderer</code>. The <code>headerRenderer</code> works similar to the itemRenderer of a List control.
@@ -217,15 +217,15 @@ package flexlib.containers {
         */
         public function set headerRenderer(value:IFactory):void {
         	_headerRenderer = value;
-        	
+
         	headerChanged = true;
         	invalidateProperties();
         }
-        
+
         public function get headerRenderer():IFactory {
         	return _headerRenderer;
         }
-        
+
         /**
         * @private
         * Boolean dirty flag to let us know if we need to change the icon in the commitProperties method.
@@ -234,7 +234,7 @@ package flexlib.containers {
 
         public function WindowShade() {
             super();
-            
+
             //default scroll policies are off
             this.verticalScrollPolicy = ScrollPolicy.OFF;
             this.horizontalScrollPolicy = ScrollPolicy.OFF;
@@ -245,12 +245,12 @@ package flexlib.containers {
         protected function createOrReplaceHeaderButton():void {
            if(_headerButton) {
                 _headerButton.removeEventListener(MouseEvent.CLICK, headerButton_clickHandler);
-                
+
                 if(rawChildren.contains(_headerButton)) {
                     rawChildren.removeChild(_headerButton);
                 }
             }
-            
+
             if(_headerRenderer) {
             	_headerButton = _headerRenderer.newInstance() as Button;
             }
@@ -258,11 +258,11 @@ package flexlib.containers {
             	var headerClass:Class = getStyle("headerClass");
           	 	_headerButton = new headerClass();
             }
-            
+
             applyHeaderButtonStyles(_headerButton);
 
             _headerButton.addEventListener(MouseEvent.CLICK, headerButton_clickHandler);
-            
+
             rawChildren.addChild(_headerButton);
 
             // Fix for Issue #85
@@ -271,13 +271,13 @@ package flexlib.containers {
 
         protected function applyHeaderButtonStyles(button:Button):void {
             button.setStyle("textAlign", getStyle("headerTextAlign"));
-            
+
             var headerStyleName:String = getStyle("headerStyleName");
             if(headerStyleName) {
             	headerStyleName = StringUtil.trim(headerStyleName);
             	button.styleName = headerStyleName;
             }
-            
+
             button.toggle = getStyle("toggleHeader");
             button.label = label;
 
@@ -306,7 +306,7 @@ package flexlib.containers {
          */
         override public function set label(value:String):void {
             super.label = value;
-            
+
             if(_headerButton) _headerButton.label = value;
         }
 
@@ -314,16 +314,16 @@ package flexlib.containers {
 		 * @private
 		 */
 		private var _opened:Boolean = true;
-		
+
         /**
          * Sets or gets the state of this WindowShade, either opened (true) or closed (false).
          */
         public function get opened():Boolean {
             return _opened;
         }
-        
+
         private var _headerLocation:String = "top";
-		
+
 		[Bindable]
 		[Inspectable(enumeration="top,bottom", defaultValue="top")]
 		/**
@@ -335,7 +335,7 @@ package flexlib.containers {
 			invalidateSize();
 			invalidateDisplayList();
 		}
-		
+
 		public function get headerLocation():String {
 			return _headerLocation;
 		}
@@ -346,13 +346,13 @@ package flexlib.containers {
          [Bindable]
         public function set opened(value:Boolean):void {
             var old:Boolean = _opened;
-            
+
             _opened = value;
             _openedChanged = _openedChanged || (old != _opened);
-           
+
             if(_openedChanged && initialized) {
                 // we only want to dispatch the WindowShadeEvent.OPENED_CHANGED when the property actually changes. The _openedChanged
-                // flag may be set from a previous call with the same value. In that case we want to leave it set 
+                // flag may be set from a previous call with the same value. In that case we want to leave it set
                 // for the commitProperties() method.
                 if((old != _opened) && willTrigger(WindowShadeEvent.OPENED_CHANGED)) {
                     var evt:WindowShadeEvent = new WindowShadeEvent(WindowShadeEvent.OPENED_CHANGED, false, true);
@@ -368,7 +368,7 @@ package flexlib.containers {
 
                 measure();
                	runResizeEffect();
-                
+
                 invalidateProperties();
             }
         }
@@ -376,8 +376,8 @@ package flexlib.containers {
 
         /**
          * @private
-         * 
-         * This exists to allow us to restore a previous opened state when a WindowShadeEvent.OPENED_CHANGED event is 
+         *
+         * This exists to allow us to restore a previous opened state when a WindowShadeEvent.OPENED_CHANGED event is
          * cancelled, while bypassing the code that changes the visual state of the WindowShade and dispatches the WindowShadeEvent.
          */
          protected function restoreOpened(value:Boolean):void {
@@ -395,16 +395,16 @@ package flexlib.containers {
          */
         override public function styleChanged(styleProp:String):void {
             super.styleChanged(styleProp);
-            
+
             if(styleProp == "headerClass") {
                 headerChanged = true;
                 invalidateProperties();
             }
-            else if(styleProp == "headerStyleName" || styleProp == "headerTextAlign" || styleProp == "toggleHeader" 
+            else if(styleProp == "headerStyleName" || styleProp == "headerTextAlign" || styleProp == "toggleHeader"
             	|| styleProp == "openIcon" || styleProp == "closeIcon") {
                 applyHeaderButtonStyles(_headerButton);
             }
-            
+
             invalidateDisplayList();
         }
 
@@ -413,7 +413,7 @@ package flexlib.containers {
          */
         override protected function createChildren():void {
             super.createChildren();
-         
+
             createOrReplaceHeaderButton();
         }
 
@@ -421,23 +421,23 @@ package flexlib.containers {
          * @private
          */
         override protected function commitProperties():void {
-			
+
 			super.commitProperties();
-			
+
 			if(headerChanged) {
 				createOrReplaceHeaderButton();
 				headerChanged = false;
 			}
-			
+
             if(_openedChanged) {
-                
+
                 if(_opened) {
                     _headerButton.setStyle('icon', getStyle("openIcon"));
                 }
                 else {
                     _headerButton.setStyle('icon', getStyle("closeIcon"));
                 }
-                
+
                 _openedChanged = false;
             }
         }
@@ -447,14 +447,14 @@ package flexlib.containers {
          */
         override protected function updateDisplayList(w:Number, h:Number):void {
             super.updateDisplayList(w, h);
-            
+
             if(_headerLocation == "top") {
             	_headerButton.move(0,0);
             }
             else if(_headerLocation == "bottom") {
             	_headerButton.move(0,h - _headerButton.getExplicitOrMeasuredHeight());
             }
-            
+
 			_headerButton.setActualSize(w, _headerButton.getExplicitOrMeasuredHeight());
         }
 
@@ -462,7 +462,7 @@ package flexlib.containers {
 		 * @private
 		 */
 		private var _viewMetrics:EdgeMetrics;
-		
+
 		override public function get viewMetrics():EdgeMetrics
     	{
     		// The getViewMetrics function needs to return its own object.
@@ -470,16 +470,16 @@ package flexlib.containers {
 	        // one once and then hold a pointer to it.
 	        if (!_viewMetrics)
 	            _viewMetrics = new EdgeMetrics(0, 0, 0, 0);
-	        
+
 	        var vm:EdgeMetrics = _viewMetrics;
-	
+
 	        var o:EdgeMetrics = super.viewMetrics;
-	        
+
 	        vm.left = o.left;
 	        vm.top = o.top;
 	        vm.right = o.right;
 	        vm.bottom = o.bottom;
-	        
+
 	        var hHeight:Number = _headerButton.getExplicitOrMeasuredHeight();
 	        if (!isNaN(hHeight)) {
 	        	if(_headerLocation == "top") {
@@ -489,19 +489,19 @@ package flexlib.containers {
 	        		 vm.bottom += hHeight;
 	        	}
 	        }
-	           
+
 
 	        return vm;
     	}
-    	
+
     	public var closedHeight:Number = 0;
-    	
+
         /**
          * @private
          */
         override protected function measure():void {
             super.measure();
-            
+
             if(_opened) {
             	//if this WindowShade is opened then we have to include the height of the header button
                 //measuredHeight += _headerButton.getExplicitOrMeasuredHeight();
@@ -529,7 +529,7 @@ package flexlib.containers {
 
 
         private var transitionCompleted:Boolean = true;
-		
+
         /**
          * @private
          */
@@ -552,11 +552,11 @@ package flexlib.containers {
             if(willTrigger(beginEvent)) {
                 dispatchEvent(new WindowShadeEvent(beginEvent, false, false));
             }
-			
+
             var duration:Number = _opened ? getStyle("openDuration") : getStyle("closeDuration");
-            if(duration == 0) { 
+            if(duration == 0) {
             	this.setActualSize(getExplicitOrMeasuredWidth(), measuredHeight);
-            	
+
             	invalidateSize();
             	invalidateDisplayList();
 
@@ -567,7 +567,7 @@ package flexlib.containers {
 
             	return;
             }
-            
+
             resize = new Resize(this);
 
             // If this WindowShade currently has no explicit height set, we want to

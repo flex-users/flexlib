@@ -46,7 +46,7 @@ package flexlib.baseClasses
   import mx.geom.RoundedRectangle;
 
   import mx.managers.HistoryManager;
-  
+
   import mx.styles.CSSStyleDeclaration;
 
   use namespace mx_internal;
@@ -1071,7 +1071,7 @@ package flexlib.baseClasses
       {
         firstTime = false;
 
-        // Add "addedToStage" and "removedFromStage" listeners so we can 
+        // Add "addedToStage" and "removedFromStage" listeners so we can
         // register/un-register from the history manager when this component
         // is added or removed from the display list.
         addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler, false, 0, true);
@@ -1386,7 +1386,7 @@ package flexlib.baseClasses
               FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("." + headerStyleName);
             if (headerStyleDecl)
             {
-              // Need to reset the header style declaration and 
+              // Need to reset the header style declaration and
               // regenerate their style cache
               for (var i:int = 0; i < numChildren; i++)
               {
@@ -2312,7 +2312,7 @@ package flexlib.baseClasses
           newIndex = oldIndex;
 
           // can't do selectedChild because we need to actually do
-          // newIndex + 1 because currently that's what the index 
+          // newIndex + 1 because currently that's what the index
           // of the child is (SDK-12622) since this one isn't
           // actually removed from the display list yet
           instantiateChild(Container(getChildAt(newIndex + 1)));

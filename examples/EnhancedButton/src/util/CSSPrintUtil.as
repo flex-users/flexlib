@@ -23,42 +23,42 @@ SOFTWARE.
 package util
 {
     import mx.styles.CSSStyleDeclaration;
-    
+
     /**
      * This is a utility class for outputting CSS values for our given style.
-     */  
+     */
     public class CSSPrintUtil
     {
-        public static const COLOR_PROPS : Array = [ "fillColors", "overFillColors", "selectedFillColors", "disabledFillColors", "borderColor", 
+        public static const COLOR_PROPS : Array = [ "fillColors", "overFillColors", "selectedFillColors", "disabledFillColors", "borderColor",
             "color", "textRollOverColor", "textSelectedColor", "themeColor", "borderColors", "selectedBorderColors", "overBorderColors" ];
-        
-        
+
+
         /**
-         * Output the delta of newStyle and origStyle. 
+         * Output the delta of newStyle and origStyle.
          * s
          * @param origStyle The original style that we started with.
          * @param newStyle The new style containing whatever altered properties we started with.
          * @param styleProps An array of property keys that we use for comparison.
          * @param styleName The name of the style to output (not discernable from style object itself).
-         */ 
+         */
         public static function outputStyles( origStyle:CSSStyleDeclaration, newStyle:CSSStyleDeclaration, styleProps:Array, styleName:String ) : String
         {
             var origVal : *, newVal : *;
             var output : String = "";
-            
-            
-             output += "Button {\n" + 
-	"    upSkin:ClassReference('EnhancedButtonSkin');\n" + 
-	"    overSkin:ClassReference('EnhancedButtonSkin');\n" + 
-	"    downSkin:ClassReference('EnhancedButtonSkin');\n" + 
-	"    disabledSkin:ClassReference('EnhancedButtonSkin');\n" + 
-	"    selectedUpSkin:ClassReference('EnhancedButtonSkin');\n" + 
-	"    selectedOverSkin:ClassReference('EnhancedButtonSkin');\n" + 
-	"    selectedDownSkin:ClassReference('EnhancedButtonSkin');\n" + 
-	"    selectedDisabledSkin:ClassReference('EnhancedButtonSkin');\n" + 
+
+
+             output += "Button {\n" +
+	"    upSkin:ClassReference('EnhancedButtonSkin');\n" +
+	"    overSkin:ClassReference('EnhancedButtonSkin');\n" +
+	"    downSkin:ClassReference('EnhancedButtonSkin');\n" +
+	"    disabledSkin:ClassReference('EnhancedButtonSkin');\n" +
+	"    selectedUpSkin:ClassReference('EnhancedButtonSkin');\n" +
+	"    selectedOverSkin:ClassReference('EnhancedButtonSkin');\n" +
+	"    selectedDownSkin:ClassReference('EnhancedButtonSkin');\n" +
+	"    selectedDisabledSkin:ClassReference('EnhancedButtonSkin');\n" +
 	"}\n\n";
-            
-            
+
+
             output += "." + styleName + " {\n"
             for each ( var prop : String in styleProps )
             {
@@ -69,17 +69,17 @@ package util
                 {
                     output += "     " + prop + ": " + formatVal( prop, newVal ) + ";\n";
                 }
-               
+
             }
-            
+
             output += "}\n";
-            
+
             return output;
         }
-        
+
         /**
          * @Return whether two values are equals. If the values are arrays, the function compares whether the value of the arrays are equal.
-         */  
+         */
         public static function equalVals( origVal:*, newVal:* ) : Boolean
         {
             if ( origVal == null && newVal == null )
@@ -90,12 +90,12 @@ package util
                 {
                     return false;
                 }
-                
+
                 var origA : Array = origVal as Array;
                 var newA : Array = newVal as Array;
                 if ( origA.length != newA.length )
                 {
-                    return false;    
+                    return false;
                 }
                 else
                 {
@@ -105,19 +105,19 @@ package util
                           {
                               return false;
                           }
-                      }        
+                      }
                       return true;
                 }
             }
             else
             {
                 return origVal == newVal;
-            }     
+            }
         }
-        
+
         /**
-         * Convert either an array, or a value from RGB to hex. 
-         */  
+         * Convert either an array, or a value from RGB to hex.
+         */
         public static function convertRGBToHex( val:* ) : *
         {
             if ( val is Array )
@@ -125,7 +125,7 @@ package util
                 // duplicate the array
                 var valA : Array = (val as Array);
                 valA = valA.slice();
-                
+
                 for ( var i:int = 0; i < valA.length; i++ )
                 {
                     valA[i] = rgbToHex( valA[i] );
@@ -137,21 +137,21 @@ package util
                 return rgbToHex( val );
             }
         }
-        
+
         /**
          * Convert a given RGB value to a hex value.
-         */  
-        public static function rgbToHex(val:Number):String 
+         */
+        public static function rgbToHex(val:Number):String
         {
             var newVal:String = val.toString(16);
-            while (newVal.length < 6) 
-            {    
-                newVal = "0" + newVal; 
+            while (newVal.length < 6)
+            {
+                newVal = "0" + newVal;
             }
             return "#" + newVal.toUpperCase();
         }
-        
-        
+
+
         private static function formatVal( prop : String, val : * ) : String
         {
             var colorProp : Boolean = false;
@@ -163,7 +163,7 @@ package util
                     break;
                 }
             }
-            
+
             if ( colorProp )
             {
                 val = convertRGBToHex( val );
@@ -174,9 +174,9 @@ package util
             }
             return val;
         }
-        
-        
-    }         
+
+
+    }
 }
-        
-        
+
+

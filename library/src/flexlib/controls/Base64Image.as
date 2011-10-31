@@ -30,7 +30,7 @@ package flexlib.controls
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.utils.ByteArray;
-	
+
 	import mx.controls.Image;
 	import mx.utils.Base64Decoder;
 
@@ -57,7 +57,7 @@ package flexlib.controls
 		}
 
 		private var _source:Object;
-		
+
 		/**
 		 * Attempt to auto detect if we're receiving a base64 encoded string
 		 * or a traditional value for the image source
@@ -65,7 +65,7 @@ package flexlib.controls
 		override public function set source( value:Object ) :void
 		{
 			_source = value;
-			
+
 			var decoder:Base64Decoder = new Base64Decoder();
 			var byteArray:ByteArray;
 
@@ -84,11 +84,11 @@ package flexlib.controls
 				super.source = value
 			}
 		}
-		
+
 		override public function get source():Object {
 			return _source;
 		}
-		
+
 		private function onIOError(event:IOErrorEvent):void {
 			super.source = _source;
 		}

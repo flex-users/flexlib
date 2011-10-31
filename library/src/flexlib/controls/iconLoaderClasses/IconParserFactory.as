@@ -24,12 +24,12 @@ SOFTWARE.
 package flexlib.controls.iconLoaderClasses
 {
 	import flash.utils.ByteArray;
-	
+
 	/**
 	 * Factory class to create a new object that implements the <code>IIconParser</code>
 	 * interface.
 	 */
-	
+
 	public class IconParserFactory
 	{
 		/**
@@ -37,16 +37,16 @@ package flexlib.controls.iconLoaderClasses
 		 * implements <code>IIconParser</code>. If no parser is available for the data,
 		 * <code>null</code> is returned
 		 */
-		 
+
 		public static function newParser( data : ByteArray ) : IIconParser
 		{
 			data.position = 0;
-			
+
 			var b1	: int = data.readUnsignedByte();
 			var b2	: int = data.readUnsignedByte();
 			var b3	: int = data.readUnsignedByte();
 			var b4	: int = data.readUnsignedByte();
-			
+
 			if( b1 == 0 && b2 == 0 && b3 == 1 && b4 == 0 )
 			{
 				return new IcoParser();
@@ -55,7 +55,7 @@ package flexlib.controls.iconLoaderClasses
 			{
 				return new IcnsParser();
 			}
-			
+
 			return null;
 		}
 	}

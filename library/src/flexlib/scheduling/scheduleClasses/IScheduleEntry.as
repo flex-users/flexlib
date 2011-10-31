@@ -31,7 +31,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */package flexlib.scheduling.scheduleClasses
 {
 	/**
-	 */	
+	 */
 	public interface IScheduleEntry
 	{
 		function get startDate() : Date;

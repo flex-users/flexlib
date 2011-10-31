@@ -27,25 +27,25 @@ package flexlib.controls.treeGridClasses
 import mx.controls.dataGridClasses.DataGridListData;
 import mx.controls.listClasses.BaseListData;
 import mx.core.IUIComponent;
-	
+
 /**
- * 
+ *
  */
 public class TreeGridListData extends DataGridListData
 {
-		
+
 	public function TreeGridListData(
-		text : String, 
+		text : String,
 		dataField : String,
-		columnIndex : int, 
+		columnIndex : int,
 		uid : String,
-		owner : IUIComponent, 
+		owner : IUIComponent,
 		rowIndex : int = 0)
 	{
 		super( text, dataField, columnIndex, uid, owner, rowIndex );
 	}
-	
-	
+
+
 	//----------------------------------
 	//  depth
     //----------------------------------
@@ -71,15 +71,15 @@ public class TreeGridListData extends DataGridListData
 	/**
 	 *  Contains <code>true</code> if the node has children.
 	 */
-	public var hasChildren:Boolean; 
-	
-	
+	public var hasChildren:Boolean;
+
+
 	public var hasSibling : Boolean;
 
     //----------------------------------
 	//  icon
     //----------------------------------
-	
+
 	/**
 	 *  A Class representing the icon for the item in the TreeGrid control.
 	 */
@@ -93,24 +93,24 @@ public class TreeGridListData extends DataGridListData
 	 *  The default indentation for this row of the TreeGrid control.
 	 */
 	public var indent:int;
-	
+
 	public var indentationGap:int;
 
 	//----------------------------------
 	//  icon
     //----------------------------------
-	
+
 	/**
 	 *  A String that enumerate the trunk style for the item in the TreeGrid control.
 	 */
 	public var trunk:String;
-	
+
 	public var trunkOffsetTop : Number;
-	
+
 	public var trunkOffsetBottom : Number;
-	
+
 	public var trunkColor:uint = 0xffffff;
-	
+
     //----------------------------------
 	//  node
     //----------------------------------
@@ -127,7 +127,7 @@ public class TreeGridListData extends DataGridListData
 	/**
 	 *  Contains <code>true</code> if the node is open.
 	 */
-	public var open:Boolean; 
-	
+	public var open:Boolean;
+
 } // end class
 } // end package

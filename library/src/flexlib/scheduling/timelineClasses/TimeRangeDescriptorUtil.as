@@ -31,28 +31,28 @@ POSSIBILITY OF SUCH DAMAGE.
 */package flexlib.scheduling.timelineClasses
 {
 	import flexlib.scheduling.util.DateUtil;
-	
+
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
-	
+
 	public class TimeRangeDescriptorUtil
-	{		
-		public static var defaultTimeRangeDescriptor : Array = [ 
-			[ DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 5 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 10 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 15 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 30 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 60 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 2 * DateUtil.HOUR_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 6 * DateUtil.HOUR_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 12 * DateUtil.HOUR_IN_MILLISECONDS, "L:NNAA" ], 
-			[ 24 * DateUtil.HOUR_IN_MILLISECONDS, "DD/MM/YY" ], 
+	{
+		public static var defaultTimeRangeDescriptor : Array = [
+			[ DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ],
+			[ 5 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ],
+			[ 10 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ],
+			[ 15 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ],
+			[ 30 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ],
+			[ 60 * DateUtil.MINUTE_IN_MILLISECONDS, "L:NNAA" ],
+			[ 2 * DateUtil.HOUR_IN_MILLISECONDS, "L:NNAA" ],
+			[ 6 * DateUtil.HOUR_IN_MILLISECONDS, "L:NNAA" ],
+			[ 12 * DateUtil.HOUR_IN_MILLISECONDS, "L:NNAA" ],
+			[ 24 * DateUtil.HOUR_IN_MILLISECONDS, "DD/MM/YY" ],
 			[ 2 * DateUtil.DAY_IN_MILLISECONDS, "DD/MM/YY" ],
-			[ 4 * DateUtil.DAY_IN_MILLISECONDS, "DD/MM/YY" ], 	
-			[ 7 * DateUtil.DAY_IN_MILLISECONDS, "DD/MM/YY" ], 
-			[ 14 * DateUtil.DAY_IN_MILLISECONDS, "DD/MM/YY" ],	
-			[ 30 * DateUtil.DAY_IN_MILLISECONDS, "MMM YY" ], 				
+			[ 4 * DateUtil.DAY_IN_MILLISECONDS, "DD/MM/YY" ],
+			[ 7 * DateUtil.DAY_IN_MILLISECONDS, "DD/MM/YY" ],
+			[ 14 * DateUtil.DAY_IN_MILLISECONDS, "DD/MM/YY" ],
+			[ 30 * DateUtil.DAY_IN_MILLISECONDS, "MMM YY" ],
 			[ 4 * DateUtil.MONTH_IN_MILLISECONDS, "MMM YY" ],
 			[ 6 * DateUtil.MONTH_IN_MILLISECONDS, "MMM YY" ],
 			[ 9 * DateUtil.MONTH_IN_MILLISECONDS, "MMM YY" ],
@@ -60,10 +60,10 @@ POSSIBILITY OF SUCH DAMAGE.
 			[ 2 * DateUtil.YEAR_IN_MILLISECONDS, "YYYY" ],
 			[ 5 * DateUtil.YEAR_IN_MILLISECONDS, "YYYY" ],
 			[ 10 * DateUtil.YEAR_IN_MILLISECONDS, "YYYY" ],
-			[ 25 * DateUtil.YEAR_IN_MILLISECONDS, "YYYY" ], 
+			[ 25 * DateUtil.YEAR_IN_MILLISECONDS, "YYYY" ],
 			[ 500 * DateUtil.YEAR_IN_MILLISECONDS, "YYYY" ] ];
-															
-		public static function convertArrayToTimeRangeDescriptor( timeDescriptor : Array ) : IList 
+
+		public static function convertArrayToTimeRangeDescriptor( timeDescriptor : Array ) : IList
 		{
 			var dataProvider : IList = new ArrayCollection();
 			var len : Number = timeDescriptor.length;
@@ -77,10 +77,10 @@ POSSIBILITY OF SUCH DAMAGE.
 			}
 			return dataProvider;
 		}
-		
-		public static function getDefaultTimeRangeDescriptor() : IList 
+
+		public static function getDefaultTimeRangeDescriptor() : IList
 		{
 			return TimeRangeDescriptorUtil.convertArrayToTimeRangeDescriptor( defaultTimeRangeDescriptor );
-		}		
+		}
 	}
 }

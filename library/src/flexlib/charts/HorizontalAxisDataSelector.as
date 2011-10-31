@@ -74,7 +74,7 @@ package flexlib.charts
     {
       if (!FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("HorizontalAxisDataSelector"))
       {
-        // If HorizontalAxisDataSelector has no CSS definition, 
+        // If HorizontalAxisDataSelector has no CSS definition,
         // create one and set the default value.
         var newStyleDeclaration:CSSStyleDeclaration = new CSSStyleDeclaration();
         newStyleDeclaration.setStyle("selectorColor", 0xFF0000);
@@ -93,7 +93,7 @@ package flexlib.charts
     //	/**
     //	 * When <code>true</code>, instructs the selector to snap to the nearest data point.
     //	 * When <code>false</code>, the selector will interpolate values based on mouse positions.
-    //	 * 
+    //	 *
     //	 * @default true
     //	 */
     //	public var snap:Boolean = true;

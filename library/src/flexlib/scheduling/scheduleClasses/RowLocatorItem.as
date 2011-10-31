@@ -31,7 +31,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */package flexlib.scheduling.scheduleClasses
 {
 	import flexlib.scheduling.scheduleClasses.layout.EntryLayoutItem;
-	
+
 	/**
 	 * @private
 	 */
