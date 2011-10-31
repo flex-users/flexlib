@@ -35,8 +35,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 	import mx.core.ClassFactory;
 	import mx.core.IFactory;
-	import mx.core.UIComponent;	
-	
+	import mx.core.UIComponent;
+
 	/**
 	 * @private
 	 */
@@ -45,36 +45,36 @@ POSSIBILITY OF SUCH DAMAGE.
 		public var itemRenderer : IFactory;
 		private var freeRenderers : Array;
 		private var visibleRenderers : Array;
-		private var layout : TimelineLayout;		
-		
+		private var layout : TimelineLayout;
+
 		public function TimelineViewer()
 		{
 			itemRenderer = new ClassFactory( SimpleTimelineEntryRenderer );
 			freeRenderers = new Array();
-			visibleRenderers = new Array();			
+			visibleRenderers = new Array();
 		}
-		
+
 		public function update( event : Event ) : void
 		{
 			layout = event.target as TimelineLayout;
 			invalidateDisplayList();
 		}
-				
+
 		protected override function updateDisplayList( unscaledWidth : Number, unscaledHeight : Number ) : void
 		{
 			super.updateDisplayList( unscaledWidth , unscaledHeight );
 			render( layout );
 		}
-		
-		private function render( layout : TimelineLayout ) : void 
+
+		private function render( layout : TimelineLayout ) : void
 		{
 			if( layout == null ) return;
-			
+
 			var oldRenderers : Array = visibleRenderers;
 			visibleRenderers = new Array();
-			
+
 			var xPosition : Number = layout.xPosition;
-			
+
 			for each( var item : TimelineLayoutItem in layout.items )
 			{
 				var renderer : ITimelineEntryRenderer = oldRenderers.pop();
@@ -85,22 +85,22 @@ POSSIBILITY OF SUCH DAMAGE.
 					renderer.y = item.y;
 					renderer.data = item.data;
 				}
-				else 
+				else
 				{
-					renderer = getRenderer();					
+					renderer = getRenderer();
 					renderer.x = item.x - xPosition;
 					renderer.y = item.y;
-					renderer.height = item.height;					
+					renderer.height = item.height;
 					renderer.data = item.data;
-					
+
 					addChild( DisplayObject( renderer ) );
 				}
 				visibleRenderers.push( renderer );
 			}
-			
-			removeUnusedRenderers( oldRenderers );			
+
+			removeUnusedRenderers( oldRenderers );
 		}
-		
+
 		private function removeUnusedRenderers( oldRenderers : Array ) : void
 		{
 			for each( var freeRenderer : DisplayObject in oldRenderers )
@@ -108,7 +108,7 @@ POSSIBILITY OF SUCH DAMAGE.
 				freeRenderers.push( removeChild( freeRenderer ) );
 			}
 		}
-		
+
 		private function getRenderer() : ITimelineEntryRenderer
 		{
 			if( freeRenderers.length > 0 )
@@ -116,6 +116,6 @@ POSSIBILITY OF SUCH DAMAGE.
 				return freeRenderers.pop();
 			}
 			return itemRenderer.newInstance();
-		}		
+		}
 	}
 }

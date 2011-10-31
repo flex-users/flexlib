@@ -33,7 +33,7 @@ use namespace mx_internal;
 
 //--------------------------------------
 //  Events
-//-------------------------------------- 
+//--------------------------------------
 
 /**
  *  Dispatched when a user selects an item from the pop-up menu.
@@ -43,9 +43,9 @@ use namespace mx_internal;
 [Event(name="itemClick", type="mx.events.MenuEvent")]
 
 /**
- *  The name of a CSS style declaration used by the dropdown menu.  
+ *  The name of a CSS style declaration used by the dropdown menu.
  *  This property allows you to control the appearance of the dropdown menu.
- *  The default value sets the <code>fontWeight</code> to <code>normal</code> and 
+ *  The default value sets the <code>fontWeight</code> to <code>normal</code> and
  *  the <code>textAlign</code> to <code>left</code>.
  *
  *  @default "popUpMenu"
@@ -68,7 +68,7 @@ use namespace mx_internal;
 
 //--------------------------------------
 //  Other metadata
-//-------------------------------------- 
+//--------------------------------------
 
 //[IconFile("PopUpMenuButton.png")]
 
@@ -76,28 +76,28 @@ use namespace mx_internal;
 
 /**
  *  PopUpMenuButtonBase is a copy/paste version of the original PopUpMenuButton class in the Flex framework.
- * 
+ *
  * 	<p>The only modifications made to this class were to change some properties and
  *  methods from private to protected so we can override them in a subclass.</p>
- * 
+ *
  *  <p>The PopUpMenuButton control creates a PopUpButton control with a main
  *  sub-button and a secondary sub-button.
  *  Clicking on the secondary (right) sub-button drops down a menu that
- *  can be popluated through a <code>dataProvider</code> property. 
- *  Unlike the Menu and MenuBar controls, the PopUpMenuButton control 
+ *  can be popluated through a <code>dataProvider</code> property.
+ *  Unlike the Menu and MenuBar controls, the PopUpMenuButton control
  *  supports only a single-level menu. This means that the menu cannot contain
  *  cascading submenus.</p>
- * 
- *  <p>The main sub-button of the PopUpMenuButton control can have a 
+ *
+ *  <p>The main sub-button of the PopUpMenuButton control can have a
  *     text label, an icon, or both on its face.
- *     When a user selects an item from the drop-down menu or clicks 
- *     the main button of the PopUpMenuButton control, the control 
+ *     When a user selects an item from the drop-down menu or clicks
+ *     the main button of the PopUpMenuButton control, the control
  *     dispatches an <code>itemClick</code> event.
- *     When a user clicks the main button of the 
- *     control, the control also dispatches a <code>click</code> event. 
+ *     When a user clicks the main button of the
+ *     control, the control also dispatches a <code>click</code> event.
  *     You can customize the look of a PopUpMenuButton control.</p>
  *
- *  <p>The PopUpMenuButton control has the following sizing 
+ *  <p>The PopUpMenuButton control has the following sizing
  *     characteristics:</p>
  *     <table class="innertable">
  *        <tr>
@@ -106,8 +106,8 @@ use namespace mx_internal;
  *        </tr>
  *        <tr>
  *           <td>Default size</td>
- *           <td>Sufficient to accommodate the label and any icon on 
- *               the main button, and the icon on the pop-up button. 
+ *           <td>Sufficient to accommodate the label and any icon on
+ *               the main button, and the icon on the pop-up button.
  *               The control does not reserve space for the menu.</td>
  *        </tr>
  *        <tr>
@@ -121,10 +121,10 @@ use namespace mx_internal;
  *     </table>
  *
  *  @mxml
- *  
+ *
  *  <p>The <code>&lt;mx:PopUpMenuButton&gt;</code> tag inherits all of the tag
  *  attributes of its superclass, and adds the following tag attributes:</p>
- *  
+ *
  *  <pre>
  *  &lt;mx:PopUpMenuButton
  *    <strong>Properties</strong>
@@ -141,7 +141,7 @@ use namespace mx_internal;
  *  /&gt;
  *  </pre>
  *
- *  
+ *
  *
  *  @see mx.controls.Menu
  *  @see mx.controls.MenuBar
@@ -177,37 +177,37 @@ public class PopUpMenuButtonBase extends PopUpButton
      *  @private
      */
     private var dataProviderChanged:Boolean = false;
-    
+
     /**
      *  @private
      */
     private var labelSet:Boolean = false;
-    
+
     /**
      *  @private
      */
     protected var popUpMenu:Menu = null;
-    
+
     /**
      *  @private
      */
     private var selectedIndex:int = -1;
-    
+
     /**
      *  @private
-     */ 
+     */
     private var itemRenderer:IListItemRenderer = null;
-    
+
     /**
      *  @private
-     */ 
+     */
     private var explicitIcon:Class = null;
-    
+
     /**
      *  @private
-     */ 
+     */
     private var menuSelectedStyle:Boolean = false;
-    
+
     //--------------------------------------------------------------------------
     //
     //  Overridden properties
@@ -244,7 +244,7 @@ public class PopUpMenuButtonBase extends PopUpButton
      */
     private var _dataDescriptor:IMenuDataDescriptor =
                                         new DefaultDataDescriptor();
-    
+
     /**
      *  The data descriptor accesses and manipulates data in the data provider.
      *  <p>When you specify this property as an attribute in MXML, you must
@@ -310,10 +310,10 @@ public class PopUpMenuButtonBase extends PopUpButton
     {
         _dataProvider = value;
         dataProviderChanged = true;
-        
-        invalidateProperties();     
+
+        invalidateProperties();
     }
-    
+
     //--------------------------------------------------------------------------
     //  iconField
     //--------------------------------------------------------------------------
@@ -331,15 +331,15 @@ public class PopUpMenuButtonBase extends PopUpButton
      *  Name of the field in the <code>dataProvider</code> Array that contains the icon to
      *  show for each menu item.
      *  The <code>iconFunction</code> property, if set, overrides this property.
-     * 
-     *  <p>The renderers will look in the data provider object for a property of 
-     *  the name supplied as the iconField.  If the value of the property is a 
-     *  Class, it will instantiate that class and expect it to be an instance 
-     *  of an IFlexDisplayObject. If the value of the property is a String, 
-     *  it will look to see if a Class exists with that name in the application, 
-     *  and if it can't find one, it will also look for a property on the 
+     *
+     *  <p>The renderers will look in the data provider object for a property of
+     *  the name supplied as the iconField.  If the value of the property is a
+     *  Class, it will instantiate that class and expect it to be an instance
+     *  of an IFlexDisplayObject. If the value of the property is a String,
+     *  it will look to see if a Class exists with that name in the application,
+     *  and if it can't find one, it will also look for a property on the
      *  document with that name and expect that property to map to a Class.</p>
-     * 
+     *
      *  If the data provider is an E4X XML object, you must set this property
      *  explicitly; for example, use &#064;icon to specify the <code>icon</code> attribute.
      *
@@ -358,10 +358,10 @@ public class PopUpMenuButtonBase extends PopUpButton
         if (_iconField != value)
         {
             _iconField = value;
-            
+
             if (popUpMenu)
                 popUpMenu.iconField = _iconField;
-            
+
             dispatchEvent(new Event("iconFieldChanged"));
         }
     }
@@ -385,14 +385,14 @@ public class PopUpMenuButtonBase extends PopUpButton
      *  If you specify this property, Flex ignores any <code>iconField</code>
      *  property value.
      *
-     *  By default the menu does not try to display icons with the text 
-     *  in the rows.  However, by specifying an icon function, you can specify 
-     *  a Class for a graphic that will be created and displayed as an icon 
-     *  in the row. 
+     *  By default the menu does not try to display icons with the text
+     *  in the rows.  However, by specifying an icon function, you can specify
+     *  a Class for a graphic that will be created and displayed as an icon
+     *  in the row.
      *
      *  <p>The iconFunction takes a single argument which is the item
      *  in the data provider and returns a Class.</p>
-     * 
+     *
      *  <blockquote>
      *  <code>iconFunction(item:Object):Class</code>
      *  </blockquote>
@@ -412,7 +412,7 @@ public class PopUpMenuButtonBase extends PopUpButton
         if (_iconFunction != value)
         {
             _iconFunction = value;
-            
+
             if (popUpMenu)
                 popUpMenu.iconFunction = _iconFunction;
         }
@@ -478,10 +478,10 @@ public class PopUpMenuButtonBase extends PopUpButton
         if (_labelField != value)
         {
             _labelField = value;
-            
+
             if (popUpMenu)
                 popUpMenu.labelField = _labelField;
-            
+
             dispatchEvent(new Event("labelFieldChanged"));
         }
     }
@@ -512,7 +512,7 @@ public class PopUpMenuButtonBase extends PopUpButton
      *
      *  <p>The label function must take a single argument which is the item
      *  in the dataProvider and return a String.</p>
-     * 
+     *
      *  <blockquote>
      *  <code>labelFunction(item:Object):String</code>
      *  </blockquote>
@@ -532,7 +532,7 @@ public class PopUpMenuButtonBase extends PopUpButton
         if (_labelFunction != value)
         {
             _labelFunction = value;
-            
+
             if (popUpMenu)
                 popUpMenu.labelFunction = _labelFunction;
         }
@@ -601,14 +601,14 @@ public class PopUpMenuButtonBase extends PopUpButton
     	{
     		// In general we shouldn't create the popUp until
 	        // they are actually popped up. However, in this case
-	        // the initial label, icon and action on the main button's 
-	        // click are to be borrowed from the popped menu. 
+	        // the initial label, icon and action on the main button's
+	        // click are to be borrowed from the popped menu.
 	        // Moreover since PopUpMenuButton doesn't expose selectedIndex
 	        // selectedItem etc., one should be able to access them
-	        // prior to popping up the menu.        
+	        // prior to popping up the menu.
 	        getPopUp();
     	}
-    	
+
         if (_showRootChanged)
         {
             _showRootChanged = false;
@@ -625,30 +625,30 @@ public class PopUpMenuButtonBase extends PopUpButton
             if (dataProvider.length)
             {
                 selectedIndex = 0;
-                
+
 				var cursor:IViewCursor = dataProvider.createCursor()
 				cursor.seek(CursorBookmark.FIRST, 0);
 
                 var item:* = cursor.current;
-                
+
                 // Set button label.
                 if (labelSet)
                     super.label = _label;
                 else
                     super.label = popUpMenu.itemToLabel(item);
-                
+
                 // Set button icon,
                 setSafeIcon(popUpMenu.itemToIcon(item));
             }
             else
             {
                 selectedIndex = -1;
-                
+
                 if (labelSet)
                     super.label = _label;
                 else
                     super.label = "";
-                
+
                 clearStyle("icon");
             }
 
@@ -657,7 +657,7 @@ public class PopUpMenuButtonBase extends PopUpButton
 
         super.commitProperties();
     }
-    
+
     /**
      *  @private
      */
@@ -665,7 +665,7 @@ public class PopUpMenuButtonBase extends PopUpButton
     {
         super.styleChanged(styleProp);
         //style is actually set here already.
-        if (styleProp == "icon" || styleProp == null || styleProp == "styleName" ) 
+        if (styleProp == "icon" || styleProp == null || styleProp == "styleName" )
         {
             if (menuSelectedStyle)
             {
@@ -711,7 +711,7 @@ public class PopUpMenuButtonBase extends PopUpButton
             super.popUp = popUpMenu;
             // Add PopUp to PopUpManager here so that
             // commitProperties of Menu gets called even
-            // before the PopUp is opened. This is 
+            // before the PopUp is opened. This is
             // necessary to get the initial label and dp.
             PopUpManager.addPopUp(super.popUp, this, false);
             super.popUp.owner = this;
@@ -719,13 +719,13 @@ public class PopUpMenuButtonBase extends PopUpButton
 
         return popUpMenu;
     }
-    
+
     //--------------------------------------------------------------------------
     //
     //   private helper methods
     //
     //--------------------------------------------------------------------------
-    
+
      /**
      *  @private
      */
@@ -779,7 +779,7 @@ public class PopUpMenuButtonBase extends PopUpButton
             menuEvent.label =
                 popUpMenu.itemToLabel(cursor.current);
             dispatchEvent(menuEvent);
-            
+
             // Reset selection after the change event is dispatched
             // just like in a menu.
             popUpMenu.selectedIndex = -1;
@@ -814,7 +814,7 @@ public class PopUpMenuButtonBase extends PopUpButton
         if (event.index >= 0)
         {
             var menuEvent:MenuEvent = new MenuEvent(MenuEvent.ITEM_CLICK);
-            
+
             menuEvent.label = popUpMenu.itemToLabel(event.item);
             if (labelSet)
                 super.label = _label;
@@ -822,10 +822,10 @@ public class PopUpMenuButtonBase extends PopUpButton
                 super.label = popUpMenu.itemToLabel(event.item);
             setSafeIcon(popUpMenu.itemToIcon(event.item));
             menuEvent.menu = popUpMenu;
-            menuEvent.menu.selectedIndex = menuEvent.index = 
+            menuEvent.menu.selectedIndex = menuEvent.index =
                 selectedIndex = event.index;
             menuEvent.item = event.item;
-            itemRenderer = menuEvent.itemRenderer = 
+            itemRenderer = menuEvent.itemRenderer =
                 event.itemRenderer;
             dispatchEvent(menuEvent);
         }

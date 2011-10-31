@@ -29,7 +29,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 @ignore
 */package flexlib.scheduling.timelineClasses
-{	
+{
 	public interface ITimeDescriptor
 	{
 		function get date() : Date;

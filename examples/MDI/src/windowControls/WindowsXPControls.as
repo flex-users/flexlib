@@ -30,11 +30,11 @@ package windowControls
 		{
 			super();
 		}
-		
+
 		override protected function createChildren():void
 		{
 			super.createChildren();
-			
+
 			setStyle("horizontalGap", 2);
 		}
 	}

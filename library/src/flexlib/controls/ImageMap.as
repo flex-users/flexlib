@@ -345,7 +345,7 @@ package flexlib.controls
     {
       g.moveTo(coords[0], coords[1]);
 
-      //since we moved to the first point, we loop over all points starting on the second point	
+      //since we moved to the first point, we loop over all points starting on the second point
       for (var i:int = 2; i < coords.length; i += 2)
       {
         g.lineTo(coords[i], coords[i + 1]);

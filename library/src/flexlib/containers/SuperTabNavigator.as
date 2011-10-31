@@ -704,7 +704,7 @@ package flexlib.containers
         canvas.stopScrollingEvent = _stopScrollingEvent;
         canvas.scrollSpeed = _scrollSpeed;
 
-        // So we can see our child heirarchy: 
+        // So we can see our child heirarchy:
         // holder (Box) -> canvas (ButtonScrollingCanvas) -> tabBar (SuperTabBar)
         canvas.addChild(tabBar);
         holder.addChild(canvas);
@@ -720,7 +720,7 @@ package flexlib.containers
         menu.setStyle("textAlign", "left");
 
         // If we wanted to change the scroll policy for the scrolling menu we
-        // could modify the following two lines. For example, turning 
+        // could modify the following two lines. For example, turning
         // verticalScrollPolicy to OFF will remove the side scrollbars and leave
         // just the arrow buttons on top and bottom.
         menu.verticalScrollPolicy = ScrollPolicy.AUTO;
@@ -899,7 +899,7 @@ package flexlib.containers
         //and we catch the event that gets dispatched with setChildIndex and stop
         //it from propogating. I don't know why there's a problem with the
         //setChildAt method dispatching an event with an incorrect oldIndex, but
-        //god it was hard to figure this one out. 
+        //god it was hard to figure this one out.
         if (event.oldIndex < event.newIndex)
         {
           event.newIndex--;
@@ -917,7 +917,7 @@ package flexlib.containers
         this.setChildIndex(getChildAt(event.oldIndex), event.newIndex);
       }
 
-      // Calling validateNow before calling selectedIndex makes sure we 
+      // Calling validateNow before calling selectedIndex makes sure we
       // don't get a little display bug that tends to creep up
       this.validateNow();
 
@@ -969,7 +969,7 @@ package flexlib.containers
 
       var th:Number = tabBarHeight + 1;
 
-      // tabBarSpace is used to try to figure out how much space we 
+      // tabBarSpace is used to try to figure out how much space we
       // need for the tabs, to figure out if we need to scroll them
       var tabBarSpace:Number = w;
       if (popupButton.includeInLayout)
@@ -1007,7 +1007,7 @@ package flexlib.containers
       }
 
       //now we're good to go with the tab widths, so this should be OK
-      //if we called this first we would see some flickering of the tabs 
+      //if we called this first we would see some flickering of the tabs
       //as they are resized quickly. No good.
       super.updateDisplayList(unscaledWidth, unscaledHeight);
 
@@ -1175,7 +1175,7 @@ package flexlib.containers
         var child:Container = this.getChildAt(i) as Container;
 
         var obj:Object = new Object();
-        //setting the type to an empty string bypasses a bug in MenuItemRenderer (or in 
+        //setting the type to an empty string bypasses a bug in MenuItemRenderer (or in
         //DefaultDataDescriptor, depending on how you look at it). Try commenting out the
         //line and check out the menu items.
         obj.type = "";
@@ -1190,7 +1190,7 @@ package flexlib.containers
       menu.dataProvider = popupMenuDP;
 
       //we re-assign the menu to the popup button each time just to be safe to
-      //ensure that the PopUpBUtton hasn't set its popUp to null, which it has a 
+      //ensure that the PopUpBUtton hasn't set its popUp to null, which it has a
       //tendency to do (I think only since Flex 3)
       //fixes issue #71: http://code.google.com/p/flexlib/issues/detail?id=71
       popupButton.popUp = menu;

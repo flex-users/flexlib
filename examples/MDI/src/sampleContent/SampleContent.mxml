@@ -20,11 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
 		 preinitialize="init()" label="Sample Data">
-	
+
 	<mx:Script source="SampleData.as" />
-	
+
 	<mx:Style>
 		.podContainer {
 			paddingLeft: 0;
@@ -43,7 +43,7 @@ SOFTWARE.
 	<mx:HBox width="100%" height="25" horizontalAlign="right">
 		<mx:ComboBox dataProvider="['Data', 'Temp', 'Rain', 'Pie', 'Top 5']" change="viewChange(event)"  fontFamily="Arial" fontSize="11"/> <!-- , -->
 	</mx:HBox>
-	
+
 	<mx:Canvas width="100%" height="100%">
 		<mx:ViewStack id="theView" styleName="podView" width="100%" height="100%" creationPolicy="all" selectedIndex="{Math.round(Math.random() * 5)}">
 			<mx:Canvas width="100%" height="100%">
@@ -64,7 +64,7 @@ SOFTWARE.
 			        	<mx:ColumnSeries yField="high_temp" minField="low_temp" name="Temperature" displayName="Monthly High-Low Temperature (F)"
 			        					 fill="{new SolidColor(0x006699, 0.75)}"/>
 			        </mx:series>
-			        
+
 			        <mx:horizontalAxis>
 		                <mx:CategoryAxis categoryField="month" displayName="Month" title="Month" />
 		            </mx:horizontalAxis>
@@ -73,17 +73,17 @@ SOFTWARE.
 		            		<mx:AxisRenderer labelRotation="0" labelGap="10" horizontalCenter="0"
 			            				 axisStroke="{new Stroke(0x666666, 5)}" tickStroke="{new Stroke(0xFFFFFF, 2)}" minorTickStroke="{new Stroke(0xFFFFFF, 1)}" />
 		            	</mx:horizontalAxisRenderers>
-		            	
+
 		            	<mx:verticalAxisRenderers>
 		            		<mx:AxisRenderer labelGap="10" horizontalCenter="0"
 			            				 axisStroke="{new Stroke(0x006699, 5, 0.75)}" tickStroke="{new Stroke(0xFFFFFF, 0, 0)}" minorTickStroke="{new Stroke(0xFFFFFF, 2)}" />
 		            	</mx:verticalAxisRenderers>
 		            </mx:CartesianChart>
-			        
+
 			        <mx:verticalAxis>
 			        	<mx:LinearAxis title="Average Temperatures (High/Low) Degrees Farenheit" displayName="Temp"  />
 			        </mx:verticalAxis>
-					
+
 					<mx:backgroundElements>
 			            <mx:Array>
 			                <mx:GridLines direction="both">
@@ -101,16 +101,16 @@ SOFTWARE.
 			        </mx:backgroundElements>
 				</mx:ColumnChart>
 			</mx:Canvas>
-			
+
 			<mx:Canvas width="100%" height="100%">
-				<mx:LineChart id="rainfallChart" width="100%" height="100%">					
+				<mx:LineChart id="rainfallChart" width="100%" height="100%">
 					<mx:series>
 		            	 <mx:LineSeries name="Rainfall (cm)" yField="rainfall" displayName="Rainfall (cm)"
-		                			  lineStroke="{new Stroke(0xFF0000, 2)}" 
-		                			  fill="{new SolidColor(0xFF0000, 0.75)}" 
+		                			  lineStroke="{new Stroke(0xFF0000, 2)}"
+		                			  fill="{new SolidColor(0xFF0000, 0.75)}"
 		                			  stroke="{new Stroke(0xFF0000, 2)}"/>
 		            </mx:series>
-		            
+
 					 <mx:horizontalAxis>
 		                <mx:CategoryAxis categoryField="month" displayName="Month" title="Month" />
 		            </mx:horizontalAxis>
@@ -120,23 +120,23 @@ SOFTWARE.
 			            				 axisStroke="{new Stroke(0x666666, 5)}" tickStroke="{new Stroke(0xFFFFFF, 2)}" minorTickStroke="{new Stroke(0xFFFFFF, 1)}" />
 		            	</mx:horizontalAxisRenderers>
 		            	<mx:verticalAxisRenderers>
-		            		<mx:AxisRenderer labelGap="10" horizontalCenter="0" 
+		            		<mx:AxisRenderer labelGap="10" horizontalCenter="0"
 			            				 axisStroke="{new Stroke(0xFF0000, 5, 0.75)}" tickStroke="{new Stroke(0xFFFFFF, 0, 0)}" minorTickStroke="{new Stroke(0xFFFFFF, 2)}" />
 		            	</mx:verticalAxisRenderers>
 		            </mx:CartesianChart>
-			        
+
 					<mx:verticalAxis>
 						<mx:LinearAxis displayName="Rainfall" title="Rainfall (cm)"  />
 			        </mx:verticalAxis>
-					
+
 				</mx:LineChart>
 			</mx:Canvas>
-			
+
 			<mx:Canvas width="100%" height="100%">
 				<mx:PieChart id="chart" height="100%" width="100%"
-		            paddingRight="5" paddingLeft="5" 
+		            paddingRight="5" paddingLeft="5"
 		            showDataTips="true" dataProvider="{tmpDataCollection}" >
-		            
+
 		            <mx:series>
 		                <mx:PieSeries labelPosition="callout" field="rainfall">
 		                    <mx:calloutStroke>
@@ -155,43 +155,43 @@ SOFTWARE.
 
 			<mx:VBox width="100%" height="100%">
 				<mx:ComboBox id="listShow" dataProvider="{listComboData}" labelField="label" />
-				<mx:List dataProvider="{tmpDataCollection.source.sortOn(listShow.selectedItem.data).slice(0, 5)}" 
+				<mx:List dataProvider="{tmpDataCollection.source.sortOn(listShow.selectedItem.data).slice(0, 5)}"
 						 width="100%" height="100%" labelFunction="listLabel" />
 			</mx:VBox>
-			
+
 		</mx:ViewStack>
 		<!-- A mask layer we use to implement a fade effect -->
 		<mx:Canvas id="theMask" width="100%" height="100%" backgroundColor="#FFFFFF" alpha="0" visible="false" />
 
 	</mx:Canvas>
-	
-	
-	
+
+
+
 	<mx:Fade id="fadeOut" target="{theMask}" alphaFrom="0" alphaTo="1" duration="300" />
 	<mx:Fade id="fadeIn" target="{theMask}" alphaFrom="1" alphaTo="0" duration="300" />
-	
+
 	<mx:Script>
 		<![CDATA[
 			import mx.events.ItemClickEvent;
 			import mx.events.EffectEvent;
 			import mx.events.ListEvent;
-			
-            
+
+
             private var nextViewIndex:int = 0;
 			[Bindable] private var listComboData:Array = [{label:'High Temp', data:'high_temp'}, {label:'Low Temp', data:'low_temp'}, {label:'Rainfall', data:'rainfall'}];
-            
-            
+
+
             private function init():void
             {
             	createSampleData();
             }
-            
+
             private function viewChange(event:ListEvent):void
             {
             	this.nextViewIndex = ComboBox(event.currentTarget).selectedIndex;
             	this.changeView();
             }
-            
+
             private function changeView():void
         	{
         		theMask.visible = true;
@@ -199,7 +199,7 @@ SOFTWARE.
 	        	fadeOut.addEventListener(EffectEvent.EFFECT_END, changeViewStep2);
 	        	fadeOut.play();
         	}
-        	
+
         	private function changeViewStep2(event:EffectEvent):void
         	{
         		theView.selectedIndex = this.nextViewIndex;
@@ -207,16 +207,16 @@ SOFTWARE.
         		fadeIn.addEventListener(EffectEvent.EFFECT_END, function():void { theMask.visible = false });
         		fadeIn.play();
         	}
-        	
-        	
+
+
         	private function listLabel(item:Object):String
         	{
         		return item.month + " - " + item[listShow.selectedItem.data];
         	}
-            
+
 		]]>
 	</mx:Script>
 </mx:VBox>
-	
-	
+
+
 

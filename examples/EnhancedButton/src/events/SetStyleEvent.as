@@ -28,16 +28,16 @@ package events
     {
         public var styleProp : String;
         public var styleVal : *;
-        
+
         public static const TYPE : String = "setStyle";
-        
-        
-        public function SetStyleEvent( styleProp : String, styleVal : * ) 
+
+
+        public function SetStyleEvent( styleProp : String, styleVal : * )
         {
             super( TYPE, true );
             this.styleProp = styleProp;
             this.styleVal = styleVal;
         }
-        
+
     }
 }

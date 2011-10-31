@@ -32,11 +32,11 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.viewers
 {
 	import flexlib.scheduling.scheduleClasses.layout.LayoutUpdateEvent;
-	
+
 	import mx.core.IUIComponent;
-	
+
 	public interface ITimeIndicatorViewer extends IUIComponent
-	{	
+	{
 		function update( event : LayoutUpdateEvent ) : void;
 	}
 }

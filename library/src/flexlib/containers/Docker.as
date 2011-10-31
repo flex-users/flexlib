@@ -48,7 +48,7 @@ import flexlib.containers.DockableToolBar;
 use namespace mx_internal;
 
 /**
- *  Name of the CSS Style declaration to use for the styles for the docking area at 
+ *  Name of the CSS Style declaration to use for the styles for the docking area at
  *  the top and bottom.
  *  By default, the Dockers's inheritable styles are used.
  */
@@ -65,7 +65,7 @@ use namespace mx_internal;
  *  and related controls in a Docking ToolBars context. UI controls
  *  which need to be outside the docking context (for eg. StatusBar or Menus)
  *  should be placed outside the Docker container.
- *  
+ *
  *
  *
  *  @see flexlib.containers.DockableToolBar
@@ -92,7 +92,7 @@ public class Docker extends Container
 		layoutObject.target = this;
         	percentHeight = percentWidth = 100;
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Variables
@@ -105,19 +105,19 @@ public class Docker extends Container
 	 * of the ToolBar
 	 */
 	mx_internal var dragProxy:UIComponent;
-	
+
 	private var dockerViewMetrics:EdgeMetrics;
 	private var layoutObject:Layout;
 
 	private var topBar:VBox;
 	private var bottomBar:VBox;
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden properties
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
 	 * @private
 	 */
@@ -133,7 +133,7 @@ public class Docker extends Container
 		vm.top = o.top;
 		vm.right = o.right;
 		vm.bottom = o.bottom;
-		
+
 		vm.top += topBar.getExplicitOrMeasuredHeight();
 		vm.bottom += bottomBar.getExplicitOrMeasuredHeight();
 
@@ -155,13 +155,13 @@ public class Docker extends Container
 		super.measure();
 
 		layoutObject.measure();
-		
+
 		measuredMinHeight = 0;
 		measuredMinWidth = 0;
 		topBar.minWidth = 0;
 		bottomBar.minWidth = 0;
-	}		
-	
+	}
+
 	/**
 	 *  @private
 	 */
@@ -170,7 +170,7 @@ public class Docker extends Container
 	{
 		super.updateDisplayList(unscaledWidth, unscaledHeight);
 		layoutObject.updateDisplayList(unscaledWidth, unscaledHeight);
-		
+
 		for (var i:int = 0; i < topBar.numChildren; i++)
 		{
 			wrapRow(HBox(topBar.getChildAt(i)), i, topBar);
@@ -180,7 +180,7 @@ public class Docker extends Container
 			wrapRow(HBox(bottomBar.getChildAt(i)), i, bottomBar);
 		}
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden methods
@@ -203,7 +203,7 @@ public class Docker extends Container
 			rawChildren.addChild(topBar);
 			rawChildren.addChild(bottomBar);
 		}
-		
+
 		var toolBarStyleName:String = getStyle("dockingAreaStyleName");
 	   	topBar.styleName = bottomBar.styleName = toolBarStyleName ? toolBarStyleName : this;
 
@@ -218,10 +218,10 @@ public class Docker extends Container
 								recurse:Boolean = true):void
 	{
 		super.createComponentsFromDescriptors();
-		
-		// Change DockableToolBar from from being content child 
+
+		// Change DockableToolBar from from being content child
 		// to a chrome child i.e., move it to the rawChildren collection.
-		
+
 		for(var i:int=0;i<numChildren;i++)
 		{
 			var child:IUIComponent = IUIComponent(getChildAt(i));
@@ -239,7 +239,7 @@ public class Docker extends Container
 				i--;
 			}
 		}
-			
+
 	}
 
 	/**
@@ -249,14 +249,14 @@ public class Docker extends Container
 											 unscaledHeight:Number):void
 	{
 		super.layoutChrome(unscaledWidth, unscaledHeight);
-		
+
 		var bm:EdgeMetrics = borderMetrics;
-		
+
 		var x:Number = bm.left;
 		var y:Number = bm.top;
-		
+
 		topBar.move(0, 0);
-		IFlexDisplayObject(topBar).setActualSize(unscaledWidth, 
+		IFlexDisplayObject(topBar).setActualSize(unscaledWidth,
 			topBar.getExplicitOrMeasuredHeight());
 
 		var h:int = bottomBar.getExplicitOrMeasuredHeight();
@@ -281,13 +281,13 @@ public class Docker extends Container
 		{
 			toolbar = bottomBar
 		}
-		
+
 		if (!toolbar.numChildren)
 		{
 			row = createRow();
 			toolbar.addChild(row);
 		}
-		
+
 		var row:HBox = HBox(toolbar.getChildAt(toolbar.numChildren - 1));
 		row.addChild(child);
 		child.docker = this;
@@ -308,7 +308,7 @@ public class Docker extends Container
 		row.styleName = rowStyleName ? rowStyleName : this;
 		return row;
 	}
-	
+
 	/**
 	 *  @private
 	 *  Moves ToolBars to a new row if there is insufficient space in this row to display
@@ -319,7 +319,7 @@ public class Docker extends Container
 		var totalW:int = 0;
 		var newRow:HBox;
 		for (var j:int = 0; j < row.numChildren; j++)
-		{	
+		{
 			var ch:DockableToolBar = DockableToolBar(row.getChildAt(j));
 			totalW += ch.measuredWidth;
 			if (totalW > toolbar.width && j)
@@ -335,19 +335,19 @@ public class Docker extends Container
 					}
 				}
 				ch.parent.removeChild(ch);
-				newRow.addChild(ch);				
+				newRow.addChild(ch);
 			}
 		}
 		if (newRow)
 			wrapRow(newRow, rowIndex + 1, toolbar);
 	}
-	
+
  	/**
 	 *  @private
 	 *  Called by the DockableToolBar to display the docking placement indicators and
 	 *  add the ToolBar to a correct location.
 	 */
-  	mx_internal function dragOver(item:DockableToolBar, event:MouseEvent, 
+  	mx_internal function dragOver(item:DockableToolBar, event:MouseEvent,
   			finalPlacement:Boolean = false):Boolean
 	{
 		var pt:Point = new Point(event.stageX, event.stageY);
@@ -368,7 +368,7 @@ public class Docker extends Container
 		}
 		else
 			dragProxy.graphics.clear();
-			
+
 		if (toolbar)
 		{
 			var x1:int, y1:int;
@@ -376,11 +376,11 @@ public class Docker extends Container
 			var rowIndex:int = toolbar.numChildren;
 			var colIndex:int;
 			var createNewRow:Boolean = true;
-			
+
 			y1 = y2 = toolbar.height;
 			x2 = toolbar.width;
 			var row:HBox;
-			
+
 			for (var i:int = 0; i < toolbar.numChildren; i++)
 			{
 				row = HBox(toolbar.getChildAt(i));
@@ -390,7 +390,7 @@ public class Docker extends Container
 					y1 = y2 = row.y;
 					break;
 				}
-				
+
 				if (pt.y >= row.y && pt.y <= row.y + row.height * 0.75)
 				{
 					var child:DisplayObject = row.getChildAt(row.numChildren - 1);
@@ -398,7 +398,7 @@ public class Docker extends Container
 					colIndex = row.numChildren;
 					rowIndex = i;
 					for (var j:int = 0; j < row.numChildren; j++)
-					{	
+					{
 						child = row.getChildAt(j);
 						if (pt.x < child.x + child.width / 2)
 						{
@@ -407,13 +407,13 @@ public class Docker extends Container
 							break;
 						}
 					}
-					
+
 					if (item.parent == row)
 					{
 						if ((row.getChildIndex(item) == j - 1 || child == item))
 							return true;
 					}
-					else if (colIndex == row.numChildren && 
+					else if (colIndex == row.numChildren &&
 						item.measuredWidth + row.measuredWidth > toolbar.width && !finalPlacement)
 						return true;
 					y1 = row.y;
@@ -422,7 +422,7 @@ public class Docker extends Container
 					break;
 				}
 			}
-			
+
 			if (finalPlacement)
 			{
 				if (createNewRow)
@@ -434,17 +434,17 @@ public class Docker extends Container
 					row = HBox(toolbar.getChildAt(rowIndex));
 
 				var p:UIComponent = UIComponent(item.parent);
-				
+
 				if (row == p && p.getChildIndex(item) < colIndex)
 					colIndex--;
-					
+
 				p.removeChild(item);
-				row.addChildAt(item, colIndex);		
+				row.addChildAt(item, colIndex);
 				wrapRow(row, rowIndex, toolbar);
 
 				if (p is HBox && p.numChildren == 0)
 					p.parent.removeChild(p);
-	
+
 			}
 			else
 			{

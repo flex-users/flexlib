@@ -33,52 +33,52 @@ package flexlib.scheduling.scheduleClasses.layout
 {
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
-	
+
 	[Event(name="update",type="flexlib.scheduling.scheduleClasses.layout.LayoutUpdateEvent")]
 	public class HorizontalLinesLayout extends Layout implements IHorizontalLinesLayout
 	{
 		private var _rowHeight : Number;
-	
+
 		public function get rowHeight() : Number
 		{
 		    return _rowHeight;
 		}
-		
+
 		public function set rowHeight( value : Number ) : void
 		{
 			_rowHeight = value;
 		}
-		
+
 		public function update( event : LayoutUpdateEvent ) : void
 		{
 			entryLayout = IEntryLayout( event.layout );
 			contentWidth = entryLayout.contentWidth;
 			startDate = entryLayout.startDate;
-			endDate = entryLayout.endDate;			
+			endDate = entryLayout.endDate;
 			viewportWidth = entryLayout.viewportWidth;
 			viewportHeight = entryLayout.viewportHeight;
 			rowHeight = entryLayout.rowHeight;
 			xPosition = entryLayout.xPosition;
 			yPosition = entryLayout.yPosition;
-			
+
 			calculateItems( entryLayout );
 			dispatchEvent( new LayoutUpdateEvent( this ) );
 		}
-		
+
 		protected function calculateItems( entryLayout : IEntryLayout ) : void
 		{
 			var result : IList = new ArrayCollection();
 			var firstRow : Number = Math.floor( yPosition / rowHeight );
 			var lastRow : Number = Math.ceil(( yPosition + viewportHeight ) / rowHeight );
-	      
+
 			for( var i : Number = firstRow; i <= lastRow; i++ )
 			{
 				var item : HorizontalLinesLayoutItem = new HorizontalLinesLayoutItem();
-				
+
 				item.x = 0;
 				item.y = i * rowHeight;
 				item.width = viewportWidth;
-				
+
 				result.addItem( item );
 			}
 			_items = result;

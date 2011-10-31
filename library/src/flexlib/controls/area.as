@@ -24,7 +24,7 @@ SOFTWARE.
 package flexlib.controls
 {
 	[ExcludeClass]
-	
+
 	dynamic public class area extends Object
 	{
 		public var href:String;

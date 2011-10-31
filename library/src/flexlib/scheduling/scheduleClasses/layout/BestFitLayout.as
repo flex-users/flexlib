@@ -32,15 +32,15 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.layout
 {
 	import flexlib.scheduling.scheduleClasses.IScheduleEntry;
-	
+
 	import mx.events.CollectionEvent;
 
 	public class BestFitLayout extends AbstractEntryLayout implements IEntryLayout
 	{
 		/**
-		 * Layout the complete dataProvider so that 
-		 * one millisecond equals one pixel. This is the best 
-		 * precision we can ever show, since Dates have this 
+		 * Layout the complete dataProvider so that
+		 * one millisecond equals one pixel. This is the best
+		 * precision we can ever show, since Dates have this
 		 * resolution.
 		 */
 		override public function createLayout() : void
@@ -49,7 +49,7 @@ package flexlib.scheduling.scheduleClasses.layout
 			if( dataProvider == null ) return;
 			createLayoutFor( 0, dataProvider.length );
 		}
-		
+
 		private function createLayoutFor( startIndex : Number, endIndex : Number ) : void
 		{
 			var len : Number = endIndex;
@@ -60,29 +60,29 @@ package flexlib.scheduling.scheduleClasses.layout
 			}
 			updateLayouterProperties();
 		}
-	
+
 		private function addItemToRow( entry : IScheduleEntry ) : void
 		{
 			var x : Number = entry.startDate.getTime() - startDate.getTime();
 			if( isOffScreenLeftRight( x, totalMilliseconds ) ) return;
-			
+
 			var width : Number = entry.endDate.getTime() - entry.startDate.getTime();
 			if( isTooSmall( width ) ) return;
-			
+
 			var layoutItem : EntryLayoutItem = new EntryLayoutItem();
 			layoutItem.x = x;
-			layoutItem.width = width; 
+			layoutItem.width = width;
 			layoutItem.height = rowHeight;
 			layoutItem.data = entry;
-			
+
 			//sets y and row of the item
 			insertNonOverlapping( layoutItem );
 		}
-				
+
 		/**
-		 * find the lowest row, which hasn't 
+		 * find the lowest row, which hasn't
 		 * overlapping items and add the item to it
-		 */ 
+		 */
 		private function insertNonOverlapping( item : EntryLayoutItem ) : void
 		{
 			//Either find an existing row and squeeze the item into it...
@@ -101,24 +101,24 @@ package flexlib.scheduling.scheduleClasses.layout
 					return;
 				}
 			}
-			
+
 			//...or create a new row and place the item in there.
 			item.row = length;
-			item.y = length * item.height;			
+			item.y = length * item.height;
 			var newRow : Array = new Array();
 			newRow.push( item );
 			rows.push( newRow );
 			//save item against row location for efficient access.
 			saveItemWithRow( item, length, 0 );
 		}
-		
+
 		/**
 		 * See if we can fit the item into this row
 		 * return the index of the inserting point or -1 if no position could be found
-		 * 
-		 * TODO: If we could assume, that the dataProvider is ordererd by startTime, 
+		 *
+		 * TODO: If we could assume, that the dataProvider is ordererd by startTime,
 		 * we wouldn't have to search here. Instead we could simply add the items.
-		 */ 
+		 */
 		private function findNonOverlappingPosition( row : Array, item : EntryLayoutItem ) : Number
 		{
 			var x : Number = item.x;
@@ -126,16 +126,16 @@ package flexlib.scheduling.scheduleClasses.layout
 
 			var length : Number = row.length;
 			if( length == 0 ) return 0;
-			
+
 			var i : Number = 0;
 			while( i < length && x > row[ i ].x ) i++;
-			
+
 			//x was greater than all of the entries
 			if( i == length )
 			{
 				if( x >= row[ i - 1 ].x + row[ i - 1 ].width )
 				{
-					return length;	
+					return length;
 				}
 				return -1;
 			}
@@ -143,46 +143,46 @@ package flexlib.scheduling.scheduleClasses.layout
 			if( x < row[ i ].x && x + width <= row[ i ].x ){
 				if( i == 0 ) return 0;
 				if( x > row[ i - 1 ].x + row[ i - 1 ].width )
-				{					
+				{
 					return i;
-				} 
+				}
 			}
 			return -1;
 		}
-		
+
 		override public function addItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-		
+
 		override public function removeItem( event : CollectionEvent ) : void
 		{
 			createLayout();
-		}		
-		
+		}
+
 		override public function replaceItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-		
+
 		override public function updateItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-		
+
 		override public function resetItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-				
+
 		override public function refreshItem( event : CollectionEvent ) : void
 		{
 			createLayout();
 		}
-		
+
 		override public function moveItem( event : CollectionEvent ) : void
 		{
 			//do nothing on move. This shouldn't have an influence on the component.
-		}			
+		}
 	}
 }

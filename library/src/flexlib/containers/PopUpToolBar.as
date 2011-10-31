@@ -83,10 +83,10 @@ public class PopUpToolBar extends TitleWindow
 			child.setActualSize(unscaledWidth, child.getExplicitOrMeasuredHeight());
 		}
 	}
-	
+
 	public function getTitleBar():UIComponent
 	{
 		return super.titleBar;
-	}	
+	}
 }
 }

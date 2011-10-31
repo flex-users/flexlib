@@ -40,6 +40,6 @@ private function createSampleData():void
 						 );
 	this.tmpDataCollection = new ArrayCollection(tmpData);
 }
-	
-[Bindable] 
+
+[Bindable]
 public var tmpDataCollection:ArrayCollection;

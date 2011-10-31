@@ -57,20 +57,20 @@ import mx.controls.sliderClasses.SliderDirection;
 
 [IconFile("HSlider.png")]
 
-/**	
- *  An alternative to the HSlider control included in the Flex framework. This 
+/**
+ *  An alternative to the HSlider control included in the Flex framework. This
  *  version of the HSlider allows you to drag the region between the thumbs, if
  *  the slider has mutliple thumbs. If there is more than one thumb then the region
  *  between the leftmost thumb and the rightmost thumb is draggable.
- * 
+ *
  *  <p>To use this control an enable the draggable regions between the thumbs you
  *  need to set the <code>thumbCount</code> to something greater than 1, otherwise
  *  this control will work exactly like the original HSlider.  </p>
  *  @mxml
- *  
+ *
  *  <p>The <code>&lt;flexlib:HSlider&gt;</code> tag inherits all of the tag attributes
  *  of its superclass, and adds the following tag attribute:</p>
- * 
+ *
  *  <pre>
  *  &lt;flexlib:HSlider
  *    <strong>Styles</strong>
@@ -78,7 +78,7 @@ import mx.controls.sliderClasses.SliderDirection;
  *  /&gt;
  *  </pre>
  *  </p>
- *  	
+ *
  *  @see mx.controls.HSlider
  *  @see flexlib.controls.VSlider
  *  @see flexlib.baseClasses.SliderBase
@@ -86,7 +86,7 @@ import mx.controls.sliderClasses.SliderDirection;
 public class HSlider extends ExtendedSlider
 {
 	//include "../core/Version.as";
-		
+
 	//--------------------------------------------------------------------------
 	//
 	//  Constructor
@@ -99,7 +99,7 @@ public class HSlider extends ExtendedSlider
 	public function HSlider()
 	{
 		super();
-		
+
 		// Slider variables.
 		direction = SliderDirection.HORIZONTAL;
 	}

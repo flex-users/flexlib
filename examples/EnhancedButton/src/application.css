@@ -24,13 +24,13 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace mx "library://ns.adobe.com/flex/mx";
 
-s|Application 
+s|Application
 {
     color: #FFFFFF;
     font-family: Arial;
     font-size: 10;
 }
-     
+
 s|Button {
     upSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
 	overSkin:ClassReference('flexlib.skins.EnhancedButtonSkin');
@@ -71,7 +71,7 @@ mx|HSlider
    rounded-bottom-corners: true;
 }
 
-.areaPanelTitle 
+.areaPanelTitle
 {
    /*letter-spacing: 4;*/
    /*color: #ffffff;*/
@@ -106,10 +106,10 @@ mx|HSlider
     corner-radii: 12, 0, 0, 12;
     fill-colors: #557AB7, #91A8D0, #3A66AC, #7F9AC8;
     fill-color-ratios: 0, 40, 80, 255;
-    
+
     over-fill-colors:  #FF0000, #00FF00, #0000FF, #333333;
     over-fill-color-ratios: 0, 80, 160, 255;
-    
+
 }
 
 .niceButton

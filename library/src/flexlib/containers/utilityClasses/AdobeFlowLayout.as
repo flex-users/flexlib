@@ -78,13 +78,13 @@ public class AdobeFlowLayout extends Layout
 	 *  For future use
 	 */
 	//private var direction:String = FlowDirection.HORIZONTAL;
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden methods
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
 	 *  @private
 	 *  Measure container as per Flow layout rules.
@@ -127,7 +127,7 @@ public class AdobeFlowLayout extends Layout
 			target.measuredWidth = preferredWidth / rowCount + wPadding + minWidth;
 		else
 			target.measuredWidth = preferredWidth + wPadding;
-		
+
 		target.measuredHeight = minHeight + hPadding;
 
 		if (explicitMeasuredHeight)
@@ -144,14 +144,14 @@ public class AdobeFlowLayout extends Layout
 		var target:Container = Container(super.target);
 
 		var vm:EdgeMetrics = target.viewMetricsAndPadding;
-		
+
 		var horizontalGap:Number = target.getStyle("horizontalGap");
 		var verticalGap:Number = target.getStyle("verticalGap");
-       
+
 		var xPos:Number = vm.left;
 		var yPos:Number = vm.top;
 		var maxYPos:Number = 0;
-		
+
 		var n:int = target.numChildren;
 		var child:IUIComponent;
 		var lastChild:IUIComponent;
@@ -161,9 +161,9 @@ public class AdobeFlowLayout extends Layout
 		var xEnd:Number = unscaledWidth - vm.right;
 		var full:Boolean = false;
 		var remainingRows:int = 0xFFFF;
-		
+
 		var xWrapWidth:int = 0xFFFF;
-		
+
 		if (rowCount > 0 && target.parent)
 		{
 			var numLines:int = target.parent.height / target.measuredHeight;
@@ -179,7 +179,7 @@ public class AdobeFlowLayout extends Layout
 
 			childWidth = child.getExplicitOrMeasuredWidth();
 			childHeight = child.getExplicitOrMeasuredHeight();
-			
+
 			if(!full)
 			{
 				// Start a new row?
@@ -200,15 +200,15 @@ public class AdobeFlowLayout extends Layout
 						lastChild.setActualSize(0, 0);
 				}
 			}
-			
+
 			child.setActualSize(childWidth, childHeight)
 			child.move(xPos, yPos);
 			lastChild = child;
 			maxYPos = Math.max(maxYPos, yPos + childHeight);
 			xPos += (childWidth + horizontalGap);
-			
+
 		}
-			
+
 		maxYPos += vm.bottom;
 
 		if (target.height != maxYPos && isNaN(target.percentHeight) && !explicitHeightSet)
@@ -223,7 +223,7 @@ public class AdobeFlowLayout extends Layout
 				target.height = NaN;
 			}
 			explicitHeightSet = false;
-			
+
 			if (lastWidth != unscaledWidth)
 			{
 				target.callLater(target.invalidateDisplayList);

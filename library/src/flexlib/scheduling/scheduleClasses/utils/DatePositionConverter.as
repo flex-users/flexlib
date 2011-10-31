@@ -32,53 +32,53 @@ POSSIBILITY OF SUCH DAMAGE.
 {
 	/**
 	 * @private
-	 * Provide methods to convert pixel positions 
-	 * to dates and vice versa 
-	 */	
+	 * Provide methods to convert pixel positions
+	 * to dates and vice versa
+	 */
 	public class DatePositionConverter
 	{
 		public var startDateMilliseconds : Number;
 		public var totalWidth : Number;
 		public var totalMilliseconds : Number;
-		
+
 		public function positionToMilliseconds( position : Number ) : Number
 		{
 			return position / totalWidth * totalMilliseconds;
 		}
-		
+
 		public function millisecondsToPosition( milliseconds : Number ) : Number
 		{
-			return milliseconds / totalMilliseconds * totalWidth;	
+			return milliseconds / totalMilliseconds * totalWidth;
 		}
 
 		public function positionToMillisecondsAbsolute( position : Number ) : Number
 		{
 			return startDateMilliseconds + positionToMilliseconds( position );
 		}
-		
+
 		public function millisecondsToPositionAbsolute( milliseconds : Number ) : Number
 		{
-			return millisecondsToPosition( milliseconds - startDateMilliseconds );	
+			return millisecondsToPosition( milliseconds - startDateMilliseconds );
 		}
 
 		public function positionToDate( position : Number ) : Date
 		{
 			return new Date( positionToMillisecondsAbsolute( position ));
 		}
-		
+
 		public function dateToPosition( date : Date ) : Number
 		{
 			return millisecondsToPositionAbsolute( date.getTime() );
 		}
 
 
-		public function toString() : String 
+		public function toString() : String
 		{
 			return "[object DatePositionConverter"
 				+ " startDateMilliseconds:" + startDateMilliseconds
 				+ " totalWidth:" + totalWidth
 				+ " totalMilliseconds:" + totalMilliseconds
 			    + "]";
-		}	
+		}
 	}
 }

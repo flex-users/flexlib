@@ -40,11 +40,11 @@ Application
 	cornerRadius: 5;
 	dropShadowEnabled: false;
 	headerHeight: 29;
-	backgroundAlpha: 1; 
+	backgroundAlpha: 1;
 	backgroundColor: #FFFFFF;
 	titleStyleName: "mdiWindowTitleStyle";
 	titleBackgroundSkin: Embed(source="/assets/swf/MSWindows.swf", symbol="headerBgDefault");
-	
+
 	controlButtonWidth: 21;
 	controlButtonHeight: 21;
 	controlButtonGap: 4;
@@ -62,11 +62,11 @@ Application
 	cornerRadius: 5;
 	dropShadowEnabled: false;
 	headerHeight: 29;
-	backgroundAlpha: 1; 
+	backgroundAlpha: 1;
 	backgroundColor: #FFFFFF;
 	titleStyleName: "mdiWindowTitleStyle";
 	titleBackgroundSkin: Embed(source="/assets/swf/MSWindows.swf", symbol="headerBgDefaultNoFocus");
-	
+
 	controlButtonWidth: 21;
 	controlButtonHeight: 21;
 	controlButtonGap: 4;

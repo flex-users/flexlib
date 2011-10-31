@@ -496,7 +496,7 @@ package flexlib.controls
         //we always reset the displayed rows on a dataprovider assignment or when the showRoot property change
         _displayedModel = new ArrayCollection();
 
-        //reset flags 
+        //reset flags
         dataProviderChanged = false;
         showRootChanged = false;
 

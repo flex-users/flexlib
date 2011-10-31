@@ -24,57 +24,57 @@ package flexlib.controls.textClasses
 {
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
-	
+
 	public class StringBoundaries
 	{
 		/**
 		* The TextField the string is in.
 		*/
 		private var textField:TextField;
-		
+
 		/**
 		* The first line of text the string inhabits.
 		*/
 		private var startLine:int;
-		
+
 		/**
 		* The last line of text the string inhabits.
 		*/
 		private var endLine:int;
-		
+
 		/**
 		* The index of the first character in the string.
 		*/
 		private var startIndex:int;
-		
+
 		/**
 		* The index of the last character in the string.
 		*/
 		private var endIndex:int;
-		
+
 		/**
 		* The horizontal offset to apply to the bounding rectangle.
 		*/
 		private var xOffset:Number;
-		
+
 		/**
 		* The vertical offset to apply to the bounding rectangle.
 		*/
 		private var yOffset:Number;
-		
+
 		/**
 		* TextField.getCharBoundaries seems to be consistently innaccurate by this amount in the x-axis.
 		*/
 		public const X_CORRECTION:Number = 1;
-		
+
 		/**
 		* TextField.getCharBoundaries seems to be consistently innaccurate by this amount in the y-axis.
 		*/
 		public const Y_CORRECTION:Number = 2;
-		
+
 		/**
 		* Finds the bounding rectangle of a character range within a TextField object.  If the character range spans multiple lines, bounding rectangles are calculated for each line.
-		* 
+		*
 		* @param textField The TextField the string is in.
 		* @param startIndex The start index of the character range.
 		* @param endIndex The end index of the character range.
@@ -91,7 +91,7 @@ package flexlib.controls.textClasses
 			this.xOffset = xOffset;
 			this.yOffset = yOffset;
 		}
-		
+
 		/**
 		* Returns the bounding rectangles of the current character range.
 		*/
@@ -101,11 +101,11 @@ package flexlib.controls.textClasses
 			// Only return rects in the visible area of the TextField
 			var firstVisibleIndex:int = this.textField.getLineOffset(this.textField.scrollV-1);
 			var lastVisibleIndex:int = this.getLineEndOffset(this.textField.bottomScrollV-1);
-			
+
 			// If the visible area of the TextField is larger than the actual character range, only return rects within the character range instead.
 			firstVisibleIndex = Math.max(firstVisibleIndex, this.startIndex);
 			lastVisibleIndex = Math.min(lastVisibleIndex, this.endIndex);
-			
+
 			// If the character range spans multiple lines, get bounding rects for each line.
 			// Otherwise, just get one bounding rect for the whole character range.
 			if(this.isMultiline){
@@ -113,10 +113,10 @@ package flexlib.controls.textClasses
 			}else{
 				rects = [this.stringRect(firstVisibleIndex, lastVisibleIndex)];
 			}
-			
+
 			return rects;
 		}
-		
+
 		/**
 		* Indicates whether or not the character range spans multiple lines.
 		*/
@@ -126,100 +126,100 @@ package flexlib.controls.textClasses
 			}
 			return false;
 		}
-		
+
 		/**
 		* Indicates whether or not the character range has visible characters.
 		*/
 		public function get isVisible():Boolean{
 			var firstVisibleChar:int = this.textField.getLineOffset(this.textField.scrollV-1);
 			var lastVisibleChar:int = this.getLineEndOffset(this.textField.bottomScrollV-1)
-			
+
 			if(this.endIndex >= firstVisibleChar && this.startIndex <= lastVisibleChar){
 				return true;
 			}
-			
+
 			return false;
 		}
-		
-		/** 	
+
+		/**
 		* Returns an array of Rectangles representing the boundaries of a multiline character range.
-		* 
+		*
 		* @param startIndex The start index of the character range
 		* @param endIndex The end index of the character range
 		*/
 		private function getLineRects(startIndex:int, endIndex:int):Array{
 			var r:Array = new Array();
-			
+
 			var startLn:int = this.textField.getLineIndexOfChar(startIndex);
 			var endLn:int = this.textField.getLineIndexOfChar(endIndex);
-			
+
 			var numLines:int = endLn - startLn;
-			
+
 			var startLineEndOffset:int = this.getLineEndOffset(startLn);
-			
+
 			r.push(this.stringRect(startIndex,startLineEndOffset));
-			
+
 			for(var i:int=1; i<numLines; i++){
 				var line:int = startLn + i;
 				var ind1:int = textField.getLineOffset(line);
 				var ind2:int = this.getLineEndOffset(line);
 				r.push(this.stringRect(ind1,ind2));
 			}
-			
+
 			var endLineOffset:int = textField.getLineOffset(endLn);
 			r.push(this.stringRect(endLineOffset,endIndex));
-			
+
 			return r;
 		}
-		
-		/**	
+
+		/**
 		* Returns a Rectangle representing the boundaries of a singleline character range.
-		* 
+		*
 		* @param startIndex The start index of the character range
 		* @param endIndex The end index of the character range
 		*/
 		private function stringRect(startIndex:int, endIndex:int):Rectangle{
-			
+
 			// If this is a single character, simply return the character boundaries
 			if(startIndex == endIndex){
 				var rect:Rectangle = this.getAdjustedCharBoundaries(startIndex,true);
 				return rect;
 			}
-			
-			// Use lineHeight instead of Rectangle.height so that multi-line 
+
+			// Use lineHeight instead of Rectangle.height so that multi-line
 			// highlights don't have spaces between lines
 			var thisLine:int = this.textField.getLineIndexOfChar(startIndex);
 			var lineHeight:Number = this.textField.getLineMetrics(thisLine).height;
-			
+
 			var rect1:Rectangle = this.getAdjustedCharBoundaries(startIndex,true);
 			var rect2:Rectangle = this.getAdjustedCharBoundaries(endIndex,false);
-			
+
 			var r:Rectangle = new Rectangle(rect1.x, rect1.y, rect2.right - rect1.x, lineHeight);
 			return r;
 		}
-		
+
 		/**
-		* Returns the index of the last character in a line of text 
+		* Returns the index of the last character in a line of text
 		*/
 		private function getLineEndOffset(lineIndex:int):int{
 			return textField.getLineOffset(lineIndex) + textField.getLineLength(lineIndex);
 			//return textField.getLineOffset(lineIndex+1) - 1;
 		}
-        
+
         /**
         * Returns the Y position of a character's bounding rect in consideration of the vertical scroll position of the TextField.
-        * <p>Because getCharBoundaries returns the same bounding rect regardless of the TextField's scroll position, it is necessary to adjust for it.</p> 
+        * <p>Because getCharBoundaries returns the same bounding rect regardless of the TextField's scroll position, it is necessary to adjust for it.</p>
         * <p>adjustedCharY = the Y position of the character - the Y position of the first visible line of text.</p>
         */
         private function get adjustedCharY():int{
-        	
+
             /*
                 Get the rect of the first visible character
             */
             var lineIndex:int = this.textField.scrollV-1;
             var ind:int = this.textField.getLineOffset(lineIndex);
             var rect:Rectangle = this.textField.getCharBoundaries(ind);
-            
+
             /*
                 For some characters (such as carriage returns), getCharBoundaries returns null.
                 In those situations, we find the next character that does not return null,
@@ -240,7 +240,7 @@ package flexlib.controls.textClasses
 
             return rect.y;
         }
-        
+
 		/**
 		* Returns the bounding rectangle of a character in consideration of the vertical scroll position of the TextField and other manual offsets.  Also, prevents TextField.getCharBoundaries from returning null and causing an error.
 		*

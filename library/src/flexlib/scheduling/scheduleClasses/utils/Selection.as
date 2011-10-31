@@ -31,38 +31,38 @@ POSSIBILITY OF SUCH DAMAGE.
 */package flexlib.scheduling.scheduleClasses.utils
 {
 	import flash.utils.Dictionary;
-	
+
 	/**
 	 * @private
-	 */	
+	 */
 	public class Selection
 	{
 		public var allowMultipleSelection : Boolean = false;
-		
+
 		protected var item : Object;
 		protected var items : Dictionary;
-		
+
 		public function Selection()
 		{
 			items = new Dictionary();
 		}
-		
+
 		public function hasItem( item : Object ) : Boolean
 		{
-			return items[ item ];	
+			return items[ item ];
 		}
-		
+
 		public function get selectedItem() : Object
 		{
 			return item;
 		}
-		
+
 		public function set selectedItem( value : Object ) : void
 		{
 			clear();
 			setItem( value );
 		}
-		
+
 		public function get selectedItems() : Array
 		{
 			var result : Array = new Array();
@@ -72,43 +72,43 @@ POSSIBILITY OF SUCH DAMAGE.
 			}
 			return result;
 		}
-		
+
 		public function set selectedItems( newItems : Array ) : void
 		{
 			clear();
 			if( newItems == null ) return;
-			
+
 			for each( var item : Object in newItems )
 			{
 				items[ item ] = item;
 			}
 		}
-		
+
 		public function addItem( item : Object ) : void
 		{
 			if( allowMultipleSelection )
 			{
-				items[ item ] = item;			
+				items[ item ] = item;
 			}
-			else 
+			else
 			{
 				clear();
 				setItem( item );
 			}
 		}
-		
+
 		public function removeItem( item : Object ) : void
 		{
 			delete items[ item ];
 			this.item = null;
 		}
-		
+
 		public function clear() : void
 		{
 			item = null;
-			items = new Dictionary();		
+			items = new Dictionary();
 		}
-		
+
 		public function getNumberOfSelectedItems() : Number
 		{
 			var size : Number = 0;
@@ -117,12 +117,12 @@ POSSIBILITY OF SUCH DAMAGE.
 				size++;
 			}
 			return size;
-		}		
-		
+		}
+
 		private function setItem( value : Object ) : void
 		{
 			item = value;
-			items[ value ] = value;			
+			items[ value ] = value;
 		}
 	}
 }

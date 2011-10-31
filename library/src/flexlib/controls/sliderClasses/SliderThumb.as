@@ -31,10 +31,10 @@ use namespace mx_internal;
  *  The SliderThumb class can only be used within the context
  *  of a Slider control.
  *  You can create a subclass of the SliderThumb class,
- *  and use it with a Slider control by setting the 
+ *  and use it with a Slider control by setting the
  *  <code>sliderThumbClass</code>
- *  property of the Slider control to your subclass. 
- *  		
+ *  property of the Slider control to your subclass.
+ *
  *  @see mx.controls.HSlider
  *  @see mx.controls.VSlider
  *  @see mx.controls.sliderClasses.Slider
@@ -44,7 +44,7 @@ use namespace mx_internal;
 public class SliderThumb extends Button
 {
 	//include "../../core/Version.as";
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Constructor
@@ -60,16 +60,16 @@ public class SliderThumb extends Button
 
 		stickyHighlighting = true;
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Variables
 	//
 	//--------------------------------------------------------------------------
 
-	/** 
+	/**
 	 *  @private
-	 *  The zero-based index number of this thumb. 
+	 *  The zero-based index number of this thumb.
 	 */
 	mx_internal var thumbIndex:int;
 
@@ -78,7 +78,7 @@ public class SliderThumb extends Button
 	 *  x-position offset.
 	 */
 	private var xOffset:Number;
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden properties
@@ -96,12 +96,12 @@ public class SliderThumb extends Button
 	override public function set x(value:Number):void
 	{
 		var result:Number = moveXPos(value);
-		
+
 		updateValue();
-		
+
 		super.x = result;
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Properties
@@ -119,23 +119,23 @@ public class SliderThumb extends Button
 	{
 		return $x + width / 2;
 	}
-	
+
 	/**
 	 *  @private
 	 */
 	public function set xPosition(value:Number):void
 	{
 		$x = value - width / 2;
-		
+
 		SliderBase(owner).drawTrackHighlight();
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden methods: UIComponent
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
 	 *  @private
 	 */
@@ -146,7 +146,7 @@ public class SliderThumb extends Button
 		measuredWidth = 12;
 		measuredHeight = 12;
 	}
-	
+
 	/**
 	 *  @private
 	 */
@@ -154,7 +154,7 @@ public class SliderThumb extends Button
 	{
 		phase =  isFocused ? ButtonPhase.DOWN : ButtonPhase.UP;
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden methods: Button
@@ -167,13 +167,13 @@ public class SliderThumb extends Button
 	override mx_internal function buttonReleased():void
 	{
 		super.buttonReleased();
-		
+
 		if (enabled)
 		{
 			systemManager.getSandboxRoot().removeEventListener(
 				MouseEvent.MOUSE_MOVE, mouseMoveHandler, true);
             systemManager.deployMouseShields(false);
-            
+
 			SliderBase(owner).onThumbRelease(this);
 		}
 	}
@@ -188,38 +188,38 @@ public class SliderThumb extends Button
 	 *  @private
 	 *  Move the thumb into the correct position.
 	 */
-	private function moveXPos(value:Number, 
-                              overrideSnap:Boolean = false, 
+	private function moveXPos(value:Number,
+                              overrideSnap:Boolean = false,
                               noUpdate:Boolean = false):Number
 	{
 		var result:Number = calculateXPos(value, overrideSnap);
-		
+
 		xPosition = result;
-		
-		if (!noUpdate) 
+
+		if (!noUpdate)
 			updateValue();
-		
+
 		return result;
 	}
-	
+
 	/**
 	 *  @private
-	 *  Ask the Slider if we should be moving into a snap position 
+	 *  Ask the Slider if we should be moving into a snap position
 	 *  and make sure we haven't exceeded the min or max position
 	 */
 	private function calculateXPos(value:Number,
 								   overrideSnap:Boolean = false):Number
 	{
 		var bounds:Object = SliderBase(owner).getXBounds(thumbIndex);
-		
+
 		var result:Number = Math.min(Math.max(value, bounds.min), bounds.max);
 
 		if (!overrideSnap)
-			result = SliderBase(owner).getSnapValue(result, this);	
-		
+			result = SliderBase(owner).getSnapValue(result, this);
+
 		return result;
 	}
-	
+
 	/**
 	 *	@private
 	 *	Used by the Slider for animating the sliding of the thumb.
@@ -228,7 +228,7 @@ public class SliderThumb extends Button
 	{
 		moveXPos(value, true, true);
 	}
-	
+
 	/**
 	 *	@private
 	 *	Used by the Slider for animating the sliding of the thumb.
@@ -237,7 +237,7 @@ public class SliderThumb extends Button
 	{
 		moveXPos(value);
 	}
-	
+
 	/**
 	 *  @private
 	 *  Tells the Slider to update its value for the thumb based on the thumb's
@@ -267,7 +267,7 @@ public class SliderThumb extends Button
 								  1;
 		var isHorizontal:Boolean =
 			SliderBase(owner).direction == SliderDirection.HORIZONTAL;
-		
+
 		var newVal:Number;
 		if ((event.keyCode == Keyboard.DOWN && !isHorizontal) ||
 			(event.keyCode == Keyboard.LEFT && isHorizontal))
@@ -289,11 +289,11 @@ public class SliderThumb extends Button
 		{
 			newVal = SliderBase(owner).getXFromValue(SliderBase(owner).maximum);
 		}
-		
+
 		if (!isNaN(newVal))
 		{
 			event.stopPropagation();
-			//mark last interaction as key 
+			//mark last interaction as key
 			SliderBase(owner).keyInteraction = true;
 			moveXPos(newVal);
 		}
@@ -304,7 +304,7 @@ public class SliderThumb extends Button
 	//  Overridden event handlers: Button
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
 	 *  @private
 	 */
@@ -316,12 +316,12 @@ public class SliderThumb extends Button
 		{
 			// Store where the mouse is positioned
 			// relative to the thumb when first pressed.
-			xOffset = event.localX; 
-			
+			xOffset = event.localX;
+
 			systemManager.getSandboxRoot().addEventListener(
 				MouseEvent.MOUSE_MOVE, mouseMoveHandler, true);
 			systemManager.deployMouseShields(true);
-			
+
 			SliderBase(owner).onThumbPress(this);
 		}
 	}
@@ -335,7 +335,7 @@ public class SliderThumb extends Button
 	 *  @private
 	 *  Internal function to handle mouse movements
 	 *  when the thumb is in a pressed state
-	 *  We want the thumb to follow the x-position of the mouse. 
+	 *  We want the thumb to follow the x-position of the mouse.
 	 */
 	private function mouseMoveHandler(event:MouseEvent):void
 	{
@@ -343,10 +343,10 @@ public class SliderThumb extends Button
 		{
 			var pt:Point = new Point(event.stageX, event.stageY);
 			pt = SliderBase(owner).innerSlider.globalToLocal(pt);
-			
+
 			// Place the thumb in the correct position.
 			moveXPos(pt.x - xOffset + width / 2, false, true);
-			
+
 			// Callback to the Slider to handle tooltips and update its value.
 			SliderBase(owner).onThumbMove(this);
 		}

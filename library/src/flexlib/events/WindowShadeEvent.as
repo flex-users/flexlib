@@ -39,12 +39,12 @@ package flexlib.events {
 
 
         /**
-         *  The WindowShadeEvent.OPENED_CHANGED constant defines the value of the 
-         *  <code>type</code> property of the event object for a 
+         *  The WindowShadeEvent.OPENED_CHANGED constant defines the value of the
+         *  <code>type</code> property of the event object for a
          *  <code>openedChanged</code> event, which indicates that the value of the
          * <code>opened</code> property has been toggled, either through user action
          * or programattically.
-         * 
+         *
          * <p>This is the only WindowShadeEvent type that can be cancelled by a listener function. If the
          * <code>preventDefault()</code> method is called, the previous value of the <code>opened</code> property
          * will be restored. The restoration will trigger an additonal PropertyChangeEvent to keep properties bound to
@@ -56,7 +56,7 @@ package flexlib.events {
          * The WindowShadeEvent.OPEN_BEGIN constant defines the value of the <code>type</code>
          * property of a WindowShadeEvent object used to indicate that a WindowShade is about to be opened. This
          * type of WindowShadeEvent is not cancelable.
-         * 
+         *
          * <p>In most cases, an event of this type will be followed by an event of type WindowShadeEvent.OPEN_END (<code>openEnd</code>); however,
          * if the user clicks the header button before the opening transition has run to completion, the <code>openEnd</code> event will
          * not be dispatched, since the WindowShade will not be left in the open state.</p>
@@ -69,7 +69,7 @@ package flexlib.events {
          * property of a WindowShadeEvent object used to indicate that a WindowShade has been completely opened. The WindowShade, however,
          * is not guaranteed to have been rendered in the fully open state when this event is dispatched. (Use callLater in the event handler
          * if this is a problem.) This type of WindowShadeEvent is not cancelable.
-         * 
+         *
          */
         public static const OPEN_END:String = "openEnd";
 
@@ -78,7 +78,7 @@ package flexlib.events {
          * The WindowShadeEvent.CLOSE_BEGIN constant defines the value of the <code>type</code>
          * property of a WindowShadeEvent object used to indicate that a WindowShade is about to be closed. This
          * type of WindowShadeEvent is not cancelable.
-         * 
+         *
          * <p>In most cases, an event of this type will be followed by an event of type WindowShadeEvent.CLOSE_END (<code>closeEnd</code>); however,
          * if the user clicks the header button before the closing transition has run to completion, the <code>closeEnd</code> event will
          * not be dispatched, since the WindowShade will not be left in the closed state.</p>
@@ -90,7 +90,7 @@ package flexlib.events {
          * property of a WindowShadeEvent object used to indicate that a WindowShade has been completely opened. The WindowShade, however,
          * is not guaranteed to have been rendered in the fully open state when this event is dispatched. (Use callLater in the event handler
          * if this is a problem.) This type of WindowShadeEvent is not cancelable.
-         * 
+         *
          */
         public static const CLOSE_END:String = "closeEnd";
 

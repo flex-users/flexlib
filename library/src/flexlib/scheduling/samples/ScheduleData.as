@@ -34,68 +34,68 @@ POSSIBILITY OF SUCH DAMAGE.
 	import flexlib.scheduling.scheduleClasses.SimpleScheduleEntry;
 	import flexlib.scheduling.scheduleClasses.ColoredScheduleEntry;
 	import flexlib.scheduling.util.DateUtil;
-	
+
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
-	
+
 	public class ScheduleData
-	{	
+	{
 		public function createRandomSimpleScheduleEntries( size : Number ) : ArrayCollection
 		{
 			var result : Array = new Array();
-			
+
 			for( var i : Number = 0; i < size; i++ )
 			{
-				result.push( createSimpleEntry( 
-					i, 
-					randomInt( ( 24 - 1 ) * 60 ) * 60 * 1000,								
+				result.push( createSimpleEntry(
+					i,
+					randomInt( ( 24 - 1 ) * 60 ) * 60 * 1000,
 					( 10 + randomInt( 120 ) ) * 60 * 1000 ) );
 			}
-			
-			return new ArrayCollection( result );			
+
+			return new ArrayCollection( result );
 		}
-		
+
 		public function createRandomColoredScheduleEntries( size : Number ) : ArrayCollection
 		{
 			var result : Array = new Array();
-			
+
 			for( var i : Number = 0; i < size; i++ )
 			{
 				var color : uint = 0x999999 + randomInt( 0x777777 );
-				result.push( createColoredEntry( 
-					i, 
-					randomInt( ( 24 - 1 ) * 60 ) * 60 * 1000,								
+				result.push( createColoredEntry(
+					i,
+					randomInt( ( 24 - 1 ) * 60 ) * 60 * 1000,
 					( 10 + randomInt( 120 ) ) * 60 * 1000, color ) );
 			}
-			
-			return new ArrayCollection( result );			
+
+			return new ArrayCollection( result );
 		}
-		
+
 		public function createRowsOfRandomColoredEntries( rows : Number, size : Number ) : ArrayCollection
 		{
-			var result : Array = new Array();			
+			var result : Array = new Array();
 			for( var i : Number = 0; i < rows; i++ )
 			{
-				var row : IList = new ArrayCollection();				
+				var row : IList = new ArrayCollection();
 				for( var j : Number = 0; j < size; j++ )
 				{
 					var color : uint = 0x999999 + randomInt( 0x777777 );
-					row.addItem( createColoredEntry( 
-						j, 
-						randomInt( ( 24 - 1 ) * 60 ) * 60 * 1000,								
+					row.addItem( createColoredEntry(
+						j,
+						randomInt( ( 24 - 1 ) * 60 ) * 60 * 1000,
 						( 10 + randomInt( 60 ) ) * 60 * 1000, color ) );
 				}
 				result.push( row );
-			}			
-			return new ArrayCollection( result );			
+			}
+			return new ArrayCollection( result );
 		}
-		
+
 		public function createRowsOfSequentialColoredEntries( rows : Number, size : Number ) : ArrayCollection
 		{
 			var result : Array = new Array();
-			var counter : Number = 0;		
+			var counter : Number = 0;
 			for( var i : Number = 0; i < rows; i++ )
-			{				
+			{
 				var row : IList = new ArrayCollection();
 				var currentTime : Number = ( ( 24 - 1 ) * 60 ) / size;
 				var color : uint = 0x999999 + randomInt( 0x777777 );
@@ -103,25 +103,25 @@ POSSIBILITY OF SUCH DAMAGE.
 				{
 					counter++;
 					var startTime : Number = currentTime * j * 60 * 1000;
-					var duration : Number = ( randomInt( 60 ) + 30 ) * 60 * 1000;					
-					var entry : SimpleScheduleEntry = createColoredEntry( j, startTime, duration, color );										
+					var duration : Number = ( randomInt( 60 ) + 30 ) * 60 * 1000;
+					var entry : SimpleScheduleEntry = createColoredEntry( j, startTime, duration, color );
 					entry.label = "Entry " + counter;
 					row.addItem( entry );
 				}
 				result.push( row );
-			}			
-			return new ArrayCollection( result );			
-		}		
-		
+			}
+			return new ArrayCollection( result );
+		}
+
 		private function createSimpleEntry( i : Number, startTime : Number, duration : Number ) : SimpleScheduleEntry
 		{
 			var entry : SimpleScheduleEntry = new SimpleScheduleEntry();
 			entry.startDate = DateUtil.setTime( new Date(), startTime );
 			entry.endDate = DateUtil.addTime( DateUtil.copyDate( entry.startDate ), duration );
-			entry.label = "Entry " + i; 
+			entry.label = "Entry " + i;
 			return entry;
 		}
-		
+
 		private function createColoredEntry( i : Number, startTime : Number, duration : Number, color : uint ) : SimpleScheduleEntry
 		{
 			var entry : ColoredScheduleEntry = new ColoredScheduleEntry();
@@ -130,8 +130,8 @@ POSSIBILITY OF SUCH DAMAGE.
 			entry.label = "Entry " + i;
 			entry.backgroundColor = color;
 			return entry;
-		}		
-		
+		}
+
 		private function randomInt( max : Number ) : Number
 		{
 			return Math.floor( Math.random() * max );

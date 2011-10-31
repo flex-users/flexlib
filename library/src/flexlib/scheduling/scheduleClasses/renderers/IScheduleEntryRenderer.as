@@ -32,19 +32,19 @@ POSSIBILITY OF SUCH DAMAGE.
 package flexlib.scheduling.scheduleClasses.renderers
 {
 	import flexlib.scheduling.scheduleClasses.IScheduleEntry;
-	
+
 	import mx.core.IDataRenderer;
 	import mx.core.IFlexDisplayObject;
 	import mx.styles.IStyleClient;
-	
+
 	/**
-	 */	
+	 */
 	public interface IScheduleEntryRenderer extends IFlexDisplayObject, IDataRenderer, IStyleClient
 	{
 		function get entry() : IScheduleEntry;
 		function set entry( value : IScheduleEntry ) : void;
-		
+
 		function get selected() : Boolean;
-		function set selected( value : Boolean ) : void;		
+		function set selected( value : Boolean ) : void;
 	}
 }

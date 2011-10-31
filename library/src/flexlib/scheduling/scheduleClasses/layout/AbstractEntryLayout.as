@@ -33,71 +33,71 @@ package flexlib.scheduling.scheduleClasses.layout
 {
 	import flexlib.scheduling.scheduleClasses.IScheduleEntry;
 	import flexlib.scheduling.scheduleClasses.RowLocatorItem;
-	
+
 	import flash.utils.Dictionary;
-	
+
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
 	import mx.events.CollectionEvent;
-	
+
 	[Event(name="update",type="flexlib.scheduling.scheduleClasses.layout.LayoutUpdateEvent")]
 	public class AbstractEntryLayout extends Layout implements IEntryLayout
 	{
 		protected var rows : Array;
-		private var rowLocator : Dictionary;		
-		private var _dataProvider : IList;	
-		private var _xPosition : Number = 0;	
+		private var rowLocator : Dictionary;
+		private var _dataProvider : IList;
+		private var _xPosition : Number = 0;
 		private var _rowHeight : Number = 50;
-		
+
 		public function AbstractEntryLayout()
 		{
 			createLayout();
 		}
-		
+
 		public function get dataProvider() : IList
 		{
 		    return _dataProvider;
 		}
-		
+
 		public function set dataProvider( value : IList ) : void
 		{
 			_dataProvider = value;
 			//tryToCreateLayout();
 		}
-				
+
 		override public function get xPosition() : Number
 		{
 			var zoom : Number = totalMilliseconds / contentWidth;
-			
+
 			return _xPosition / zoom;
-		}		
-		
+		}
+
 		override public function set xPosition( value : Number ) : void
 		{
 			if( isNaN( value )) return;
-			
+
 			var zoom : Number = totalMilliseconds / contentWidth;
-			
+
 			_xPosition = value * zoom;
 		}
-		
+
 		[Bindable]
 		public function get rowHeight() : Number
 		{
 		    return _rowHeight;
 		}
-		
+
 		public function set rowHeight( value : Number ) : void
 		{
 			_rowHeight = value;
 		}
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
 		public function findLayoutItem( entry : IScheduleEntry ) : EntryLayoutItem
 		{
 			var rowLocatorItem : RowLocatorItem = getRowLocatorItem( entry );
@@ -110,56 +110,56 @@ package flexlib.scheduling.scheduleClasses.layout
 			}
 			return null;
 		}
-				
+
 		public function update() : void
 		{
 			calculateItems();
 			dispatchEvent( new LayoutUpdateEvent( this ) );
 		}
-		
-		
+
+
 		public function createLayout() : void
 		{
 			rows = new Array();
 			rowLocator = new Dictionary( true );
 		}
-				
+
 		public function setRowLocatorItem( item : EntryLayoutItem, rowLocatorItem : RowLocatorItem ) : void
 		{
 			rowLocatorItem.layoutItem = item;
 			rowLocator[ item.data ] = rowLocatorItem;
 		}
-		
+
 		public function getRowLocatorItem( entry : IScheduleEntry ) : RowLocatorItem
 		{
 			return rowLocator[ entry ];
 		}
-		
+
 		public function deleteRowLocatorItem( entry : IScheduleEntry ) : RowLocatorItem
 		{
 			return rowLocator[ entry ] = null;
 		}
-		
+
 		protected function saveItemWithRow( item : EntryLayoutItem, row : Number, rowItem : Number ) : void
 		{
 			var rowLocatorItem : RowLocatorItem = new RowLocatorItem();
 			rowLocatorItem.row = row;
 			rowLocatorItem.rowItem = rowItem;
 			setRowLocatorItem( item, rowLocatorItem );
-		}			
-			
+		}
+
 		protected function isOffScreenLeftRight( entryStart : Number, viewPortEnd : Number ) : Boolean
  		{
   			var isOff : Boolean;
   			var isOffScreenOnLeftSide : Boolean = ( entryStart < 0 );
- 			var isOffScreenOnRightSide : Boolean = ( entryStart > viewPortEnd );	 			
+ 			var isOffScreenOnRightSide : Boolean = ( entryStart > viewPortEnd );
  			if( isOffScreenOnLeftSide || isOffScreenOnRightSide )
  			{
  				isOff = true;
  			}
  			return isOff;
  		}
-		
+
  		protected function isTooSmall( width : Number ) : Boolean
  		{
  			var tooSmall : Boolean = ( width <= 0 );
@@ -169,15 +169,15 @@ package flexlib.scheduling.scheduleClasses.layout
  			}
  			return tooSmall;
  		}
- 		
+
  		protected function updateLayouterProperties() : void
 		{
 			contentHeight = rows.length * rowHeight;
 		}
-				
+
 		/**
 		 * Potentially expensive call!
-		 */		
+		 */
 		private function tryToCreateLayout() : void
 		{
 			if( dataProvider != null && startDate != null && endDate != null && !isNaN( rowHeight ) )
@@ -185,75 +185,75 @@ package flexlib.scheduling.scheduleClasses.layout
 				createLayout();
 			}
 		}
-		
+
 		/**
 		 * find the items which are currently visible in the viewport
-		 * _xPosition is an unscaled value 
-		 * 
+		 * _xPosition is an unscaled value
+		 *
 		 * TODO: If rows were ordered by x, we could optimize the search for items
-		 */ 
+		 */
 		private function calculateItems() : void
 		{
 			var result : ArrayCollection = new ArrayCollection();
 			var firstRow : Number = Math.floor( yPosition / rowHeight );
 			var lastRow : Number = Math.ceil(( yPosition + viewportHeight ) / rowHeight );
 			if( lastRow >= rows.length ) lastRow = rows.length - 1;
-			
+
 			var totalMilliseconds : Number = endDate.getTime() - startDate.getTime();
 			var zoom : Number = totalMilliseconds / contentWidth;
-			
+
 			var xStart : Number = _xPosition;
 			var xEnd : Number = _xPosition + viewportWidth * zoom;
-			
+
 			for( var rowIndex : Number = firstRow; rowIndex <= lastRow; rowIndex++ )
 			{
 				var row : Array = rows[ rowIndex ];
 				for each( var item : EntryLayoutItem in row )
 				{
-					if( item.x < xEnd && item.x + item.width >= xStart ) 
+					if( item.x < xEnd && item.x + item.width >= xStart )
 					{
 						item.zoom = zoom;
 						item.row = rowIndex;
-						result.addItem( item );					
+						result.addItem( item );
 					}
-				}	
+				}
 			}
 			_items = result;
 		}
-		
+
 		public function addItem( event : CollectionEvent ) : void
 		{
 			throw new Error( "Abstract method invoked" );
 		}
-		
+
 		public function removeItem( event : CollectionEvent ) : void
 		{
 			throw new Error( "Abstract method invoked" );
-		}		
-		
+		}
+
 		public function replaceItem( event : CollectionEvent ) : void
 		{
 			throw new Error( "Abstract method invoked" );
 		}
-		
+
 		public function updateItem( event : CollectionEvent ) : void
 		{
 			throw new Error( "Abstract method invoked" );
 		}
-		
+
 		public function resetItem( event : CollectionEvent ) : void
 		{
 			throw new Error( "Abstract method invoked" );
 		}
-				
+
 		public function refreshItem( event : CollectionEvent ) : void
 		{
 			throw new Error( "Abstract method invoked" );
 		}
-		
+
 		public function moveItem( event : CollectionEvent ) : void
 		{
 			throw new Error( "Abstract method invoked" );
-		}		
+		}
 	}
 }

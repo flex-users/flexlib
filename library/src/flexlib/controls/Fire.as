@@ -512,7 +512,7 @@ package flexlib.controls
       fire.draw(input);
       fire.applyFilter(fire, fire.rect, new Point(0, 0), d);
 
-      //Now just drop the resulting bitmapData intop our output Bitmap and we're all done! 
+      //Now just drop the resulting bitmapData intop our output Bitmap and we're all done!
       output.bitmapData = fire;
     }
   }

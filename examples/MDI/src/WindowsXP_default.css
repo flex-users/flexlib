@@ -28,7 +28,7 @@ MDIWindow
 {
 	windowControlsClass: ClassReference("windowControls.WindowsXPControls");
 	titleStyleName: "winXPTitleStyle";
-	
+
 	minimizeBtnStyleNameNoFocus: "mdiWindowMinimizeBtnNoFocus";
 	maximizeBtnStyleNameNoFocus: "mdiWindowMaximizeBtnNoFocus";
 	restoreBtnStyleNameNoFocus: "mdiWindowRestoreBtnNoFocus";
@@ -55,7 +55,7 @@ MDIWindow
 	cornerRadius: 5;
 	dropShadowEnabled: false;
 	headerHeight: 29;
-	backgroundAlpha: 1; 
+	backgroundAlpha: 1;
 	backgroundColor: #FFFFFF;
 	titleBackgroundSkin: Embed(source= "assets/swf/WindowsAssets.swf", symbol="headerBgDefault");
 }
@@ -72,10 +72,10 @@ MDIWindow
 	cornerRadius: 5;
 	dropShadowEnabled: false;
 	headerHeight: 29;
-	backgroundAlpha: 1; 
+	backgroundAlpha: 1;
 	backgroundColor: #FFFFFF;
 	titleBackgroundSkin: Embed(source= "assets/swf/WindowsAssets.swf", symbol="headerBgDefaultNoFocus");
-	
+
 }
 
 .mdiWindowMinimizeBtn

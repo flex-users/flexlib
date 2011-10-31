@@ -66,26 +66,26 @@ public class SliderHighlightSkin extends Border
 	{
 		return 2;
 	}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//  Overridden methods
 	//
 	//--------------------------------------------------------------------------
-	
+
     /**
 	 *  @private
 	 */
 	override protected function updateDisplayList(w:Number, h:Number):void
 	{
-		
+
 		super.updateDisplayList(w, h);
 
 		var themeColor:int = getStyle("themeColor");
-		
+
 		graphics.clear();
-		
-		
+
+
 		// Highlight
 		drawRoundRect(
 			0, h/2, w, 1, 0,
@@ -97,8 +97,8 @@ public class SliderHighlightSkin extends Border
 			0, h/2 - 2, w, 1, 0,
 			themeColor, 0.4);
 	}
-	
-	
+
+
 }
 
 }
