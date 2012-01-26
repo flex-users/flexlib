@@ -28,7 +28,9 @@ package flexlib.charts
   import flash.events.Event;
   import flash.events.MouseEvent;
   import flash.geom.Point;
-
+  
+  import flexlib.styles.StyleDeclarationHelper;
+  
   import mx.charts.chartClasses.ChartElement;
   import mx.core.EventPriority;
   import mx.core.FlexGlobals;
@@ -72,14 +74,16 @@ package flexlib.charts
     /** Initialize styles to default values */
     private static function classConstruct():Boolean
     {
-      if (!FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("HorizontalAxisDataSelector"))
+      if (!FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.charts.HorizontalAxisDataSelector")))
       {
         // If HorizontalAxisDataSelector has no CSS definition,
         // create one and set the default value.
         var newStyleDeclaration:CSSStyleDeclaration = new CSSStyleDeclaration();
         newStyleDeclaration.setStyle("selectorColor", 0xFF0000);
 
-        FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("HorizontalAxisDataSelector", newStyleDeclaration, true);
+        FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+			StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.charts.HorizontalAxisDataSelector"), 
+			newStyleDeclaration, true);
       }
       return true;
     }

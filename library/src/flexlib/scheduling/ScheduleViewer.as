@@ -31,16 +31,17 @@
  */
 package flexlib.scheduling
 {
+  import flash.events.Event;
+  import flash.events.MouseEvent;
+  
   import flexlib.scheduling.scheduleClasses.IScheduleEntry;
   import flexlib.scheduling.scheduleClasses.LayoutScrollEvent;
   import flexlib.scheduling.scheduleClasses.Schedule;
   import flexlib.scheduling.scheduleClasses.ScheduleNavigator;
   import flexlib.scheduling.scheduleClasses.layout.IEntryLayout;
   import flexlib.scheduling.scheduleClasses.schedule_internal;
-
-  import flash.events.Event;
-  import flash.events.MouseEvent;
-
+  import flexlib.styles.StyleDeclarationHelper;
+  
   import mx.collections.ArrayCollection;
   import mx.collections.ICollectionView;
   import mx.collections.IList;
@@ -256,7 +257,7 @@ package flexlib.scheduling
     // Define a static method to initialize the style.
     private static function classConstruct():Boolean
     {
-      if (!FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(".scheduleViewer"))
+      if (!FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.scheduling.ScheduleViewer")))
       {
         // If ScheduleViewer has no CSS definition,
         // create one and set the default value.
@@ -270,7 +271,9 @@ package flexlib.scheduling
         newStyleDeclaration.setStyle("verticalGridLineColor", 0x000000);
         newStyleDeclaration.setStyle("verticalGridLineAlpha", .5);
 
-        FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(".scheduleViewer", newStyleDeclaration, true);
+        FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+			StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.scheduling.ScheduleViewer"), 
+			newStyleDeclaration, true);
       }
       return true;
     }
