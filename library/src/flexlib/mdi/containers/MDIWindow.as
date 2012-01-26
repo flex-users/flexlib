@@ -31,16 +31,17 @@ package flexlib.mdi.containers
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuItem;
 	import flash.utils.getQualifiedClassName;
-
+	
 	import flexlib.mdi.events.MDIWindowEvent;
 	import flexlib.mdi.managers.MDIManager;
-
+	import flexlib.styles.StyleDeclarationHelper;
+	
 	import mx.containers.Canvas;
 	import mx.containers.Panel;
 	import mx.controls.Button;
 	import mx.core.Container;
-    import mx.core.FlexGlobals;
-    import mx.core.UIComponent;
+	import mx.core.FlexGlobals;
+	import mx.core.UIComponent;
 	import mx.core.UITextField;
 	import mx.core.mx_internal;
 	import mx.managers.CursorManager;
@@ -569,7 +570,10 @@ package flexlib.mdi.containers
 			//------------------------
 		    //  type selector
 		    //------------------------
-			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("MDIWindow");
+			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.mdi.containers.MDIWindow")
+			);
+			
 			if(!selector)
 			{
 				selector = new CSSStyleDeclaration();
@@ -744,7 +748,9 @@ package flexlib.mdi.containers
 			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("." + closeBtnStyleName, closeBtnSelector, false);
 
 			// apply it all
-			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("MDIWindow", selector, false);
+			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.mdi.containers.MDIWindow"), 
+				selector, false);
 
 			return true;
 		}

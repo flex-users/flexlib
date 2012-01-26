@@ -25,9 +25,10 @@ package flexlib.charts
     import flash.events.Event;
     import flash.events.MouseEvent;
     import flash.geom.Point;
-
+    
     import flexlib.charts.utils.GeomUtils;
-
+    import flexlib.styles.StyleDeclarationHelper;
+    
     import mx.collections.ArrayCollection;
     import mx.collections.ICollectionView;
     import mx.core.FlexGlobals;
@@ -136,7 +137,10 @@ package flexlib.charts
 
         private static function constructStyle():Boolean
         {
-            var style:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("DraggablePie");
+            var style:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.charts.DraggablePie")
+			);
+			
             if(style)
             {
                 if(style.getStyle("disabledAlpha") == undefined)
@@ -164,7 +168,10 @@ package flexlib.charts
                     this.lineColor = 0x333333;
                 };
             }
-            FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("DraggablePie",style,true);
+            FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.charts.DraggablePie")
+				,style,true);
+			
             return true;
         }
 

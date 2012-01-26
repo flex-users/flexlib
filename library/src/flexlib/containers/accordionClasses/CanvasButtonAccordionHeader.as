@@ -13,16 +13,18 @@ package flexlib.containers.accordionClasses
 import flash.display.DisplayObject;
 import flash.events.Event;
 import flash.events.MouseEvent;
+
+import flexlib.controls.CanvasButton;
+import flexlib.styles.StyleDeclarationHelper;
+
 import mx.core.Container;
 import mx.core.FlexGlobals;
 import mx.core.IDataRenderer;
 import mx.core.IFlexDisplayObject;
 import mx.core.mx_internal;
+import mx.skins.halo.AccordionHeaderSkin;
 import mx.styles.CSSStyleDeclaration;
 import mx.styles.ISimpleStyleClient;
-
-import flexlib.controls.CanvasButton;
-import mx.skins.halo.AccordionHeaderSkin;
 
 use namespace mx_internal;
 
@@ -139,7 +141,9 @@ public class CanvasButtonAccordionHeader extends CanvasButton implements IDataRe
 
 	private static function initializeStyles():void
 	{
-		var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("CanvasButtonAccordionHeader");
+		var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+			StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.accordionClasses.CanvasButtonAccordionHeader")
+		);
 
 		if(!selector)
 		{
@@ -165,8 +169,9 @@ public class CanvasButtonAccordionHeader extends CanvasButton implements IDataRe
 			this.upSkin = mx.skins.halo.AccordionHeaderSkin;
 		}
 
-		FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("CanvasButtonAccordionHeader", selector, false);
-
+		FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+			StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.accordionClasses.CanvasButtonAccordionHeader"), 
+			selector, false);
 	}
 
 	initializeStyles();

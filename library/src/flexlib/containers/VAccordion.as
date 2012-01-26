@@ -23,18 +23,19 @@ SOFTWARE.
 
 package flexlib.containers
 {
+	import flash.geom.Rectangle;
+	
 	import flexlib.baseClasses.AccordionBase;
 	import flexlib.containers.accordionClasses.AccordionHeaderLocation;
-
-	import flash.geom.Rectangle;
-
+	import flexlib.styles.StyleDeclarationHelper;
+	
 	import mx.controls.Button;
 	import mx.core.Container;
 	import mx.core.EdgeMetrics;
-    import mx.core.FlexGlobals;
-    import mx.core.IUIComponent;
-	import mx.core.mx_internal;
+	import mx.core.FlexGlobals;
+	import mx.core.IUIComponent;
 	import mx.core.UIComponent;
+	import mx.core.mx_internal;
 	import mx.styles.CSSStyleDeclaration;
 
 
@@ -55,7 +56,9 @@ package flexlib.containers
 
 		private static function initializeStyles():void
 		{
-			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("VAccordion");
+			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.VAccordion")
+			);
 
 			if(!selector)
 			{
@@ -74,7 +77,9 @@ package flexlib.containers
 				this.horizontalGap = -1;
 			}
 
-			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("VAccordion", selector, false);
+			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.VAccordion"), 
+				selector, false);
 
 		}
 

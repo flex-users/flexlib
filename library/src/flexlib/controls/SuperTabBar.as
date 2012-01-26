@@ -28,20 +28,21 @@ package flexlib.controls {
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-
+	
 	import flexlib.containers.SuperTabNavigator;
 	import flexlib.controls.tabBarClasses.SuperTab;
 	import flexlib.events.SuperTabEvent;
 	import flexlib.events.TabReorderEvent;
-
+	import flexlib.styles.StyleDeclarationHelper;
+	
 	import mx.collections.IList;
 	import mx.containers.ViewStack;
 	import mx.controls.Button;
 	import mx.controls.TabBar;
 	import mx.core.ClassFactory;
 	import mx.core.DragSource;
-    import mx.core.FlexGlobals;
-    import mx.core.IFlexDisplayObject;
+	import mx.core.FlexGlobals;
+	import mx.core.IFlexDisplayObject;
 	import mx.core.IUIComponent;
 	import mx.core.UIComponent;
 	import mx.core.mx_internal;
@@ -130,7 +131,9 @@ package flexlib.controls {
 
 		private static function initializeStyles():void
 		{
-			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("SuperTabBar");
+			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.controls.SuperTabBar")
+			);
 
 			if(!selector)
 			{
@@ -179,7 +182,9 @@ package flexlib.controls {
 
 			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("." + tabCloseStyleName, cSelector, false);
 
-			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("SuperTabBar", selector, false);
+			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.controls.SuperTabBar"), 
+				selector, false);
 		}
 
 		initializeStyles();

@@ -29,13 +29,15 @@ package flexlib.controls
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
-
+	
+	import flexlib.styles.StyleDeclarationHelper;
+	
 	import mx.controls.Button;
 	import mx.controls.Menu;
 	import mx.controls.scrollClasses.ScrollBar;
 	import mx.core.Application;
-    import mx.core.FlexGlobals;
-    import mx.core.ScrollPolicy;
+	import mx.core.FlexGlobals;
+	import mx.core.ScrollPolicy;
 	import mx.core.mx_internal;
 	import mx.events.ScrollEvent;
 	import mx.styles.CSSStyleDeclaration;
@@ -163,7 +165,9 @@ package flexlib.controls
 		 */
 		private static function initializeStyles():void
 		{
-			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("ScrollableArrowMenu");
+			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.controls.ScrollableArrowMenu")
+			);
 
 			if(!selector)
 			{
@@ -176,7 +180,9 @@ package flexlib.controls
 				this.downButtonStyleName = "downButton";
 			}
 
-			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("ScrollableArrowMenu", selector, false);
+			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.controls.ScrollableArrowMenu"), 
+				selector, false);
 
 
 
