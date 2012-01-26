@@ -25,9 +25,10 @@ package flexlib.controls
 {
   import flash.display.Graphics;
   import flash.events.MouseEvent;
-
+  
   import flexlib.events.ImageMapEvent;
-
+  import flexlib.styles.StyleDeclarationHelper;
+  
   import mx.controls.Image;
   import mx.core.FlexGlobals;
   import mx.core.UIComponent;
@@ -190,12 +191,16 @@ package flexlib.controls
     private static function initStyles():Boolean
     {
       var sd:CSSStyleDeclaration =
-        FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("ImageMap");
+        FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+			StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.controls.ImageMap")
+		);
 
       if (!sd)
       {
         sd = new CSSStyleDeclaration();
-        FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("ImageMap", sd, false);
+        FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+			StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.controls.ImageMap"), 
+			sd, false);
       }
 
       sd.defaultFactory = function():void

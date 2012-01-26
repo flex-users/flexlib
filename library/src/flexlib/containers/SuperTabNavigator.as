@@ -27,14 +27,15 @@ package flexlib.containers
   import flash.display.DisplayObject;
   import flash.events.Event;
   import flash.events.MouseEvent;
-
+  
   import flexlib.controls.ScrollableArrowMenu;
   import flexlib.controls.SuperTabBar;
   import flexlib.controls.tabBarClasses.SuperTab;
   import flexlib.events.SuperTabEvent;
   import flexlib.events.TabReorderEvent;
   import flexlib.skins.TabPopUpButtonSkin;
-
+  import flexlib.styles.StyleDeclarationHelper;
+  
   import mx.collections.ArrayCollection;
   import mx.collections.IList;
   import mx.containers.Box;
@@ -500,7 +501,9 @@ package flexlib.containers
      */
     private static function initializeStyles():void
     {
-      var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("SuperTabNavigator");
+      var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+		  StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.SuperTabNavigator")
+	  );
 
       if (!selector)
       {
@@ -615,7 +618,9 @@ package flexlib.containers
 
 
 
-      FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("SuperTabNavigator", selector, false);
+      FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+		  StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.SuperTabNavigator"), 
+		  selector, false);
 
 
     }

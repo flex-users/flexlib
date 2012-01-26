@@ -28,11 +28,13 @@ package flexlib.containers
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
-
+	
+	import flexlib.styles.StyleDeclarationHelper;
+	
 	import mx.containers.Canvas;
 	import mx.controls.Button;
-    import mx.core.FlexGlobals;
-    import mx.core.ScrollPolicy;
+	import mx.core.FlexGlobals;
+	import mx.core.ScrollPolicy;
 	import mx.styles.CSSStyleDeclaration;
 
 
@@ -114,7 +116,9 @@ package flexlib.containers
 		 */
 		private static function initializeStyles():void
 		{
-			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("ButtonScrollingCanvas");
+			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.ButtonScrollingCanvas")
+			);
 
 			if(!selector)
 			{
@@ -129,7 +133,9 @@ package flexlib.containers
 				this.rightButtonStyleName = "rightButton";
 			}
 
-			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("ButtonScrollingCanvas", selector, false);
+			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.ButtonScrollingCanvas"), 
+				selector, false);
 
 
 
