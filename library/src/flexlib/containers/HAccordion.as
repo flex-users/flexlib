@@ -23,21 +23,21 @@ SOFTWARE.
 
 package flexlib.containers
 {
-	import flexlib.baseClasses.AccordionBase;
-
 	import flash.geom.Rectangle;
-
+	
+	import flexlib.baseClasses.AccordionBase;
+	import flexlib.containers.accordionClasses.AccordionHeaderLocation;
+	import flexlib.styles.StyleDeclarationHelper;
+	
 	import mx.controls.Button;
 	import mx.core.Container;
 	import mx.core.EdgeMetrics;
-    import mx.core.FlexGlobals;
-    import mx.core.IUIComponent;
+	import mx.core.FlexGlobals;
+	import mx.core.IUIComponent;
 	import mx.core.UIComponent;
 	import mx.core.mx_internal;
 	import mx.effects.Tween;
 	import mx.styles.CSSStyleDeclaration;
-
-	import flexlib.containers.accordionClasses.AccordionHeaderLocation;
 
 	use namespace mx_internal;
 
@@ -62,7 +62,9 @@ package flexlib.containers
 	{
 		private static function initializeStyles():void
 		{
-			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("HAccordion");
+			var selector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.HAccordion")
+			);
 
 			if(!selector)
 			{
@@ -81,7 +83,9 @@ package flexlib.containers
 				this.horizontalGap = -1;
 			}
 
-			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("HAccordion", selector, false);
+			FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.HAccordion"), 
+				selector, false);
 
 		}
 

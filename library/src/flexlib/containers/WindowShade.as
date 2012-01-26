@@ -22,20 +22,21 @@ SOFTWARE.
 */
 package flexlib.containers {
 	import flash.events.MouseEvent;
-    import flexlib.events.WindowShadeEvent;
-
+	
+	import flexlib.events.WindowShadeEvent;
+	import flexlib.styles.StyleDeclarationHelper;
+	
 	import mx.controls.Button;
 	import mx.core.EdgeMetrics;
-    import mx.core.FlexGlobals;
-    import mx.core.IFactory;
+	import mx.core.FlexGlobals;
+	import mx.core.IFactory;
 	import mx.core.LayoutContainer;
 	import mx.core.ScrollPolicy;
 	import mx.effects.Resize;
-    import mx.effects.effectClasses.ResizeInstance;
-    import mx.events.EffectEvent;
-    import mx.events.PropertyChangeEvent;
+	import mx.effects.effectClasses.ResizeInstance;
+	import mx.events.EffectEvent;
+	import mx.events.PropertyChangeEvent;
 	import mx.styles.CSSStyleDeclaration;
-
 	import mx.utils.StringUtil;
 
     /**
@@ -171,7 +172,10 @@ package flexlib.containers {
 
         private static function constructClass():Boolean {
 
-            var css:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("WindowShade")
+            var css:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration(
+				StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.WindowShade")
+			);
+			
             var changed:Boolean = false;
             if(!css) {
                 // If there is no CSS definition for WindowShade,
@@ -189,7 +193,9 @@ package flexlib.containers {
             }
 
             if(changed) {
-                FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("WindowShade", css, true);
+                FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration(
+					StyleDeclarationHelper.getStyleSelectorForClassName("flexlib.containers.WindowShade"), 
+					css, true);
             }
 
             return true;
