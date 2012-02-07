@@ -362,19 +362,6 @@ package flexlib.controls
 
     /**
      * @private
-     * I don't know why UIComponent doesn't have a removeAllChildren() method, but this
-     * method just does that, removes all children of the areaHolder.
-     */
-    private function removeChildren():void
-    {
-      while (areaHolder.numChildren > 0)
-      {
-        areaHolder.removeChildAt(0);
-      }
-    }
-
-    /**
-     * @private
      * We're basically re-creating the functionality of all the mouse events. But we need
      * to dispatch our custom ImageMapEvent so we can pass back the link information as well
      * as the basic mouse event info. So I've recreated the click, double-click, down, up, over,
