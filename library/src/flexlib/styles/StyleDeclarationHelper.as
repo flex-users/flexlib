@@ -24,7 +24,7 @@ package flexlib.styles
 		 * Gets the style selector for the specified class name.
 		 * 
 		 * Starting in Flex 4, component selectors passed to StyleManager.getStyleDeclaration and StyleManager.setStyleDeclaration
-		 * must be fully qualified class names. In versions of Flex < 4, the class name itself was used.
+		 * must be fully qualified class names. In versions of Flex &lt; 4, the class name itself was used.
 		 * 
 		 * @see http://flexdevtips.blogspot.com/2009/03/setting-default-styles-for-custom.html
 		 * 
