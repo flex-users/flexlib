@@ -23,7 +23,7 @@
 @namespace mx "library://ns.adobe.com/flex/mx";
 @namespace flexlib "http://code.google.com/p/flexlib/";
 
-flexlib|HAccordion
+flexlib|flexlib.containers.HAccordion
 		{
 			backgroundColor: #FFFFFF;
 			borderStyle: "solid";
@@ -37,7 +37,7 @@ flexlib|HAccordion
 			textAlign: "right";
 		}
 
-flexlib|VAccordion
+flexlib|flexlib.containers.VAccordion
 		{
 			backgroundColor: #FFFFFF;
 			borderStyle: "solid";
@@ -57,7 +57,7 @@ flexlib|VAccordion
 		//------------------------------
 		*/
 
-flexlib|AccordionHeader
+flexlib.containers.AccordionHeader
 		{
 		/*	selectedFillColors: #FFFFFF, #FFFFFF; */ /* overrides the calculated fillcolors */
 
