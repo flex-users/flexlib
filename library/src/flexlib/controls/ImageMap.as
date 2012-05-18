@@ -257,7 +257,7 @@ package flexlib.controls
      */
     private function drawShapes():void
     {
-      removeAllChildren();
+      removeChildren();
 
       //TODO: this shouldn't be hardcoded...
       // for some reason, flex4 won't pickup the outlineThickness style,
@@ -358,18 +358,6 @@ package flexlib.controls
 
       //got to remember to reconnect from the last point to the first point
       g.lineTo(coords[0], coords[1]);
-    }
-
-    /**
-     * @private
-     * Removes all children of the areaHolder.
-     */
-    private function removeAllChildren():void
-    {
-      while (areaHolder.numChildren > 0)
-      {
-        areaHolder.removeChildAt(0);
-      }
     }
 
     /**
