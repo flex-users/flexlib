@@ -257,7 +257,7 @@ package flexlib.controls
      */
     private function drawShapes():void
     {
-      removeChildren();
+      removeAllChildren();
 
       //TODO: this shouldn't be hardcoded...
       // for some reason, flex4 won't pickup the outlineThickness style,
@@ -362,10 +362,9 @@ package flexlib.controls
 
     /**
      * @private
-     * I don't know why UIComponent doesn't have a removeAllChildren() method, but this
-     * method just does that, removes all children of the areaHolder.
+     * Removes all children of the areaHolder.
      */
-    private function removeChildren():void
+    private function removeAllChildren():void
     {
       while (areaHolder.numChildren > 0)
       {
