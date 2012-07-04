@@ -4,34 +4,7 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="absolute" creationComplete="initApp()">
     <mx:Style>
-        
-        @font-face{
-            src:local("Times New Roman");
-            fontFamily:myFont;
-            advancedAntiAliasing:true;
-            fontWeight:normal;
-            fontStyle:normal;
-        }
-        
-        @font-face{
-            src:local("Times New Roman");
-            fontFamily:myFont;
-            advancedAntiAliasing:true;
-            fontWeight:bold;
-            fontStyle:normal;
-        }
-        
-        @font-face{
-            src:local("Times New Roman");
-            fontFamily:myFont;
-            advancedAntiAliasing:true;
-            fontWeight:normal;
-            fontStyle:italic;
-        }
-        
-        
         .Document{
-            fontFamily:myFont;
             fontSize:14pt;
             paddingLeft:50px;
             paddingRight:50px;
@@ -96,26 +69,22 @@
                 });
                 
                 styles.setStyle("h1",{
-                    fontFamily:"myFont",
                     fontSize:18,
                     fontWeight:"bold",
                     textAlign:"center"
                 });
                 
                 styles.setStyle("h2",{
-                    fontFamily:"myFont",
                     fontSize:16,
                     fontWeight:"bold"
                 });
                 
                 styles.setStyle("h3",{
-                    fontFamily:"myFont",
                     fontSize:14,
                     fontWeight:"bold"
                 });
                 
                 styles.setStyle("p",{
-                    fontFamily:"myFont",
                     fontSize:12,
                     textIndent:30
                 });
