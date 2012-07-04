@@ -27,23 +27,8 @@
                 xmlns:mx="library://ns.adobe.com/flex/mx">
 
   <fx:Style source="AccordionDefaults.css" />
-  <fx:Script>
-    <![CDATA[
-      import mx.containers.Accordion;
-      /* We have to embed a font for the VAccordion. Without doing this the
-       * labels that are rotated will be invisible. In AccordionDefaults.css
-       * we reference the bolded font named 'accordionHeader' so that needs
-       * to match here. */
-      [Embed(systemFont="Arial", fontWeight="bold", fontName='accordionHeader', mimeType='application/x-font',
-        advancedAntiAliasing='true')]
-      private var font1:Class;
-    ]]>
-  </fx:Script>
-
-
 
   <s:VGroup width="100%" height="100%">
-
 
     <s:Panel title="HAccordion"
              height="100%"
