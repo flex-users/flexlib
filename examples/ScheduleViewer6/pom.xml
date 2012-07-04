@@ -26,10 +26,10 @@
   <parent>
     <groupId>com.google.code.flexlib</groupId>
     <artifactId>flexlib-examples</artifactId>
-    <version>2.6-M3</version>
+    <version>2.6-SNAPSHOT</version>
   </parent>
   <artifactId>flexlib-example-scheduleviewer6</artifactId>
-  <version>2.6-M3</version>
+  <version>2.6-SNAPSHOT</version>
   <packaging>swf</packaging>
   <name>flexlib :: examples :: ScheduleViewer 6</name>
 
