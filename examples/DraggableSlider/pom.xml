@@ -26,10 +26,10 @@
   <parent>
     <groupId>com.google.code.flexlib</groupId>
     <artifactId>flexlib-examples</artifactId>
-    <version>2.6-M3-SNAPSHOT</version>
+    <version>2.6-M3</version>
   </parent>
   <artifactId>flexlib-example-draggableslider</artifactId>
-  <version>2.6-M3-SNAPSHOT</version>
+  <version>2.6-M3</version>
   <packaging>swf</packaging>
   <name>flexlib :: examples :: DraggableSlider</name>
 
