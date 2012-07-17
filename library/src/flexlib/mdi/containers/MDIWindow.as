@@ -59,7 +59,7 @@ package flexlib.mdi.containers
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.MINIMIZE
 	 */
-	[Event(name="minimize", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="minimizeMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  If the window is minimized, this event is dispatched when the titleBar is clicked.
@@ -68,7 +68,7 @@ package flexlib.mdi.containers
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.RESTORE
 	 */
-	[Event(name="restore", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="restoreMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the maximize button is clicked or when the window is in a
@@ -76,70 +76,70 @@ package flexlib.mdi.containers
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.MAXIMIZE
 	 */
-	[Event(name="maximize", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="maximizeMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the close button is clicked.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.CLOSE
 	 */
-	[Event(name="close", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="closeMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the window gains focus and is given topmost z-index of MDIManager's children.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.FOCUS_START
 	 */
-	[Event(name="focusStart", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="focusStartMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the window loses focus and no longer has topmost z-index of MDIManager's children.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.FOCUS_END
 	 */
-	[Event(name="focusEnd", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="focusEndMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the window starts being dragged.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.DRAG_START
 	 */
-	[Event(name="dragStart", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="dragStartMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched while the window is being dragged.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.DRAG
 	 */
-	[Event(name="drag", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="dragMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the window stops being dragged.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.DRAG_END
 	 */
-	[Event(name="dragEnd", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="dragEndMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when a resize handle is pressed.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.RESIZE_START
 	 */
-	[Event(name="resizeStart", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="resizeStartMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched while the mouse is down on a resize handle.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.RESIZE
 	 */
-	[Event(name="resize", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="resizeMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the mouse is released from a resize handle.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.RESIZE_END
 	 */
-	[Event(name="resizeEnd", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="resizeEndMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 
 	//--------------------------------------
