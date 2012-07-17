@@ -26,10 +26,12 @@ package flexlib.mdi.containers
 	import flash.display.DisplayObject;
 	import flash.events.ContextMenuEvent;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuItem;
+	import flash.ui.Keyboard;
 	import flash.utils.getQualifiedClassName;
 	
 	import flexlib.mdi.events.MDIWindowEvent;
@@ -46,7 +48,6 @@ package flexlib.mdi.containers
 	import mx.core.mx_internal;
 	import mx.managers.CursorManager;
 	import mx.styles.CSSStyleDeclaration;
-
 
 
 	//--------------------------------------
@@ -764,6 +765,8 @@ package flexlib.mdi.containers
 			minWidth = minHeight = width = height = 200;
 			windowState = MDIWindowState.NORMAL;
 			doubleClickEnabled = true;
+
+			this.addEventListener(KeyboardEvent.KEY_DOWN, arrowKeyPress);
 
 			windowControls = new MDIWindowControlsContainer();
 			updateContextMenu();
@@ -1808,6 +1811,85 @@ package flexlib.mdi.containers
 					this.windowManager.showAllWindows();
 				break;
 
+			}
+		}
+		
+		// This event is called when a key is pressed and anything in the MDIWindow has focus
+		private function arrowKeyPress(event:KeyboardEvent):void
+		{
+			dragAmountX = 5; // adjust by 5 pixels(?) at a time
+			dragAmountY = 5;
+
+			// only resize if only the ctrl key is clicked
+			if(windowState == MDIWindowState.NORMAL && resizable && event.ctrlKey && !event.shiftKey && !event.altKey)
+			{
+				savePanel();
+
+				switch(event.keyCode)
+				{
+					case Keyboard.UP:
+						dragAmountX = 0;
+						break;
+					case Keyboard.DOWN:
+						dragAmountX = 0;
+						dragAmountY *= -1;
+						break;
+					case Keyboard.RIGHT:
+						dragAmountX *= -1;
+						dragAmountY = 0;
+						break;
+					case Keyboard.LEFT:
+						dragAmountY = 0;
+						break;
+					default:
+						dragAmountX = 0;
+						dragAmountY = 0;
+				}
+				
+				if (dragAmountX != 0 || dragAmountY !=0) // only resize if an arrow key was pressed
+				{
+					this.height = Math.max(savedWindowRect.height - dragAmountY, minHeight);
+					this.width = Math.max(savedWindowRect.width - dragAmountX, minWidth);
+					dispatchEvent(new MDIWindowEvent(MDIWindowEvent.RESIZE_END, this));
+				}
+			}
+			else if (windowState == MDIWindowState.NORMAL && draggable && !event.ctrlKey && event.shiftKey && !event.altKey)
+			{
+				switch(event.keyCode) 
+				{
+					case Keyboard.UP:
+						dragAmountX = 0;
+						break;
+					case Keyboard.DOWN:
+						dragAmountX = 0;
+						dragAmountY *= -1;
+						break;
+					case Keyboard.RIGHT:
+						dragAmountX *= -1;
+						dragAmountY = 0;
+						break;
+					case Keyboard.LEFT:
+						dragAmountY = 0;
+						break;
+					default:
+						dragAmountX = 0;
+						dragAmountY = 0;
+				}
+				
+				if (dragAmountX != 0 || dragAmountY !=0) // only move if an arrow key was pressed
+				{
+					if(windowManager.enforceBoundaries)
+					{
+						x = Math.max( 0, Math.min( parent.width - this.width, this.x - dragAmountX ) );
+						y = Math.max( 0, Math.min( parent.height - this.height, this.y - dragAmountY ) );
+					}
+					else
+					{
+						x = this.x - dragAmountX;
+						y = this.y - dragAmountY;
+					}
+					dispatchEvent(new MDIWindowEvent(MDIWindowEvent.DRAG_END, this));
+				}
 			}
 		}
 	}

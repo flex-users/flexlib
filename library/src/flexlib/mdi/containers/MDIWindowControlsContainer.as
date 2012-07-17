@@ -60,7 +60,7 @@ package flexlib.mdi.containers
 			if(!minimizeBtn)
 			{
 				minimizeBtn = new Button();
-				minimizeBtn.toolTip = "Minimize";
+				minimizeBtn.toolTip = "Minimize"; // added by Chad for screen reading
 				minimizeBtn.buttonMode = true;
 				addChild(minimizeBtn);
 			}
@@ -68,7 +68,7 @@ package flexlib.mdi.containers
 			if(!maximizeRestoreBtn)
 			{
 				maximizeRestoreBtn = new Button();
-				maximizeRestoreBtn.toolTip = "Maximize";
+				maximizeRestoreBtn.toolTip = "Maximize"; // added by Chad for screen reading
 				maximizeRestoreBtn.buttonMode = true;
 				addChild(maximizeRestoreBtn);
 			}
@@ -76,7 +76,7 @@ package flexlib.mdi.containers
 			if(!closeBtn)
 			{
 				closeBtn = new Button();
-				closeBtn.toolTip = "Close";
+				closeBtn.toolTip = "Close"; // added by Chad for screen reading
 				closeBtn.buttonMode = true;
 				addChild(closeBtn);
 			}
