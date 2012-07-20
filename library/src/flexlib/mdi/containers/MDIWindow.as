@@ -26,6 +26,7 @@ package flexlib.mdi.containers
 	import flash.display.DisplayObject;
 	import flash.events.ContextMenuEvent;
 	import flash.events.Event;
+	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
@@ -34,11 +35,12 @@ package flexlib.mdi.containers
 	import flash.ui.Keyboard;
 	import flash.utils.getQualifiedClassName;
 	
+	import flexlib.mdi.containers.FocusableCanvas;
 	import flexlib.mdi.events.MDIWindowEvent;
 	import flexlib.mdi.managers.MDIManager;
 	import flexlib.styles.StyleDeclarationHelper;
 	
-	import mx.containers.Canvas;
+	import mx.binding.utils.BindingUtils;
 	import mx.containers.Panel;
 	import mx.controls.Button;
 	import mx.core.Container;
@@ -457,7 +459,7 @@ package flexlib.mdi.containers
 		 * Invisible shape laid over titlebar to prevent funkiness from clicking in title textfield.
 		 * Making it public gives child components like controls container access to size of titleBar.
 		 */
-		public var titleBarOverlay:Canvas;
+		public var titleBarOverlay:FocusableCanvas;
 
 		/**
 		 * @private
@@ -795,11 +797,12 @@ package flexlib.mdi.containers
 
 			if(!titleBarOverlay)
 			{
-				titleBarOverlay = new Canvas();
+				titleBarOverlay = new FocusableCanvas();
 				titleBarOverlay.width = this.width;
 				titleBarOverlay.height = this.titleBar.height;
 				titleBarOverlay.alpha = 0;
 				titleBarOverlay.setStyle("backgroundColor", 0x000000);
+				BindingUtils.bindProperty(titleBarOverlay, "toolTip", this, "title");
 				rawChildren.addChild(titleBarOverlay);
 			}
 
@@ -1301,6 +1304,9 @@ package flexlib.mdi.containers
 			// clicking anywhere brings window to front
 			addEventListener(MouseEvent.MOUSE_DOWN, bringToFrontProxy);
 			contextMenu.addEventListener(ContextMenuEvent.MENU_SELECT, bringToFrontProxy);
+			
+			// gaining focus on any element in the window brings it to the front
+			this.addEventListener(FocusEvent.FOCUS_IN, bringToFrontProxy);
 		}
 
 		/**
