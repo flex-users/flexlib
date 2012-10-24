@@ -45,7 +45,6 @@ package flexlib.containers
   import mx.containers.ViewStack;
   import mx.controls.Menu;
   import mx.controls.PopUpButton;
-  import mx.core.Container;
   import mx.core.EdgeMetrics;
   import mx.core.FlexGlobals;
   import mx.core.INavigatorContent;
