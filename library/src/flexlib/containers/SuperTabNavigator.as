@@ -48,6 +48,7 @@ package flexlib.containers
   import mx.core.Container;
   import mx.core.EdgeMetrics;
   import mx.core.FlexGlobals;
+  import mx.core.INavigatorContent;
   import mx.core.ScrollPolicy;
   import mx.effects.Tween;
   import mx.events.ChildExistenceChangedEvent;
@@ -1177,7 +1178,7 @@ package flexlib.containers
 
       for (var i:int = 0; i < this.numChildren; i++)
       {
-        var child:Container = this.getChildAt(i) as Container;
+        var child:INavigatorContent = INavigatorContent(this.getChildAt(i));
 
         var obj:Object = new Object();
         //setting the type to an empty string bypasses a bug in MenuItemRenderer (or in
