@@ -41,6 +41,7 @@ package flexlib.mdi.containers
 	import flexlib.styles.StyleDeclarationHelper;
 	
 	import mx.binding.utils.BindingUtils;
+	import mx.containers.Canvas;
 	import mx.containers.Panel;
 	import mx.controls.Button;
 	import mx.core.Container;
@@ -394,49 +395,49 @@ package flexlib.mdi.containers
 	     *
 	     * Resize handle for top edge of window.
 	     */
-		private var resizeHandleTop:Button;
+		private var resizeHandleTop:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for right edge of window.
 	     */
-		private var resizeHandleRight:Button;
+		private var resizeHandleRight:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for bottom edge of window.
 	     */
-		private var resizeHandleBottom:Button;
+		private var resizeHandleBottom:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for left edge of window.
 	     */
-		private var resizeHandleLeft:Button;
+		private var resizeHandleLeft:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for top left corner of window.
 	     */
-		private var resizeHandleTL:Button;
+		private var resizeHandleTL:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for top right corner of window.
 	     */
-		private var resizeHandleTR:Button;
+		private var resizeHandleTR:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for bottom right corner of window.
 	     */
-		private var resizeHandleBR:Button;
+		private var resizeHandleBR:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for bottom left corner of window.
 	     */
-		private var resizeHandleBL:Button;
+		private var resizeHandleBL:Canvas;
 
 		/**
 		 * Resize handle currently in use.
@@ -809,7 +810,7 @@ package flexlib.mdi.containers
 			// edges
 			if(!resizeHandleTop)
 			{
-				resizeHandleTop = new Button();
+				resizeHandleTop = new Canvas();
 				resizeHandleTop.x = cornerHandleSize * .5;
 				resizeHandleTop.y = -(edgeHandleSize * .5);
 				resizeHandleTop.height = edgeHandleSize;
@@ -820,7 +821,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleRight)
 			{
-				resizeHandleRight = new Button();
+				resizeHandleRight = new Canvas();
 				resizeHandleRight.y = cornerHandleSize * .5;
 				resizeHandleRight.width = edgeHandleSize;
 				resizeHandleRight.alpha = 0;
@@ -830,7 +831,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleBottom)
 			{
-				resizeHandleBottom = new Button();
+				resizeHandleBottom = new Canvas();
 				resizeHandleBottom.x = cornerHandleSize * .5;
 				resizeHandleBottom.height = edgeHandleSize;
 				resizeHandleBottom.alpha = 0;
@@ -840,7 +841,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleLeft)
 			{
-				resizeHandleLeft = new Button();
+				resizeHandleLeft = new Canvas();
 				resizeHandleLeft.x = -(edgeHandleSize * .5);
 				resizeHandleLeft.y = cornerHandleSize * .5;
 				resizeHandleLeft.width = edgeHandleSize;
@@ -852,7 +853,7 @@ package flexlib.mdi.containers
 			// corners
 			if(!resizeHandleTL)
 			{
-				resizeHandleTL = new Button();
+				resizeHandleTL = new Canvas();
 				resizeHandleTL.x = resizeHandleTL.y = -(cornerHandleSize * .3);
 				resizeHandleTL.width = resizeHandleTL.height = cornerHandleSize;
 				resizeHandleTL.alpha = 0;
@@ -862,7 +863,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleTR)
 			{
-				resizeHandleTR = new Button();
+				resizeHandleTR = new Canvas();
 				resizeHandleTR.width = resizeHandleTR.height = cornerHandleSize;
 				resizeHandleTR.alpha = 0;
 				resizeHandleTR.focusEnabled = false;
@@ -871,7 +872,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleBR)
 			{
-				resizeHandleBR = new Button();
+				resizeHandleBR = new Canvas();
 				resizeHandleBR.width = resizeHandleBR.height = cornerHandleSize;
 				resizeHandleBR.alpha = 0;
 				resizeHandleBR.focusEnabled = false;
@@ -880,7 +881,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleBL)
 			{
-				resizeHandleBL = new Button();
+				resizeHandleBL = new Canvas();
 				resizeHandleBL.width = resizeHandleBL.height = cornerHandleSize;
 				resizeHandleBL.alpha = 0;
 				resizeHandleBL.focusEnabled = false;
@@ -1306,6 +1307,7 @@ package flexlib.mdi.containers
 			contextMenu.addEventListener(ContextMenuEvent.MENU_SELECT, bringToFrontProxy);
 			
 			// gaining focus on any element in the window brings it to the front
+			// Could be improved to look for focusManager's lastfocused item
 			this.addEventListener(FocusEvent.FOCUS_IN, bringToFrontProxy);
 		}
 
@@ -1338,7 +1340,7 @@ package flexlib.mdi.containers
 		{
 			windowManager.bringToFront(this);
 		}
-
+		
 		/**
 		 *  Minimize the window.
 		 */
@@ -1478,7 +1480,7 @@ package flexlib.mdi.containers
 		/**
 		 * Gives MDIResizeHandle value for a given resize handle button
 		 */
-		private function resizeHandleForButton( button:Button ):String
+		private function resizeHandleForButton( button:Canvas ):String
 		{
 			if( button == resizeHandleLeft )
 				return MDIResizeHandle.LEFT;
@@ -1507,7 +1509,7 @@ package flexlib.mdi.containers
 		{
 			if(windowState == MDIWindowState.NORMAL && resizable)
 			{
-				currentResizeHandle = resizeHandleForButton(event.target as Button);
+				currentResizeHandle = resizeHandleForButton(event.target as Canvas);
 				setCursor(currentResizeHandle);
 				dragStartMouseX = parent.mouseX;
 				dragStartMouseY = parent.mouseY;
@@ -1671,7 +1673,7 @@ package flexlib.mdi.containers
 			// event.buttonDown is to detect being dragged over
 			if(windowState == MDIWindowState.NORMAL && resizable && !event.buttonDown)
 			{
-				setCursor(resizeHandleForButton(event.target as Button));
+				setCursor(resizeHandleForButton(event.target as Canvas));
 			}
 		}
 
