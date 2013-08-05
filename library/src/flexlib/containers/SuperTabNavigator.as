@@ -856,7 +856,12 @@ package flexlib.containers
 
       if (sourceBar != tabBar)
       {
-        if (curDataProvider is IList)
+        if (curDataProvider is ViewStack)
+        {
+          child = (curDataProvider as ViewStack).getChildAt(event.oldIndex);
+          curDataProvider.removeChildAt(event.oldIndex);
+        }
+        else if (curDataProvider is IList)
         {
           child = (curDataProvider as IList).getItemAt(event.oldIndex);
           curDataProvider.removeItemAt(event.oldIndex);
@@ -877,11 +882,6 @@ package flexlib.containers
           }
 
           child = newChild;
-        }
-        else if (curDataProvider is ViewStack)
-        {
-          child = (curDataProvider as ViewStack).getChildAt(event.oldIndex);
-          curDataProvider.removeChildAt(event.oldIndex);
         }
 
         if (child is DisplayObject)
