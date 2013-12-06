@@ -1839,7 +1839,7 @@ package flexlib.mdi.containers
 			dragAmountY = 5;
 
 			// only resize if only the ctrl key is clicked
-			if(windowState == MDIWindowState.NORMAL && resizableByKeypress && event.ctrlKey && !event.shiftKey && !event.altKey)
+			if(windowState == MDIWindowState.NORMAL && resizable && resizableByKeypress && event.ctrlKey && !event.shiftKey && !event.altKey)
 			{
 				savePanel();
 
@@ -1871,7 +1871,7 @@ package flexlib.mdi.containers
 					dispatchEvent(new MDIWindowEvent(MDIWindowEvent.RESIZE_END, this));
 				}
 			}
-			else if (windowState == MDIWindowState.NORMAL && draggableByKeypress && !event.ctrlKey && event.shiftKey && !event.altKey)
+			else if (windowState == MDIWindowState.NORMAL && draggable && draggableByKeypress && !event.ctrlKey && event.shiftKey && !event.altKey)
 			{
 				switch(event.keyCode) 
 				{
