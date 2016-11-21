@@ -257,7 +257,7 @@ package flexlib.controls
      */
     private function drawShapes():void
     {
-      removeChildren();
+      //removeChildren();
 
       //TODO: this shouldn't be hardcoded...
       // for some reason, flex4 won't pickup the outlineThickness style,
