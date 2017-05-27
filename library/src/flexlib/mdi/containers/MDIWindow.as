@@ -1100,7 +1100,7 @@ package flexlib.mdi.containers
 				}
 			}
 			// add type selector (created in classConstruct so we know it exists)
-			var typeSelector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("MDIWindow");
+			var typeSelector:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("flexlib.mdi.containers.MDIWindow");
 			selectorList.push(typeSelector);
 
 			return selectorList;
