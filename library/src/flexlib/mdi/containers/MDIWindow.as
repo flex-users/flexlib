@@ -391,12 +391,12 @@ package flexlib.mdi.containers
 		public var draggable:Boolean = true;
 		
 		/**
-		 * Flag determining whether or not this window is resizeable by hotkey (ctrl-<arrow>).
+		 * Flag determining whether or not this window is resizeable by hotkey (ctrl+arrow).
 		 */
 		public var resizableByKeypress:Boolean = true;
 		
 		/**
-		 * Flag determining whether or not this window is draggable by hotkey (shift-<arrow>).
+		 * Flag determining whether or not this window is draggable by hotkey (shift+arrow).
 		 */
 		public var draggableByKeypress:Boolean = true;
 		
