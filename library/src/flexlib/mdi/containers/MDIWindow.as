@@ -389,7 +389,17 @@ package flexlib.mdi.containers
 		 * Flag determining whether or not this window is draggable.
 		 */
 		public var draggable:Boolean = true;
-
+		
+		/**
+		 * Flag determining whether or not this window is resizeable by hotkey (ctrl-<arrow>).
+		 */
+		public var resizableByKeypress:Boolean = true;
+		
+		/**
+		 * Flag determining whether or not this window is draggable by hotkey (shift-<arrow>).
+		 */
+		public var draggableByKeypress:Boolean = true;
+		
 		/**
 	     * @private
 	     *
@@ -1829,7 +1839,7 @@ package flexlib.mdi.containers
 			dragAmountY = 5;
 
 			// only resize if only the ctrl key is clicked
-			if(windowState == MDIWindowState.NORMAL && resizable && event.ctrlKey && !event.shiftKey && !event.altKey)
+			if(windowState == MDIWindowState.NORMAL && resizable && resizableByKeypress && event.ctrlKey && !event.shiftKey && !event.altKey)
 			{
 				savePanel();
 
@@ -1861,7 +1871,7 @@ package flexlib.mdi.containers
 					dispatchEvent(new MDIWindowEvent(MDIWindowEvent.RESIZE_END, this));
 				}
 			}
-			else if (windowState == MDIWindowState.NORMAL && draggable && !event.ctrlKey && event.shiftKey && !event.altKey)
+			else if (windowState == MDIWindowState.NORMAL && draggable && draggableByKeypress && !event.ctrlKey && event.shiftKey && !event.altKey)
 			{
 				switch(event.keyCode) 
 				{
