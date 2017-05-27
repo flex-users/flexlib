@@ -26,16 +26,21 @@ package flexlib.mdi.containers
 	import flash.display.DisplayObject;
 	import flash.events.ContextMenuEvent;
 	import flash.events.Event;
+	import flash.events.FocusEvent;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuItem;
+	import flash.ui.Keyboard;
 	import flash.utils.getQualifiedClassName;
 	
+	import flexlib.mdi.containers.FocusableCanvas;
 	import flexlib.mdi.events.MDIWindowEvent;
 	import flexlib.mdi.managers.MDIManager;
 	import flexlib.styles.StyleDeclarationHelper;
 	
+	import mx.binding.utils.BindingUtils;
 	import mx.containers.Canvas;
 	import mx.containers.Panel;
 	import mx.controls.Button;
@@ -48,7 +53,6 @@ package flexlib.mdi.containers
 	import mx.styles.CSSStyleDeclaration;
 
 
-
 	//--------------------------------------
 	//  Events
 	//--------------------------------------
@@ -58,7 +62,7 @@ package flexlib.mdi.containers
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.MINIMIZE
 	 */
-	[Event(name="minimize", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="minimizeMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  If the window is minimized, this event is dispatched when the titleBar is clicked.
@@ -67,7 +71,7 @@ package flexlib.mdi.containers
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.RESTORE
 	 */
-	[Event(name="restore", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="restoreMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the maximize button is clicked or when the window is in a
@@ -75,70 +79,70 @@ package flexlib.mdi.containers
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.MAXIMIZE
 	 */
-	[Event(name="maximize", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="maximizeMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the close button is clicked.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.CLOSE
 	 */
-	[Event(name="close", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="closeMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the window gains focus and is given topmost z-index of MDIManager's children.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.FOCUS_START
 	 */
-	[Event(name="focusStart", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="focusStartMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the window loses focus and no longer has topmost z-index of MDIManager's children.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.FOCUS_END
 	 */
-	[Event(name="focusEnd", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="focusEndMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the window starts being dragged.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.DRAG_START
 	 */
-	[Event(name="dragStart", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="dragStartMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched while the window is being dragged.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.DRAG
 	 */
-	[Event(name="drag", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="dragMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the window stops being dragged.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.DRAG_END
 	 */
-	[Event(name="dragEnd", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="dragEndMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when a resize handle is pressed.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.RESIZE_START
 	 */
-	[Event(name="resizeStart", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="resizeStartMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched while the mouse is down on a resize handle.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.RESIZE
 	 */
-	[Event(name="resize", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="resizeMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 	/**
 	 *  Dispatched when the mouse is released from a resize handle.
 	 *
 	 *  @eventType flexlib.mdi.events.MDIWindowEvent.RESIZE_END
 	 */
-	[Event(name="resizeEnd", type="flexlib.mdi.events.MDIWindowEvent")]
+	[Event(name="resizeEndMDIWindow", type="flexlib.mdi.events.MDIWindowEvent")]
 
 
 	//--------------------------------------
@@ -391,49 +395,49 @@ package flexlib.mdi.containers
 	     *
 	     * Resize handle for top edge of window.
 	     */
-		private var resizeHandleTop:Button;
+		private var resizeHandleTop:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for right edge of window.
 	     */
-		private var resizeHandleRight:Button;
+		private var resizeHandleRight:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for bottom edge of window.
 	     */
-		private var resizeHandleBottom:Button;
+		private var resizeHandleBottom:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for left edge of window.
 	     */
-		private var resizeHandleLeft:Button;
+		private var resizeHandleLeft:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for top left corner of window.
 	     */
-		private var resizeHandleTL:Button;
+		private var resizeHandleTL:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for top right corner of window.
 	     */
-		private var resizeHandleTR:Button;
+		private var resizeHandleTR:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for bottom right corner of window.
 	     */
-		private var resizeHandleBR:Button;
+		private var resizeHandleBR:Canvas;
 
 		/**
 	     * @private
 	     * Resize handle for bottom left corner of window.
 	     */
-		private var resizeHandleBL:Button;
+		private var resizeHandleBL:Canvas;
 
 		/**
 		 * Resize handle currently in use.
@@ -456,7 +460,7 @@ package flexlib.mdi.containers
 		 * Invisible shape laid over titlebar to prevent funkiness from clicking in title textfield.
 		 * Making it public gives child components like controls container access to size of titleBar.
 		 */
-		public var titleBarOverlay:Canvas;
+		public var titleBarOverlay:FocusableCanvas;
 
 		/**
 		 * @private
@@ -765,6 +769,8 @@ package flexlib.mdi.containers
 			windowState = MDIWindowState.NORMAL;
 			doubleClickEnabled = true;
 
+			this.addEventListener(KeyboardEvent.KEY_DOWN, arrowKeyPress);
+
 			windowControls = new MDIWindowControlsContainer();
 			updateContextMenu();
 		}
@@ -792,18 +798,19 @@ package flexlib.mdi.containers
 
 			if(!titleBarOverlay)
 			{
-				titleBarOverlay = new Canvas();
+				titleBarOverlay = new FocusableCanvas();
 				titleBarOverlay.width = this.width;
 				titleBarOverlay.height = this.titleBar.height;
 				titleBarOverlay.alpha = 0;
 				titleBarOverlay.setStyle("backgroundColor", 0x000000);
+				BindingUtils.bindProperty(titleBarOverlay, "toolTip", this, "title");
 				rawChildren.addChild(titleBarOverlay);
 			}
 
 			// edges
 			if(!resizeHandleTop)
 			{
-				resizeHandleTop = new Button();
+				resizeHandleTop = new Canvas();
 				resizeHandleTop.x = cornerHandleSize * .5;
 				resizeHandleTop.y = -(edgeHandleSize * .5);
 				resizeHandleTop.height = edgeHandleSize;
@@ -814,7 +821,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleRight)
 			{
-				resizeHandleRight = new Button();
+				resizeHandleRight = new Canvas();
 				resizeHandleRight.y = cornerHandleSize * .5;
 				resizeHandleRight.width = edgeHandleSize;
 				resizeHandleRight.alpha = 0;
@@ -824,7 +831,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleBottom)
 			{
-				resizeHandleBottom = new Button();
+				resizeHandleBottom = new Canvas();
 				resizeHandleBottom.x = cornerHandleSize * .5;
 				resizeHandleBottom.height = edgeHandleSize;
 				resizeHandleBottom.alpha = 0;
@@ -834,7 +841,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleLeft)
 			{
-				resizeHandleLeft = new Button();
+				resizeHandleLeft = new Canvas();
 				resizeHandleLeft.x = -(edgeHandleSize * .5);
 				resizeHandleLeft.y = cornerHandleSize * .5;
 				resizeHandleLeft.width = edgeHandleSize;
@@ -846,7 +853,7 @@ package flexlib.mdi.containers
 			// corners
 			if(!resizeHandleTL)
 			{
-				resizeHandleTL = new Button();
+				resizeHandleTL = new Canvas();
 				resizeHandleTL.x = resizeHandleTL.y = -(cornerHandleSize * .3);
 				resizeHandleTL.width = resizeHandleTL.height = cornerHandleSize;
 				resizeHandleTL.alpha = 0;
@@ -856,7 +863,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleTR)
 			{
-				resizeHandleTR = new Button();
+				resizeHandleTR = new Canvas();
 				resizeHandleTR.width = resizeHandleTR.height = cornerHandleSize;
 				resizeHandleTR.alpha = 0;
 				resizeHandleTR.focusEnabled = false;
@@ -865,7 +872,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleBR)
 			{
-				resizeHandleBR = new Button();
+				resizeHandleBR = new Canvas();
 				resizeHandleBR.width = resizeHandleBR.height = cornerHandleSize;
 				resizeHandleBR.alpha = 0;
 				resizeHandleBR.focusEnabled = false;
@@ -874,7 +881,7 @@ package flexlib.mdi.containers
 
 			if(!resizeHandleBL)
 			{
-				resizeHandleBL = new Button();
+				resizeHandleBL = new Canvas();
 				resizeHandleBL.width = resizeHandleBL.height = cornerHandleSize;
 				resizeHandleBL.alpha = 0;
 				resizeHandleBL.focusEnabled = false;
@@ -1298,6 +1305,10 @@ package flexlib.mdi.containers
 			// clicking anywhere brings window to front
 			addEventListener(MouseEvent.MOUSE_DOWN, bringToFrontProxy);
 			contextMenu.addEventListener(ContextMenuEvent.MENU_SELECT, bringToFrontProxy);
+			
+			// gaining focus on any element in the window brings it to the front
+			// Could be improved to look for focusManager's lastfocused item
+			this.addEventListener(FocusEvent.FOCUS_IN, bringToFrontProxy);
 		}
 
 		/**
@@ -1329,7 +1340,7 @@ package flexlib.mdi.containers
 		{
 			windowManager.bringToFront(this);
 		}
-
+		
 		/**
 		 *  Minimize the window.
 		 */
@@ -1469,7 +1480,7 @@ package flexlib.mdi.containers
 		/**
 		 * Gives MDIResizeHandle value for a given resize handle button
 		 */
-		private function resizeHandleForButton( button:Button ):String
+		private function resizeHandleForButton( button:Canvas ):String
 		{
 			if( button == resizeHandleLeft )
 				return MDIResizeHandle.LEFT;
@@ -1498,7 +1509,7 @@ package flexlib.mdi.containers
 		{
 			if(windowState == MDIWindowState.NORMAL && resizable)
 			{
-				currentResizeHandle = resizeHandleForButton(event.target as Button);
+				currentResizeHandle = resizeHandleForButton(event.target as Canvas);
 				setCursor(currentResizeHandle);
 				dragStartMouseX = parent.mouseX;
 				dragStartMouseY = parent.mouseY;
@@ -1662,7 +1673,7 @@ package flexlib.mdi.containers
 			// event.buttonDown is to detect being dragged over
 			if(windowState == MDIWindowState.NORMAL && resizable && !event.buttonDown)
 			{
-				setCursor(resizeHandleForButton(event.target as Button));
+				setCursor(resizeHandleForButton(event.target as Canvas));
 			}
 		}
 
@@ -1808,6 +1819,85 @@ package flexlib.mdi.containers
 					this.windowManager.showAllWindows();
 				break;
 
+			}
+		}
+		
+		// This event is called when a key is pressed and anything in the MDIWindow has focus
+		private function arrowKeyPress(event:KeyboardEvent):void
+		{
+			dragAmountX = 5; // adjust by 5 pixels(?) at a time
+			dragAmountY = 5;
+
+			// only resize if only the ctrl key is clicked
+			if(windowState == MDIWindowState.NORMAL && resizable && event.ctrlKey && !event.shiftKey && !event.altKey)
+			{
+				savePanel();
+
+				switch(event.keyCode)
+				{
+					case Keyboard.UP:
+						dragAmountX = 0;
+						break;
+					case Keyboard.DOWN:
+						dragAmountX = 0;
+						dragAmountY *= -1;
+						break;
+					case Keyboard.RIGHT:
+						dragAmountX *= -1;
+						dragAmountY = 0;
+						break;
+					case Keyboard.LEFT:
+						dragAmountY = 0;
+						break;
+					default:
+						dragAmountX = 0;
+						dragAmountY = 0;
+				}
+				
+				if (dragAmountX != 0 || dragAmountY !=0) // only resize if an arrow key was pressed
+				{
+					this.height = Math.max(savedWindowRect.height - dragAmountY, minHeight);
+					this.width = Math.max(savedWindowRect.width - dragAmountX, minWidth);
+					dispatchEvent(new MDIWindowEvent(MDIWindowEvent.RESIZE_END, this));
+				}
+			}
+			else if (windowState == MDIWindowState.NORMAL && draggable && !event.ctrlKey && event.shiftKey && !event.altKey)
+			{
+				switch(event.keyCode) 
+				{
+					case Keyboard.UP:
+						dragAmountX = 0;
+						break;
+					case Keyboard.DOWN:
+						dragAmountX = 0;
+						dragAmountY *= -1;
+						break;
+					case Keyboard.RIGHT:
+						dragAmountX *= -1;
+						dragAmountY = 0;
+						break;
+					case Keyboard.LEFT:
+						dragAmountY = 0;
+						break;
+					default:
+						dragAmountX = 0;
+						dragAmountY = 0;
+				}
+				
+				if (dragAmountX != 0 || dragAmountY !=0) // only move if an arrow key was pressed
+				{
+					if(windowManager.enforceBoundaries)
+					{
+						x = Math.max( 0, Math.min( parent.width - this.width, this.x - dragAmountX ) );
+						y = Math.max( 0, Math.min( parent.height - this.height, this.y - dragAmountY ) );
+					}
+					else
+					{
+						x = this.x - dragAmountX;
+						y = this.y - dragAmountY;
+					}
+					dispatchEvent(new MDIWindowEvent(MDIWindowEvent.DRAG_END, this));
+				}
 			}
 		}
 	}
