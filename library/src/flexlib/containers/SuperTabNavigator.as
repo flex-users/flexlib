@@ -45,9 +45,9 @@ package flexlib.containers
   import mx.containers.ViewStack;
   import mx.controls.Menu;
   import mx.controls.PopUpButton;
-  import mx.core.Container;
   import mx.core.EdgeMetrics;
   import mx.core.FlexGlobals;
+  import mx.core.INavigatorContent;
   import mx.core.ScrollPolicy;
   import mx.effects.Tween;
   import mx.events.ChildExistenceChangedEvent;
@@ -856,7 +856,12 @@ package flexlib.containers
 
       if (sourceBar != tabBar)
       {
-        if (curDataProvider is IList)
+        if (curDataProvider is ViewStack)
+        {
+          child = (curDataProvider as ViewStack).getChildAt(event.oldIndex);
+          curDataProvider.removeChildAt(event.oldIndex);
+        }
+        else if (curDataProvider is IList)
         {
           child = (curDataProvider as IList).getItemAt(event.oldIndex);
           curDataProvider.removeItemAt(event.oldIndex);
@@ -877,11 +882,6 @@ package flexlib.containers
           }
 
           child = newChild;
-        }
-        else if (curDataProvider is ViewStack)
-        {
-          child = (curDataProvider as ViewStack).getChildAt(event.oldIndex);
-          curDataProvider.removeChildAt(event.oldIndex);
         }
 
         if (child is DisplayObject)
@@ -1177,7 +1177,7 @@ package flexlib.containers
 
       for (var i:int = 0; i < this.numChildren; i++)
       {
-        var child:Container = this.getChildAt(i) as Container;
+        var child:INavigatorContent = INavigatorContent(this.getChildAt(i));
 
         var obj:Object = new Object();
         //setting the type to an empty string bypasses a bug in MenuItemRenderer (or in

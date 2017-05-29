@@ -33,19 +33,19 @@ package flexlib.mdi.events
 	 */
 	public class MDIWindowEvent extends Event
 	{
-		public static const MINIMIZE:String = "minimize";
-		public static const RESTORE:String = "restore";
-		public static const MAXIMIZE:String = "maximize";
-		public static const CLOSE:String = "close";
+		public static const MINIMIZE:String = "minimizeMDIWindow";
+		public static const RESTORE:String = "restoreMDIWindow";
+		public static const MAXIMIZE:String = "maximizeMDIWindow";
+		public static const CLOSE:String = "closeMDIWindow";
 
-		public static const FOCUS_START:String = "focusStart";
-		public static const FOCUS_END:String = "focusEnd";
-		public static const DRAG_START:String = "dragStart";
-		public static const DRAG:String = "drag";
-		public static const DRAG_END:String = "dragEnd";
-		public static const RESIZE_START:String = "resizeStart";
-		public static const RESIZE:String = "resize";
-		public static const RESIZE_END:String = "resizeEnd";
+		public static const FOCUS_START:String = "focusStartMDIWindow";
+		public static const FOCUS_END:String = "focusEndMDIWindow";
+		public static const DRAG_START:String = "dragStartMDIWindow";
+		public static const DRAG:String = "dragMDIWindow";
+		public static const DRAG_END:String = "dragEndMDIWindow";
+		public static const RESIZE_START:String = "resizeStartMDIWindow";
+		public static const RESIZE:String = "resizeMDIWindow";
+		public static const RESIZE_END:String = "resizeEndMDIWindow";
 
 		public var window:MDIWindow;
 

@@ -319,7 +319,6 @@
 
   <modules>
     <module>library</module>
-    <module>examples</module>
     <module>assemblies</module>
   </modules>
 
@@ -366,6 +365,7 @@
             </dependency>
           </dependencies>
           <configuration>
+            <accessible>true</accessible>
             <storepass />
             <themes>
               <theme>${settings.localRepository}/com/adobe/flex/framework/framework/${flex.version}/configs_zip/themes/Spark/spark.css</theme>
